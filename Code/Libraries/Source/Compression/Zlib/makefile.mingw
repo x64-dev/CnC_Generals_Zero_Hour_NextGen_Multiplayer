@@ -1,0 +1,51 @@
+export INSTALL=/bin/install.exe -cpD
+export INSTALL_DATA=/bin/install.exe -cpD
+export INSTALL_PROGRAM=/bin/install.exe -cpD
+export ac_cv_prog_LN_S=cp -fp
+export cl_cv_prog_LN=cp -fp
+export LN_S=cp -fp
+export LN=cp -fp
+export EXEEXT=.ext
+export exeext=.ext
+export CFLAGS= -O2 -fnative-struct -fno-rtti -fno-exceptions -mcpu=pentium -march=i386
+export CXXFLAGS= $(CFLAGS)
+export LDFLAGS= -Wl,-s 
+export LIBS= -Wl,-s -liberty -lc
+
+.PHONY: all
+all:
+	./configure --prefix=c:/progra~1/ed --host=i386-pc-mingw32 --build=i386-pc-mingw32 --target=i386-pc-mingw32
+	rm -f libtool.orig
+	rm -f makefile.orig
+	rm -f src/makefile.orig
+
+	if [ -e libtool ]; then \
+		cp -fp libtool libtool.orig; \
+		sed -e "s/~/!/" libtool.orig >libtool; \
+	fi
+
+#	if ! [ -e makefile.orig ]; then \
+#		cp -fp makefile makefile.orig; \
+#	fi
+#	sed -f makefile.sed makefile.orig >makefile
+
+#	if ! [ -e src/makefile.orig ]; then \
+#		cp -fp src/makefile src/makefile.orig; \
+#	fi
+#	sed -f makefile.sed src/makefile.orig >src/makefile
+
+#	if ! [ -e buf_c.orig ]; then \
+#		cp -fp buf.c buf_c.orig; \
+#	fi
+#	sed -f buf_c.sed buf_c.orig >buf.c
+
+#	list='$(makefd)'; for fd in $$list; do \
+#		if ! [ -e $$fd/makefile.in.orig ]; then \
+#			cp -fp $$fd/makefile.in $$fd/makefile.in.orig; \
+#		fi; \
+#		sed -f makefile.sed $$fd/makefile.in.orig >$$fd/makefile.in; \
+#	done
+
+#	make all
+#	make check
+#	make install prefix=c:/temp/ed
