@@ -859,7 +859,6 @@ extern void userMemoryAdjustPoolSize(const char *poolName, Int& initialAllocatio
 #ifdef __cplusplus
 
 #ifndef _OPERATOR_NEW_DEFINED_
-
 	#define _OPERATOR_NEW_DEFINED_
 
 	extern void * __cdecl operator new		(size_t size);

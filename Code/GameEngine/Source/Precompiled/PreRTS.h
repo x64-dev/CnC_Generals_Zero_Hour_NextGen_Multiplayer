@@ -41,6 +41,7 @@ class STLSpecialAlloc;
 // PLEASE DO NOT ABUSE WINDOWS OR IT WILL BE REMOVED ENTIRELY. :-)
 //--------------------------------------------------------------------------------- System Includes 
 #define WIN32_LEAN_AND_MEAN
+#define __PLACEMENT_VEC_NEW_INLINE // jmarshall
 #include <atlbase.h>
 #include <windows.h>
 
@@ -49,12 +50,12 @@ class STLSpecialAlloc;
 #include <direct.h>
 #include <EXCPT.H>
 #include <float.h>
-#include <fstream.h>
+#include <fstream>
 #include <imagehlp.h>
 #include <io.h>
 #include <limits.h>
 #include <lmcons.h>
-#include <mapicode.h>
+//#include <mapicode.h> // jmarshall
 #include <math.h>
 #include <memory.h>
 #include <mmsystem.h>
@@ -103,6 +104,8 @@ class STLSpecialAlloc;
 // Icky. These have to be in this order.
 #include "Lib/Basetype.h"
 #include "Common/STLTypedefs.h"
+#undef type
+#undef value_type
 #include "Common/Errors.h"
 #include "Common/Debug.h"
 #include "Common/AsciiString.h"

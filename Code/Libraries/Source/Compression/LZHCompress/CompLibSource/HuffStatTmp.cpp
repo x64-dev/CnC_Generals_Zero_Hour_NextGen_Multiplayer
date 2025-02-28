@@ -1,5 +1,4 @@
-#ifndef __J2K__LZH__HuffStatTmp_HPP__
-#define __J2K__LZH__HuffStatTmp_CPP__
+#pragma once
 
 inline int cmpHuffStatTmpStruct( const HuffStatTmpStruct& a,
                                  const HuffStatTmpStruct& b )
@@ -48,5 +47,3 @@ void shellSort( HuffStatTmpStruct* a, int N ) {
     }
   }
 }
-
-#endif

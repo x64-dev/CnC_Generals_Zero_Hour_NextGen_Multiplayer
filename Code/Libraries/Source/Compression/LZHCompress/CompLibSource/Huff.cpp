@@ -11,5 +11,6 @@
 #include "LZHLEncoder2.cpp"
 #include "LZHLDecoderStat.cpp"
 #include "../CompLibHeader/LZHLDecompressor.hpp"
+#include "LZHLDecompressor.cpp"
 
 #endif

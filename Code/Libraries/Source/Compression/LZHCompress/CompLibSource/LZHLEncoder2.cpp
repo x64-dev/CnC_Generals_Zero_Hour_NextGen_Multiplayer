@@ -56,7 +56,7 @@ void LZHLEncoder::putMatch( const BYTE* src, size_t nRaw, size_t matchOver, size
   };
 
   if ( matchOver < 8 ) {
-    _put( 256 + matchOver );
+    _put( (unsigned short)(256 + matchOver) ); // jmarshall
 
   } else if ( matchOver < 38 ) {
     matchOver -= 8;

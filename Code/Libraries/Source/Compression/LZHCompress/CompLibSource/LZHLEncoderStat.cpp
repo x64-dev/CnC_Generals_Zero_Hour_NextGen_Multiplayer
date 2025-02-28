@@ -1,6 +1,8 @@
 #ifndef __J2K__LZH__LZHLEncoderStat_CPP__
 #define __J2K__LZH__LZHLEncoderStat_CPP__
 
+#include <math.h>
+
 LZHLEncoderStat::LZHLEncoderStat() 
 {
   nextStat = HUFFRECALCLEN;

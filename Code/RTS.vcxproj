@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Internal|Win32">
+      <Configuration>Internal</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{1BF80399-C9E3-464C-9263-CFB3C432B74C}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>17.0.35707.178</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">
+    <OutDir>.\Main\Internal\</OutDir>
+    <IntDir>.\Main\Internal\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Main\Release\</OutDir>
+    <IntDir>.\Main\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Main\Debug\</OutDir>
+    <IntDir>.\Main\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Main\Internal/RTS.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_INTERNAL;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Main\Internal/RTS.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Main\Internal/</AssemblerListingLocation>
+      <ObjectFileName>.\Main\Internal/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Main\Internal/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Main\Internal/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/FIXED:NO %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Benchmark.lib;WW3D2Internal.lib;WWDebugInternal.lib;WWLibInternal.lib;WWUtilInternal.lib;WWMathInternal.lib;GameEngineInternal.lib;GameEngineDeviceInternal.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\Run\RTSI.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\Run\RTSI.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\Run\RTSI.map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Main\Internal/RTS.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Main\Release/RTS.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IG_DEBUG_STACKTRACE;NDEBUG;_RELEASE;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Main\Release/RTS.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Main\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Main\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Main\Release/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Main\Release/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Benchmark.lib;WW3D2.lib;WWDebug.lib;WWLib.lib;WWUtil.lib;WWMath.lib;GameEngine.lib;GameEngineDevice.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\Run\RTS.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\Run\RTS.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\Run\RTS.map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Main\Release/RTS.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Main\Debug/RTS.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;BROWSER_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Main\Debug/RTS.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Main\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Main\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Main\Debug/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Main\Debug/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>BenchmarkD.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\Run\RTSD.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\Run\RTSD.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\Run\RTSD.map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <OutputFile>.\Main\Debug/RTS.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\buildVersion.h" />
+    <CustomBuild Include="Main\generatedVersion.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Incrementing version numbers held in %(FullPath) .\Main\buildVersion.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
+$(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
+</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2Debug.lib;$(ProjectDir)Libraries\Lib\WWDebugDebug.lib;$(ProjectDir)Libraries\Lib\WWUtilDebug.lib;$(ProjectDir)Libraries\Lib\WWLibDebug.lib;$(ProjectDir)Libraries\Lib\WWMathDebug.lib;$(ProjectDir)GameEngine\Lib\GameEngineDebug.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDeviceDebug.lib;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">Incrementing version numbers held in %(FullPath) .\Main\buildVersion.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
+$(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
+</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2Internal.lib;$(ProjectDir)Libraries\Lib\WWDebugInternal.lib;$(ProjectDir)Libraries\Lib\WWUtilInternal.lib;$(ProjectDir)Libraries\Lib\WWLibInternal.lib;$(ProjectDir)Libraries\Lib\WWMathInternal.lib;$(ProjectDir)GameEngine\Lib\GameEngineInternal.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDeviceInternal.lib;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">%(FullPath);%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Incrementing version numbers held in %(FullPath) .\Main\buildVersion.h</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
+$(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
+</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2.lib;$(ProjectDir)Libraries\Lib\WWDebug.lib;$(ProjectDir)Libraries\Lib\WWUtil.lib;$(ProjectDir)Libraries\Lib\WWLib.lib;$(ProjectDir)Libraries\Lib\WWMath.lib;$(ProjectDir)GameEngine\Lib\GameEngine.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDevice.lib;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="Main\resource.h" />
+    <ClInclude Include="Main\WinMain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main\WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Run\Data\English\HeaderTemplate.ini" />
+    <None Include="..\Run\Data\English\Language.ini" />
+    <None Include="..\Run\Data\Generals.str" />
+    <None Include="..\Run\Data\INI\AIData.ini" />
+    <None Include="..\Run\Data\INI\Animation2D.ini" />
+    <None Include="..\Run\Data\INI\Armor.ini" />
+    <None Include="..\Run\Data\INI\AudioSettings.ini" />
+    <None Include="..\Run\Data\INI\Campaign.ini" />
+    <None Include="..\Run\Data\INI\CommandButton.ini" />
+    <None Include="..\Run\Data\INI\CommandMap.ini" />
+    <None Include="..\Run\Data\INI\CommandMapDebug.ini" />
+    <None Include="..\Run\Data\INI\CommandSet.ini" />
+    <None Include="..\Run\Data\INI\ControlBarResizer.ini" />
+    <None Include="..\Run\Data\INI\ControlBarScheme.ini" />
+    <None Include="..\Run\Data\INI\Crate.ini" />
+    <None Include="..\Run\Data\INI\Credits.ini" />
+    <None Include="..\Run\Data\INI\DamageFX.ini" />
+    <None Include="..\Run\Data\INI\Default\AIData.ini" />
+    <None Include="..\Run\Data\INI\Default\ButtonSets.ini" />
+    <None Include="..\Run\Data\INI\Default\CommandButton.ini" />
+    <None Include="..\Run\Data\INI\Default\CommandMap.ini" />
+    <None Include="..\Run\Data\INI\Default\ControlBarScheme.ini" />
+    <None Include="..\Run\Data\INI\Default\Crate.ini" />
+    <None Include="..\Run\Data\INI\Default\FXList.ini" />
+    <None Include="..\Run\Data\INI\Default\GameData.ini" />
+    <None Include="..\Run\Data\INI\Default\multiplayer.ini" />
+    <None Include="..\Run\Data\INI\Default\Music.ini" />
+    <None Include="..\Run\Data\INI\Default\Object.ini" />
+    <None Include="..\Run\Data\INI\Default\ObjectCreationList.ini" />
+    <None Include="..\Run\Data\INI\Default\PlayerTemplate.ini" />
+    <None Include="..\Run\Data\INI\Default\Roads.ini" />
+    <None Include="..\Run\Data\INI\Default\Science.ini" />
+    <None Include="..\Run\Data\INI\Default\ShellMenuScheme.ini" />
+    <None Include="..\Run\Data\INI\Default\SoundEffects.ini" />
+    <None Include="..\Run\Data\INI\Default\SpecialPower.ini" />
+    <None Include="..\Run\Data\INI\Default\Speech.ini" />
+    <None Include="..\Run\Data\INI\Default\Terrain.ini" />
+    <None Include="..\Run\Data\INI\Default\Upgrade.ini" />
+    <None Include="..\Run\Data\INI\Default\Video.ini" />
+    <None Include="..\Run\Data\INI\Default\Voice.ini" />
+    <None Include="..\Run\Data\INI\Default\Water.ini" />
+    <None Include="..\Run\Data\INI\Default\Webpages.ini" />
+    <None Include="..\Run\Data\INI\DrawGroupInfo.ini" />
+    <None Include="..\Run\Data\INI\Eva.ini" />
+    <None Include="..\Run\Data\INI\FXList.ini" />
+    <None Include="..\Run\Data\INI\GameData.ini" />
+    <None Include="..\Run\Data\INI\GameDataDebug.ini" />
+    <None Include="..\Run\Data\INI\GameLOD.ini" />
+    <None Include="..\Run\Data\INI\GameLODPresets.ini" />
+    <None Include="..\Run\Data\INI\InGameUI.ini" />
+    <None Include="..\Run\Data\INI\Locomotor.ini" />
+    <None Include="..\Run\Data\INI\MappedImages\HandCreated\HandCreatedMappedImages.INI" />
+    <None Include="..\Run\Data\INI\MappedImages\TextureSize_512\SAUserInterface512.INI" />
+    <None Include="..\Run\Data\INI\MappedImages\TextureSize_512\SCUserInterface512.INI" />
+    <None Include="..\Run\Data\INI\MappedImages\TextureSize_512\SNUserInterface512.INI" />
+    <None Include="..\Run\Data\INI\MappedImages\TextureSize_512\SSUserInterface512.INI" />
+    <None Include="..\Run\Data\INI\MappedImages\TextureSize_512\SUUserInterface512.INI" />
+    <None Include="..\Run\Data\INI\MiscAudio.ini" />
+    <None Include="..\Run\Data\INI\Mouse.ini" />
+    <None Include="..\Run\Data\INI\Multiplayer.ini" />
+    <None Include="..\Run\Data\INI\Music.ini" />
+    <None Include="..\Run\Data\INI\ObjectCreationList.ini" />
+    <None Include="..\Run\Data\INI\Object\CivilianBuilding.ini" />
+    <None Include="..\Run\Data\INI\Object\CivilianProp.ini" />
+    <None Include="..\Run\Data\INI\Object\CivilianUnit.ini" />
+    <None Include="..\Run\Data\INI\Object\FactionBuilding.ini" />
+    <None Include="..\Run\Data\INI\Object\FactionProp.ini" />
+    <None Include="..\Run\Data\INI\Object\FactionUnit.ini" />
+    <None Include="..\Run\Data\INI\Object\NatureProp.ini" />
+    <None Include="..\Run\Data\INI\Object\NatureUnit.ini" />
+    <None Include="..\Run\Data\INI\Object\System.ini" />
+    <None Include="..\Run\Data\INI\ParticleSystem.ini" />
+    <None Include="..\Run\Data\INI\PlayerTemplate.ini" />
+    <None Include="..\Run\Data\INI\Rank.ini" />
+    <None Include="..\Run\Data\INI\Roads.ini" />
+    <None Include="..\Run\Data\INI\Science.ini" />
+    <None Include="..\Run\Data\INI\ShellMenuScheme.ini" />
+    <None Include="..\Run\Data\INI\SoundEffects.ini" />
+    <None Include="..\Run\Data\INI\SpecialPower.ini" />
+    <None Include="..\Run\Data\INI\Speech.ini" />
+    <None Include="..\Run\Data\INI\Terrain.ini" />
+    <None Include="..\Run\Data\INI\Upgrade.ini" />
+    <None Include="..\Run\Data\INI\Video.ini" />
+    <None Include="..\Run\Data\INI\Voice.ini" />
+    <None Include="..\Run\Data\INI\Water.ini" />
+    <None Include="..\Run\Data\INI\Weapon.ini" />
+    <None Include="..\Run\Data\INI\Webpages.ini" />
+    <None Include="..\Run\Data\INI\WindowTransitions.ini" />
+    <None Include="..\Run\Window\ControlBar.wnd" />
+    <None Include="..\Run\Window\ControlBarPopupDescription.wnd" />
+    <None Include="..\Run\Window\Diplomacy.wnd" />
+    <None Include="..\Run\Window\GeneralsExpPoints.wnd" />
+    <None Include="..\Run\Window\GenPowersShortcutBarChina.wnd" />
+    <None Include="..\Run\Window\GenPowersShortcutBarGLA.wnd" />
+    <None Include="..\Run\Window\GenPowersShortcutBarUS.wnd" />
+    <None Include="..\Run\Window\IMECandidateWindow.wnd" />
+    <None Include="..\Run\Window\IMEStatusWindow.wnd" />
+    <None Include="..\Run\Window\InGamePopupMessage.wnd" />
+    <None Include="..\Run\Window\Menus\BlankWindow.wnd" />
+    <None Include="..\Run\Window\Menus\CRCMismatch.wnd" />
+    <None Include="..\Run\Window\Menus\CreditsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\Defeat.wnd" />
+    <None Include="..\Run\Window\Menus\DifficultySelect.wnd" />
+    <None Include="..\Run\Window\Menus\DisconnectScreen.wnd" />
+    <None Include="..\Run\Window\Menus\DownloadMenu.wnd" />
+    <None Include="..\Run\Window\Menus\EstablishConnectionsScreen.wnd" />
+    <None Include="..\Run\Window\Menus\GameInfoWindow.wnd" />
+    <None Include="..\Run\Window\Menus\GameSpyGameOptionsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\GameSpyLoadScreen.wnd" />
+    <None Include="..\Run\Window\Menus\GameSpyLoginProfile.wnd" />
+    <None Include="..\Run\Window\Menus\GameSpyLoginQuick.wnd" />
+    <None Include="..\Run\Window\Menus\LanGameOptionsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\LanLobbyMenu.wnd" />
+    <None Include="..\Run\Window\Menus\LanMapSelectMenu.wnd" />
+    <None Include="..\Run\Window\Menus\LocalDefeat.wnd" />
+    <None Include="..\Run\Window\Menus\MainMenu.wnd" />
+    <None Include="..\Run\Window\Menus\MapSelectMenu.wnd" />
+    <None Include="..\Run\Window\Menus\MapTransferScreen.wnd" />
+    <None Include="..\Run\Window\Menus\MessageBox.wnd" />
+    <None Include="..\Run\Window\Menus\MultiplayerLoadScreen.wnd" />
+    <None Include="..\Run\Window\Menus\NetworkDirectConnect.wnd" />
+    <None Include="..\Run\Window\Menus\ObserverQuit.wnd" />
+    <None Include="..\Run\Window\Menus\OptionsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\PopupCommunicator.wnd" />
+    <None Include="..\Run\Window\Menus\PopupGameSpyCreateGame.wnd" />
+    <None Include="..\Run\Window\Menus\PopupHostGame.wnd" />
+    <None Include="..\Run\Window\Menus\PopupJoinGame.wnd" />
+    <None Include="..\Run\Window\Menus\PopupLadderDetails.wnd" />
+    <None Include="..\Run\Window\Menus\PopupLadderSelect.wnd" />
+    <None Include="..\Run\Window\Menus\PopupLocaleSelect.wnd" />
+    <None Include="..\Run\Window\Menus\PopupPlayerInfo.wnd" />
+    <None Include="..\Run\Window\Menus\PopupReplay.wnd" />
+    <None Include="..\Run\Window\Menus\PopupSaveLoad.wnd" />
+    <None Include="..\Run\Window\Menus\QuitMenu.wnd" />
+    <None Include="..\Run\Window\Menus\QuitMessageBox.wnd" />
+    <None Include="..\Run\Window\Menus\QuitNoSave.wnd" />
+    <None Include="..\Run\Window\Menus\RCBuddiesMenu.wnd" />
+    <None Include="..\Run\Window\Menus\RCBuddyRequestMenu.wnd" />
+    <None Include="..\Run\Window\Menus\RCGameDetailsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\RCLocalPlayerMenu.wnd" />
+    <None Include="..\Run\Window\Menus\RCNonBuddiesMenu.wnd" />
+    <None Include="..\Run\Window\Menus\RCNoProfileMenu.wnd" />
+    <None Include="..\Run\Window\Menus\ReplayMenu.wnd" />
+    <None Include="..\Run\Window\Menus\SaveLoad.wnd" />
+    <None Include="..\Run\Window\Menus\ScoreScreen.wnd" />
+    <None Include="..\Run\Window\Menus\ShellGameLoadScreen.wnd" />
+    <None Include="..\Run\Window\Menus\SinglePlayerLoadScreen.wnd" />
+    <None Include="..\Run\Window\Menus\SinglePlayerMenu.wnd" />
+    <None Include="..\Run\Window\Menus\SkirmishGameOptionsMenu.wnd" />
+    <None Include="..\Run\Window\Menus\SkirmishMapSelectMenu.wnd" />
+    <None Include="..\Run\Window\Menus\Victorious.wnd" />
+    <None Include="..\Run\Window\Menus\WOLBuddyOverlay.wnd" />
+    <None Include="..\Run\Window\Menus\WOLCustomLobby.wnd" />
+    <None Include="..\Run\Window\Menus\WOLLadderScreen.wnd" />
+    <None Include="..\Run\Window\Menus\WOLLoginMenu.wnd" />
+    <None Include="..\Run\Window\Menus\WOLMapSelectMenu.wnd" />
+    <None Include="..\Run\Window\Menus\WOLMessageWindow.wnd" />
+    <None Include="..\Run\Window\Menus\WOLQuickMatchMenu.wnd" />
+    <None Include="..\Run\Window\Menus\WOLStatusMenu.wnd" />
+    <None Include="..\Run\Window\Menus\WOLWelcomeMenu.wnd" />
+    <None Include="..\Run\Window\MOTD.wnd" />
+    <None Include="..\Run\Window\ReplayControl.wnd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Main\Generals.ico" />
+    <Image Include="Main\Install_Final.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Main\RTS.RC">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Main;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">Main;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Main;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GameEngineDevice\GameEngineDevice.vcxproj">
+      <Project>{45f142c2-2b6a-42d3-a8a1-6e6726c951a9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="GameEngine\GameEngine.vcxproj">
+      <Project>{54d11ea6-8cd0-42d9-9ed5-82bdc2f894a4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\Compression\Compression.vcxproj">
+      <Project>{72a36dc7-8fe2-439a-a503-f220901cc311}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\EABrowserDispatch\EABrowserDispatch.vcxproj">
+      <Project>{60f187a6-9f0a-4867-9098-a9686d0e831e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WW3D2\ww3d2.vcxproj">
+      <Project>{f7415afa-ee56-48f9-a42b-3101d93675f6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WWDebug\wwdebug.vcxproj">
+      <Project>{4e83553c-d499-4d91-b744-5aac6986a33b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
+      <Project>{46cf04d9-1c8e-4f31-af11-ae8dbe8a9004}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WWLib\wwlib.vcxproj">
+      <Project>{441114de-f54c-4876-978a-c288103ceea0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
+      <Project>{034e07ef-9c39-4a94-9bc9-e19b18996951}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
+      <Project>{86908043-4887-4a76-8da4-3350e9932e32}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Libraries\Source\WWVegas\Wwutil\wwutil.vcxproj">
+      <Project>{bb333cd2-42e0-4787-8c7f-1add61daf031}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Tools\buildVersionUpdate\buildVersionUpdate.vcxproj">
+      <Project>{578b769b-5e19-4929-b943-2e7d2c878615}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Tools\DebugWindow\DebugWindow.vcxproj">
+      <Project>{4009b7d6-8f7f-472a-bb42-f73f599757ff}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Tools\Launcher\launcher.vcxproj">
+      <Project>{03e354a5-4ed0-436d-8c8c-42e546118cca}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Tools\ParticleEditor\ParticleEditor.vcxproj">
+      <Project>{ed91cf2d-ff0b-4568-8dc8-9911a75646dc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Tools\versionUpdate\versionUpdate.vcxproj">
+      <Project>{83fcc1e0-e231-4c1e-a545-451f7131cebf}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
