@@ -3384,8 +3384,10 @@ void WorldHeightMapEdit::removeLastBoundary(void)
 		DEBUG_CRASH(("Invalid border remove request. jkmcd"));
 		return;
 	}
-	
-	m_boundaries.erase(&m_boundaries.back());
+// jmarshall	
+	//m_boundaries.erase(&m_boundaries.back());
+	m_boundaries.erase(m_boundaries.end() - 1);
+// jmarshall end
 }
 
 void WorldHeightMapEdit::findBoundaryNear(Coord3D *pt, float okDistance, Int *outNdx, Int *outHandle)

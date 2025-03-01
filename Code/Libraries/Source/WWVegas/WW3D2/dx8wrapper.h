@@ -45,7 +45,7 @@
 
 #include "always.h"
 #include "dllist.h"
-#include "d3d8.h"
+#include "../../../DX90SDK/include/d3d8.h"
 #include "matrix4.h"
 #include "statistics.h"
 #include "wwstring.h"

@@ -95,7 +95,7 @@
 #include "ImpassableOptions.h"
 
 
-#include <d3dx8.h>
+#include "../../../Libraries/DX90SDK/include/d3dx8.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
