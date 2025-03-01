@@ -526,7 +526,7 @@ static PoolSizeRec sizes[] =
 	{ "Mapping", 128, 32 },
 	{ "OutputChunk", 32, 32 },
 	{ "InputChunk", 32, 32 },
-	{ "AnimateWindow", 32, 32 },
+	{ "AnimateWindowObject", 32, 32 },
 	{ "GameFont", 32, 32 },
 	{ "NetCommandRef", 256, 32 },
 	{ "GameMessageArgument", 128, 32 },
