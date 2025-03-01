@@ -32,6 +32,14 @@
 #ifndef _BASE_TYPE_H_
 #define _BASE_TYPE_H_
 
+#ifndef __PLACEMENT_VEC_NEW_INLINE
+#define __PLACEMENT_VEC_NEW_INLINE
+#endif
+
+#ifndef _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+#endif
+
 #include <math.h>
 #include <string.h>
 

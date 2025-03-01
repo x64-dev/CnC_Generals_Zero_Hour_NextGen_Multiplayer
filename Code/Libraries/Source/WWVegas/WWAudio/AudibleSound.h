@@ -42,7 +42,9 @@
 #define __SOUNDOBJ_H
 
 #pragma warning (push, 3)
-#include "mss.h"
+// jmarshall - audio
+//#include "mss.h"
+// jmarshall - audio
 #pragma warning (pop)
 
 //#include <malloc.h>
