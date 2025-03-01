@@ -35,20 +35,21 @@ tex t0
 ; Perform EMBM to get a local normal bump reflection.
 texbem t1, t0       ; compute new (u,v) values
 
-#ifndef DO_WATER_ALPHA_TEXTURE
+; jmarshall - fix DO_WATER_ALPHA_TEXTURE
+; #ifndef DO_WATER_ALPHA_TEXTURE
 
 ; result goes in output color multiplied by diffuse
 mul r0, t1, v0
 
-#else
-
-;alternate version which uses a third texture which provides per-pixel alpha.
-; result goes in output color multiplied by diffuse
-tex t2	; get alpha texture
-mul r0.rgb, t1, v0
-+mul r0.a, t2, v0
-
-#endif
+; #else
+; 
+; ;alternate version which uses a third texture which provides per-pixel alpha.
+; ; result goes in output color multiplied by diffuse
+; tex t2	; get alpha texture
+; mul r0.rgb, t1, v0
+; +mul r0.a, t2, v0
+; 
+; #endif
 
 
 
