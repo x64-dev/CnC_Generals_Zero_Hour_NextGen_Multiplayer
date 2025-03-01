@@ -7159,29 +7159,29 @@ void ScriptEngine::setSequentialTimer(Team *team, Int frameCount)
 
 void ScriptEngine::evaluateAndProgressAllSequentialScripts( void )
 {
-	VecSequentialScriptPtrIt it, lastIt;
-	lastIt = m_sequentialScripts.end();
-
 	Int spinCount = 0;
-	for (it = m_sequentialScripts.begin(); it != m_sequentialScripts.end(); /* empty */) {
-		if (it == lastIt) {
+	auto it = m_sequentialScripts.begin();
+
+	// jmarshall don't store lastit causes a crash.
+	while (it != m_sequentialScripts.end()) {
+		if (it == m_sequentialScripts.end()) {
 			++spinCount;
-		} else {
+		}
+		else {
 			spinCount = 0;
 		}
 
 		if (spinCount > MAX_SPIN_COUNT) {
-			SequentialScript *seqScript = (*it);
+			SequentialScript* seqScript = (*it);
 			if (seqScript) {
-				DEBUG_LOG(("Sequential script %s appears to be in an infinite loop.\n", 
+				DEBUG_LOG(("Sequential script %s appears to be in an infinite loop.\n",
 					seqScript->m_scriptToExecuteSequentially->getName().str()));
 			}
 			++it;
 			continue;
 		}
-
-		lastIt = it;
-		
+// jmarshall end
+	
 		Bool itAdvanced = false;
 
 		SequentialScript *seqScript = (*it);

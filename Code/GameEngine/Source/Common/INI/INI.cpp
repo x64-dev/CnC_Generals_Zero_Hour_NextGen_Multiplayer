@@ -370,16 +370,16 @@ void INI::load( AsciiString filename, INILoadType loadType, Xfer *pXfer )
 					#if defined(_DEBUG) || defined(_INTERNAL)
 					strcpy(m_curBlockStart, m_buffer);
 					#endif
-					try {
-						(*parse)( this );
+					//try {
+					(*parse)( this );
 
-					} catch (...) {
-						DEBUG_CRASH(("Error parsing block '%s' in INI file '%s'\n", token, m_filename.str()) );
-						char buff[1024];
-						sprintf(buff, "Error parsing INI file '%s' (Line: '%s')\n", m_filename.str(), currentLine.str());
-
-						throw INIException(buff);
-					}
+					//} catch (...) {
+					//	DEBUG_CRASH(("Error parsing block '%s' in INI file '%s'\n", token, m_filename.str()) );
+					//	char buff[1024];
+					//	sprintf(buff, "Error parsing INI file '%s' (Line: '%s')\n", m_filename.str(), currentLine.str());
+					//
+					//	throw INIException(buff);
+					//}
 					#if defined(_DEBUG) || defined(_INTERNAL)
 						strcpy(m_curBlockStart, "NO_BLOCK");
 					#endif

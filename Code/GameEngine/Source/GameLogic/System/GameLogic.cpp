@@ -2502,7 +2502,7 @@ Int GameLogic::rebalanceChildSleepyUpdate(Int i)
 // balance down, not up), so this one is hand-unrolled for
 // max efficiency. I have left the pristine non-unrolled
 // version present for clarity. (Yes, this is worth doing.) (srj) 
-#if 1
+#if 0
 	UpdateModulePtr* pI = &m_sleepyUpdates[i];
 
 	// our children are i*2 and i*2+1
