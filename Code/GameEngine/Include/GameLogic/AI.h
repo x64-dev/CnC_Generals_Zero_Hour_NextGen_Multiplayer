@@ -304,6 +304,8 @@ class Waypoint;
 class Team;
 class Weapon;
 
+#undef AI_PASSIVE
+
 // Note - written out in save/load xfer and .map files, don't change these numbers.  
 enum AttitudeType {
 	AI_SLEEP = -2,

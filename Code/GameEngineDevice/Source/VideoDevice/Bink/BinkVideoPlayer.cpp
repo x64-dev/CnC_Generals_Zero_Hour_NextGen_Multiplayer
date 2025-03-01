@@ -207,7 +207,7 @@ VideoStreamInterface* BinkVideoPlayer::createStream( HBINK handle )
 		Int volume = (32768*mod)/100;
 		DEBUG_LOG(("BinkVideoPlayer::createStream() - About to set volume (%g -> %d -> %d\n",
 			TheAudio->getVolume(AudioAffect_Speech), mod, volume));
-		BinkSetVolume( stream->m_handle,0, volume);
+		BinkSetVolume( stream->m_handle,volume);
 		DEBUG_LOG(("BinkVideoPlayer::createStream() - set volume\n"));
 	}
 
@@ -272,7 +272,7 @@ void BinkVideoPlayer::notifyVideoPlayerOfNewProvider( Bool nowHasValid )
 {
 	if (!nowHasValid) {
 		TheAudio->releaseHandleForBink();
-		BinkSetSoundTrack(0, 0);
+		BinkSetSoundTrack(0);
 	} else {
 		initializeBinkWithMiles();
 	}
@@ -291,7 +291,7 @@ void BinkVideoPlayer::initializeBinkWithMiles()
 	}
 	if( !driver || retVal == 0)
 	{
-		BinkSetSoundTrack ( 0,0 );
+		BinkSetSoundTrack ( 0 );
 	}
 }
 
