@@ -101,7 +101,7 @@ template<typename T> bool StripLeft(WChar* string, const T* trimChars)
 
 	if (start != string)
 		{
-		wcscpy(string, start);
+		wcscpy((wchar_t *)string, (const wchar_t*)start);
 		}
 
 	return true;
@@ -111,7 +111,7 @@ template<typename T> bool StripLeft(WChar* string, const T* trimChars)
 // Strip all right side characters that are trim chars
 template<typename T> bool StripRight(WChar* string, const T* trimChars)
 	{
-	int length = wcslen(string) - 1;
+	int length = wcslen((wchar_t *)string) - 1;
 	int index = length;
 
 	while (index >= 0)
@@ -296,7 +296,7 @@ UInt UString::Length(void) const
 		return 0;
 		}
 
-	return wcslen(mData);
+	return wcslen((const wchar_t *)mData);
 	}
 
 
@@ -364,7 +364,7 @@ void UString::Copy(const Char* s)
 void UString::Copy(const WChar* ws)
 	{
 	assert(ws != NULL);
-	UInt length = wcslen(ws);
+	UInt length = wcslen((const wchar_t*)ws);
 
 	if (length == 0)
 		{
@@ -377,7 +377,7 @@ void UString::Copy(const WChar* ws)
 		}
 
 	assert(Capacity() >= length);
-	wcscpy(mData, ws);
+	wcscpy((wchar_t *)mData, (const wchar_t*)ws);
 	}
 
 
@@ -466,14 +466,14 @@ void UString::Concat(const Char* s)
 void UString::Concat(const WChar* ws)
 	{
 	assert(ws != NULL);
-	UInt length = (Length() + wcslen(ws));
+	UInt length = (Length() + wcslen((const wchar_t*)ws));
 
 	if (Capacity() < length)
 		{
 		Resize(length);
 		}
 
-	wcscat(mData, ws);
+	wcscat((wchar_t *)mData, (const wchar_t*)ws);
 	}
 
 
@@ -586,7 +586,7 @@ Int UString::Compare(const Char* s) const
 
 Int UString::Compare(const WChar* ws) const
 	{
-	return wcscmp(ws, Get());
+	return wcscmp((wchar_t *)ws, (const wchar_t*)Get());
 	}
 
 
@@ -707,7 +707,7 @@ Int UString::CompareNoCase(const Char* s) const
 
 Int UString::CompareNoCase(const WChar* ws) const
 	{
-	return wcsicmp(ws, Get());
+	return wcsicmp((wchar_t *)ws, (const wchar_t*)Get());
 	}
 
 
@@ -776,7 +776,7 @@ Int UString::Find(Char c) const
 
 Int UString::Find(WChar c) const
 	{
-	WChar* ptr = wcschr(Get(), c);
+	WChar* ptr = (WChar *)wcschr((const wchar_t*)Get(), (wchar_t)c);
 
 	// Not found?
 	if (ptr == NULL)
@@ -829,7 +829,7 @@ Int UString::FindLast(Char c) const
 Int UString::FindLast(WChar c) const
 	{
 	assert(mData != NULL);
-	WChar* ptr = wcsrchr(mData, (WChar)c);
+	WChar* ptr = (WChar *)wcsrchr((const wchar_t*)mData, (wchar_t)c);
 
 	// Not found?
 	if (ptr == NULL)
@@ -995,7 +995,7 @@ void UString::ToUpper(void)
 	{
 	if (mData != NULL)
 		{
-		wcsupr(mData);
+		wcsupr((wchar_t*)mData);
 		}
 	}
 
@@ -1020,7 +1020,7 @@ void UString::ToLower(void)
 	{
 	if (mData != NULL)
 		{
-		wcslwr(mData);
+		wcslwr((wchar_t *)mData);
 		}
 	}
 
@@ -1045,7 +1045,7 @@ void UString::Reverse(void)
 	{
 	if (mData != NULL)
 		{
-		wcsrev(mData);
+		wcsrev((wchar_t*)mData);
 		}
 	}
 
@@ -1119,7 +1119,7 @@ bool UString::TrimLeft(const Char* trimChars)
 
 bool UString::TrimLeft(const WChar* trimChars)
 	{
-	if ((trimChars == NULL) || (wcslen(trimChars) == 0))
+	if ((trimChars == NULL) || (wcslen((const wchar_t*)trimChars) == 0))
 		{
 		return false;
 		}
@@ -1163,7 +1163,7 @@ bool UString::TrimRight(const Char* trimChars)
 
 bool UString::TrimRight(const WChar* trimChars)
 	{
-	if ((trimChars == NULL) || (wcslen(trimChars) == 0))
+	if ((trimChars == NULL) || (wcslen((const wchar_t*)trimChars) == 0))
 		{
 		return false;
 		}
@@ -1282,7 +1282,7 @@ bool UString::Resize(UInt size)
 	if (mData != NULL)
 		{
 		UInt minSize = __min(Capacity(), size);
-		wcsncpy(data, mData, minSize);
+		wcsncpy((wchar_t *)data, (const wchar_t*)mData, minSize);
 		data[minSize] = 0;
 		delete mData;
 		}

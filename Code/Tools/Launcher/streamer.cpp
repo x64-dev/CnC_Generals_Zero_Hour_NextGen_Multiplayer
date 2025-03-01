@@ -1,142 +1,109 @@
-/*
-**	Command & Conquer Generals(tm)
-**	Copyright 2025 Electronic Arts Inc.
-**
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
-**
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
-**
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-
 #include "streamer.h"
 #ifdef _WIN32
-  #include <windows.h>
+#include <windows.h>
 #endif
 
-
-Streamer::Streamer() : streambuf()
+Streamer::Streamer()
+    : std::streambuf(), Output_Device(nullptr), is_unbuffered_(false), buffer_(nullptr)
 {
-  int state=unbuffered();
-  unbuffered(0);  // 0 = buffered, 1 = unbuffered
+    // By default, we use buffered output (0 = buffered, 1 = unbuffered)
+    unbuffered(0);
 }
- 
+
 Streamer::~Streamer()
 {
-  sync();
-  delete[](base());
-}
-
-int Streamer::setOutputDevice(OutputDevice *device)
-{
-  Output_Device=device;
-  return(0);
-}
-
-
-// put n chars from string into buffer
-int Streamer::xsputn(const char* buf, int size) //implementation of sputn
-{
-
-  if (size<=0)  // Nothing to do
-    return(0);
-
-  const unsigned char *ptr=(const unsigned char *)buf;
-  for (int i=0; i<size; i++, ptr++)
-  {
-    if(*ptr=='\n')
-    {
-      if (overflow(*ptr)==EOF)
-        return(i);
+    sync();
+    if (buffer_) {
+        delete[] buffer_;
+        buffer_ = nullptr;
     }
-    else if (sputc(*ptr)==EOF)
-      return(i);
-  }
-  return(size);
 }
 
-// Flush the buffer and make more room if needed
+int Streamer::setOutputDevice(OutputDevice* device)
+{
+    Output_Device = device;
+    return 0;
+}
+
+// Write up to n characters from s into the buffer
+std::streamsize Streamer::xsputn(const char* buf, std::streamsize size)
+{
+    if (size <= 0)
+        return 0;
+
+    const unsigned char* ptr = reinterpret_cast<const unsigned char*>(buf);
+    for (std::streamsize i = 0; i < size; i++, ptr++) {
+        if (*ptr == '\n') {
+            if (overflow(*ptr) == EOF)
+                return i;
+        }
+        else if (sputc(*ptr) == EOF)
+            return i;
+    }
+    return size;
+}
+
+// Flush the buffer and make room if needed.
 int Streamer::overflow(int c)
 {
+    if (c == EOF)
+        return sync();
 
-  if (c==EOF)
-    return(sync());
-  if ((pbase()==0) && (doallocate()==0))
-    return(EOF);
-  if((pptr() >= epptr()) && (sync()==EOF))
-    return(EOF);
-  else {
-    sputc(c);
-    if ((unbuffered() && c=='\n' || pptr() >= epptr())
-        && sync()==EOF) {
-      return(EOF);
+    // If no put area is set, try to allocate one.
+    if ((pbase() == nullptr) && (doallocate() == 0))
+        return EOF;
+
+    // If the put area is full and we cannot flush it, fail.
+    if ((pptr() >= epptr()) && (sync() == EOF))
+        return EOF;
+    else {
+        sputc(c);
+        // If unbuffered mode with newline or if put area is now full, flush.
+        if (((unbuffered() && (c == '\n')) || (pptr() >= epptr())) && sync() == EOF)
+            return EOF;
+        return c;
     }
-    return(c);
-  }
 }
 
-// This is a write only stream, this should never happen
+// This is a write-only stream, so underflow should never be reached.
 int Streamer::underflow(void)
 {
-  return(EOF);
+    return EOF;
 }
 
+// Allocate the internal buffer if not already done.
 int Streamer::doallocate()
 {
+    if (buffer_ == nullptr) {
+        buffer_ = new char[2 * STREAMER_BUFSIZ];  // to be deleted in destructor
+        memset(buffer_, 0, 2 * STREAMER_BUFSIZ);
 
-  if (base()==NULL)
-  {
-    char *buf=new char[(2*STREAMER_BUFSIZ)];   // deleted by destructor
-    memset(buf,0,2*STREAMER_BUFSIZ);
-
-    // Buffer
-    setb(
-       buf,         // base pointer
-       buf+STREAMER_BUFSIZ,  // ebuf pointer (end of buffer);
-       0);          // 0 = manual deletion of buff 
-
-    // Get area
-    setg(
-        buf,   // eback 
-        buf,   // gptr
-        buf);  // egptr
-
-    buf+=STREAMER_BUFSIZ;
-    // Put area
-    setp(buf,buf+STREAMER_BUFSIZ);
-    return(1);
-  }
-  else
-    return(0);
+        // Set the get area to empty (not used in a write-only stream)
+        setg(buffer_, buffer_, buffer_);
+        // Use the second half of the allocated block for output.
+        setp(buffer_ + STREAMER_BUFSIZ, buffer_ + 2 * STREAMER_BUFSIZ);
+        return 1;
+    }
+    else
+        return 0;
 }
 
-
+// Flush the output buffer to the output device.
 int Streamer::sync()
 {
-  if (pptr()<=pbase()) {
-    return(0);
-  }
+    if (pptr() <= pbase())
+        return 0;
 
-  int wlen=pptr()-pbase();
+    int wlen = static_cast<int>(pptr() - pbase());
 
-  if (Output_Device)
-  {
-    Output_Device->print(pbase(),wlen);
-  }
+    if (Output_Device) {
+        Output_Device->print(pbase(), wlen);
+    }
 
-  if (unbuffered()) {
-    setp(pbase(),pbase());
-  }
-  else {
-    setp(pbase(),pbase()+STREAMER_BUFSIZ);
-  }
-  return(0);
+    // Reset the put pointer: if unbuffered, empty the buffer completely.
+    if (unbuffered())
+        setp(pbase(), pbase());
+    else
+        setp(pbase(), pbase() + STREAMER_BUFSIZ);
+    return 0;
 }

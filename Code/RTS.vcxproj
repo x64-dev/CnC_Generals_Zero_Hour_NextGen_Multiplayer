@@ -227,7 +227,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Main\buildVersion.h" />
-    <CustomBuild Include="Main\generatedVersion.h">
+    <ClInclude Include="Main\generatedVersion.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Incrementing version numbers held in %(FullPath) .\Main\buildVersion.h</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
 $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
@@ -246,7 +246,7 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
 </Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2.lib;$(ProjectDir)Libraries\Lib\WWDebug.lib;$(ProjectDir)Libraries\Lib\WWUtil.lib;$(ProjectDir)Libraries\Lib\WWLib.lib;$(ProjectDir)Libraries\Lib\WWMath.lib;$(ProjectDir)GameEngine\Lib\GameEngine.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDevice.lib;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);%(Outputs)</Outputs>
-    </CustomBuild>
+    </ClInclude>
     <ClInclude Include="Main\resource.h" />
     <ClInclude Include="Main\WinMain.h" />
   </ItemGroup>

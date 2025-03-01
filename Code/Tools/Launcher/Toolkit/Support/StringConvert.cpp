@@ -92,7 +92,7 @@ Char* UnicodeToANSI(const WChar* string, Char* buffer, UInt bufferLength)
 	#ifdef _DEBUG
 	int result = 
 	#endif
-		WideCharToMultiByte(CP_ACP, 0, string, -1, buffer, bufferLength,
+		WideCharToMultiByte(CP_ACP, 0, (LPCWCH)string, -1, buffer, bufferLength,
 			NULL, NULL);
 
 	#ifdef _DEBUG

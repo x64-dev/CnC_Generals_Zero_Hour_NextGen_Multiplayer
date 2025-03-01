@@ -53,7 +53,7 @@ will you be ready to leave grasshopper.
 #ifndef WDEBUG_HEADER
 #define WDEBUG_HEADER
 
-#include <iostream.h>
+#include <iostream>
 #include "odevice.h"
 #include "streamer.h"
 #include <time.h>
@@ -166,6 +166,7 @@ will you be ready to leave grasshopper.
 
 #endif  // DEBUG
 
+using namespace std;
 
 class MsgManager
 {
@@ -184,10 +185,10 @@ class MsgManager
    static void                enableWarn(int flag);
    static void                enableError(int flag);
 
-   static ostream            *debugStream(void);
-   static ostream            *infoStream(void);
-   static ostream            *warnStream(void);
-   static ostream            *errorStream(void);
+   static std::ostream            *debugStream(void);
+   static std::ostream            *infoStream(void);
+   static std::ostream            *warnStream(void);
+   static std::ostream            *errorStream(void);
 };
 
 #endif
