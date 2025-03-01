@@ -83,8 +83,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;_INTERNAL;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libraries\Bink\include;Libraries\DX90SDK\Include;Libraries\Source\WWVegas\Miles6\Include;Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;NDEBUG;_INTERNAL;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -95,7 +95,7 @@
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Main\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -118,6 +118,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -136,8 +137,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IG_DEBUG_STACKTRACE;NDEBUG;_RELEASE;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libraries\Bink\include;Libraries\DX90SDK\Include;Libraries\Source\WWVegas\Miles6\Include;Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;IG_DEBUG_STACKTRACE;NDEBUG;_RELEASE;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -148,7 +149,7 @@
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Main\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <ResourceCompile>
@@ -169,6 +170,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -186,8 +188,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;BROWSER_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libraries\Bink\include;Libraries\DX90SDK\Include;Libraries\Source\WWVegas\Miles6\Include;Libraries\Include;GameEngine\Include;gameenginedevice\Include;Libraries\Source\WWVegas;Libraries\Source\WWVegas\WWLib;Libraries\Source\WWVegas\WWMath;Libraries\Source\WWVegas\WWDebug;Libraries\Source\WWVegas\WWSaveLoad;Libraries\Source\WWVegas\WW3D2;Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_DEBUG;WIN32;_WINDOWS;BROWSER_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -198,7 +200,7 @@
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Main\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
@@ -207,11 +209,11 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>BenchmarkD.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\Run\RTSD.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>libcd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>Libraries\DX90SDK\Lib\x86;Libraries\Bink\lib\;GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libci.lib;libcd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\Run\RTSD.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
@@ -220,6 +222,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <OutputFile>.\Main\Debug/RTS.bsc</OutputFile>
