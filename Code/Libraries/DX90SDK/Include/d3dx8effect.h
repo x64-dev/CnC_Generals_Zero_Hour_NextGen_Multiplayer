@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////
 //
-//  Copyright (C) Microsoft Corporation.  All Rights Reserved.
+//  Copyright (C) 1999 Microsoft Corporation.  All Rights Reserved.
 //
 //  File:       d3dx8effect.h
 //  Content:    D3DX effect types and functions
@@ -13,9 +13,6 @@
 #define __D3DX8EFFECT_H__
 
 
-#define D3DXFX_DONOTSAVESTATE  (1 << 0)
-
-
 typedef enum _D3DXPARAMETERTYPE
 {
     D3DXPT_DWORD        = 0,
@@ -26,7 +23,6 @@ typedef enum _D3DXPARAMETERTYPE
     D3DXPT_VERTEXSHADER = 5,
     D3DXPT_PIXELSHADER  = 6,
     D3DXPT_CONSTANT     = 7,
-    D3DXPT_STRING       = 8,
     D3DXPT_FORCE_DWORD  = 0x7fffffff /* force 32-bit size enum */
 
 } D3DXPARAMETERTYPE;
@@ -36,14 +32,14 @@ typedef struct _D3DXEFFECT_DESC
 {
     UINT Parameters;
     UINT Techniques;
+    DWORD Usage;
 
 } D3DXEFFECT_DESC;
 
 
 typedef struct _D3DXPARAMETER_DESC
 {
-    LPCSTR Name;
-    LPCSTR Index;
+    DWORD Name;
     D3DXPARAMETERTYPE Type;
 
 } D3DXPARAMETER_DESC;
@@ -51,36 +47,64 @@ typedef struct _D3DXPARAMETER_DESC
 
 typedef struct _D3DXTECHNIQUE_DESC
 {
-    LPCSTR Name;
-    LPCSTR Index;
-    UINT   Passes;
+    DWORD Name;
+    UINT Passes;
 
 } D3DXTECHNIQUE_DESC;
 
 
 typedef struct _D3DXPASS_DESC
 {
-    LPCSTR Name;
-    LPCSTR Index;
+    DWORD Name;
 
 } D3DXPASS_DESC;
 
 
+typedef struct ID3DXEffect *LPD3DXEFFECT;
+typedef struct ID3DXTechnique *LPD3DXTECHNIQUE;
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// ID3DXTechnique ////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+// {A00F378D-AF79-4917-907E-4D635EE63844}
+DEFINE_GUID( IID_ID3DXTechnique, 
+0xa00f378d, 0xaf79, 0x4917, 0x90, 0x7e, 0x4d, 0x63, 0x5e, 0xe6, 0x38, 0x44);
+
+
+DECLARE_INTERFACE_(ID3DXTechnique, IUnknown)
+{
+    // IUnknown
+    STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
+    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG, Release)(THIS) PURE;
+
+    // ID3DXTechnique
+    STDMETHOD(GetDevice)(THIS_ LPDIRECT3DDEVICE8* ppDevice) PURE;
+    STDMETHOD(GetDesc)(THIS_ D3DXTECHNIQUE_DESC* pDesc) PURE;
+    STDMETHOD(GetPassDesc)(THIS_ UINT Index, D3DXPASS_DESC* pDesc) PURE;
+
+    STDMETHOD_(BOOL, IsParameterUsed)(THIS_ DWORD dwName) PURE;
+
+    STDMETHOD(Validate)(THIS) PURE;
+    STDMETHOD(Begin)(THIS_ UINT *pPasses) PURE;
+    STDMETHOD(Pass)(THIS_ UINT Index) PURE;
+    STDMETHOD(End)(THIS) PURE;
+};
+ 
 
 //////////////////////////////////////////////////////////////////////////////
 // ID3DXEffect ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-typedef interface ID3DXEffect ID3DXEffect;
-typedef interface ID3DXEffect *LPD3DXEFFECT;
 
-// {648B1CEB-8D4E-4d66-B6FA-E44969E82E89}
+// {281BBDD4-AEDF-4907-8650-E79CDFD45165}
 DEFINE_GUID( IID_ID3DXEffect, 
-0x648b1ceb, 0x8d4e, 0x4d66, 0xb6, 0xfa, 0xe4, 0x49, 0x69, 0xe8, 0x2e, 0x89);
+0x281bbdd4, 0xaedf, 0x4907, 0x86, 0x50, 0xe7, 0x9c, 0xdf, 0xd4, 0x51, 0x65);
 
-
-#undef INTERFACE
-#define INTERFACE ID3DXEffect
 
 DECLARE_INTERFACE_(ID3DXEffect, IUnknown)
 {
@@ -92,40 +116,27 @@ DECLARE_INTERFACE_(ID3DXEffect, IUnknown)
     // ID3DXEffect
     STDMETHOD(GetDevice)(THIS_ LPDIRECT3DDEVICE8* ppDevice) PURE;
     STDMETHOD(GetDesc)(THIS_ D3DXEFFECT_DESC* pDesc) PURE;
-    STDMETHOD(GetParameterDesc)(THIS_ LPCSTR pParameter, D3DXPARAMETER_DESC* pDesc) PURE;
-    STDMETHOD(GetTechniqueDesc)(THIS_ LPCSTR pTechnique, D3DXTECHNIQUE_DESC* pDesc) PURE;
-    STDMETHOD(GetPassDesc)(THIS_ LPCSTR pTechnique, LPCSTR pPass, D3DXPASS_DESC* pDesc) PURE;
-    STDMETHOD(FindNextValidTechnique)(THIS_ LPCSTR pTechnique, D3DXTECHNIQUE_DESC* pDesc) PURE;
-    STDMETHOD(CloneEffect)(THIS_ LPDIRECT3DDEVICE8 pDevice, LPD3DXEFFECT* ppEffect) PURE;
-    STDMETHOD(GetCompiledEffect)(THIS_ LPD3DXBUFFER* ppCompiledEffect) PURE;
 
-    STDMETHOD(SetTechnique)(THIS_ LPCSTR pTechnique) PURE;
-    STDMETHOD(GetTechnique)(THIS_ LPCSTR* ppTechnique) PURE;
+    STDMETHOD(GetParameterDesc)(THIS_ UINT Index, D3DXPARAMETER_DESC* pDesc) PURE;
+    STDMETHOD(GetTechniqueDesc)(THIS_ UINT Index, D3DXTECHNIQUE_DESC* pDesc) PURE;
 
-    STDMETHOD(SetDword)(THIS_ LPCSTR pParameter, DWORD dw) PURE;
-    STDMETHOD(GetDword)(THIS_ LPCSTR pParameter, DWORD* pdw) PURE; 
-    STDMETHOD(SetFloat)(THIS_ LPCSTR pParameter, FLOAT f) PURE;
-    STDMETHOD(GetFloat)(THIS_ LPCSTR pParameter, FLOAT* pf) PURE;    
-    STDMETHOD(SetVector)(THIS_ LPCSTR pParameter, CONST D3DXVECTOR4* pVector) PURE;
-    STDMETHOD(GetVector)(THIS_ LPCSTR pParameter, D3DXVECTOR4* pVector) PURE;
-    STDMETHOD(SetMatrix)(THIS_ LPCSTR pParameter, CONST D3DXMATRIX* pMatrix) PURE;
-    STDMETHOD(GetMatrix)(THIS_ LPCSTR pParameter, D3DXMATRIX* pMatrix) PURE;
-    STDMETHOD(SetTexture)(THIS_ LPCSTR pParameter, LPDIRECT3DBASETEXTURE8 pTexture) PURE;
-    STDMETHOD(GetTexture)(THIS_ LPCSTR pParameter, LPDIRECT3DBASETEXTURE8 *ppTexture) PURE;
-    STDMETHOD(SetVertexShader)(THIS_ LPCSTR pParameter, DWORD Handle) PURE;
-    STDMETHOD(GetVertexShader)(THIS_ LPCSTR pParameter, DWORD* pHandle) PURE;
-    STDMETHOD(SetPixelShader)(THIS_ LPCSTR pParameter, DWORD Handle) PURE;
-    STDMETHOD(GetPixelShader)(THIS_ LPCSTR pParameter, DWORD* pHandle) PURE;
-    STDMETHOD(SetString)(THIS_ LPCSTR pParameter, LPCSTR pString) PURE;
-    STDMETHOD(GetString)(THIS_ LPCSTR pParameter, LPCSTR* ppString) PURE;
-    STDMETHOD_(BOOL, IsParameterUsed)(THIS_ LPCSTR pParameter) PURE;
+    STDMETHOD(SetDword)(THIS_ DWORD Name, DWORD dw) PURE;
+    STDMETHOD(GetDword)(THIS_ DWORD Name, DWORD* pdw) PURE; 
+    STDMETHOD(SetFloat)(THIS_ DWORD Name, FLOAT f) PURE;
+    STDMETHOD(GetFloat)(THIS_ DWORD Name, FLOAT* pf) PURE;
+    STDMETHOD(SetVector)(THIS_ DWORD Name, D3DXVECTOR4* pVector) PURE;
+    STDMETHOD(GetVector)(THIS_ DWORD Name, D3DXVECTOR4* pVector) PURE;
+    STDMETHOD(SetMatrix)(THIS_ DWORD Name, D3DXMATRIX* pMatrix) PURE;
+    STDMETHOD(GetMatrix)(THIS_ DWORD Name, D3DXMATRIX* pMatrix) PURE;
+    STDMETHOD(SetTexture)(THIS_ DWORD Name, LPDIRECT3DBASETEXTURE8 pTexture) PURE;
+    STDMETHOD(GetTexture)(THIS_ DWORD Name, LPDIRECT3DBASETEXTURE8 *ppTexture) PURE;
+    STDMETHOD(SetVertexShader)(THIS_ DWORD Name, DWORD Handle) PURE;
+    STDMETHOD(GetVertexShader)(THIS_ DWORD Name, DWORD* pHandle) PURE;
+    STDMETHOD(SetPixelShader)(THIS_ DWORD Name, DWORD Handle) PURE;
+    STDMETHOD(GetPixelShader)(THIS_ DWORD Name, DWORD* pHandle) PURE;
 
-    STDMETHOD(Validate)(THIS) PURE;
-    STDMETHOD(Begin)(THIS_ UINT *pPasses, DWORD Flags) PURE;
-    STDMETHOD(Pass)(THIS_ UINT Pass) PURE;
-    STDMETHOD(End)(THIS) PURE;
-    STDMETHOD(OnLostDevice)(THIS) PURE;
-    STDMETHOD(OnResetDevice)(THIS) PURE;
+    STDMETHOD(GetTechnique)(THIS_ UINT Index, LPD3DXTECHNIQUE* ppTechnique) PURE;
+    STDMETHOD(CloneEffect)(THIS_ LPDIRECT3DDEVICE8 pDevice, DWORD Usage, LPD3DXEFFECT* ppEffect) PURE;
 };
 
 
@@ -141,25 +152,20 @@ extern "C" {
 
 
 //----------------------------------------------------------------------------
-// D3DXCreateEffect:
-// -----------------
-// Creates an effect from an ascii or binaray effect description.
+// D3DXCompileEffect:
+// ------------------
+// Compiles an ascii effect description into a binary form usable by
+// D3DXCreateEffect.
 //
 // Parameters:
-//  pDevice
-//      Pointer of the device on which to create the effect
 //  pSrcFile
-//      Name of the file containing the effect description
-//  hSrcModule
-//      Module handle. if NULL, current module will be used.
-//  pSrcResource
-//      Resource name in module
+//      Name of the file containing the ascii effect description
 //  pSrcData
-//      Pointer to effect description
+//      Pointer to ascii effect description
 //  SrcDataSize
 //      Size of the effect description in bytes
-//  ppEffect
-//      Returns a buffer containing created effect.
+//  ppCompiledEffect
+//      Returns a buffer containing compiled effect.
 //  ppCompilationErrors
 //      Returns a buffer containing any error messages which occurred during
 //      compile.  Or NULL if you do not care about the error messages.
@@ -167,56 +173,60 @@ extern "C" {
 //----------------------------------------------------------------------------
 
 HRESULT WINAPI
-    D3DXCreateEffectFromFileA(
-        LPDIRECT3DDEVICE8 pDevice,
+    D3DXCompileEffectFromFileA(
         LPCSTR            pSrcFile,
-        LPD3DXEFFECT*     ppEffect,
+        LPD3DXBUFFER*     ppCompiledEffect,
         LPD3DXBUFFER*     ppCompilationErrors);
 
 HRESULT WINAPI
-    D3DXCreateEffectFromFileW(
-        LPDIRECT3DDEVICE8 pDevice,
+    D3DXCompileEffectFromFileW(
         LPCWSTR           pSrcFile,
-        LPD3DXEFFECT*     ppEffect,
+        LPD3DXBUFFER*     ppCompiledEffect,
         LPD3DXBUFFER*     ppCompilationErrors);
 
 #ifdef UNICODE
-#define D3DXCreateEffectFromFile D3DXCreateEffectFromFileW
+#define D3DXCompileEffectFromFile D3DXCompileEffectFromFileW
 #else
-#define D3DXCreateEffectFromFile D3DXCreateEffectFromFileA
+#define D3DXCompileEffectFromFile D3DXCompileEffectFromFileA
 #endif
 
 
 HRESULT WINAPI
-    D3DXCreateEffectFromResourceA(
-        LPDIRECT3DDEVICE8 pDevice,
-        HMODULE           hSrcModule,
-        LPCSTR            pSrcResource,
-        LPD3DXEFFECT*     ppEffect,
+    D3DXCompileEffect(
+        LPCVOID           pSrcData,
+        UINT              SrcDataSize,
+        LPD3DXBUFFER*     ppCompiledEffect,
         LPD3DXBUFFER*     ppCompilationErrors);
 
-HRESULT WINAPI
-    D3DXCreateEffectFromResourceW(
-        LPDIRECT3DDEVICE8 pDevice,
-        HMODULE           hSrcModule,
-        LPCWSTR           pSrcResource,
-        LPD3DXEFFECT*     ppEffect,
-        LPD3DXBUFFER*     ppCompilationErrors);
 
-#ifdef UNICODE
-#define D3DXCreateEffectFromResource D3DXCreateEffectFromResourceW
-#else
-#define D3DXCreateEffectFromResource D3DXCreateEffectFromResourceA
-#endif
+
+//----------------------------------------------------------------------------
+// D3DXCreateEffect:
+// -----------------
+// Creates an effect object, given compiled binary effect data
+//
+// Parameters:
+//  pDevice
+//      Pointer to the device to be used.
+//  pCompiledEffect
+//      Pointer to compiled effect data
+//  CompiledEffectSize
+//      Size of compiled effect data in bytes
+//  Usage
+//      Allows the specification of D3DUSAGE_SOFTWAREPROCESSING 
+//  ppEffect
+//      Returns the created effect object
+//----------------------------------------------------------------------------
 
 
 HRESULT WINAPI
     D3DXCreateEffect(
         LPDIRECT3DDEVICE8 pDevice,
-        LPCVOID           pSrcData,
-        UINT              SrcDataSize,
-        LPD3DXEFFECT*     ppEffect,
-        LPD3DXBUFFER*     ppCompilationErrors);
+        LPCVOID           pCompiledEffect,
+        UINT              CompiledEffectSize,
+        DWORD             Usage,
+        LPD3DXEFFECT*     ppEffect);
+
 
 
 #ifdef __cplusplus

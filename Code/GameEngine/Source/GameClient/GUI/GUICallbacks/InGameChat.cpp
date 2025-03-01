@@ -157,7 +157,9 @@ Bool IsInGameChatActive() {
 
 // Slash commands -------------------------------------------------------------------------
 extern "C" {
-int getQR2HostingStatus(void);
+	int getQR2HostingStatus(void) {
+		return 0;
+	}
 }
 extern int isThreadHosting;
 

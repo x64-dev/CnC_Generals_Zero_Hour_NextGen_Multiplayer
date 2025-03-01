@@ -209,7 +209,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dx8.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\Run\RTSD.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Libraries\DX90SDK\Lib\x86;Libraries\Bink\lib\;GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -496,6 +496,31 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
       <Project>{83fcc1e0-e231-4c1e-a545-451f7131cebf}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Libraries\Source\GameSpy\bin\brigades\Debug\usbrigades.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Chat\Debug\uschat.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\common\Debug\uscommon.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Direct2Game\Debug\usd2g.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\gcdkey\Debug\uscdkey.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\ghttp\Debug\ushttp.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\GP\Debug\usgp.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\gstats\Debug\usstats.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\gt2\Debug\usgt2.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\natneg\Debug\usnatneg.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Peer\Debug\uspeer.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\pinger\Debug\uspinger.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\pt\Debug\uspt.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\qr2\Debug\usqr2.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\sake\Debug\ussake.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\sc\Debug\ussc.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\serverbrowsing\Debug\usserverbrowsing.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\sharedDll\Debug\UniSpySDK.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Voice2\Debug\usvoice2.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Voice2\libgsm\Debug\gsm.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\Voice2\libspeex\Debug\speex.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\webservices\Debug\uswebservice.lib" />
+    <Library Include="Libraries\Source\WWVegas\Miles6\Libraries\Win32\DebugRelease\mss32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
