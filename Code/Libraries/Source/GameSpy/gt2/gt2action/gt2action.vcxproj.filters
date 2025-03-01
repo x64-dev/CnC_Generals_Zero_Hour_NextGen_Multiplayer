@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{fc640378-a84b-4f20-bd16-64fa08f67624}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{13f8a55d-6db9-4176-b4f7-fe03df1e5862}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="images">
+      <UniqueIdentifier>{0136d14d-6399-41e8-b1d1-02db838d4d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sounds">
+      <UniqueIdentifier>{9c8d52d4-a712-4d6a-b933-8f0a8eac3bb8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gt2aClient.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aDisplay.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aInput.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aLogic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aMain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aMath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aParse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aServer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gt2aSound.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TGAFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gt2aClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aParse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gt2aSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TGAFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\asteroid0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\asteroid1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\asteroid2.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\explosion0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\explosion1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\mine0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\mine1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\mine2.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\rocket0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\rocket1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\rocket2.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\rocket3.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\ship0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\ship1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\space.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\spinner0.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\spinner1.tga">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\spinner2.tga">
+      <Filter>images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="sounds\die.wav">
+      <Filter>sounds</Filter>
+    </Media>
+    <Media Include="sounds\explosion.wav">
+      <Filter>sounds</Filter>
+    </Media>
+    <Media Include="sounds\mine.wav">
+      <Filter>sounds</Filter>
+    </Media>
+    <Media Include="sounds\pickup.wav">
+      <Filter>sounds</Filter>
+    </Media>
+    <Media Include="sounds\rocket.wav">
+      <Filter>sounds</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="messages.txt" />
+    <Text Include="todo.txt" />
+  </ItemGroup>
+</Project>
