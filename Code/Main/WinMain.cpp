@@ -840,12 +840,11 @@ static CriticalSection critSec1, critSec2, critSec3, critSec4, critSec5;
 // WinMain ====================================================================
 /** Application entry point */
 //=============================================================================
-Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                      LPSTR lpCmdLine, Int nCmdShow )
+int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, Int nCmdShow )
 {
-	checkProtection();
+//	checkProtection();
 
-	try {
+	{
 
 		_set_se_translator( DumpExceptionInfo ); // Hook that allows stack trace.
 		//
@@ -1020,10 +1019,7 @@ Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		// BGC - shut down COM
 	//	OleUninitialize();
 	}	
-	catch (...) 
-	{ 
-	
-	}
+
 
 	TheAsciiStringCriticalSection = NULL;
 	TheUnicodeStringCriticalSection = NULL;

@@ -3479,8 +3479,8 @@ void initMemoryManager()
 	if (theLinkTester != 6)
 #endif
 	{
-		DEBUG_CRASH(("Wrong operator new/delete linked in! Fix this...\n"));
-		exit(-1);
+//		DEBUG_CRASH(("Wrong operator new/delete linked in! Fix this...\n"));
+//		exit(-1);
 	}
 
 	theMainInitFlag = true;

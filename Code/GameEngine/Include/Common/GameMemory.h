@@ -57,7 +57,7 @@
 
 //#if (defined(_DEBUG) || defined(_INTERNAL)) && !defined(MEMORYPOOL_DEBUG) && !defined(DISABLE_MEMORYPOOL_DEBUG)
 #if (defined(_DEBUG)) && !defined(MEMORYPOOL_DEBUG) && !defined(DISABLE_MEMORYPOOL_DEBUG)
-	#define MEMORYPOOL_DEBUG
+//	#define MEMORYPOOL_DEBUG
 #endif
 
 // SYSTEM INCLUDES ////////////////////////////////////////////////////////////
@@ -76,134 +76,18 @@
 
 // MACROS //////////////////////////////////////////////////////////////////
 
-#ifdef MEMORYPOOL_DEBUG
+#define DECLARE_LITERALSTRING_ARG1
+#define PASS_LITERALSTRING_ARG1	
+#define DECLARE_LITERALSTRING_ARG2
+#define PASS_LITERALSTRING_ARG2
 
-	// by default, enable free-block-retention for checkpointing in debug mode
-	#ifndef DISABLE_MEMORYPOOL_CHECKPOINTING
-		#define MEMORYPOOL_CHECKPOINTING
-	#endif
+#define allocateBlock(ARGLITERAL)										allocateBlockImplementation()
+#define allocateBlockDoNotZero(ARGLITERAL)					allocateBlockDoNotZeroImplementation()
+#define allocateBytes(ARGCOUNT,ARGLITERAL)					allocateBytesImplementation(ARGCOUNT)
+#define allocateBytesDoNotZero(ARGCOUNT,ARGLITERAL)	allocateBytesDoNotZeroImplementation(ARGCOUNT)
+#define newInstanceDesc(ARGCLASS,ARGLITERAL)				new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED) ARGCLASS
+#define newInstance(ARGCLASS)												new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED) ARGCLASS
 
-	// by default, enable bounding walls in debug mode (unless we have specifically disabled them)
-	#ifndef DISABLE_MEMORYPOOL_BOUNDINGWALL
-		#define MEMORYPOOL_BOUNDINGWALL
-	#endif
-
-	#define DECLARE_LITERALSTRING_ARG1										const char * debugLiteralTagString
-	#define PASS_LITERALSTRING_ARG1												debugLiteralTagString
-	#define DECLARE_LITERALSTRING_ARG2										, const char * debugLiteralTagString
-	#define PASS_LITERALSTRING_ARG2												, debugLiteralTagString
-
-	#define MP_LOC_SUFFIX																/*" [" DEBUG_FILENLINE "]"*/
-
-	#define allocateBlock(ARGLITERAL)										allocateBlockImplementation(ARGLITERAL MP_LOC_SUFFIX)
-	#define allocateBlockDoNotZero(ARGLITERAL)					allocateBlockDoNotZeroImplementation(ARGLITERAL MP_LOC_SUFFIX)
-	#define allocateBytes(ARGCOUNT,ARGLITERAL)					allocateBytesImplementation(ARGCOUNT, ARGLITERAL MP_LOC_SUFFIX)
-	#define allocateBytesDoNotZero(ARGCOUNT,ARGLITERAL)	allocateBytesDoNotZeroImplementation(ARGCOUNT, ARGLITERAL MP_LOC_SUFFIX)
-	#define newInstanceDesc(ARGCLASS,ARGLITERAL)				new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED, ARGLITERAL MP_LOC_SUFFIX) ARGCLASS
-	#define newInstance(ARGCLASS)												new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED, __FILE__) ARGCLASS
-
-	#if !defined(MEMORYPOOL_STACKTRACE) && !defined(DISABLE_MEMORYPOOL_STACKTRACE)
-		#define MEMORYPOOL_STACKTRACE
-	#endif
-
-	// flags for the memory-report options.
-	enum 
-	{
-
-#ifdef MEMORYPOOL_CHECKPOINTING
-		// ------------------------------------------------------
-		// you usually won't use the _REPORT bits directly; see below for more convenient combinations.
-
-		// you must set at least one of the 'allocate' bits.
-		_REPORT_CP_ALLOCATED_BEFORE			= 0x0001,
-		_REPORT_CP_ALLOCATED_BETWEEN		= 0x0002,
-		_REPORT_CP_ALLOCATED_DONTCARE		= (_REPORT_CP_ALLOCATED_BEFORE|_REPORT_CP_ALLOCATED_BETWEEN),
-
-		// you must set at least one of the 'freed' bits.
-		_REPORT_CP_FREED_BEFORE					= 0x0010,
-		_REPORT_CP_FREED_BETWEEN				= 0x0020,
-		_REPORT_CP_FREED_NEVER					= 0x0040,	// ie, still in existence
-		_REPORT_CP_FREED_DONTCARE				= (_REPORT_CP_FREED_BEFORE|_REPORT_CP_FREED_BETWEEN|_REPORT_CP_FREED_NEVER),
-		// ------------------------------------------------------
-#endif // MEMORYPOOL_CHECKPOINTING
-
-#ifdef MEMORYPOOL_STACKTRACE
-		/** display the stacktrace for allocation location for all blocks found. 
-			this bit may be mixed-n-matched with any other flag.
-		*/
-		REPORT_CP_STACKTRACE		= 0x0100,
-#endif
-		
-		/** display stats for each pool, in addition to each block.
-			(this is useful for finding suitable allocation counts for the pools.)
-			this bit may be mixed-n-matched with any other flag.
-		*/
-		REPORT_POOLINFO					= 0x0200, 
-
-		/** report on the overall memory situation (including all pools and dma's).
-			this bit may be mixed-n-matched with any other flag.
-		*/
-		REPORT_FACTORYINFO			= 0x0400,	
-
-		/** report on pools that have overflowed their initial allocation.
-			this bit may be mixed-n-matched with any other flag.
-		*/
-		REPORT_POOL_OVERFLOW		= 0x0800,	
-
-		/** simple-n-cheap leak checking */
-		REPORT_SIMPLE_LEAKS			= 0x1000,
-
-#ifdef MEMORYPOOL_CHECKPOINTING
-		/** report on blocks that were allocated between the checkpoints.
-		 (don't care if they were freed or not.)
-		*/
-		REPORT_CP_ALLOCATES	= (_REPORT_CP_ALLOCATED_BETWEEN | _REPORT_CP_FREED_DONTCARE),	
-
-		/** report on blocks that were freed between the checkpoints.
-		 (don't care when they were allocated.)
-		*/
-		REPORT_CP_FREES			= (_REPORT_CP_ALLOCATED_DONTCARE | _REPORT_CP_FREED_BETWEEN),	
-
-		/** report on blocks that were allocated between the checkpoints, and still exist
-		 (note that this reports *potential* leaks -- some such blocks may be desired)
-		*/
-		REPORT_CP_LEAKS			= (_REPORT_CP_ALLOCATED_BETWEEN | _REPORT_CP_FREED_NEVER),
-
-		/** report on blocks that existed before checkpoint #1 and still exist now.
-		*/
-		REPORT_CP_LONGTERM		= (_REPORT_CP_ALLOCATED_BEFORE | _REPORT_CP_FREED_NEVER),
-		
-		/** report on blocks that were allocated-and-freed between the checkpoints.
-		*/
-		REPORT_CP_TRANSIENT		= (_REPORT_CP_ALLOCATED_BETWEEN | _REPORT_CP_FREED_BETWEEN),
-
-		/** report on all blocks that currently exist
-		*/
-		REPORT_CP_EXISTING		= (_REPORT_CP_ALLOCATED_BEFORE | _REPORT_CP_ALLOCATED_BETWEEN | _REPORT_CP_FREED_NEVER),
-
-		/** report on all blocks that have ever existed (!) (or at least, since the last call
-			to debugResetCheckpoints)
-		*/
-		REPORT_CP_ALL					= (_REPORT_CP_ALLOCATED_DONTCARE | _REPORT_CP_FREED_DONTCARE)
-#endif // MEMORYPOOL_CHECKPOINTING
-		
-	};
-
-#else
-
-	#define DECLARE_LITERALSTRING_ARG1
-	#define PASS_LITERALSTRING_ARG1	
-	#define DECLARE_LITERALSTRING_ARG2
-	#define PASS_LITERALSTRING_ARG2
-
-	#define allocateBlock(ARGLITERAL)										allocateBlockImplementation()
-	#define allocateBlockDoNotZero(ARGLITERAL)					allocateBlockDoNotZeroImplementation()
-	#define allocateBytes(ARGCOUNT,ARGLITERAL)					allocateBytesImplementation(ARGCOUNT)
-	#define allocateBytesDoNotZero(ARGCOUNT,ARGLITERAL)	allocateBytesDoNotZeroImplementation(ARGCOUNT)
-	#define newInstanceDesc(ARGCLASS,ARGLITERAL)				new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED) ARGCLASS
-	#define newInstance(ARGCLASS)												new(ARGCLASS::ARGCLASS##_GLUE_NOT_IMPLEMENTED) ARGCLASS
-
-#endif
 
 // FORWARD REFERENCES /////////////////////////////////////////////////////////
 
@@ -331,6 +215,8 @@ public:
 
 	/// allocate a block from this pool. (don't call directly; use allocateBlock() macro)
 	void *allocateBlockImplementation(DECLARE_LITERALSTRING_ARG1);
+
+	void* allocateBlockImplementation(const char* s) { return allocateBlockImplementation(); }
 
 	/// same as allocateBlockImplementation, but memory returned is not zeroed
 	void *allocateBlockDoNotZeroImplementation(DECLARE_LITERALSTRING_ARG1);
