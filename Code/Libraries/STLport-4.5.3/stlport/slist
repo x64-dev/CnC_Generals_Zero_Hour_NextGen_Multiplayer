@@ -12,6 +12,10 @@
  *
  */
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
+
 #ifndef _STLP_SLIST
 #define _STLP_SLIST
 

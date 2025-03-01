@@ -5,7 +5,7 @@
 #  pragma option -w-8062
 # else
 #  if !(defined (_STLP_MSVC) && (_STLP_MSVC < 1200))
-#   pragma warning (pop)
+//#   pragma warning (pop)	MSVC misbehaves with this (jkmcd)
 #  endif
 #  pragma pack (pop)
 # endif

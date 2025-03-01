@@ -12,6 +12,7 @@
  */
 #  pragma warning ( disable : 4355 4284  4231 4511 4512 4097 4786 4800 4018 4146 4244 4514 4127 4100 4663)
 #  pragma warning ( disable : 4245 4514 4660) // conversion from enum to unsigned int signed/unsigned mismatch
+#  pragma warning ( disable : 4103)	// #pragma pack used. This one is informational. Why doesn't it show up on my box?
 #  if (_MSC_VER > 1200)
 // multiple copy constructors/assignment operators specified,
 // with member templates are bogus...

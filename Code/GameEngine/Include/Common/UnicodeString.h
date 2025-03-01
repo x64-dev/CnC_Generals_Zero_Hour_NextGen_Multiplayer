@@ -201,6 +201,8 @@ public:
 	*/
 	void set(const WideChar* s);
 
+	void set(const UnsignedShort* s);
+
 	/**
 		replace contents of self with the given string. Note the
 		nomenclature is translate rather than set; this is because

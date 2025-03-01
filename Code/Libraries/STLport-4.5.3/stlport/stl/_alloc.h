@@ -260,7 +260,11 @@ _STLP_EXPORT_TEMPLATE_CLASS __node_alloc<_STLP_NODE_ALLOCATOR_THREADS, 0>;
 typedef __node_alloc<_STLP_NODE_ALLOCATOR_THREADS, 0> _Node_alloc;
 # if defined (_STLP_USE_TEMPLATE_EXPORT)
 _STLP_EXPORT_TEMPLATE_CLASS __debug_alloc<_Node_alloc>;
+#if defined(_STLP_USE_CUSTOM_NEWALLOC)
+_STLP_EXPORT_TEMPLATE_CLASS __debug_alloc<_STLP_USE_CUSTOM_NEWALLOC>;
+#else
 _STLP_EXPORT_TEMPLATE_CLASS __debug_alloc<__new_alloc>;
+#endif
 _STLP_EXPORT_TEMPLATE_CLASS __debug_alloc<__malloc_alloc<0> >;
 # endif
 
@@ -285,13 +289,26 @@ typedef __pthread_alloc __multithreaded_alloc;
 # if defined ( _STLP_USE_NEWALLOC )
 
 #  if defined ( _STLP_DEBUG_ALLOC )
+#if defined(_STLP_USE_CUSTOM_NEWALLOC)
+typedef __debug_alloc<_STLP_USE_CUSTOM_NEWALLOC> __sgi_alloc;
+#else
 typedef __debug_alloc<__new_alloc> __sgi_alloc;
+#endif
+#  else
+#if defined(_STLP_USE_CUSTOM_NEWALLOC)
+typedef _STLP_USE_CUSTOM_NEWALLOC __sgi_alloc;
 #  else
 typedef __new_alloc __sgi_alloc;
+#endif
 #  endif /* _STLP_DEBUG_ALLOC */
 
+#if defined(_STLP_USE_CUSTOM_NEWALLOC)
+typedef _STLP_USE_CUSTOM_NEWALLOC __single_client_alloc;
+typedef _STLP_USE_CUSTOM_NEWALLOC __multithreaded_alloc;
+#else
 typedef __new_alloc __single_client_alloc;
 typedef __new_alloc __multithreaded_alloc;
+#endif
 
 #  elif defined (_STLP_USE_MALLOC)
 

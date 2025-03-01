@@ -15,6 +15,10 @@
 
 // Boris : highly questionable header for BC++
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
+
 #ifndef _STLP_mem_h
 
 # if !defined (_STLP_OUTERMOST_HEADER_ID)

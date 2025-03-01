@@ -25,6 +25,9 @@
  *
  */
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
 
 //==========================================================
 // User-settable macros that control compilation:
@@ -42,7 +45,7 @@
  *
  */
 
-// # define   _STLP_NO_OWN_IOSTREAMS	1
+# define   _STLP_NO_OWN_IOSTREAMS	1
 
 
 /* 
@@ -56,7 +59,7 @@
  * Hint : In VC++ 6.x, they are not.
  */
 
-// #define   _STLP_NO_NEW_IOSTREAMS	1
+#define   _STLP_NO_NEW_IOSTREAMS	1
 
 /*
  * Use this switch for embedded systems where no iostreams are available

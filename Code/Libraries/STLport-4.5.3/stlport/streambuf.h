@@ -15,6 +15,11 @@
  * modified is included with the above copyright notice.
  *
  */ 
+
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
+
 #ifndef _STLP_STREAMBUF_H
 # define _STLP_STREAMBUF_H
 

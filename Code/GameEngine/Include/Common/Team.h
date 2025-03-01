@@ -45,7 +45,13 @@ typedef UnsignedInt TeamPrototypeID;
 #define TEAM_PROTOTYPE_ID_INVALID 0
 
 // ------------------------------------------------------------------------------------------------
-typedef std::hash_map< TeamID, Relationship, std::hash<TeamID>, std::equal_to<TeamID> > TeamRelationMapType;
+//typedef std::unordered_map< TeamID, Relationship, std::hash<TeamID>, std::equal_to<TeamID> > TeamRelationMapType;
+typedef std::unordered_map<
+	TeamID,
+	Relationship,
+	std::hash<TeamID>,
+	std::equal_to<TeamID>
+> TeamRelationMapType;
 class TeamRelationMap : public MemoryPoolObject,
 												public Snapshot
 {

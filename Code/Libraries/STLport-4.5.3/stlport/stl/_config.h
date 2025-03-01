@@ -59,7 +59,7 @@
  * It could be also used to mask settings from 
  * different directories.
  */
-# include <stl_user_config.h>
+# include "stl_user_config.h"
 
 /* ========================================================= */
 /* This file is used for compatibility; it accepts old-style config
@@ -80,7 +80,7 @@
  * or settings applicable to a group of compilers, such as
  * to all who use EDG front-end.
  */
-# include <config/stl_confix.h>
+# include "config/stl_confix.h"
 
 
 /*

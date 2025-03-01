@@ -33,6 +33,9 @@
 // codecvt<char, char, mbstate_t> does something nontrivial are a rare
 // corner case.)
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
 
 #ifndef _STLP_STDIO_STREAMBUF
 #define _STLP_STDIO_STREAMBUF

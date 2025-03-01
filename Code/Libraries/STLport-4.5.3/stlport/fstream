@@ -16,6 +16,9 @@
  *
  */ 
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
 
 // This header defines classes basic_filebuf, basic_ifstream,
 // basic_ofstream, and basic_fstream.  These classes represent

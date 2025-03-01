@@ -265,8 +265,8 @@ _STLP_DECLARE_COPY_TRIVIAL(unsigned long)
 _STLP_DECLARE_COPY_TRIVIAL(wchar_t)
 #endif
 #ifdef _STLP_LONG_LONG
-_STLP_DECLARE_COPY_TRIVIAL(long long)
-_STLP_DECLARE_COPY_TRIVIAL(unsigned long long)
+_STLP_DECLARE_COPY_TRIVIAL(_STLP_LONG_LONG)	// JKMCD: Changed this from long long to use the macro STLP_LONG_LONG
+_STLP_DECLARE_COPY_TRIVIAL(unsigned _STLP_LONG_LONG) // JKMCD: Changed this from long long to use the macro STLP_LONG_LONG
 #endif 
 _STLP_DECLARE_COPY_TRIVIAL(float)
 _STLP_DECLARE_COPY_TRIVIAL(double)

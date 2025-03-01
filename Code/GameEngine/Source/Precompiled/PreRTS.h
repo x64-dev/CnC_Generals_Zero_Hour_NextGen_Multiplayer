@@ -26,25 +26,25 @@
 // Be careful what you stick in here, because putting files that change often in here will 
 // tend to cheese people's goats.
 
-#ifndef __PRERTS_H__
-#define __PRERTS_H__
-
+#pragma once
 //-----------------------------------------------------------------------------
 // srj sez: this must come first, first, first.
 #define _STLP_USE_NEWALLOC					1
 //#define _STLP_USE_CUSTOM_NEWALLOC		STLSpecialAlloc
 class STLSpecialAlloc;
 
+#pragma warning(disable : 4018)
+#pragma warning(disable : 4996)
 
 // We actually don't use Windows for much other than timeGetTime, but it was included in 40 
 // different .cpp files, so I bit the bullet and included it here.
 // PLEASE DO NOT ABUSE WINDOWS OR IT WILL BE REMOVED ENTIRELY. :-)
 //--------------------------------------------------------------------------------- System Includes 
-#define WIN32_LEAN_AND_MEAN
+
 #define __PLACEMENT_VEC_NEW_INLINE // jmarshall
+#include <string.h>
 #include <atlbase.h>
 #include <windows.h>
-
 #include <assert.h>
 #include <ctype.h>
 #include <direct.h>
@@ -80,6 +80,8 @@ class STLSpecialAlloc;
 #include <winerror.h>
 #include <wininet.h>
 #include <winreg.h>
+#include <unordered_map>
+
 
 #ifndef DIRECTINPUT_VERSION
 #	define DIRECTINPUT_VERSION	0x800
@@ -87,25 +89,25 @@ class STLSpecialAlloc;
 
 #include <dinput.h>
 
+#undef AI_PASSIVE
+
 //------------------------------------------------------------------------------------ STL Includes
 // srj sez: no, include STLTypesdefs below, instead, thanks
-//#include <algorithm>
-//#include <bitset>
-//#include <hash_map>
-//#include <list>
-//#include <map>
-//#include <queue>
-//#include <set>
-//#include <stack>
-//#include <string>
-//#include <vector>
+#include <algorithm>
+#include <bitset>
+#include <hash_map>
+#include <list>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
 
 //------------------------------------------------------------------------------------ RTS Includes
 // Icky. These have to be in this order.
 #include "Lib/Basetype.h"
-#include "Common/STLTypedefs.h"
-#undef type
-#undef value_type
+//#include "Common/STLTypedefs.h"
 #include "Common/Errors.h"
 #include "Common/Debug.h"
 #include "Common/AsciiString.h"
@@ -127,5 +129,3 @@ class STLSpecialAlloc;
 
 #include "Common/Thing.h"
 #include "Common/UnicodeString.h"
-
-#endif /* __PRERTS_H__ */

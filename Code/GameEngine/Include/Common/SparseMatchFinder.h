@@ -73,7 +73,7 @@ private:
 	};
 
 	//-------------------------------------------------------------------------------------------------
-	typedef std::hash_map< BITSET, const MATCHABLE*, HashMapHelper, HashMapHelper > MatchMap;
+	typedef std::unordered_map< BITSET, const MATCHABLE*, HashMapHelper, HashMapHelper > MatchMap;
 
 	//-------------------------------------------------------------------------------------------------
 	// MEMBER VARS

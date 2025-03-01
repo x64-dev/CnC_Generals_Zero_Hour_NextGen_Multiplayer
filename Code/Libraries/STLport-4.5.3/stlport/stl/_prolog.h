@@ -7,7 +7,7 @@
 # undef std
 
 # ifndef _STLP_CONFIG_H
-#  include <stl/_config.h>
+#  include "stl/_config.h"
 # endif
 
 /* If the platform provides any specific prolog actions,

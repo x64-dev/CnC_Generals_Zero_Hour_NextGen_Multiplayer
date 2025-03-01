@@ -11,6 +11,10 @@
  * purpose.  It is provided "as is" without express or implied warranty.
  */
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
+
 #ifndef _STLP_ROPE
 #define _STLP_ROPE
 

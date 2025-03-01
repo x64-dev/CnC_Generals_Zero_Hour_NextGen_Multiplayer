@@ -21,7 +21,6 @@
 // Author: Matthew D. Campbell, June 2002
 
 #include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
-#include <set>
 
 #include "Common/GameState.h"
 #include "Common/RandomValue.h"

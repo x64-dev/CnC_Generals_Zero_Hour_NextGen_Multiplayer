@@ -20,6 +20,9 @@
 // MAY BE REMOVED in a future standard revision.  You should use the
 // header <sstream> instead.
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
 
 #ifndef _STLP_STRSTREAM
 #define _STLP_STRSTREAM

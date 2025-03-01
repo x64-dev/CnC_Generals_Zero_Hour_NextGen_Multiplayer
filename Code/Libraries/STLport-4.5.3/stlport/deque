@@ -23,6 +23,10 @@
  *
  */
 
+#ifdef _STLP_USE_PRAGMA_ONCE
+#pragma once	// JKMCD should speed up compile times.
+#endif
+
 #ifndef _STLP_DEQUE
 #define _STLP_DEQUE
 

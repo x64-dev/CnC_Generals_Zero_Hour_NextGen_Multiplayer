@@ -12,17 +12,19 @@
 #  define _STLP_NATIVE_CPP_RUNTIME_HEADER(header) <../crt/##header>
 #  define _STLP_GLOBAL_NEW_HANDLER
 # else
-#  define _STLP_NATIVE_HEADER(x) <../include/##x>
-#  define _STLP_NATIVE_C_HEADER(x) <../include/##x>
-#  define _STLP_NATIVE_CPP_C_HEADER(x) <../include/##x>
-#  define _STLP_NATIVE_OLD_STREAMS_HEADER(x) <../include/##x>
-#  define _STLP_NATIVE_CPP_RUNTIME_HEADER(header) <../include/##header>
+#  define _STLP_NATIVE_HEADER(x) <##x>
+#  define _STLP_NATIVE_C_HEADER(x) <##x>
+#  define _STLP_NATIVE_CPP_C_HEADER(x) <#x>
+#  define _STLP_NATIVE_OLD_STREAMS_HEADER(x) <##x>
+#  define _STLP_NATIVE_CPP_RUNTIME_HEADER(header) <##header>
 # endif
 
 # define _STLP_CALL __cdecl
 
 # ifndef _STLP_LONG_LONG
 #  define _STLP_LONG_LONG  __int64
+# else
+#  error "Long Long already defined. - (WW) See JKMCD"
 # endif
 
 // these switches depend on compiler flags
@@ -62,6 +64,7 @@
 #  if (_STLP_MSVC > 1100)
      typedef char __stl_char;
 #   define _STLP_DEFAULTCHAR __stl_char
+#   define _STLP_USE_PRAGMA_ONCE	1
 #  endif /* (_STLP_MSVC < 1100 ) */
 
 #  define _STLP_NO_TYPENAME_ON_RETURN_TYPE 1 
@@ -72,8 +75,9 @@
 // #  if !defined (_MSC_FULL_VER) || (_MSC_FULL_VER < 12008804 )
 #   define _STLP_NO_USING_FOR_GLOBAL_FUNCTIONS 1
 //#  endif
+#  define _STLP_DONT_SIMULATE_PARTIAL_SPEC_FOR_TYPE_TRAITS 1
 #  define _STLP_NO_FUNCTION_TMPL_PARTIAL_ORDER 1
-#  define _STLP_NO_CLASS_PARTIAL_SPECIALIZATION 1
+#  define _STLP_NO_CLASS_PARTIAL_SPECIALIZATION 1	// JKMCD: Turning this off because it instantiates lots of extra templates.
 #  define _STLP_NO_FRIEND_TEMPLATES
 #  define _STLP_STATIC_CONST_INIT_BUG   1
 //  these work, as long they are inline
