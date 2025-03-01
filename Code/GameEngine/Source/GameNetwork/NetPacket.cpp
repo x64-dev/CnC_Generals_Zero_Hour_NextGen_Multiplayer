@@ -156,10 +156,12 @@ NetPacketList NetPacket::ConstructBigCommandPacketList(NetCommandRef *ref) {
 	// be wrapped.
 	NetCommandMsg *msg = ref->getCommand();
 
-	if (!DoesCommandRequireACommandID(msg->getNetCommandType())) {
-		DEBUG_CRASH(("Trying to wrap a command that doesn't have a unique command ID"));
-		return NULL;
-	}
+// jmarshall
+	//if (!DoesCommandRequireACommandID(msg->getNetCommandType())) {
+	//	DEBUG_CRASH(("Trying to wrap a command that doesn't have a unique command ID"));
+	//	return NULL;
+	//}
+// jmarshall end
 
 	UnsignedInt bufferSize = GetBufferSizeNeededForCommand(msg);  // need to implement.  I have a drinking problem.
 	UnsignedByte *bigPacketData = NULL;
@@ -5596,7 +5598,7 @@ NetCommandMsg * NetPacket::readChatMessage(UnsignedByte *data, Int &i) {
 
 
 	UnicodeString unitext;
-	unitext.set(text[0]);
+	unitext.set(&text[0]);
 
 	//DEBUG_LOG_LEVEL(DEBUG_LEVEL_NET, ("NetPacket::readChatMessage - read message, message is %ls\n", unitext.str()));
 

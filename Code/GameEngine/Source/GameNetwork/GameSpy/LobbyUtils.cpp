@@ -664,7 +664,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 {
 	if (!win)
 		return;
-
+#if 0 // jmarshall - gamespy
 	// save off selection
 	Int selectedIndex = -1;
 	Int indexToSelect = -1;
@@ -714,6 +714,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 	{
 		TheWindowManager->winSetLoneWindow(NULL);
 	}
+#endif
 }
 
 void RefreshGameInfoListBox( GameWindow *mainWin, GameWindow *win )

@@ -894,7 +894,7 @@ void PSThreadClass::Thread_Function()
 					{
 						DEBUG_LOG(("Successful login\n"));
 						incrOpCount();
-						GetPersistDataValues(0, req.player.id, pd_public_rw, 0, "", getPersistentDataCallback, this);
+						GetPersistDataValues(0, req.player.id, pd_public_rw, 0, "", (PersDataCallbackFn)getPersistentDataCallback, this);
 					}
 					else
 					{
@@ -923,7 +923,7 @@ void PSThreadClass::Thread_Function()
 						char kvbuf[256];
 						sprintf(kvbuf, "\\locale\\%d", req.player.locale);
 						incrOpCount();
-						SetPersistDataValues(0, req.player.id, pd_public_rw, 0, kvbuf, setPersistentDataLocaleCallback, this);
+						SetPersistDataValues(0, req.player.id, pd_public_rw, 0, kvbuf, (PersDataSaveCallbackFn)setPersistentDataLocaleCallback, this);
 					}
 				}
 				break;
@@ -1032,7 +1032,7 @@ void PSThreadClass::Thread_Function()
 						char *munkeeHack = strdup(GameSpyPSMessageQueueInterface::formatPlayerKVPairs(req.player).c_str()); // GS takes a char* for some reason
 						incrOpCount();
 						DEBUG_LOG(("Setting values %s\n", munkeeHack));
-						SetPersistDataValues(0, req.player.id, pd_public_rw, 0, munkeeHack, setPersistentDataCallback, this);
+						SetPersistDataValues(0, req.player.id, pd_public_rw, 0, munkeeHack, (PersDataSaveCallbackFn)setPersistentDataCallback, this);
 						free(munkeeHack);
 					}
 					else
@@ -1070,7 +1070,7 @@ void PSThreadClass::Thread_Function()
 						DEBUG_LOG(("Looking for preorder status for %d (success=%d, done=%d) from CDKey %s with hash %s\n",
 							cdAuthInfo.id, cdAuthInfo.success, cdAuthInfo.done, req.cdkey.c_str(), cdkeyHash));
 						if (cdAuthInfo.done && cdAuthInfo.success)
-							GetPersistDataValues(0, cdAuthInfo.id, pd_public_ro, 0, "\\preorder", getPreorderCallback, this);
+							GetPersistDataValues(0, cdAuthInfo.id, pd_public_ro, 0, "\\preorder", (PersDataCallbackFn)getPreorderCallback, this);
 						else
 							decrOpCount();
 					}

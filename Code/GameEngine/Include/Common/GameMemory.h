@@ -608,7 +608,7 @@ private: \
 	
 // ----------------------------------------------------------------------------
 #define MEMORY_POOL_GLUE_WITHOUT_GCMP(ARGCLASS) \
-protected: \
+public: \
 	virtual ~ARGCLASS(); \
 public: \
 	enum ARGCLASS##MagicEnum { ARGCLASS##_GLUE_NOT_IMPLEMENTED = 0 }; \
@@ -679,7 +679,7 @@ public: /* include this line at the end to reset visibility to 'public' */
 // ----------------------------------------------------------------------------
 // this is the version for an Abstract Base Class, which will never be instantiated...
 #define MEMORY_POOL_GLUE_ABC(ARGCLASS) \
-protected: \
+public: \
 	virtual ~ARGCLASS(); \
 public: \
 	enum ARGCLASS##MagicEnum { ARGCLASS##_GLUE_NOT_IMPLEMENTED = 0 }; \

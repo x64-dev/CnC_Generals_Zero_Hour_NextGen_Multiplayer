@@ -109,7 +109,7 @@ RailroadBehavior::RailroadBehavior( Thing *thing, const ModuleData *moduleData )
 {
 	const RailroadBehaviorModuleData *modData = getRailroadBehaviorModuleData();
 
-	m_carriageTemplateNameIterator = 0;
+	//m_carriageTemplateNameIterator = 0; // jmarshall
 
 	m_nextStationTask = DO_NOTHING;
 	m_trailerID = INVALID_ID;

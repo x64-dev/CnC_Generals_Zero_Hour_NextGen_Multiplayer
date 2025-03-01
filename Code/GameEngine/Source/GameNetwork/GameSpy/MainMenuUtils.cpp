@@ -501,7 +501,7 @@ static GHTTPBool configHeadCallback( GHTTPRequest request, GHTTPResult result,
 	std::string gameURL, mapURL;
 	std::string configURL, motdURL;
 	FormatURLFromRegistry(gameURL, mapURL, configURL, motdURL);
-	ghttpGet( configURL.c_str(), GHTTPFalse, configCallback, param );
+	ghttpGet( configURL.c_str(), GHTTPFalse, (ghttpCompletedCallback)configCallback, param );
 
 	return GHTTPTrue;
 }
@@ -710,7 +710,7 @@ static GHTTPBool numPlayersOnlineCallback( GHTTPRequest request, GHTTPResult res
 void CheckOverallStats( void )
 {
 	ghttpGet("http://gamestats.gamespy.com/ccgenerals/display.html",
-		GHTTPFalse, overallStatsCallback, NULL);
+		GHTTPFalse, (ghttpCompletedCallback)overallStatsCallback, NULL);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -718,7 +718,7 @@ void CheckOverallStats( void )
 void CheckNumPlayersOnline( void )
 {
 	ghttpGet("http://launch.gamespyarcade.com/software/launch/arcadecount2.dll?svcname=ccgenerals",
-		GHTTPFalse, numPlayersOnlineCallback, NULL);
+		GHTTPFalse, (ghttpCompletedCallback)numPlayersOnlineCallback, NULL);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -880,10 +880,10 @@ static void reallyStartPatchCheck( void )
 	DEBUG_LOG(("Map patch check: [%s]\n", mapURL.c_str()));
 	DEBUG_LOG(("Config: [%s]\n", configURL.c_str()));
 	DEBUG_LOG(("MOTD: [%s]\n", motdURL.c_str()));
-	ghttpGet(gameURL.c_str(), GHTTPFalse, gamePatchCheckCallback, (void *)timeThroughOnline);
-	ghttpGet(mapURL.c_str(), GHTTPFalse, gamePatchCheckCallback, (void *)timeThroughOnline);
-	ghttpHead(configURL.c_str(), GHTTPFalse, configHeadCallback, (void *)timeThroughOnline);
-	ghttpGet(motdURL.c_str(), GHTTPFalse, motdCallback, (void *)timeThroughOnline);
+	ghttpGet(gameURL.c_str(), GHTTPFalse, (ghttpCompletedCallback)gamePatchCheckCallback, (void *)timeThroughOnline);
+	ghttpGet(mapURL.c_str(), GHTTPFalse, (ghttpCompletedCallback)gamePatchCheckCallback, (void *)timeThroughOnline);
+	ghttpHead(configURL.c_str(), GHTTPFalse, (ghttpCompletedCallback)configHeadCallback, (void *)timeThroughOnline);
+	ghttpGet(motdURL.c_str(), GHTTPFalse, (ghttpCompletedCallback)motdCallback, (void *)timeThroughOnline);
 	
 	// check total game stats
 	CheckOverallStats();

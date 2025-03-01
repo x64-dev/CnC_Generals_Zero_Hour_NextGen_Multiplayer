@@ -111,7 +111,7 @@ ThingFactory::ThingFactory()
 	m_firstTemplate = NULL;
 	m_nextTemplateID = 1;	// not zero!
 
-	m_templateHashMap.resize( TEMPLATE_HASH_SIZE );
+	m_templateHashMap.rehash( TEMPLATE_HASH_SIZE ); // jmarshall
 }  // end ThingFactory
 
 //-------------------------------------------------------------------------------------------------
