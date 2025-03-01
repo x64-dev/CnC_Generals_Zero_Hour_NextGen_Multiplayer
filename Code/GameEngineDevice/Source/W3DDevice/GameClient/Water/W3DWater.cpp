@@ -1223,7 +1223,7 @@ void WaterRenderObjClass::update( void )
 				{
 
 					// only pay attention to mesh points that are in motion
-					if( BitTest( pData->status, WaterRenderObjClass::IN_MOTION ) )
+					if( BitTestEA( pData->status, WaterRenderObjClass::IN_MOTION ) )
 					{
 
 						// DAMPENING to slow the changes down

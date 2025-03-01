@@ -174,7 +174,7 @@ GameMessageDisposition LookAtTranslator::translateGameMessage(const GameMessage 
 			// get key and state from args
 			UnsignedByte key		= msg->getArgument( 0 )->integer;
 			UnsignedByte state	= msg->getArgument( 1 )->integer;
-			Bool isPressed = !(BitTest( state, KEY_STATE_UP ));
+			Bool isPressed = !(BitTestEA( state, KEY_STATE_UP ));
 			
 			if (TheShell && TheShell->isShellActive())
 				break;

@@ -261,11 +261,11 @@ UnsignedInt getPickTypesForContext( Bool forceAttackMode )
 	const CommandButton *command = TheInGameUI->getGUICommand();
 
 	if (command != NULL) {
-		if (BitTest( command->getOptions(), ALLOW_MINE_TARGET)) {
+		if (BitTestEA( command->getOptions(), ALLOW_MINE_TARGET)) {
 			types |= PICK_TYPE_MINES;
 		}
 
-		if (BitTest( command->getOptions(), ALLOW_SHRUBBERY_TARGET ) ) {
+		if (BitTestEA( command->getOptions(), ALLOW_SHRUBBERY_TARGET ) ) {
 			types |= PICK_TYPE_SHRUBBERY;
 		}
 	} else {
@@ -307,7 +307,7 @@ UnsignedInt getPickTypesForCurrentSelection( Bool forceAttackMode )
 		}
 
 		// For efficiency.
-		if (BitTest(retVal, PICK_TYPE_MINES | PICK_TYPE_SHRUBBERY)) {
+		if (BitTestEA(retVal, PICK_TYPE_MINES | PICK_TYPE_SHRUBBERY)) {
 			break;
 		}
 	}
@@ -319,19 +319,19 @@ UnsignedInt getPickTypesForCurrentSelection( Bool forceAttackMode )
 //-------------------------------------------------------------------------------------------------
 void translatePickTypesToKindof(UnsignedInt pickTypes, KindOfMaskType& outMask)
 {
-	if (BitTest(pickTypes, PICK_TYPE_SELECTABLE)) {
+	if (BitTestEA(pickTypes, PICK_TYPE_SELECTABLE)) {
 		outMask.set(KINDOF_SELECTABLE);
 	}
 
-	if (BitTest(pickTypes, PICK_TYPE_SHRUBBERY)) {
+	if (BitTestEA(pickTypes, PICK_TYPE_SHRUBBERY)) {
 		outMask.set(KINDOF_SHRUBBERY);
 	}
 
-	if (BitTest(pickTypes, PICK_TYPE_MINES)) {
+	if (BitTestEA(pickTypes, PICK_TYPE_MINES)) {
 		outMask.set(KINDOF_MINE);
 	}
 
-	if (BitTest(pickTypes, PICK_TYPE_FORCEATTACKABLE)) {
+	if (BitTestEA(pickTypes, PICK_TYPE_FORCEATTACKABLE)) {
 		outMask.set(KINDOF_FORCEATTACKABLE);
 	}	
 }

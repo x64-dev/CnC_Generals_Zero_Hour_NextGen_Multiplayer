@@ -1128,8 +1128,8 @@ Bool ScriptConditions::evaluateNamedDiscovered(Parameter *pItemParm, Parameter* 
 	}
 
 	// If we are stealthed we are not visible.
-	if (BitTest( theObj->getStatusBits(), OBJECT_STATUS_STEALTHED) && 
-		!BitTest( theObj->getStatusBits(), OBJECT_STATUS_DETECTED)) {
+	if (BitTestEA( theObj->getStatusBits(), OBJECT_STATUS_STEALTHED) && 
+		!BitTestEA( theObj->getStatusBits(), OBJECT_STATUS_DETECTED)) {
 		return false;
 	}
 	ObjectShroudStatus shroud = theObj->getShroudedStatus(pPlayer->getPlayerIndex());
@@ -1164,8 +1164,8 @@ Bool ScriptConditions::evaluateTeamDiscovered(Parameter *pTeamParm, Parameter *p
 		}
 		
 		// If we are stealthed we are not visible.
-		if (BitTest( pObj->getStatusBits(), OBJECT_STATUS_STEALTHED) && 
-			!BitTest( pObj->getStatusBits(), OBJECT_STATUS_DETECTED)) {
+		if (BitTestEA( pObj->getStatusBits(), OBJECT_STATUS_STEALTHED) && 
+			!BitTestEA( pObj->getStatusBits(), OBJECT_STATUS_DETECTED)) {
 			continue;
 		}
 		ObjectShroudStatus shroud = pObj->getShroudedStatus(pPlayer->getPlayerIndex());
@@ -1826,7 +1826,7 @@ Bool ScriptConditions::evaluateSkirmishSpecialPowerIsReady(Parameter *pSkirmishP
 			for (DLINK_ITERATOR<Object> iter = team->iterate_TeamMemberList(); !iter.done(); iter.advance()) {
 				Object *pObj = iter.cur();
 				if (!pObj) continue;
-				if ( BitTest( pObj->getStatusBits(), OBJECT_STATUS_UNDER_CONSTRUCTION ) || pObj->isDisabled() )
+				if ( BitTestEA( pObj->getStatusBits(), OBJECT_STATUS_UNDER_CONSTRUCTION ) || pObj->isDisabled() )
 				{
 					continue; // can't fire if under construction or disabled.
 				}

@@ -42,6 +42,7 @@
 
 #include <math.h>
 #include <string.h>
+#include <unordered_map>
 
 /*
 **	Turn off some unneeded warnings.
@@ -173,8 +174,8 @@ inline Real deg2rad(Real rad) { return rad * (PI/180); }
 //-----------------------------------------------------------------------------
 // For twiddling bits
 //-----------------------------------------------------------------------------
-#undef BitTest
-#define BitTest( x, i ) ( ( (x) & (i) ) != 0 )
+#undef BitTestEA
+#define BitTestEA( x, i ) ( ( (x) & (i) ) != 0 )
 #define BitSet( x, i ) ( (x) |= (i) )
 #define BitClear( x, i ) ( (x ) &= ~(i) )
 #define BitToggle( x, i ) ( (x) ^= (i) )
