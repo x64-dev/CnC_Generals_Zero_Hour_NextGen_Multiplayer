@@ -410,7 +410,8 @@ void GameEngine::init( int argc, char *argv[] )
 		// If this really needs to take place, please make sure that pressing cancel on the audio 
 		// load music dialog will still cause the game to quit.
 		// m_quitting = FALSE;
-
+// jmarshall - loose files
+#if 0
 		// for fingerprinting, we need to ensure the presence of these files
 		AsciiString dirName;
 		dirName = TheArchiveFileSystem->getArchiveFilenameForFile("generalsb.sec");
@@ -431,7 +432,8 @@ void GameEngine::init( int argc, char *argv[] )
 			DEBUG_LOG(("generalsa.sec was not found in music.big - it was in '%s'\n", dirName.str()));
 			m_quitting = TRUE;
 		}
-
+#endif
+// jmarshall end
 		// initialize the MapCache
 		TheMapCache = MSGNEW("GameEngineSubsystem") MapCache;
 		TheMapCache->updateCache();
