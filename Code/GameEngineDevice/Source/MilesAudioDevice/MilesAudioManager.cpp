@@ -66,6 +66,14 @@
 
 #include "Common/File.h"
 
+#define IMPORTS __declspec(dllimport)
+extern "C" {
+	IMPORTS void __stdcall AIL_set_sample_volume_pan(HSAMPLE sample, float volume, float pan);
+	IMPORTS void __stdcall AIL_set_stream_volume_pan(HSTREAM stream, float volume, float pan);
+	IMPORTS void __stdcall AIL_stream_volume_pan(HSTREAM stream, float* volume, float* pan);
+	IMPORTS void __stdcall AIL_sample_volume_pan(HSAMPLE sample, float* volume, float* pan);
+};
+
 #ifdef _INTERNAL
 //#pragma optimize("", off)
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
@@ -739,7 +747,7 @@ void MilesAudioManager::playAudioEvent( AudioEventRTS *event )
 				if ((info->m_soundType == AT_Streaming) && event->getUninterruptable()) {
 					setDisallowSpeech(TRUE);
 	 			}
-				//AIL_set_stream_volume_pan(stream, curVolume, 0.5f);
+				AIL_set_stream_volume_pan(stream, curVolume, 0.5f);
 				playStream(event, stream);
 				m_playingStreams.push_back(audio);
 				audio = NULL;
@@ -1238,25 +1246,28 @@ H3DSAMPLE MilesAudioManager::getFirst3DSample( AudioEventRTS *event )
 }
 
 //-------------------------------------------------------------------------------------------------
-void MilesAudioManager::adjustPlayingVolume( PlayingAudio *audio )
+void MilesAudioManager::adjustPlayingVolume(PlayingAudio* audio)
 {
 	Real desiredVolume = audio->m_audioEventRTS->getVolume() * audio->m_audioEventRTS->getVolumeShift();
-	//Real pan;
+	Real pan;
 	if (audio->m_type == PAT_Sample) {
-		//AIL_sample_volume_pan(audio->m_sample, NULL, &pan);
-	//	AIL_set_sample_volume_pan(audio->m_sample, m_soundVolume * desiredVolume, pan);
+		AIL_sample_volume_pan(audio->m_sample, NULL, &pan);
+		AIL_set_sample_volume_pan(audio->m_sample, m_soundVolume * desiredVolume, pan);
 
-	} else if (audio->m_type == PAT_3DSample) { 
+	}
+	else if (audio->m_type == PAT_3DSample) {
 		AIL_set_3D_sample_volume(audio->m_3DSample, m_sound3DVolume * desiredVolume);
 
-	} else if (audio->m_type == PAT_Stream) {
-	//	AIL_stream_volume_pan(audio->m_stream, NULL, &pan);
-		if (audio->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music ) {
-		//	AIL_set_stream_volume_pan(audio->m_stream, m_musicVolume * desiredVolume, pan);
-			
-		} else {
-		//	AIL_set_stream_volume_pan(audio->m_stream, m_speechVolume * desiredVolume, pan);
-			
+	}
+	else if (audio->m_type == PAT_Stream) {
+		AIL_stream_volume_pan(audio->m_stream, NULL, &pan);
+		if (audio->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music) {
+			AIL_set_stream_volume_pan(audio->m_stream, m_musicVolume * desiredVolume, pan);
+
+		}
+		else {
+			AIL_set_stream_volume_pan(audio->m_stream, m_speechVolume * desiredVolume, pan);
+
 		}
 	}
 }
@@ -1286,8 +1297,8 @@ void MilesAudioManager::stopAllSpeech( void )
 void MilesAudioManager::initFilters( HSAMPLE sample, const AudioEventRTS *event )
 {
 	// set the sample volume
-	//Real volume = event->getVolume() * event->getVolumeShift() * m_soundVolume;
-	//AIL_set_sample_volume_pan(sample, volume, 0.5f);
+	Real volume = event->getVolume() * event->getVolumeShift() * m_soundVolume;
+	AIL_set_sample_volume_pan(sample, volume, 0.5f);
 
 	// pitch shift
 	Real pitchShift = event->getPitchShift();
@@ -2087,7 +2098,7 @@ Bool MilesAudioManager::killLowestPrioritySoundImmediately( AudioEventRTS *event
 				{
 					//Release this 3D sound channel immediately because we are going to play another sound in it's place.
 					releasePlayingAudio( playing );
-					m_playing3DSounds.erase( it );
+					m_playingSounds.erase( it );
 					return TRUE;
 				}
 			}
@@ -2100,18 +2111,18 @@ Bool MilesAudioManager::killLowestPrioritySoundImmediately( AudioEventRTS *event
 //-------------------------------------------------------------------------------------------------
 void MilesAudioManager::adjustVolumeOfPlayingAudio(AsciiString eventName, Real newVolume)
 {
-	//Real pan;
-	std::list<PlayingAudio *>::iterator it;
+	Real pan;
+	std::list<PlayingAudio*>::iterator it;
 
-	PlayingAudio *playing = NULL;
+	PlayingAudio* playing = NULL;
 	for (it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it) {
 		playing = *it;
 		if (playing && playing->m_audioEventRTS->getEventName() == eventName) {
 			// Adjust it
 			playing->m_audioEventRTS->setVolume(newVolume);
-			//Real desiredVolume = playing->m_audioEventRTS->getVolume() * playing->m_audioEventRTS->getVolumeShift();
-			//AIL_sample_volume_pan(playing->m_sample, NULL, &pan);
-			//AIL_set_sample_volume_pan(playing->m_sample, desiredVolume, pan);
+			Real desiredVolume = playing->m_audioEventRTS->getVolume() * playing->m_audioEventRTS->getVolumeShift();
+			AIL_sample_volume_pan(playing->m_sample, NULL, &pan);
+			AIL_set_sample_volume_pan(playing->m_sample, desiredVolume, pan);
 		}
 	}
 
@@ -2130,13 +2141,12 @@ void MilesAudioManager::adjustVolumeOfPlayingAudio(AsciiString eventName, Real n
 		if (playing && playing->m_audioEventRTS->getEventName() == eventName) {
 			// Adjust it
 			playing->m_audioEventRTS->setVolume(newVolume);
-		//	Real desiredVolume = playing->m_audioEventRTS->getVolume() * playing->m_audioEventRTS->getVolumeShift();
-			//AIL_stream_volume_pan(playing->m_stream, NULL, &pan);
-			//AIL_set_stream_volume_pan(playing->m_stream, desiredVolume, pan);
+			Real desiredVolume = playing->m_audioEventRTS->getVolume() * playing->m_audioEventRTS->getVolumeShift();
+			AIL_stream_volume_pan(playing->m_stream, NULL, &pan);
+			AIL_set_stream_volume_pan(playing->m_stream, desiredVolume, pan);
 		}
 	}
 }
-
 
 //-------------------------------------------------------------------------------------------------
 void MilesAudioManager::removePlayingAudio( AsciiString eventName )
@@ -2391,22 +2401,22 @@ void MilesAudioManager::processPlayingList( void )
 }
 
 //-------------------------------------------------------------------------------------------------
-void MilesAudioManager::processFadingList( void )
+void MilesAudioManager::processFadingList(void)
 {
-	std::list<PlayingAudio *>::iterator it;
-	PlayingAudio *playing;
+	std::list<PlayingAudio*>::iterator it;
+	PlayingAudio* playing;
 
 	for (it = m_fadingAudio.begin(); it != m_fadingAudio.end(); /* emtpy */) {
 		playing = *it;
 		if (!playing) {
 			continue;
 		}
-		
+
 		if (playing->m_framesFaded >= getAudioSettings()->m_fadeAudioFrames) {
 			playing->m_status = PS_Stopped;
 			playing->m_requestStop = true;
 			//m_stoppedAudio.push_back(playing);
-			releasePlayingAudio( playing );
+			releasePlayingAudio(playing);
 			it = m_fadingAudio.erase(it);
 			continue;
 		}
@@ -2415,28 +2425,28 @@ void MilesAudioManager::processFadingList( void )
 		Real volume = getEffectiveVolume(playing->m_audioEventRTS);
 		volume *= (1.0f - 1.0f * playing->m_framesFaded / getAudioSettings()->m_fadeAudioFrames);
 
-		switch(playing->m_type)
+		switch (playing->m_type)
 		{
-			case PAT_Sample:
-			{
-				//AIL_set_sample_volume_pan(playing->m_sample, volume, 0.5f);
-				break;
-			}
-
-			case PAT_3DSample:
-			{
-				AIL_set_3D_sample_volume(playing->m_3DSample, volume);
-				break;
-			}
-			
-			case PAT_Stream:
-			{
-				//AIL_set_stream_volume_pan(playing->m_stream, volume, 0.5f);
-				break;
-			}
-			
+		case PAT_Sample:
+		{
+			AIL_set_sample_volume_pan(playing->m_sample, volume, 0.5f);
+			break;
 		}
-		
+
+		case PAT_3DSample:
+		{
+			AIL_set_3D_sample_volume(playing->m_3DSample, volume);
+			break;
+		}
+
+		case PAT_Stream:
+		{
+			AIL_set_stream_volume_pan(playing->m_stream, volume, 0.5f);
+			break;
+		}
+
+		}
+
 		++it;
 	}
 }
