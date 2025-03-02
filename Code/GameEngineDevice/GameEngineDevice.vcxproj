@@ -169,6 +169,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MilesAudioDevice\MilesAudioCache.cpp" />
     <ClCompile Include="Source\MilesAudioDevice\MilesAudioManager.cpp" />
     <ClCompile Include="Source\VideoDevice\Bink\BinkVideoPlayer.cpp" />
     <ClCompile Include="Source\W3DDevice\Common\System\W3DFunctionLexicon.cpp" />
