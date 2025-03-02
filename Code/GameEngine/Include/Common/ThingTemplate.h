@@ -36,7 +36,7 @@
 #include "Lib/BaseType.h"
  
 #include "Common/AudioEventRTS.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameCommon.h"
 #include "Common/Geometry.h"
 #include "Common/KindOf.h"

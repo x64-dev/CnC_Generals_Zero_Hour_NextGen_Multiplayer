@@ -54,7 +54,7 @@
 #include "MapPreview.h"
 #include "W3DDevice/GameClient/HeightMap.h"
 #include "Common/MapReaderWriterInfo.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "WWLib/Targa.h"
 #include "common/DataChunk.h"
 //-----------------------------------------------------------------------------

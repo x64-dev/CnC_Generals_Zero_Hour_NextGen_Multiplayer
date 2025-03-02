@@ -56,7 +56,7 @@
 #include "GameClient/GlobalLanguage.h"
 #include "Common/PlayerList.h"
 #include "GameLogic/RankInfo.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/ArchiveFileSystem.h"
 #include "GameClient/GadgetTextEntry.h"

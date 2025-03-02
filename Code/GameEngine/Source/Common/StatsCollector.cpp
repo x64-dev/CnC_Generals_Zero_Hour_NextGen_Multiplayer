@@ -52,7 +52,7 @@
 // USER INCLUDES //////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------
 #include "Common/StatsCollector.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/PlayerList.h"
 #include "Common/Player.h"
 #include "Common/GlobalData.h"

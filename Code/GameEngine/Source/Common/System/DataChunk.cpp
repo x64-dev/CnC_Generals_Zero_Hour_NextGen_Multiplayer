@@ -33,7 +33,7 @@
 #include "Compression.h"
 #include "Common/DataChunk.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 
 // If verbose, lots of debug logging.
 #define not_VERBOSE

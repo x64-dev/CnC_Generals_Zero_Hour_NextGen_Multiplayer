@@ -32,7 +32,7 @@
 
 #include "Common/ThingFactory.h"
 #include "Common/ThingTemplate.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameAudio.h"
 #include "Common/MapObject.h"
 #include "Common/ModuleFactory.h"

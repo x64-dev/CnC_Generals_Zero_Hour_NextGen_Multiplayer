@@ -37,7 +37,7 @@
 #include "common/GlobalData.h"
 #include "WHeightMapEdit.h"
 //#include "Common/GameFileSystem.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/ArchiveFileSystem.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/CDManager.h"

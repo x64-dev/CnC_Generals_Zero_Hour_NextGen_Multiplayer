@@ -34,7 +34,7 @@
 #include "GameLogic/PolygonTrigger.h"
 #include "Common/WellKnownKeys.h"
 #include "Common/DataChunk.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "EditGroup.h"
 #include "EditParameter.h"
 #include "ExportScriptsOptions.h"

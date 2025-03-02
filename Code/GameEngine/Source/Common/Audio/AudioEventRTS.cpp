@@ -44,7 +44,7 @@
 #include "Common/AudioRandomValue.h"
 #include "Common/AudioSettings.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameSounds.h"
 #include "Common/GlobalData.h"
 #include "Common/Player.h"

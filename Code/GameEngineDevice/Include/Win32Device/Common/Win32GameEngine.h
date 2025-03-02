@@ -38,7 +38,9 @@
 #include "Common/GameEngine.h"
 #include "GameLogic/GameLogic.h"
 #include "GameNetwork/NetworkInterface.h"
-#include "MilesAudioDevice/MilesAudioManager.h"
+#include "Common/AsciiString.h"
+#include "Common/GameAudio.h"
+#include "Common/FileSystemEA.h" 
 #include "Win32Device/Common/Win32BIGFileSystem.h"
 #include "Win32Device/Common/Win32LocalFileSystem.h"
 #include "W3DDevice/Common/W3DModuleFactory.h"
@@ -102,6 +104,5 @@ inline ParticleSystemManager* Win32GameEngine::createParticleSystemManager( void
 inline NetworkInterface *Win32GameEngine::createNetwork( void ) { return NetworkInterface::createNetwork(); }
 inline Radar *Win32GameEngine::createRadar( void ) { return NEW W3DRadar; }
 inline WebBrowser *Win32GameEngine::createWebBrowser( void ) { return NEW CComObject<W3DWebBrowser>; }
-inline AudioManager *Win32GameEngine::createAudioManager( void ) { return NEW MilesAudioManager; }
  
 #endif  // end __WIN32GAMEENGINE_H_

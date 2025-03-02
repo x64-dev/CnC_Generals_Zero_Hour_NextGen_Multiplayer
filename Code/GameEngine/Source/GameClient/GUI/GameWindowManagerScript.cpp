@@ -51,7 +51,7 @@
 #include "Lib/BaseType.h"
 #include "Common/Debug.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameMemory.h"
 #include "Common/NameKeyGenerator.h"
 #include "Common/FunctionLexicon.h"

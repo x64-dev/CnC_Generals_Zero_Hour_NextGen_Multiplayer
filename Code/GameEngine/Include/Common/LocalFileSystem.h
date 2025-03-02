@@ -32,7 +32,7 @@
 #define __LOCALFILESYSTEM_H
 
 #include "Common/SubsystemInterface.h"
-#include "FileSystem.h" // for typedefs, etc.
+#include "FileSystemEA.h" // for typedefs, etc.
 
 class File;
 

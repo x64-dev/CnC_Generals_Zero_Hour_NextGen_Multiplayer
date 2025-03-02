@@ -51,7 +51,7 @@
 #include "Common/AudioHandleSpecialValues.h"
 #include "Common/AudioRequest.h"
 #include "Common/AudioSettings.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/GameMusic.h"
 #include "Common/GameSounds.h"

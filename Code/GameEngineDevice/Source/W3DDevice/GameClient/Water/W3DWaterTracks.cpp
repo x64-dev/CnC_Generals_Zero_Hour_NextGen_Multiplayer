@@ -50,7 +50,7 @@
 #include "common/GlobalData.h"
 #include "common/UnicodeString.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "texture.h"
 #include "colmath.h"
 #include "coltest.h"

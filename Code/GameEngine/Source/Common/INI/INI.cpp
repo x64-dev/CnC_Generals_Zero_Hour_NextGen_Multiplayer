@@ -37,7 +37,7 @@
 
 #include "Common/DamageFX.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameAudio.h"
 #include "Common/Science.h"
 #include "Common/SpecialPower.h"

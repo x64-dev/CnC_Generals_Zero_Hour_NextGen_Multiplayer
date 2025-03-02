@@ -54,7 +54,7 @@
 #include <sys/stat.h>
 
 #include "Common/AsciiString.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/StreamingArchiveFile.h"
 #include "Common/PerfTimer.h"
 									

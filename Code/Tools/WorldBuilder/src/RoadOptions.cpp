@@ -28,7 +28,7 @@
 #include "WHeightMapEdit.h"
 #include "WorldBuilderDoc.h"
 #include "W3DDevice/GameClient/HeightMap.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "GameClient/TerrainRoads.h"
 
 #include <list>

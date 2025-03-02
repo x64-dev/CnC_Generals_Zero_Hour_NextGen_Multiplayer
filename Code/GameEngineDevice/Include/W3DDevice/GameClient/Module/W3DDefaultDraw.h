@@ -35,7 +35,7 @@
 // INCLUDES ///////////////////////////////////////////////////////////////////////////////////////
 #include "Common/GameType.h"
 #include "Common/DrawModule.h"
-#include "Common/FileSystem.h"	// this is only here to pull in LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h"	// this is only here to pull in LOAD_TEST_ASSETS
 
 // FORWARD REFERENCES /////////////////////////////////////////////////////////////////////////////
 class Thing;

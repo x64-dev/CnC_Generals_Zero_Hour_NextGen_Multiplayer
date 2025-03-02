@@ -32,7 +32,7 @@
 
 
 #include "Common/BattleHonors.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/PlayerTemplate.h"
 #include "Common/QuotedPrintable.h"

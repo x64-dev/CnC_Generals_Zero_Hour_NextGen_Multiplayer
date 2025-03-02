@@ -54,7 +54,7 @@
 #include "Common/AsciiString.h"
 #include "Common/GlobalData.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 
 
 #ifdef _INTERNAL

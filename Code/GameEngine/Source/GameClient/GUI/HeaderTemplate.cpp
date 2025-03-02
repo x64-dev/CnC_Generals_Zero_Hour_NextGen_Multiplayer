@@ -55,7 +55,7 @@
 #include "PreRTS.h"
 
 #include "Common/INI.h"
-#include "Common/Filesystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/Registry.h"
 #include "GameClient/HeaderTemplate.h"
 #include "GameClient/GameFont.h"

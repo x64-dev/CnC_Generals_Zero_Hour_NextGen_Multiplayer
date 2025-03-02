@@ -35,7 +35,7 @@
 #include "Common/BattleHonors.h"
 #include "Common/CustomMatchPreferences.h"
 #include "Common/GameSpyMiscPreferences.h"
-#include "Common/Filesystem.h"
+#include "Common/FileSystemEA.h"
 #include "GameClient/mouse.h"
 #include "GameClient/GameText.h"
 #include "GameClient/WindowLayout.h"

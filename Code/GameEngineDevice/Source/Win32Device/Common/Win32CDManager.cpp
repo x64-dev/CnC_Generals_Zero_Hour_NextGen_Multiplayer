@@ -48,7 +48,7 @@
 #include "windows.h"
 
 #include "Common/GameMemory.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 
 #include "Win32DEvice/Common/Win32CDManager.h"
 

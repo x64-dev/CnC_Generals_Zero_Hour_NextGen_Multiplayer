@@ -46,7 +46,7 @@
 #ifdef TEST_COMPRESSION
 
 #include "GameClient/MapUtil.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/File.h"
 
 #include "Common/PerfTimer.h"

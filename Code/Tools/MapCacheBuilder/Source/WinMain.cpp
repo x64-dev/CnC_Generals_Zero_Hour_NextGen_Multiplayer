@@ -51,7 +51,7 @@
 #include "Resource.h"
 
 #include "Common/ThingFactory.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Win32Device/Common/Win32LocalFileSystem.h"
 #include "Win32Device/Common/Win32BIGFileSystem.h"
 #include "Common/SubSystemInterface.h"
@@ -59,7 +59,7 @@
 #include "W3DDevice/Common/W3DModuleFactory.h"
 
 
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/ArchiveFileSystem.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/Debug.h"

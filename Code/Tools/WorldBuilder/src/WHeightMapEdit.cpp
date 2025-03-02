@@ -30,7 +30,7 @@
 #include "Common/Debug.h"
 #include "common/GlobalData.h"
 #include "Common/MapReaderWriterInfo.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/TerrainTypes.h"
 #include "GameLogic/PolygonTrigger.h"
 #include "GameLogic/SidesList.h"

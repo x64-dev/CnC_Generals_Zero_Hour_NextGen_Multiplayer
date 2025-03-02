@@ -25,7 +25,7 @@
 #include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
 
 #include "Common/Recorder.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/playerlist.h"
 #include "Common/Player.h"
 #include "Common/GlobalData.h"

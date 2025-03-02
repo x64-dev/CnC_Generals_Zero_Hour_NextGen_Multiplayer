@@ -85,7 +85,7 @@
 #include "Common/WellKnownKeys.h"
 #include "Common/ThingTemplate.h"
 #include "Common/Language.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/PlayerTemplate.h"
 #include "GameLogic/SidesList.h"
 #include "GameLogic/TerrainLogic.h"

@@ -34,7 +34,7 @@
 #include "Common/STLTypedefs.h"
 
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/GameSpyMiscPreferences.h"
 #include "Common/QuotedPrintable.h"

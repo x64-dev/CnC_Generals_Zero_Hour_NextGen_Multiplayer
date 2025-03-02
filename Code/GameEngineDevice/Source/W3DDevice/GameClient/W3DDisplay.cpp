@@ -44,7 +44,7 @@ static void drawFramerateBar(void);
 #include "Common/GameEngine.h"
 #include "Common/GlobalData.h"
 #include "Common/PerfTimer.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/Player.h"
 #include "Common/PlayerList.h"

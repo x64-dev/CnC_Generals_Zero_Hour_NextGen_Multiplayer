@@ -54,7 +54,7 @@
 
 #include "Common/SubsystemInterface.h"
 #include "Common/AsciiString.h"
-#include "Common/FileSystem.h" // for typedefs, etc.
+#include "Common/FileSystemEA.h" // for typedefs, etc.
 #include "Common/STLTypedefs.h"
 
 //----------------------------------------------------------------------------

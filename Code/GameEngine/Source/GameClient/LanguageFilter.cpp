@@ -26,7 +26,7 @@
 #include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
 
 #include "GameClient/LanguageFilter.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/File.h"
 
 #ifdef _INTERNAL

@@ -35,7 +35,7 @@
 #include "Common/ThingFactory.h"
 #include "Common/ThingSort.h"
 #include "Common/PlayerTemplate.h"
-#include "Common/FileSystem.h" // for LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h" // for LOAD_TEST_ASSETS
 #include "GameLogic/SidesList.h"
 #include "GameClient/Color.h"
 

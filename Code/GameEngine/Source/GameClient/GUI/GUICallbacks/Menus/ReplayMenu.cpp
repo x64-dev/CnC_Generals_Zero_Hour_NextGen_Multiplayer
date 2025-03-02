@@ -32,7 +32,7 @@
 
 
 #include "Lib/BaseType.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/GameState.h"
 #include "Common/Recorder.h"

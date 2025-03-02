@@ -48,7 +48,7 @@
 #include "Common/AudioSettings.h"
 #include "Common/AsciiString.h"
 #include "Common/AudioEventInfo.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameCommon.h"
 #include "Common/GameSounds.h"
 #include "Common/CRCDebug.h"

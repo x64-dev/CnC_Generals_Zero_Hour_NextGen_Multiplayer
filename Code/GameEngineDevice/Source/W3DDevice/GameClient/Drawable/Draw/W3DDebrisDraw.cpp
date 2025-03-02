@@ -29,7 +29,7 @@
 
 // INCLUDES ///////////////////////////////////////////////////////////////////////////////////////
 
-#include "Common/FileSystem.h"	// this is only here to pull in LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h"	// this is only here to pull in LOAD_TEST_ASSETS
 #include "Common/GlobalData.h"
 #include "Common/ThingTemplate.h"
 #include "Common/Xfer.h"

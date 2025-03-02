@@ -35,7 +35,7 @@
 
 #include "Common/DataChunk.h"
 //#include "Common/GameFileSystem.h"
-#include "Common/FileSystem.h" // for LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h" // for LOAD_TEST_ASSETS
 #include "Common/GlobalData.h"
 #include "Common/MapReaderWriterInfo.h"
 #include "Common/TerrainTypes.h"

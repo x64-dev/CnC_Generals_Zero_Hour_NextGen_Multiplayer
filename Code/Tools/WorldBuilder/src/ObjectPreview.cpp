@@ -41,7 +41,7 @@
 #include "Common/ThingFactory.h"
 #include "Common/ThingSort.h"
 #include "Common/PlayerTemplate.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "GameLogic/SidesList.h"
 #include "GameClient/Color.h"
 
