@@ -1352,12 +1352,8 @@ char q[]="&&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&  &&
 				((Vector3*)(vb+fvfinfo.Get_Location_Offset()))->Y	=	vertexArray[i].y;
 				((Vector3*)(vb+fvfinfo.Get_Location_Offset()))->Z	=	vertexArray[i].z;
 
-// jmarshall
-			//	*(unsigned int*)(vb+fvfinfo.Get_Diffuse_Offset())	=	vertexArray[i].diffuse;
-			//
-			//	*(unsigned int*)(vb+fvfinfo.Get_Diffuse_Offset())	=	argb;
-			//	*(unsigned int*)(vb + fvfinfo.Get_Diffuse_Offset()) = (vertexArray[i].diffuse & 0xFF000000) | (DX8Wrapper::Convert_Color_Clamp(colors[segIdx]) & 0x00FFFFFF);
-// jmarshall end
+			    *(unsigned int*)(vb+fvfinfo.Get_Diffuse_Offset())	=	vertexArray[i].diffuse;
+				*(unsigned int*)(vb+fvfinfo.Get_Diffuse_Offset())	=	argb;
 
 
 

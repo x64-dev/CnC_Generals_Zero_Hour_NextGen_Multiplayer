@@ -32,7 +32,7 @@
 #include <windows.h>
 #include "Win32Device/Common/Win32GameEngine.h"
 #include "Common/PerfTimer.h"
-#include "MilesAudioDevice/MilesAudioManager.h"
+#include "OpenALAudioDevice/OpenALAudioManager.h"
 #include "GameNetwork/LANAPICallbacks.h"
 
 extern DWORD TheMessageTime;
@@ -163,5 +163,5 @@ void Win32GameEngine::serviceWindowsOS( void )
 
 AudioManager* Win32GameEngine::createAudioManager(void) 
 { 
-	return NEW MilesAudioManager; 
+	return NEW OpenALAudioManager;
 }
