@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compress", "Tools\Compress\Compress.vcxproj", "{CA938EB6-B3F2-456A-94A3-6AB144E57408}"
 EndProject
@@ -54,6 +54,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wwsaveload", "Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj", "{86908043-4887-4A76-8DA4-3350E9932E32}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wwutil", "Libraries\Source\WWVegas\Wwutil\wwutil.vcxproj", "{BB333CD2-42E0-4787-8C7F-1ADD61DAF031}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameRenderer", "GameRenderer\GameRenderer.vcxproj", "{845363AF-8D9B-464C-80FA-C2FEF7A71C68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -536,6 +538,24 @@ Global
 		{BB333CD2-42E0-4787-8C7F-1ADD61DAF031}.ProfileE|Win32.Build.0 = Profile|Win32
 		{BB333CD2-42E0-4787-8C7F-1ADD61DAF031}.Release|Win32.ActiveCfg = Release|Win32
 		{BB333CD2-42E0-4787-8C7F-1ADD61DAF031}.Release|Win32.Build.0 = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Debug|Win32.Build.0 = Debug|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.DebugE|Win32.ActiveCfg = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.DebugE|Win32.Build.0 = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Hybrid|Win32.ActiveCfg = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Hybrid|Win32.Build.0 = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Internal|Win32.ActiveCfg = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Internal|Win32.Build.0 = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Max4Hybrid|Win32.ActiveCfg = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Max4Hybrid|Win32.Build.0 = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Max4Release|Win32.ActiveCfg = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Max4Release|Win32.Build.0 = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Profile|Win32.ActiveCfg = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Profile|Win32.Build.0 = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.ProfileE|Win32.ActiveCfg = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.ProfileE|Win32.Build.0 = Internal|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Release|Win32.ActiveCfg = Release|Win32
+		{845363AF-8D9B-464C-80FA-C2FEF7A71C68}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

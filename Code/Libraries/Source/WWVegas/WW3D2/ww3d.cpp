@@ -101,18 +101,16 @@
 #include "ini.h"
 #include "dazzle.h"
 #include "meshmdl.h"
-#include "dx8renderer.h"
+#include "GameRenderer.h"
 #include "render2d.h"
 #include "bound.h"
 #include "rddesc.h"
 #include "vector3i.h"
 #include <cstdio>
-#include "dx8wrapper.h"
 #include "targa.h"
 #include "sortingrenderer.h"
 #include "thread.h"
 #include "cpudetect.h"
-#include "dx8texman.h"
 #include "formconv.h"
 
 

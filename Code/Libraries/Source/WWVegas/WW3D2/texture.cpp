@@ -40,7 +40,7 @@
 #include <d3d8.h>
 #include <stdio.h>
 #include <D3dx8core.h>
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "targa.h"
 #include <nstrdup.h>
 #include "w3d_file.h"
@@ -49,8 +49,7 @@
 #include "textureloader.h"
 #include "missingtexture.h"
 #include "ffactory.h"
-#include "dx8caps.h"
-#include "dx8texman.h"
+#include "GameRenderer.h"
 #include "meshmatdesc.h"
 
 /*

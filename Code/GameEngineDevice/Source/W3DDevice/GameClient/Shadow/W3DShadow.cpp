@@ -36,7 +36,7 @@
 #include "GameClient/View.h"
 #include "WW3D2/Camera.h"
 #include "WW3D2/Light.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 #include "WW3D2/HLod.h"
 #include "WW3D2/mesh.h"
 #include "WW3D2/meshmdl.h"

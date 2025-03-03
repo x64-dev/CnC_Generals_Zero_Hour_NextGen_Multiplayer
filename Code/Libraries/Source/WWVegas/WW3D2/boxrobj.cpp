@@ -97,10 +97,7 @@
 #include "rinfo.h"
 #include "coltest.h"
 #include "inttest.h"
-#include "dx8wrapper.h"
-#include "dx8indexbuffer.h"
-#include "dx8vertexbuffer.h"
-#include "dx8fvf.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "visrasterizer.h"
 

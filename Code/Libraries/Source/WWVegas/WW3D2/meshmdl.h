@@ -57,7 +57,7 @@
 #include "rinfo.h"
 #include "meshgeometry.h"
 #include "meshmatdesc.h"
-#include "dx8list.h"
+#include "GameRenderer.h"
 
 class TextureClass;
 class RenderInfoClass;

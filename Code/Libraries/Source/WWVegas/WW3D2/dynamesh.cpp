@@ -35,13 +35,11 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 #include "dynamesh.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "rinfo.h"
 #include "camera.h"
-#include "dx8fvf.h"
+
 
 
 

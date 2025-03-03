@@ -33,8 +33,7 @@
 #include "GameClient/GameWindow.h"
 #include "vector2i.h"
 #include <d3dx8.h>
-#include "WW3D2/dx8wrapper.h"
-#include "WW3D2/dx8WebBrowser.h"
+#include "GameRenderer.h"
 
 W3DWebBrowser::W3DWebBrowser() : WebBrowser() {
 }

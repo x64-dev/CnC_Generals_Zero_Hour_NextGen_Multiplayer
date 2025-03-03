@@ -77,12 +77,9 @@
 #include "vector.h"
 #include "vp.h"
 #include "matrix4.h"
-#include "dx8wrapper.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
+#include "GameRenderer.h"
 #include "rinfo.h"
 #include "camera.h"
-#include "dx8fvf.h"
 #include <D3dx8math.h>
 #include "sortingrenderer.h"
 

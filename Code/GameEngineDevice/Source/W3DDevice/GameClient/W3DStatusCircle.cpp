@@ -34,7 +34,7 @@
 #include <coltest.h>
 #include <rinfo.h>
 #include <camera.h>
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 #include "WW3D2/Shader.h"
 #include "Common/GlobalData.h"
 #include "common/MapObject.h"

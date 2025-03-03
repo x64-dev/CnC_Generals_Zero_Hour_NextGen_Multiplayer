@@ -50,7 +50,7 @@
 #include "shader.h"
 #include "texture.h"
 #include "statistics.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 
 bool MaterialPassClass::EnablePerPolygonCulling = true;

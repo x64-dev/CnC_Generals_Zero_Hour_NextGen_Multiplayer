@@ -40,9 +40,7 @@
 #include "vector4.h"
 #include "wwdebug.h"
 #include "targa.h"
-#include "dx8wrapper.h"
-#include "dx8caps.h"
-#include <d3d8.h>
+#include "GameRenderer.h"
 
  /*
 	WW3D_FORMAT_UNKNOWN=0,

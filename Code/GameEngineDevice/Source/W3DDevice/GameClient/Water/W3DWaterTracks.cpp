@@ -57,7 +57,7 @@
 #include "rinfo.h"
 #include "camera.h"
 #include "assetmgr.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 
 //#pragma optimize("", off)
 

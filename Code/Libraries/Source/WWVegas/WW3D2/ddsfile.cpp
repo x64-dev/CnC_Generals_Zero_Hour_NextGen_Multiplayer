@@ -20,7 +20,7 @@
 #include "ffactory.h"
 #include "bufffile.h"
 #include "formconv.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "bitmaphandler.h"
 
 // ----------------------------------------------------------------------------

@@ -82,7 +82,7 @@
 #include "W3DDevice/GameClient/Module/W3DModelDraw.h"
 #include "W3DDevice/GameClient/W3DCustomScene.h"
 
-#include "WW3D2/DX8Renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/Light.h"
 #include "WW3D2/Camera.h"
 #include "WW3D2/Coltype.h"

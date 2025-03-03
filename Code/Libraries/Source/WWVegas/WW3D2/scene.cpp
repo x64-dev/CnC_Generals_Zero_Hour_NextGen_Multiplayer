@@ -63,8 +63,7 @@
 #include "ww3d.h"
 #include "rinfo.h"
 #include "chunkio.h"
-#include "dx8renderer.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "coltest.h"
 

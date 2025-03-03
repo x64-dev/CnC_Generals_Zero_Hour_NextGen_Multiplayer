@@ -30,7 +30,7 @@
 #include "Lib/BaseType.h"
 #include "camera.h"
 #include "simplevec.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "common/MapObject.h"
 #include "common/PerfTimer.h"
 #include "W3DDevice/GameClient/HeightMap.h"

@@ -40,8 +40,7 @@
 #include "texture.h"
 #include "vertmaterial.h"
 #include "realcrc.h"
-#include	"dx8wrapper.h"
-#include "dx8caps.h"
+#include "GameRenderer.h"
 
 
 /**************************************************************************************************

@@ -42,7 +42,7 @@
 #include "GameClient/View.h"
 #include "WW3D2/Camera.h"
 #include "WW3D2/Light.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 #include "WW3D2/HLod.h"
 #include "WW3D2/mesh.h"
 #include "WW3D2/meshmdl.h"
@@ -56,7 +56,6 @@
 #include "W3DDevice/GameClient/W3DShadow.h"
 #include "WW3D2/statistics.h"
 #include "GameLogic/TerrainLogic.h"
-#include "WW3D2/DX8Caps.h"
 #include "GameClient/Drawable.h"
 
 #ifdef _INTERNAL

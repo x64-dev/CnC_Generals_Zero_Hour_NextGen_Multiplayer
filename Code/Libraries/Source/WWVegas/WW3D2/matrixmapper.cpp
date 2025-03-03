@@ -44,7 +44,7 @@
 
 
 #include "matrixmapper.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 
 /***********************************************************************************************

@@ -54,7 +54,7 @@
 #include "meshmdl.h"
 #include "part_emt.h"
 #include "vertmaterial.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "texture.h"
 #include "surfaceclass.h"
 #include "textureloader.h"

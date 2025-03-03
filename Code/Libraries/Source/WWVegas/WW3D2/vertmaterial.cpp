@@ -45,7 +45,7 @@
 #include "w3derr.h"
 #include "ini.h"
 #include "xstraw.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 #include <stdio.h>
 #include <string.h>

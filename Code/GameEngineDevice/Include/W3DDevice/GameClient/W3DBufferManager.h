@@ -33,8 +33,7 @@
 #define _W3D_VERTEX_BUFFER_MANAGER
 
 #include "Lib/BaseType.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
+#include "GameRenderer.h"
 
 #define MAX_VB_SIZES 128	//number of different sized VB slots allowed.
 #define MIN_SLOT_SIZE	32	//minimum number of vertices allocated per slot (power of 2). See also MIN_SLOT_SIZE_SHIFT.

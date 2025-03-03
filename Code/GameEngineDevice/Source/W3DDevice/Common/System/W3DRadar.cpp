@@ -52,7 +52,7 @@
 #include "W3DDevice/GameClient/HeightMap.h"
 #include "W3DDevice/GameClient/W3DShroud.h"
 #include "WW3D2/Texture.h"
-#include "WW3D2/DX8Caps.h"
+#include "GameRenderer.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

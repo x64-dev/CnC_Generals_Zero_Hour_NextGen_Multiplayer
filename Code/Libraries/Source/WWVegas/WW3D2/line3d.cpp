@@ -53,10 +53,7 @@
 #include "wwdebug.h"
 #include "ww3d.h"
 #include "rinfo.h"
-#include "dx8wrapper.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
-#include "dx8fvf.h"
+#include "GameRenderer.h"
 
 // 12 Triangles for index buffer
 const unsigned short Indices[]=

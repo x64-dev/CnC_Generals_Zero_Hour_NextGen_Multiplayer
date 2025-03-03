@@ -81,7 +81,7 @@
 #include "matpass.h"
 #include "bwrender.h"
 #include "assetmgr.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 
 // DEBUG DEBUG

@@ -50,7 +50,7 @@
 
 #include "surfaceclass.h"
 #include "formconv.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "vector2i.h"
 #include "colorspace.h"
 #include "bound.h"

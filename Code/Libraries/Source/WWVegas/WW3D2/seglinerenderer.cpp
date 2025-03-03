@@ -41,7 +41,7 @@
 #include "seglinerenderer.h"
 #include "ww3d.h"
 #include "rinfo.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "vp.h"
 #include "vector3i.h"

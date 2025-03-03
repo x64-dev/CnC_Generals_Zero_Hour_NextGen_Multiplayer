@@ -17,9 +17,7 @@
 */
 
 #include "sortingrenderer.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "vertmaterial.h"
 #include "texture.h"
 #include "d3d8.h"

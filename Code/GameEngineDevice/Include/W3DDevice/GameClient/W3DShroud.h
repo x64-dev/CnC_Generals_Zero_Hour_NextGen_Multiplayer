@@ -29,7 +29,7 @@
 #define __W3DSHROUD_H_
 
 #include "WW3D2/matpass.h"
-#include "WW3D2/dx8wrapper.h"
+#include "GameRenderer.h"
 
 class AABoxClass;
 class WorldHeightMap;

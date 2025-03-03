@@ -55,13 +55,11 @@
 #include "W3DDevice/GameClient/W3DCustomScene.h"
 #include "W3DDevice/GameClient/W3DShroud.h"
 #include "WW3D2/camera.h"
-#include "WW3D2/dx8renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/sortingrenderer.h"
-#include "WW3D2/dx8wrapper.h"
 #include "WW3D2/Light.h"
 #include "WW3D2/matpass.h"
 #include "WW3D2/shader.h"
-#include "WW3D2/DX8Caps.h"
 #include "WW3D2/colorspace.h"
 
 #ifdef _INTERNAL

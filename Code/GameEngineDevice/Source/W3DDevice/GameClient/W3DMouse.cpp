@@ -29,7 +29,7 @@
 
 
 #include "Common/GameMemory.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 #include "WW3D2/RendObj.h"
 #include "WW3D2/HAnim.h"
 #include "WW3D2/Camera.h"

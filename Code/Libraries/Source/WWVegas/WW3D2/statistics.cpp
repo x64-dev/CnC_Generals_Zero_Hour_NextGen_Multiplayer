@@ -19,9 +19,7 @@
 #include "statistics.h"
 #include "wwstring.h"
 #include "simplevec.h"
-#include "dx8renderer.h"
-#include "dx8wrapper.h"
-#include "dx8caps.h"
+#include "GameRenderer.h"
 #include "textureloader.h"
 #include "texture.h"
 #include <cstdio>

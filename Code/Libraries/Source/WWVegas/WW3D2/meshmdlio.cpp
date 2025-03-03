@@ -88,7 +88,7 @@
 #include "assetmgr.h"
 #include "simplevec.h"
 #include "realcrc.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 #include <stdio.h>
 

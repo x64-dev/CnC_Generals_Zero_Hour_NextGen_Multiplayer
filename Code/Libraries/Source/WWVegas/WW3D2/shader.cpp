@@ -43,8 +43,7 @@
 #include "shader.h"
 #include "w3d_file.h"
 #include "wwdebug.h"
-#include "Dx8Wrapper.h"
-#include "dx8caps.h"
+#include "GameRenderer.h"
 
 
 bool ShaderClass::ShaderDirty=true;

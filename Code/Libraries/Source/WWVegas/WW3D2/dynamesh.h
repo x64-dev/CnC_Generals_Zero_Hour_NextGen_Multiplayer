@@ -45,7 +45,7 @@
 #include "matinfo.h"
 #include "rendobj.h"
 #include "polyinfo.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 class	ShaderClass;
 class	IntersectionClass;

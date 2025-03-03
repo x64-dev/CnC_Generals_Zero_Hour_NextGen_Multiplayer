@@ -27,8 +27,7 @@
 #include "ww3d.h"
 #include "texfcach.h"
 #include "assetmgr.h"
-#include "dx8wrapper.h"
-#include "dx8caps.h"
+#include "GameRenderer.h"
 #include "missingtexture.h"
 #include "targa.h"
 #include <D3dx8tex.h>

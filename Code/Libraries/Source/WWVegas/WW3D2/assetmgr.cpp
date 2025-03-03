@@ -102,8 +102,7 @@
 #include "wwstring.h"
 #include "wwmemlog.h"
 #include "dazzle.h"
-#include "dx8wrapper.h"
-#include "dx8renderer.h"
+#include "GameRenderer.h"
 #include "metalmap.h"
 #include "w3dexclusionlist.h"
 #include <ini.h>

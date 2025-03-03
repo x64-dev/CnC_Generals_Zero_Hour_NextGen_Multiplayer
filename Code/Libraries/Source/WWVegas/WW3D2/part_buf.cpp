@@ -48,7 +48,7 @@
 #include <limits.h>
 #include "vp.h"
 #include "texture.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "vector3.h"
 
 // A random permutation of the numbers 0 to 15 - used for LOD particle decimation.

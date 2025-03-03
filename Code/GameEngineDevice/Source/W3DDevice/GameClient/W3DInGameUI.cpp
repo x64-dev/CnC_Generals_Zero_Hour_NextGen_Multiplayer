@@ -61,8 +61,7 @@
 
 #ifdef _DEBUG
 #include "W3DDevice/GameClient/HeightMap.h"
-#include "WW3D2/DX8IndexBuffer.h"
-#include "WW3D2/DX8VertexBuffer.h"
+#include "GameRenderer.h"
 #include "WW3D2/VertMaterial.h"
 class DebugHintObject : public RenderObjClass
 {	
