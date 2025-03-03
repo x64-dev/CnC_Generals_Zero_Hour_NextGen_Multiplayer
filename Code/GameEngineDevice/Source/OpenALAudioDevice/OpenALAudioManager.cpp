@@ -28,9 +28,19 @@
 
 // Constructor
 OpenALAudioManager::OpenALAudioManager()
-    : m_digitalHandle(nullptr) // initialize your member variables as needed
+    : m_digitalHandle(nullptr)
 {
-    // TODO: Add OpenAL-specific initialization code here.
+	device = nullptr;
+	context = nullptr;
+	m_digitalHandle = nullptr;
+
+	// Initialize pool bookkeeping
+	//for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+	//{
+	//	m_sourcePool[i] = 0;
+	//	m_sourceInUse[i] = false;
+	//}
+	m_musicSource = 0;
 }
 
 // Destructor
@@ -482,8 +492,86 @@ UnsignedInt OpenALAudioManager::getNumStreams(void) const
 
 Bool OpenALAudioManager::doesViolateLimit(AudioEventRTS* event) const
 {
-    // TODO: Check if adding this event would violate any limits.
-    return false;
+	Int limit = event->getAudioEventInfo()->m_limit;
+	if (limit == 0) {
+		return false;
+	}
+
+	Int totalCount = 0;
+	Int totalRequestCount = 0;
+
+	std::list<OpenALPlayingAudio*>::const_iterator it;
+	if (!event->isPositionalAudio()) {
+		// 2-D
+		for (it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it) {
+			if ((*it)->m_audioEventRTS->getEventName() == event->getEventName()) {
+				if (totalCount == 0) {
+					// This is the oldest audio of this type playing.
+					event->setHandleToKill((*it)->m_audioEventRTS->getPlayingHandle());
+				}
+				++totalCount;
+			}
+		}
+	}
+	else {
+		// 3-D
+		for (it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it) {
+			if ((*it)->m_audioEventRTS->getEventName() == event->getEventName()) {
+				if (totalCount == 0) {
+					// This is the oldest audio of this type playing.
+					event->setHandleToKill((*it)->m_audioEventRTS->getPlayingHandle());
+				}
+				++totalCount;
+			}
+		}
+	}
+
+	// Also check the request list in case we've requested to play this sound.
+	std::list<AudioRequest*>::const_iterator arIt;
+	for (arIt = m_audioRequests.begin(); arIt != m_audioRequests.end(); ++arIt) {
+		AudioRequest* req = (*arIt);
+		if (req == NULL) {
+			continue;
+		}
+		if (req->m_usePendingEvent)
+		{
+			if (req->m_pendingEvent->getEventName() == event->getEventName())
+			{
+				totalRequestCount++;
+				totalCount++;
+			}
+		}
+	}
+
+	//If our event is an interrupting type, then normally we would always add it. The exception is when we have requested
+	//multiple sounds in the same frame and those requests violate the limit. Because we don't have any "old" sounds to
+	//remove in the case of an interrupt, we need to catch it early and prevent the sound from being added if we already
+	//reached the limit
+	if (event->getAudioEventInfo()->m_control & AC_INTERRUPT)
+	{
+		if (totalRequestCount < limit)
+		{
+			Int totalPlayingCount = totalCount - totalRequestCount;
+			if (totalRequestCount + totalPlayingCount < limit)
+			{
+				//We aren't exceeding the actual limit, then clear the kill handle.
+				event->setHandleToKill(0);
+				return false;
+			}
+
+			//We are exceeding the limit - the kill handle will kill the
+			//oldest playing sound to enforce the actual limit.
+			return false;
+		}
+	}
+
+	if (totalCount < limit)
+	{
+		event->setHandleToKill(0);
+		return false;
+	}
+
+	return true;
 }
 
 Bool OpenALAudioManager::isPlayingLowerPriority(AudioEventRTS* event) const
@@ -569,8 +657,52 @@ Bool OpenALAudioManager::isObjectPlayingVoice(UnsignedInt objID) const
 
 Bool OpenALAudioManager::killLowestPrioritySoundImmediately(AudioEventRTS* event)
 {
-    // TODO: Kill the lowest priority sound immediately if necessary.
-    return false;
+	//Actually, we want to kill the LOWEST PRIORITY SOUND, not the first "lower" priority
+	//sound we find, because it could easily be 
+	AudioEventRTS* lowestPriorityEvent = findLowestPrioritySound(event);
+	if (lowestPriorityEvent)
+	{
+		std::list<OpenALPlayingAudio*>::iterator it;
+		if (event->isPositionalAudio())
+		{
+			for (it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
+			{
+				OpenALPlayingAudio* playing = (*it);
+				if (!playing)
+				{
+					continue;
+				}
+
+				if (playing->m_audioEventRTS && playing->m_audioEventRTS == lowestPriorityEvent)
+				{
+					//Release this 3D sound channel immediately because we are going to play another sound in it's place.
+					releasePlayingAudio(playing);
+					m_playing3DSounds.erase(it);
+					return TRUE;
+				}
+			}
+		}
+		else
+		{
+			for (it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
+			{
+				OpenALPlayingAudio* playing = (*it);
+				if (!playing)
+				{
+					continue;
+				}
+
+				if (playing->m_audioEventRTS && playing->m_audioEventRTS == lowestPriorityEvent)
+				{
+					//Release this 3D sound channel immediately because we are going to play another sound in it's place.
+					releasePlayingAudio(playing);
+					m_playingSounds.erase(it);
+					return TRUE;
+				}
+			}
+		}
+	}
+	return FALSE;
 }
 
 AudioEventRTS* OpenALAudioManager::findLowestPrioritySound(AudioEventRTS* event)
@@ -828,14 +960,17 @@ void OpenALAudioManager::playAudioEvent(AudioEventRTS* event)
 				}
 			}
 
-			// Push it onto the list of playing things
-			audio->m_audioEventRTS = event;
-			// audio->source = something <-- fix this.
-			audio->buffer = 0;
-			audio->m_type = PAT_3DSample;			
+			if (!handleToKill || foundSoundToReplace)
+			{
+				// Push it onto the list of playing things
+				audio->m_audioEventRTS = event;
+				// audio->source = something <-- fix this.
+				audio->buffer = 0;
+				audio->m_type = PAT_3DSample;
 
-			playSample3D(event, audio);			
-
+				playSample3D(event, audio);
+			}
+					
 			if(audio->source != 0)
 			{
 				m_playing3DSounds.push_back(audio);
@@ -869,13 +1004,17 @@ void OpenALAudioManager::playAudioEvent(AudioEventRTS* event)
 				}
 			}
 
-			// Push it onto the list of playing things
-			audio->m_audioEventRTS = event;
-			// audio->source = something <-- fix this.
-			audio->buffer = NULL;
-			audio->m_type = PAT_Sample;			
+			if (!handleToKill || foundSoundToReplace)
+			{
+				// Push it onto the list of playing things
+				audio->m_audioEventRTS = event;
+				// audio->source = something <-- fix this.
+				audio->buffer = NULL;
+				audio->m_type = PAT_Sample;
 
-			playSample(event, audio, false);
+				playSample(event, audio, false);
+			}
+
 			if (audio->source != 0)
 			{
 				m_playingSounds.push_back(audio);				

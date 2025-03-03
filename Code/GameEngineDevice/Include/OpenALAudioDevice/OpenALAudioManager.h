@@ -36,6 +36,8 @@ struct OpenALPlayingAudio
     ALuint source;
     ALuint buffer;
 
+    ALuint poolIndex;
+
     OpenALPlayingAudioType m_type;
     OpenALPlayingStatus m_status;
     AudioEventRTS* m_audioEventRTS;
@@ -52,7 +54,6 @@ struct OpenALPlayingAudio
     {
     }
 };
-
 
 class OpenALAudioManager : public AudioManager
 {
@@ -166,7 +167,12 @@ protected:
     void stopAllSpeech(void);
     void stopAllAudioImmediately(void);
     void releasePlayingAudio(OpenALPlayingAudio* release);
+    void recycleSource(ALuint poolIndex);
+    ALuint getFreeSource(ALuint&poolIndex);
+
     void* m_digitalHandle;
+
+    ALuint m_musicSource;
 
     AsciiString m_pref3DProvider;
     AsciiString m_prefSpeaker;

@@ -26,338 +26,469 @@
 
 #include "OpenALAudioDevice/OpenALAudioLoader.h"
 
-//-------------------------------------------------------------------------------------------------
+#define NUM_POOLED_SOURCES 128
+
+ALuint m_sourcePool[NUM_POOLED_SOURCES];
+bool m_sourceInUse[NUM_POOLED_SOURCES];
+
+//-----------------------------------------------------------------------------
 void OpenALAudioManager::openDevice(void)
 {
-	device = alcOpenDevice(nullptr); // Open default device
-	if (!device)
-	{
-		DEBUG_CRASH(("Failed to open OpenAL device."));
-		return;
-	}
-	context = alcCreateContext(device, nullptr);
-	if (!context)
-	{
-		DEBUG_CRASH(("Failed to create OpenAL context."));
-		alcCloseDevice(device);
-		device = nullptr;
-		return;
-	}
-	alcMakeContextCurrent(context);
-	m_digitalHandle = device;
+    device = alcOpenDevice(nullptr); // Open default device
+    if (!device)
+    {
+        DEBUG_CRASH(("Failed to open OpenAL device."));
+        return;
+    }
+    context = alcCreateContext(device, nullptr);
+    if (!context)
+    {
+        DEBUG_CRASH(("Failed to create OpenAL context."));
+        alcCloseDevice(device);
+        device = nullptr;
+        return;
+    }
+    alcMakeContextCurrent(context);
+    m_digitalHandle = device;
+
+    alGenSources(1, &m_musicSource);  // This source is used ONLY for music
+
+    // Create the pool of SFX sources
+    alGenSources(NUM_POOLED_SOURCES, m_sourcePool);
+
+    // Mark them all as free initially
+    for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+    {
+        m_sourceInUse[i] = false;
+    }
 }
 
-//-------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Helper to get a free source from the pool
+ALuint OpenALAudioManager::getFreeSource(ALuint &poolIndex)
+{
+    for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+    {
+        if (!m_sourceInUse[i])
+        {
+            poolIndex = i;
+            m_sourceInUse[i] = true;
+
+            // Reset the source so it is ready for reuse
+            alSourceStop(m_sourcePool[i]);
+            alSourcei(m_sourcePool[i], AL_BUFFER, 0);
+
+            return m_sourcePool[i];
+        }
+    }
+    // No free source available!
+    return -1;
+}
+
+//-----------------------------------------------------------------------------
+// Helper to recycle a source back to the pool
+void OpenALAudioManager::recycleSource(ALuint poolIndex)
+{
+    alSourceStop(m_sourcePool[poolIndex]);
+    alSourcei(m_sourcePool[poolIndex], AL_BUFFER, 0);
+    m_sourceInUse[poolIndex] = false;
+}
+
+//-----------------------------------------------------------------------------
 void OpenALAudioManager::releasePlayingAudio(OpenALPlayingAudio* release)
 {
-	// Stop Audio Here
-	if (release)
-	{
-		if (release->source)
-			alDeleteSources(1, &release->source);
-		//if (release->buffer)
-			//alDeleteBuffers(1, &release->buffer);
-		delete release;
-	}
+    if (release->m_audioEventRTS && release->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_SoundEffect) {
+        if (release->m_type == PAT_Sample) {
+            if (release->source != -1) {
+                m_sound->notifyOf2DSampleCompletion();
+            }
+        }
+        else {
+            if (release->source != -1) {
+                m_sound->notifyOf3DSampleCompletion();
+            }
+        }
+    }
+
+    // Instead of deleting the source, recycle it
+    if (release)
+    {
+        if (release->source != 0)
+        {
+            // If it's the dedicated music source, don't recycle into the SFX pool
+            if (release->source == m_musicSource)
+            {
+                // Just stop the music source. We keep it forever.
+                alSourceStop(m_musicSource);
+                alSourcei(m_musicSource, AL_BUFFER, 0);
+            }
+            else
+            {
+                // SFX source => recycle it in the pool
+                recycleSource(release->poolIndex);
+            }
+        }
+        // Buffers are typically managed externally or can remain cached
+        // if you are reusing the same audio data. Adjust as needed.
+        // if (release->buffer) alDeleteBuffers(1, &release->buffer);
+
+        delete release;
+    }
 }
 
-//-------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void OpenALAudioManager::closeDevice(void)
 {
-	alcMakeContextCurrent(nullptr);
-	if (context)
-	{
-		alcDestroyContext(context);
-		context = nullptr;
-	}
-	if (device)
-	{
-		alcCloseDevice(device);
-		device = nullptr;
-	}
-	m_digitalHandle = nullptr;
+    alcMakeContextCurrent(nullptr);
+
+    if (context)
+    {
+        alcDestroyContext(context);
+        context = nullptr;
+    }
+
+    if (device)
+    {
+        // Delete all SFX sources in the pool
+        alDeleteSources(NUM_POOLED_SOURCES, m_sourcePool);
+
+        // Delete the dedicated music source
+        if (m_musicSource)
+            alDeleteSources(1, &m_musicSource);
+
+        alcCloseDevice(device);
+        device = nullptr;
+    }
+    m_digitalHandle = nullptr;
 }
-//-------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Modified so that music always uses the dedicated music source
+// and SFX uses a pooled source
+void OpenALAudioManager::playSample(AudioEventRTS* event, OpenALPlayingAudio* audio, bool isMusic)
+{
+    ALuint buffer = openFile(event);
+    if (buffer == 0)
+    {
+        // Error loading file
+        return;
+    }
+    audio->buffer = buffer;
+
+    ALuint source = 0;
+
+    if (isMusic)
+    {
+        // Always use the dedicated music source
+        source = m_musicSource;
+    }
+    else
+    {
+        // Get a source from the pool
+        source = getFreeSource(audio->poolIndex);
+        if (source == -1)
+        {
+            killLowestPrioritySoundImmediately(event);
+            source = getFreeSource(audio->poolIndex);
+
+            if (source == -1)
+            {
+                return;
+            }
+        }
+    }
+
+    audio->source = source;
+    alSourcei(source, AL_BUFFER, buffer);
+    Real volume = event->getVolume();
+    alSourcef(source, AL_GAIN, volume);
+
+    // If this is music, you might want to loop it
+    if (isMusic)
+    {
+        alSourcei(source, AL_LOOPING, AL_TRUE);
+    }
+
+    alSourcePlay(source);
+}
+
+//-----------------------------------------------------------------------------
+bool OpenALAudioManager::playSample3D(AudioEventRTS* event, OpenALPlayingAudio* audio)
+{
+    const Coord3D* pos = getCurrentPositionFromEvent(event);
+    if (!pos)
+        return false;
+
+    ALuint buffer = openFile(event);
+    if (buffer == 0)
+        return false;
+
+    audio->buffer = buffer;
+
+    // Get a 3D source from the pool
+    ALuint source = getFreeSource(audio->poolIndex);
+    if (source == -1)
+    {
+        killLowestPrioritySoundImmediately(event);
+        source = getFreeSource(audio->poolIndex);
+
+        if (source == -1)
+        {
+            return false;
+        }
+    }
+
+    audio->source = source;
+    alSourcei(source, AL_BUFFER, buffer);
+
+    // Set 3D position and volume
+    alSource3f(source, AL_POSITION, pos->x, pos->y, pos->z);
+    Real volume = event->getVolume();
+    alSourcef(source, AL_GAIN, volume);
+    alSourcef(source, AL_REFERENCE_DISTANCE, event->getAudioEventInfo()->m_minDistance);
+    alSourcef(source, AL_MAX_DISTANCE, event->getAudioEventInfo()->m_maxDistance);
+
+    alSourcePlay(source);
+    return true;
+}
+
+//-----------------------------------------------------------------------------
+void OpenALAudioManager::processStoppedList(void)
+{
+    auto checkAndRelease = [&](std::list<OpenALPlayingAudio*>& audioList)
+        {
+            for (auto it = audioList.begin(); it != audioList.end(); )
+            {
+                OpenALPlayingAudio* audio = *it;
+                if (audio && audio->source != 0 && alIsSource(audio->source))
+                {
+                    ALint state = 0;
+                    alGetSourcei(audio->source, AL_SOURCE_STATE, &state);
+
+                    // If the source is done playing or was never started properly
+                    if (state == AL_STOPPED || state == AL_INITIAL)
+                    {
+                        // This will recycle or stop the source
+                        releasePlayingAudio(audio);
+                        it = audioList.erase(it);
+                        continue;
+                    }
+                }
+                ++it;
+            }
+        };
+
+    // Check the three different lists
+    checkAndRelease(m_playingSounds);
+    checkAndRelease(m_playing3DSounds);
+    checkAndRelease(m_playingStreams);
+}
+
+//-----------------------------------------------------------------------------
 void OpenALAudioManager::update()
 {
     AudioManager::update();
 
-	processRequestList();
-	processPlayingList();
-	processFadingList();
-	processStoppedList();
-	setDeviceListenerPosition();
+    processRequestList();
+    processPlayingList();
+    processFadingList();
+    processStoppedList();
+    setDeviceListenerPosition();
 }
 
-//-------------------------------------------------------------------------------------------------
-Bool OpenALAudioManager::hasMusicTrackCompleted(const AsciiString& trackName, Int numberOfTimes) const
+//-----------------------------------------------------------------------------
+void OpenALAudioManager::setDeviceListenerPosition(void)
 {
-	std::list<OpenALPlayingAudio*>::const_iterator it;
-	OpenALPlayingAudio* playing;
-	for (it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it) {
-		playing = *it;
-		if (playing && playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music) {
-			if (playing->m_audioEventRTS->getEventName() == trackName) {
-				//if (INFINITE_LOOP_COUNT - AIL_stream_loop_count(playing->m_stream) >= numberOfTimes) {
-				//	return TRUE;
-				//}
-				// IMPLEMENT TESTING IF MUSIC IS PLAYING OR NOT 
-			}
-		}
-	}
+    Real x = m_listenerPosition.x;
+    Real y = m_listenerPosition.y;
+    Real z = m_listenerPosition.z;
 
-	return FALSE;
+    alListener3f(AL_POSITION, x, y, z);
+
+    ALfloat listenerOri[6] = {
+        0.612f, -0.5f,  0.612f,  // Forward vector
+        0.354f,  0.866f, 0.354f  // Up vector
+    };
+
+    alListenerfv(AL_ORIENTATION, listenerOri);
 }
 
-//-------------------------------------------------------------------------------------------------
-void OpenALAudioManager::playSample(AudioEventRTS* event, OpenALPlayingAudio* audio, bool isMusic)
+//-----------------------------------------------------------------------------
+void OpenALAudioManager::processFadingList(void)
 {
-	ALuint buffer = openFile(event);
-	if (buffer == 0)
-	{
-		// Error loading file
-		return;
-	}
-	audio->buffer = buffer;
-	alGenSources(1, &audio->source);
-	alSourcei(audio->source, AL_BUFFER, buffer);
-	Real volume = event->getVolume();
-	alSourcef(audio->source, AL_GAIN, volume);
-	if (isMusic)
-	{
-		alSourcei(audio->source, AL_LOOPING, AL_TRUE);
-	}
-	alSourcePlay(audio->source);
-}
-
-//-------------------------------------------------------------------------------------------------
-bool OpenALAudioManager::playSample3D(AudioEventRTS* event, OpenALPlayingAudio* audio)
-{
-	const Coord3D* pos = getCurrentPositionFromEvent(event);
-	if (pos)
-	{
-		ALuint buffer = openFile(event);
-		if (buffer == 0)
-			return false;
-		audio->buffer = buffer;
-		alGenSources(1, &audio->source);
-		alSourcei(audio->source, AL_BUFFER, buffer);
-		alSource3f(audio->source, AL_POSITION, pos->x, pos->y, pos->z);
-		Real volume = event->getVolume();
-		alSourcef(audio->source, AL_GAIN, volume);
-		alSourcef(audio->source, AL_REFERENCE_DISTANCE, event->getAudioEventInfo()->m_minDistance);
-		alSourcef(audio->source, AL_MAX_DISTANCE, event->getAudioEventInfo()->m_maxDistance);
-		alSourcePlay(audio->source);
-		return true;
-	}
-	return false;
+    // Fading logic (unchanged)...
 }
 
 void OpenALAudioManager::stopAudio(AudioAffect which)
 {
-	OpenALPlayingAudio* playing = nullptr;
-	if (BitTestEA(which, AudioAffect_Sound))
-	{
-		for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-			{
-				alSourceStop(playing->source);
-				playing->m_status = PS_Stopped;
-			}
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Sound3D))
-	{
-		for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-			{
-				alSourceStop(playing->source);
-				playing->m_status = PS_Stopped;
-			}
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
-	{
-		for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-			{
-				if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
-				{
-					if (!BitTestEA(which, AudioAffect_Music))
-						continue;
-				}
-				else
-				{
-					if (!BitTestEA(which, AudioAffect_Speech))
-						continue;
-				}
-				alSourceStop(playing->source);
-				playing->m_status = PS_Stopped;
-			}
-		}
-	}
+    OpenALPlayingAudio* playing = nullptr;
+    if (BitTestEA(which, AudioAffect_Sound))
+    {
+        for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+            {
+                alSourceStop(playing->source);
+                playing->m_status = PS_Stopped;
+            }
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Sound3D))
+    {
+        for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+            {
+                alSourceStop(playing->source);
+                playing->m_status = PS_Stopped;
+            }
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
+    {
+        for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+            {
+                if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
+                {
+                    if (!BitTestEA(which, AudioAffect_Music))
+                        continue;
+                }
+                else
+                {
+                    if (!BitTestEA(which, AudioAffect_Speech))
+                        continue;
+                }
+                alSourceStop(playing->source);
+                playing->m_status = PS_Stopped;
+            }
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
 void OpenALAudioManager::pauseAudio(AudioAffect which)
 {
-	OpenALPlayingAudio* playing = nullptr;
-	if (BitTestEA(which, AudioAffect_Sound))
-	{
-		for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-				alSourcePause(playing->source);
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Sound3D))
-	{
-		for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-				alSourcePause(playing->source);
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
-	{
-		for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-			{
-				if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
-				{
-					if (!BitTestEA(which, AudioAffect_Music))
-						continue;
-				}
-				else
-				{
-					if (!BitTestEA(which, AudioAffect_Speech))
-						continue;
-				}
-				alSourcePause(playing->source);
-			}
-		}
-	}
-	// Remove pending PLAY requests while pausing.
-	for (auto ait = m_audioRequests.begin(); ait != m_audioRequests.end(); )
-	{
-		AudioRequest* req = *ait;
-		if (req && req->m_request == AR_Play)
-		{
-			req->deleteInstance();
-			ait = m_audioRequests.erase(ait);
-		}
-		else
-		{
-			++ait;
-		}
-	}
+    OpenALPlayingAudio* playing = nullptr;
+    if (BitTestEA(which, AudioAffect_Sound))
+    {
+        for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+                alSourcePause(playing->source);
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Sound3D))
+    {
+        for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+                alSourcePause(playing->source);
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
+    {
+        for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+            {
+                if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
+                {
+                    if (!BitTestEA(which, AudioAffect_Music))
+                        continue;
+                }
+                else
+                {
+                    if (!BitTestEA(which, AudioAffect_Speech))
+                        continue;
+                }
+                alSourcePause(playing->source);
+            }
+        }
+    }
+    // Remove pending PLAY requests while pausing.
+    for (auto ait = m_audioRequests.begin(); ait != m_audioRequests.end(); )
+    {
+        AudioRequest* req = *ait;
+        if (req && req->m_request == AR_Play)
+        {
+            req->deleteInstance();
+            ait = m_audioRequests.erase(ait);
+        }
+        else
+        {
+            ++ait;
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
 void OpenALAudioManager::resumeAudio(AudioAffect which)
 {
-	OpenALPlayingAudio* playing = nullptr;
-	if (BitTestEA(which, AudioAffect_Sound))
-	{
-		for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-				alSourcePlay(playing->source);
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Sound3D))
-	{
-		for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-				alSourcePlay(playing->source);
-		}
-	}
-	if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
-	{
-		for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
-		{
-			playing = *it;
-			if (playing)
-			{
-				if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
-				{
-					if (!BitTestEA(which, AudioAffect_Music))
-						continue;
-				}
-				else
-				{
-					if (!BitTestEA(which, AudioAffect_Speech))
-						continue;
-				}
-				alSourcePlay(playing->source);
-			}
-		}
-	}
+    OpenALPlayingAudio* playing = nullptr;
+    if (BitTestEA(which, AudioAffect_Sound))
+    {
+        for (auto it = m_playingSounds.begin(); it != m_playingSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+                alSourcePlay(playing->source);
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Sound3D))
+    {
+        for (auto it = m_playing3DSounds.begin(); it != m_playing3DSounds.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+                alSourcePlay(playing->source);
+        }
+    }
+    if (BitTestEA(which, AudioAffect_Speech | AudioAffect_Music))
+    {
+        for (auto it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it)
+        {
+            playing = *it;
+            if (playing)
+            {
+                if (playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music)
+                {
+                    if (!BitTestEA(which, AudioAffect_Music))
+                        continue;
+                }
+                else
+                {
+                    if (!BitTestEA(which, AudioAffect_Speech))
+                        continue;
+                }
+                alSourcePlay(playing->source);
+            }
+        }
+    }
 }
 
-void OpenALAudioManager::processStoppedList(void)
+Bool OpenALAudioManager::hasMusicTrackCompleted(const AsciiString& trackName, Int numberOfTimes) const
 {
-	auto checkAndRelease = [&](std::list<OpenALPlayingAudio*>& audioList)
-		{
-			for (auto it = audioList.begin(); it != audioList.end(); )
-			{
-				OpenALPlayingAudio* audio = *it;
-				if (audio && audio->source != 0 && alIsSource(audio->source))
-				{
-					ALint state = 0;
-					alGetSourcei(audio->source, AL_SOURCE_STATE, &state);
+    std::list<OpenALPlayingAudio*>::const_iterator it;
+    OpenALPlayingAudio* playing;
+    for (it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it) {
+        playing = *it;
+        if (playing && playing->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music) {
+            if (playing->m_audioEventRTS->getEventName() == trackName) {
+                //if (INFINITE_LOOP_COUNT - AIL_stream_loop_count(playing->m_stream) >= numberOfTimes) {
+                //	return TRUE;
+                //}
+                // IMPLEMENT TESTING IF MUSIC IS PLAYING OR NOT 
+            }
+        }
+    }
 
-					// If the source is done playing or was never started properly
-					if (state == AL_STOPPED || state == AL_INITIAL)
-					{
-						// Release and erase from the list
-						releasePlayingAudio(audio);
-
-						it = audioList.erase(it);
-						continue; // Avoid incrementing 'it' again
-					}
-				}
-				++it;
-			}
-		};
-
-	// Check the three different lists
-	checkAndRelease(m_playingSounds);
-	checkAndRelease(m_playing3DSounds);
-	checkAndRelease(m_playingStreams);
-}
-
-void OpenALAudioManager::setDeviceListenerPosition(void)
-{
-	Real x = m_listenerPosition.x;
-	Real y = m_listenerPosition.y;
-	Real z = m_listenerPosition.z;
-
-	alListener3f(AL_POSITION, x, y, z);
-
-	ALfloat listenerOri[6] = {
-		0.612f, -0.5f,  0.612f,  // Forward vector: direction camera is facing
-		0.354f,  0.866f, 0.354f   // Up vector: defines "up" on the screen
-	};
-
-	alListenerfv(AL_ORIENTATION, listenerOri);
-}
-
-
-void OpenALAudioManager::processFadingList(void)
-{
-
+    return FALSE;
 }
