@@ -390,7 +390,6 @@
     <ClCompile Include="shattersystem.cpp" />
     <ClCompile Include="snappts.cpp" />
     <ClCompile Include="sortingrenderer.cpp" />
-    <ClCompile Include="soundrobj.cpp" />
     <ClCompile Include="sphereobj.cpp" />
     <ClCompile Include="statistics.cpp" />
     <ClCompile Include="streak.cpp" />

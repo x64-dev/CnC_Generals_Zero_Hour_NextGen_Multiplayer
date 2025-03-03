@@ -169,8 +169,16 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\MilesAudioDevice\MilesAudioCache.cpp" />
-    <ClCompile Include="Source\MilesAudioDevice\MilesAudioManager.cpp" />
+    <ClCompile Include="Source\MilesAudioDevice\MilesAudioCache.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\MilesAudioDevice\MilesAudioManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\OpenALAudioDevice\OpenALAudioLoader.cpp" />
     <ClCompile Include="Source\OpenALAudioDevice\OpenALAudioManager.cpp" />
     <ClCompile Include="Source\OpenALAudioDevice\OpenALDriver.cpp" />
