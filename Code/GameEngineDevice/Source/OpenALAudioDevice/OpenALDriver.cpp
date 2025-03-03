@@ -200,6 +200,8 @@ void OpenALAudioManager::playSample(AudioEventRTS* event, OpenALPlayingAudio* au
 
     audio->source = source;
     alSourcei(source, AL_BUFFER, buffer);
+    alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+    alSource3f(source, AL_POSITION, 0.0f, 0.0f, 0.0f);
     Real volume = event->getVolume();
     alSourcef(source, AL_GAIN, volume);
 
@@ -244,6 +246,7 @@ bool OpenALAudioManager::playSample3D(AudioEventRTS* event, OpenALPlayingAudio* 
     // Set 3D position and volume
     alSource3f(source, AL_POSITION, pos->x, pos->y, pos->z);
     Real volume = event->getVolume();
+    alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
     alSourcef(source, AL_GAIN, volume);
     alSourcef(source, AL_REFERENCE_DISTANCE, event->getAudioEventInfo()->m_minDistance);
     alSourcef(source, AL_MAX_DISTANCE, event->getAudioEventInfo()->m_maxDistance);
@@ -299,18 +302,21 @@ void OpenALAudioManager::update()
 //-----------------------------------------------------------------------------
 void OpenALAudioManager::setDeviceListenerPosition(void)
 {
-    Real x = m_listenerPosition.x;
-    Real y = m_listenerPosition.y;
-    Real z = m_listenerPosition.z;
-
-    alListener3f(AL_POSITION, x, y, z);
-
+    // Set the listener's orientation.
+     // The first three elements are the "at" vector, the next three are the "up" vector.
     ALfloat listenerOri[6] = {
-        0.612f, -0.5f,  0.612f,  // Forward vector
-        0.354f,  0.866f, 0.354f  // Up vector
+        m_listenerOrientation.x, m_listenerOrientation.y, m_listenerOrientation.z, // "at" vector
+        0.0f, 0.0f, -1.0f  // "up" vector (as in the original code)
     };
-
     alListenerfv(AL_ORIENTATION, listenerOri);
+
+    // Set the listener's position.
+    ALfloat listenerPos[3] = {
+        m_listenerPosition.x,
+        m_listenerPosition.y,
+        m_listenerPosition.z
+    };
+    alListenerfv(AL_POSITION, listenerPos);
 }
 
 //-----------------------------------------------------------------------------

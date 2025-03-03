@@ -274,21 +274,27 @@ Bool SoundManager::canPlayNow( AudioEventRTS *event )
 
 	if (event->isPositionalAudio()) 
 	{
-		if (m_numPlaying3DSamples < m_num3DSamples) 
-		{
-			return true;
-		}
+// jmarshall - let the audio manager deal with this.
+		//if (m_numPlaying3DSamples < m_num3DSamples) 
+		//{
+		//	return true;
+		//}
+		return true;
+// jmarshall - let the audio manager deal with this.
 #ifdef INTENSIVE_AUDIO_DEBUG
 		DEBUG_LOG(("- %d samples playing, %d samples available", m_numPlaying3DSamples, m_num3DSamples));
 #endif
 	} 
 	else 
 	{
+// jmarshall - let the audio manager deal with this.
 		// its a UI sound (and thus, 2-D)
-		if (m_numPlaying2DSamples < m_num2DSamples) 
-		{
-			return true;
-		}
+		//if (m_numPlaying2DSamples < m_num2DSamples) 
+		//{
+		//	return true;
+		//}
+		return true;
+// jmarshall - let the audio manager deal with this.
 	}
 
 	if (TheAudio->isPlayingLowerPriority(event)) 
@@ -311,9 +317,9 @@ Bool SoundManager::canPlayNow( AudioEventRTS *event )
 			return false;
 		}
 	}
-#ifdef INTENSIVE_AUDIO_DEBUG
+
 	DEBUG_LOG(("culled due to unavailable channels"));
-#endif
+
 	return false;
 }
 
