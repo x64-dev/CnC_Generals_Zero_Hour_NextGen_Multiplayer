@@ -491,77 +491,72 @@ static Bool parseTooltip( char *token, WinInstanceData *instData,
 	* and adjust to make the screen rect coords relative to any parent
 	* if present */
 //=============================================================================
-static Bool parseScreenRect( char *token, char *buffer,
-														 Int *x, Int *y, Int *width, Int *height )
+static Bool parseScreenRect(char* token, char* buffer,
+	Int* x, Int* y, Int* width, Int* height)
 {
-	GameWindow *parent = peekWindow();
+	GameWindow* parent = peekWindow();
 	IRegion2D screenRegion;
 	ICoord2D createRes;  // creation resolution
-	char *seps = " ,:=\n\r\t";
-	char *c;
+	char* seps = " ,:=\n\r\t";
+	char* c;
 
-	c = strtok( NULL, seps );  // UPPERLEFT token
-	c = strtok( NULL, seps );  // x position
-	scanInt( c, screenRegion.lo.x );
-	c = strtok( NULL, seps );  // y posotion
-	scanInt( c, screenRegion.lo.y );
+	// Parse tokens for screenRegion and creation resolution
+	c = strtok(NULL, seps);  // UPPERLEFT token (ignored)
+	c = strtok(NULL, seps);  // x position
+	scanInt(c, screenRegion.lo.x);
+	c = strtok(NULL, seps);  // y position
+	scanInt(c, screenRegion.lo.y);
 
-	c = strtok( NULL, seps );  // BOTTOMRIGHT token
-	c = strtok( NULL, seps );  // x position
-	scanInt( c, screenRegion.hi.x );
-	c = strtok( NULL, seps );  // y posotion
-	scanInt( c, screenRegion.hi.y );
+	c = strtok(NULL, seps);  // BOTTOMRIGHT token (ignored)
+	c = strtok(NULL, seps);  // x position
+	scanInt(c, screenRegion.hi.x);
+	c = strtok(NULL, seps);  // y position
+	scanInt(c, screenRegion.hi.y);
 
-	c = strtok( NULL, seps );  // CREATIONRESOLUTION token
-	c = strtok( NULL, seps );  // x creation resolution
-	scanInt( c, createRes.x );
-	c = strtok( NULL, seps );  // y creation resolution
-	scanInt( c, createRes.y );
+	c = strtok(NULL, seps);  // CREATIONRESOLUTION token (ignored)
+	c = strtok(NULL, seps);  // x creation resolution
+	scanInt(c, createRes.x);
+	c = strtok(NULL, seps);  // y creation resolution
+	scanInt(c, createRes.y);
 
-	//
-	// shrink or expand the screen region by the ratio of the current
-	// resolution divided by the creation resolution
-	//
+	// Compute scale factors for x and y based on the creation resolution.
 	Real xScale = (Real)TheDisplay->getWidth() / (Real)createRes.x;
 	Real yScale = (Real)TheDisplay->getHeight() / (Real)createRes.y;
-	screenRegion.lo.x = (Int)((Real)screenRegion.lo.x * xScale);
-	screenRegion.lo.y = (Int)((Real)screenRegion.lo.y * yScale);
-	screenRegion.hi.x = (Int)((Real)screenRegion.hi.x * xScale);
-	screenRegion.hi.y = (Int)((Real)screenRegion.hi.y * yScale);
 
-	//
-	// given the screen region upper left compute the upper left that we
-	// will give this window, if we have a parent note that the position
-	// is relative to the parent client area, if no parent is present
-	// we're talking about the screen
-	//
-	if( parent )
+	// Use the smaller scale factor to maintain the UI's aspect ratio.
+	Real scale = (xScale < yScale) ? xScale : yScale;
+
+	// Compute offsets to center the UI within the display.
+	Real offsetX = ((Real)TheDisplay->getWidth() - (createRes.x * scale)) / 2.0f;
+	Real offsetY = ((Real)TheDisplay->getHeight() - (createRes.y * scale)) / 2.0f;
+
+	// Scale the screen region uniformly using the chosen scale factor.
+	screenRegion.lo.x = (Int)((Real)screenRegion.lo.x * scale);
+	screenRegion.lo.y = (Int)((Real)screenRegion.lo.y * scale);
+	screenRegion.hi.x = (Int)((Real)screenRegion.hi.x * scale);
+	screenRegion.hi.y = (Int)((Real)screenRegion.hi.y * scale);
+
+	// Adjust positions relative to the parent's screen position if one exists.
+	if (parent)
 	{
 		ICoord2D parentScreenPos;
-
-		// get parent position on screen
-		parent->winGetScreenPosition( &parentScreenPos.x, &parentScreenPos.y );
-
-		// save x and y with parent position as relative (0,0) location
-		*x = screenRegion.lo.x - parentScreenPos.x;
-		*y = screenRegion.lo.y - parentScreenPos.y;
-
-	}  // end if
+		parent->winGetScreenPosition(&parentScreenPos.x, &parentScreenPos.y);
+		*x = screenRegion.lo.x - parentScreenPos.x + (Int)offsetX;
+		*y = screenRegion.lo.y - parentScreenPos.y + (Int)offsetY;
+	}
 	else
 	{
+		*x = screenRegion.lo.x + (Int)offsetX;
+		*y = screenRegion.lo.y + (Int)offsetY;
+	}
 
-		*x = screenRegion.lo.x;
-		*y = screenRegion.lo.y;
-
-	}  // end else
-
-	// save our width and height from the adjusted screen region locations
+	// Set width and height from the scaled screen region.
 	*width = screenRegion.hi.x - screenRegion.lo.x;
 	*height = screenRegion.hi.y - screenRegion.lo.y;
 
 	return TRUE;
+}
 
-}  // end parseScreenRect
 
 // parseImageOffset ===========================================================
 /** Parse the image draw offset */

@@ -441,7 +441,7 @@ Int W3DDisplay::getDisplayModeCount(void)
 	for (int res = 0; res < resolutions.Count ();  res ++)
 	{
 		// Is this the resolution we are looking for?
-		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= 800 && (fabs((Real)resolutions[res].Width/(Real)resolutions[res].Height - 1.3333f)) < 0.01f)	//only accept 4:3 aspect ratio modes.
+		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= 1280)	//only accept 4:3 aspect ratio modes.
 		{	
 			numResolutions++;
 		}
@@ -459,7 +459,7 @@ void W3DDisplay::getDisplayModeDescription(Int modeIndex, Int *xres, Int *yres, 
 	for (int res = 0; res < resolutions.Count ();  res ++)
 	{
 		// Is this the resolution we are looking for?
-		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= 800 && (fabs((Real)resolutions[res].Width/(Real)resolutions[res].Height - 1.3333f)) < 0.01f)	//only accept 4:3 aspect ratio modes.
+		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= 1280)	//only accept 4:3 aspect ratio modes.
 		{	
 			if (numResolutions == modeIndex)
 			{	//found the mode

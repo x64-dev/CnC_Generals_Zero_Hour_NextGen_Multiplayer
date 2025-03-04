@@ -180,8 +180,8 @@ void ControlBarResizer::sizeWindowsAlt( void )
 {
 	ResizerWindowList::iterator it = m_resizerWindowsList.begin();
 	GameWindow *win = NULL;
-	Real x = (Real)TheDisplay->getWidth() / 800;
-	Real y = (Real)TheDisplay->getHeight() / 600;
+	Real x = (Real)TheDisplay->getWidth() / 1280;
+	Real y = (Real)TheDisplay->getHeight() / 1080;
 	while (it != m_resizerWindowsList.end())
 	{
 		ResizerWindow *rWin = *it;

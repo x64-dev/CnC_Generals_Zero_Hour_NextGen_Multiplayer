@@ -129,7 +129,7 @@ public:
 	ControlBarScheme( void );
 	~ControlBarScheme( void );
 	
-	void init( void );
+	void init( const ICoord2D &m_offset, const Coord2D &scale );
 	void update( void );
 	void drawForeground( Coord2D multi, ICoord2D offset );	///< draw function to be called within a w3d draw procedure for the foreground 
 	void drawBackground( Coord2D multi, ICoord2D offset );	///< draw function to be called within a w3d draw procedure for the background
@@ -258,6 +258,8 @@ public:
 	void setControlBarSchemeByPlayer(Player *p);																				///< Based off the playerTemplate, pick the right scheme for the control bar
 	void setControlBarSchemeByPlayerTemplate( const PlayerTemplate *pt, Bool useSmall = FALSE);
 	void setControlBarScheme(AsciiString schemeName);																										///< SchemeName must be a valid INI entry
+
+	void UpdateSchemeOffsets(ControlBarScheme* tempScheme);
 	
 	// parse Functions for the INI file
 	const FieldParse *getFieldParse() const { return m_controlBarSchemeFieldParseTable; }								///< returns the parsing fields
@@ -273,7 +275,8 @@ public:
 
 private:
 	ControlBarScheme *m_currentScheme;													///< the current scheme that everythign uses
-	Coord2D m_multiplyer;																	
+	Coord2D m_multiplyer;				
+	ICoord2D m_offset;
 	
 	typedef std::list< ControlBarScheme* > ControlBarSchemeList;			///< list of control bar schemes
 	ControlBarSchemeList m_schemeList;
