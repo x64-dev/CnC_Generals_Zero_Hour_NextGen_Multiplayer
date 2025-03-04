@@ -1221,7 +1221,7 @@ int Cftp::SendNewPort( void )
 
 int Cftp::OpenDataConnection()
 {
-	int iNewSocket;
+	SOCKET iNewSocket;
 
 	if( m_iDataSocket == 0 )
 	{
