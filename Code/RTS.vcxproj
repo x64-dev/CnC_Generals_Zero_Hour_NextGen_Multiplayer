@@ -725,6 +725,7 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
     <Library Include="Libraries\Source\GameSpy\bin\GP\Debug\usgp.lib" />
     <Library Include="Libraries\Source\GameSpy\bin\gstats\Debug\usstats.lib" />
     <Library Include="Libraries\Source\GameSpy\bin\gt2\Debug\usgt2.lib" />
+    <Library Include="Libraries\Source\GameSpy\bin\natneg\Debug\usnatneg.lib" />
     <Library Include="Libraries\Source\GameSpy\bin\Peer\Debug\uspeer.lib" />
     <Library Include="Libraries\Source\GameSpy\bin\pinger\Debug\uspinger.lib" />
     <Library Include="Libraries\Source\GameSpy\bin\pt\Debug\uspt.lib" />
