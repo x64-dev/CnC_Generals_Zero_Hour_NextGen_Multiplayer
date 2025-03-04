@@ -487,10 +487,6 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
       <Project>{4009b7d6-8f7f-472a-bb42-f73f599757ff}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="Tools\Launcher\launcher.vcxproj">
-      <Project>{03e354a5-4ed0-436d-8c8c-42e546118cca}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="Tools\ParticleEditor\ParticleEditor.vcxproj">
       <Project>{ed91cf2d-ff0b-4568-8dc8-9911a75646dc}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
