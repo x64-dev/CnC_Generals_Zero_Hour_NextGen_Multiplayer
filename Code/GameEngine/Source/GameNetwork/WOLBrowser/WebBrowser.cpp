@@ -72,7 +72,7 @@ public:
 OLEInitializer g_OLEInitializer;
 CComModule _Module;
 
-CComObject<WebBrowser> * TheWebBrowser = NULL;
+WebBrowser * TheWebBrowser = NULL;
 
 
 /******************************************************************************
@@ -221,95 +221,4 @@ WebBrowserURL * WebBrowser::makeNewURL(AsciiString tag)
 	m_urlList = newURL;
 
 	return newURL;
-}
-
-/******************************************************************************
-*
-* NAME
-*     IUnknown::QueryInterface
-*
-* DESCRIPTION
-*
-* INPUTS
-*     IID - Interface ID
-*
-* RESULT
-*
-******************************************************************************/
-
-STDMETHODIMP WebBrowser::QueryInterface(REFIID iid, void** ppv)
-{
-	*ppv = NULL;
-
-	if ((iid == IID_IUnknown) || (iid == IID_IBrowserDispatch))
-	{
-		*ppv = static_cast<IBrowserDispatch*>(this);
-	}
-	else
-	{
-		return E_NOINTERFACE;
-	}
-
-	static_cast<IUnknown*>(*ppv)->AddRef();
-
-	return S_OK;
-}
-
-
-/******************************************************************************
-*
-* NAME
-*     IUnknown::AddRef
-*
-* DESCRIPTION
-*
-* INPUTS
-*     NONE
-*
-* RESULT
-*
-******************************************************************************/
-
-ULONG STDMETHODCALLTYPE WebBrowser::AddRef(void)
-{
-	return ++mRefCount;
-}
-
-
-/******************************************************************************
-*
-* NAME
-*     IUnknown::Release
-*
-* DESCRIPTION
-*
-* INPUTS
-*     NONE
-*
-* RESULT
-*
-******************************************************************************/
-
-ULONG STDMETHODCALLTYPE WebBrowser::Release(void)
-{
-	DEBUG_ASSERTCRASH(mRefCount > 0, ("Negative reference count"));
-	--mRefCount;
-
-	if (mRefCount == 0)
-	{
-		DEBUG_LOG(("WebBrowser::Release - all references released, deleting the object.\n"));
-		if (this == TheWebBrowser) {
-			TheWebBrowser = NULL;
-		}
-		delete this;
-		return 0;
-	}
-
-	return mRefCount;
-}
-
-STDMETHODIMP WebBrowser::TestMethod(Int num1) 
-{
-	DEBUG_LOG(("WebBrowser::TestMethod - num1 = %d\n", num1));
-	return S_OK;
 }

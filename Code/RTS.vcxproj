@@ -447,10 +447,6 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
       <Project>{72a36dc7-8fe2-439a-a503-f220901cc311}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="Libraries\Source\EABrowserDispatch\EABrowserDispatch.vcxproj">
-      <Project>{60f187a6-9f0a-4867-9098-a9686d0e831e}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="Libraries\Source\WWVegas\WW3D2\ww3d2.vcxproj">
       <Project>{f7415afa-ee56-48f9-a42b-3101d93675f6}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -469,19 +465,9 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
     </ProjectReference>
     <ProjectReference Include="Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
       <Project>{034e07ef-9c39-4a94-9bc9-e19b18996951}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
       <Project>{86908043-4887-4a76-8da4-3350e9932e32}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Libraries\Source\WWVegas\Wwutil\wwutil.vcxproj">
-      <Project>{bb333cd2-42e0-4787-8c7f-1add61daf031}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Tools\buildVersionUpdate\buildVersionUpdate.vcxproj">
-      <Project>{578b769b-5e19-4929-b943-2e7d2c878615}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="Tools\DebugWindow\DebugWindow.vcxproj">
       <Project>{4009b7d6-8f7f-472a-bb42-f73f599757ff}</Project>
@@ -489,10 +475,6 @@ $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
     </ProjectReference>
     <ProjectReference Include="Tools\ParticleEditor\ParticleEditor.vcxproj">
       <Project>{ed91cf2d-ff0b-4568-8dc8-9911a75646dc}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="Tools\versionUpdate\versionUpdate.vcxproj">
-      <Project>{83fcc1e0-e231-4c1e-a545-451f7131cebf}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

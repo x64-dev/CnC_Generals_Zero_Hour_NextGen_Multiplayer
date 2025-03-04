@@ -49,7 +49,7 @@
 #include <atlbase.h>
 #include <windows.h>
 #include <Common/GameMemory.h>
-#include "EABrowserDispatch/BrowserDispatch.h"
+//#include "EABrowserDispatch/BrowserDispatch.h"
 #include "FEBDispatch.h"
 
 class GameWindow;
@@ -77,7 +77,6 @@ public:
 
 
 class WebBrowser :
-		public FEBDispatch<WebBrowser, IBrowserDispatch, &IID_IBrowserDispatch>,
 		public SubsystemInterface
 	{
 	public:
@@ -107,21 +106,7 @@ class WebBrowser :
 	protected:
 		ULONG mRefCount;
 		WebBrowserURL *m_urlList;
-
-	//---------------------------------------------------------------------------
-	// IUnknown methods
-	//---------------------------------------------------------------------------
-	protected:
-		HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppvObject);
-		ULONG STDMETHODCALLTYPE AddRef(void);
-		ULONG STDMETHODCALLTYPE Release(void);
-
-	//---------------------------------------------------------------------------
-	// IBrowserDispatch methods
-	//---------------------------------------------------------------------------
-	public:
-		STDMETHOD(TestMethod)(Int num1);
 	};
 
-extern CComObject<WebBrowser> *TheWebBrowser;
+extern WebBrowser *TheWebBrowser;
 #endif // __WEBBROWSER_H__

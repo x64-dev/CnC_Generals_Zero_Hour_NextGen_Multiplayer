@@ -40,31 +40,7 @@ W3DWebBrowser::W3DWebBrowser() : WebBrowser() {
 
 Bool W3DWebBrowser::createBrowserWindow(char *tag, GameWindow *win) 
 {
-
-	WinInstanceData *winData = win->winGetInstanceData();
-	AsciiString windowName = winData->m_decoratedNameString;
-
-	Int x, y, w, h;
-
-	win->winGetSize(&w, &h);
-	win->winGetScreenPosition(&x, &y);
-
-	WebBrowserURL *url = findURL( AsciiString(tag) );
-
-	if (url == NULL) {
-		DEBUG_LOG(("W3DWebBrowser::createBrowserWindow - couldn't find URL for page %s\n", tag));
-		return FALSE;
-	}
-
-	CComQIPtr<IDispatch> idisp(m_dispatch);
-	if (m_dispatch == NULL)
-	{
-		return FALSE;
-	}
-
-	DX8WebBrowser::CreateBrowser(windowName.str(), url->m_url.str(), x, y, w, h, 0, BROWSEROPTION_SCROLLBARS | BROWSEROPTION_3DBORDER, (LPDISPATCH)this);
-
-	return TRUE;
+	return FALSE;
 }
 
 void W3DWebBrowser::closeBrowserWindow(GameWindow *win) 

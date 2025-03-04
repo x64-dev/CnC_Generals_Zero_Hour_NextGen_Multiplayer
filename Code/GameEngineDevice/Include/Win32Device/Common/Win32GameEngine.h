@@ -103,6 +103,6 @@ inline ParticleSystemManager* Win32GameEngine::createParticleSystemManager( void
 
 inline NetworkInterface *Win32GameEngine::createNetwork( void ) { return NetworkInterface::createNetwork(); }
 inline Radar *Win32GameEngine::createRadar( void ) { return NEW W3DRadar; }
-inline WebBrowser *Win32GameEngine::createWebBrowser( void ) { return NEW CComObject<W3DWebBrowser>; }
+inline WebBrowser* Win32GameEngine::createWebBrowser(void) { return nullptr; }
  
 #endif  // end __WIN32GAMEENGINE_H_
