@@ -92,8 +92,7 @@ public:
 	** distance from the camera to the z clipping planes.  See implementations for more info.
 	*/
 	WWINLINE void		Init_Ortho(float left,float right,float bottom,float top,float znear,float zfar);
-	WWINLINE void		Init_Perspective(float hfov,float vfov,float znear,float zfar);
-	WWINLINE void		Init_Perspective(float left,float right,float bottom,float top,float znear,float zfar);
+	WWINLINE void		Init_Perspective(float fovY, float aspect, float znear, float zfar, float not_used);
 
 	/*
 	** Access operators
@@ -356,102 +355,23 @@ WWINLINE void Matrix4::Init_Ortho
 	Row[2][3] = -(zfar + znear) / (zfar - znear);
 }
 
-
-/***********************************************************************************************
- * Matrix4::Init_Perspective -- Initialize to a perspective projection matrix                  *
- *                                                                                             *
- * You can find the formulas for this matrix in the appendix of the OpenGL programming guide.  *
- * Also, this happens to be the same convention used by Surrender.                             *
- *                                                                                             *
- * The result of this projection will be that points inside the volume will have all coords    *
- * between -1 and +1.  A point at znear will project to z=-1.  A point at zfar will project    *
- * to z=+1...                                                                                  *
- *                                                                                             *
- * INPUT:                                                                                      *
- * hfov - horizontal field of view (in radians)                                                *
- * vfov - vertical field of view (in radians)                                                  *
- * znear - distance to near z clipping plane (positive)                                        *
- * zfar - distance to the far z clipping plane (positive)                                      *
- *                                                                                             *
- * OUTPUT:                                                                                     *
- *                                                                                             *
- * WARNINGS:                                                                                   *
- * Note that the znear and zfar parameters are positive distances to the clipping planes       *
- * even though in the camera coordinate system, the clipping planes are at negative z          *
- * coordinates.  This holds for all of the projection initializations and is consistent        *
- * with OpenGL's convention.                                                                   *
- *                                                                                             *
- * HISTORY:                                                                                    *
- *   11/5/99    gth : Created.                                                                 *
- *=============================================================================================*/
-WWINLINE void Matrix4::Init_Perspective(float hfov,float vfov,float znear,float zfar)
-{
-	assert(znear > 0.0f);
-	assert(zfar > znear);
-
-	Make_Identity();
-	Row[0][0] = static_cast<float>(1.0 / tan(hfov*0.5));
-	Row[1][1] = static_cast<float>(1.0 / tan(vfov*0.5));
-	Row[2][2] = -(zfar + znear) / (zfar - znear);
-	Row[2][3] = static_cast<float>(-(2.0*zfar*znear) / (zfar - znear));
-	Row[3][2] = -1.0f;
-	Row[3][3] = 0.0f;
-}
-
-
-/***********************************************************************************************
- * Matrix4::Init_Perspective -- Initialize to a perspective projection matrix                  *
- *                                                                                             *
- * You can find the formulas for this matrix in the appendix of the OpenGL programming guide.  *
- * Also, this happens to be the same convention used by Surrender.                             *
- *                                                                                             *
- * The result of this projection will be that points inside the volume will have all coords    *
- * between -1 and +1.  A point at znear will project to z=-1.  A point at zfar will project    *
- * to z=+1...                                                                                  *
- *                                                                                             *
- * INPUT:                                                                                      *
- *                                                                                             *
- * left - min x coordinate of near clip plane                                                  *
- * right - max x coordinate of near clip plane                                                 *
- * bottom - min y coordinate of near clip plane                                                *
- * top - max y coordinate of near clip plane                                                   *
- * znear - distance to near Z clipping plane                                                   *
- * zfar - distance to far Z clipping plane                                                     *
- *                                                                                             *
- * OUTPUT:                                                                                     *
- *                                                                                             *
- * WARNINGS:                                                                                   *
- * Note that the znear and zfar parameters are positive distances to the clipping planes       *
- * even though in the camera coordinate system, the clipping planes are at negative z          *
- * coordinates.  This holds for all of the projection initializations and is consistent        *
- * with OpenGL's convention.                                                                   *
- *                                                                                             *
- * HISTORY:                                                                                    *
- *   11/5/99    gth : Created.                                                                 *
- *=============================================================================================*/
-WWINLINE void Matrix4::Init_Perspective
-(
-	float left,
-	float right,
-	float bottom,
-	float top,
-	float znear,
-	float zfar
-)
+WWINLINE void Matrix4::Init_Perspective(float fovY, float aspect, float znear, float zfar, float not_used)
 {
 	assert(znear > 0.0f);
 	assert(zfar > 0.0f);
+	assert(aspect > 0.0f);
+
+	float tanHalfFovy = tanf(fovY * 0.5f); // Precompute tan(FOV/2)
 
 	Make_Identity();
-	Row[0][0] = static_cast<float>(2.0*znear / (right - left));
-	Row[0][2] = (right + left) / (right - left);
-	Row[1][1] = static_cast<float>(2.0*znear / (top - bottom));
-	Row[1][2] = (top + bottom) / (top - bottom);
+	Row[0][0] = 1.0f / (aspect * tanHalfFovy);
+	Row[1][1] = 1.0f / tanHalfFovy;
 	Row[2][2] = -(zfar + znear) / (zfar - znear);
-	Row[2][3] = static_cast<float>(-(2.0*zfar*znear) / (zfar - znear));
+	Row[2][3] = -(2.0f * zfar * znear) / (zfar - znear);
 	Row[3][2] = -1.0f;
 	Row[3][3] = 0.0f;
 }
+
 
 /*********************************************************************************************** 
  * Matrix4::Transpose -- Returns transpose of the matrix                                       * 

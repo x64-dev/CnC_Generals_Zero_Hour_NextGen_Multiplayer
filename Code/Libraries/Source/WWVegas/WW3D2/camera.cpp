@@ -630,10 +630,17 @@ void CameraClass::Update_Frustum(void) const
 
 	// Update the projection matrix
 	if (Projection == PERSPECTIVE) {
+		int res_width;
+		int res_height;
+		int res_bits;
+		bool windowed;
 
-		ProjectionTransform.Init_Perspective(	vpmin.X*znear_dist, vpmax.X*znear_dist,
-															vpmin.Y*znear_dist, vpmax.Y*znear_dist,
-															znear_dist, zfar_dist );
+		WW3D::Get_Render_Target_Resolution(res_width, res_height, res_bits, windowed);
+
+		float fovY = 30.0f * (M_PI / 180.0f);
+		float aspect = (float)res_width / (float)res_height;
+
+		ProjectionTransform.Init_Perspective(fovY, aspect, znear_dist, zfar_dist, 0.0f );
 
 	} else {
 		

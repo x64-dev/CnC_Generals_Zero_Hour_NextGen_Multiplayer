@@ -148,7 +148,20 @@ const Matrix3D & ProjectorClass::Get_Transform(void) const
 void ProjectorClass::Set_Perspective_Projection(float hfov,float vfov,float znear,float zfar)
 {
 	Mapper->Set_Type(MatrixMapperClass::PERSPECTIVE_PROJECTION);
-	Projection.Init_Perspective(hfov,vfov,0.1f,zfar);					// don't use znear for the projection matrix
+
+	{
+		int res_width;
+		int res_height;
+		int res_bits;
+		bool windowed;
+
+		WW3D::Get_Render_Target_Resolution(res_width, res_height, res_bits, windowed);
+
+		float fovY = 30.0f * (M_PI / 180.0f);
+		float aspect = (float)res_width / (float)res_height;
+
+		Projection.Init_Perspective(fovY, aspect, 0.1f, zfar, 0.0f);
+	}	
 	
 	float tan_hfov2 = tan(hfov) * 0.5f;
 	float tan_vfov2 = tan(vfov) * 0.5f;
