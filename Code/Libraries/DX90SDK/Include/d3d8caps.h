@@ -17,9 +17,7 @@
 // include this file content only if compiling for DX8 interfaces
 #if(DIRECT3D_VERSION >= 0x0800)
 
-#if defined(_X86_) || defined(_IA64_)
 #pragma pack(4)
-#endif
 
 typedef struct _D3DCAPS8
 {
