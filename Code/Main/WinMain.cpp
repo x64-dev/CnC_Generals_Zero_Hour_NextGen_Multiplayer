@@ -1046,3 +1046,71 @@ GameEngine *CreateGameEngine( void )
 	return engine;
 
 }  // end CreateGameEngine
+
+
+// ***************************************************************
+// VERY EVIL HACK - I'M SORRY!
+// This is necessary to link with the d3dx8.lib
+// ***************************************************************
+
+extern "C" void* __cdecl my_custom_alloc2(unsigned __int64 size) {
+	return malloc(size);
+}
+
+extern "C" void __cdecl my_custom_free3(void* ptr) {
+	free(ptr);
+}
+
+// Vector constructor iterator
+extern "C" void __cdecl vdi2(
+    void* array,           // Pointer to the array memory
+    unsigned __int64 size, // Size of each element
+    int count,             // Number of elements
+    void (__cdecl *constructor)(void*),  // Constructor function
+    void (__cdecl *destructor)(void*)    // Destructor function
+) {
+    char* ptr = reinterpret_cast<char*>(array);
+    
+    try {
+        // Construct each element in the array
+        for (int i = 0; i < count; ++i) {
+            constructor(ptr);
+            ptr += size;
+        }
+    }
+    catch (...) {
+        // If an exception occurs during construction, destroy all elements that were successfully constructed
+        char* cleanup_ptr = reinterpret_cast<char*>(array);
+        for (char* p = cleanup_ptr; p < ptr; p += size) {
+            destructor(p);
+        }
+        // Re-throw the exception
+        throw;
+    }
+}
+
+// Vector destructor iterator
+extern "C" void __cdecl vdi3(
+    void* array,           // Pointer to the array memory
+    unsigned __int64 size, // Size of each element
+    int count,             // Number of elements
+    void (__cdecl *destructor)(void*)  // Destructor function
+) {
+    char* ptr = reinterpret_cast<char*>(array);
+    
+    // Destroy elements in reverse order (to match standard C++ behavior)
+    ptr += size * (count - 1);
+    
+    for (int i = 0; i < count; ++i) {
+        destructor(ptr);
+        ptr -= size;
+    }
+}
+
+// Force the linker to alias our function to the desired mangled name
+#pragma comment(linker, "/alternatename:??2@YAPAX_K@Z=my_custom_alloc2")
+#pragma comment(linker, "/alternatename:??3@YAXPAX@Z=my_custom_free3")
+#pragma comment(linker, "/alternatename:??_L@YAXPAX_KHP6AX0@Z2@Z=vdi2")
+#pragma comment(linker, "/alternatename:??_M@YAXPAX_KHP6AX0@Z@Z=vdi3")
+
+// ***************************************************************
