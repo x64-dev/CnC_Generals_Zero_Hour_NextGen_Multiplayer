@@ -39,9 +39,15 @@
 //*****************************************************************************
 BOOL InitSymbolInfo(void);
 void UninitSymbolInfo(void);
+#ifdef _WIN64
+void MakeStackTrace(DWORD64 myeip, DWORD64 myesp, DWORD64 myebp, int skipFrames, void (*callback)(const char*));
+void GetFunctionDetails(void* pointer, char* name, char* filename, unsigned int* linenumber, unsigned int* address);
+void WriteStackLine(void* address, void (*callback)(const char*));
+#else
 void MakeStackTrace(DWORD myeip,DWORD myesp,DWORD myebp, int skipFrames, void (*callback)(const char*));
 void GetFunctionDetails(void *pointer, char*name, char*filename, unsigned int* linenumber, unsigned int* address);
 void WriteStackLine(void*address, void (*callback)(const char*));
+#endif
 
 //*****************************************************************************
 //	Mis-named globals :-)
@@ -49,13 +55,21 @@ void WriteStackLine(void*address, void (*callback)(const char*));
 static CONTEXT gsContext;
 static Bool gsInit=FALSE;
 
+#ifdef _WIN64
+BOOL(__stdcall* gsSymGetLineFromAddr)(
+		IN  HANDLE                  hProcess,
+		IN  DWORD64                 dwAddr,
+		OUT PDWORD64                pdwDisplacement,
+		OUT PIMAGEHLP_LINE64        Line
+		);
+#else
 BOOL (__stdcall *gsSymGetLineFromAddr)(
 		IN  HANDLE                  hProcess,
 		IN  DWORD                   dwAddr,
 		OUT PDWORD                  pdwDisplacement,
 		OUT PIMAGEHLP_LINE          Line
 			);
-
+#endif
 
 //*****************************************************************************
 //*****************************************************************************
@@ -76,6 +90,14 @@ void StackDump(void (*callback)(const char*))
 
 	InitSymbolInfo();
 
+#ifdef _WIN64
+	DWORD64 myeip, myesp, myebp;
+	// Use CaptureStackBackTrace for x64.  Inline assembly isn't allowed.
+	// We'll get the context from within MakeStackTrace.
+	myeip = 0;
+	myesp = 0;
+	myebp = 0;
+#else
 	DWORD myeip,myesp,myebp;
 
 _asm
@@ -88,6 +110,7 @@ MYEIP1:
  mov eax, ebp
  mov dword ptr [myebp] , eax
 }
+#endif
 
 
 	MakeStackTrace(myeip,myesp,myebp, 2, callback);
@@ -96,7 +119,11 @@ MYEIP1:
 
 //*****************************************************************************
 //*****************************************************************************
-void StackDumpFromContext(DWORD eip,DWORD esp,DWORD ebp, void (*callback)(const char*))
+#ifdef _WIN64
+void StackDumpFromContext(DWORD64 eip, DWORD64 esp, DWORD64 ebp, void (*callback)(const char*))
+#else
+void StackDumpFromContext(DWORD eip, DWORD esp, DWORD ebp, void (*callback)(const char*))
+#endif
 {
 	if (callback == NULL) 
 	{
@@ -124,8 +151,13 @@ BOOL InitSymbolInfo()
 	// We use GetProcAddress to stop link failures at dll loadup
 	HINSTANCE hInstDebugHlp = GetModuleHandle("dbghelp.dll");
 
-	gsSymGetLineFromAddr = (BOOL (__stdcall *)(	IN  HANDLE,IN  DWORD,OUT PDWORD,OUT PIMAGEHLP_LINE))
-							GetProcAddress(hInstDebugHlp , "SymGetLineFromAddr");
+#ifdef _WIN64
+	gsSymGetLineFromAddr = (BOOL(__stdcall*)(IN HANDLE, IN DWORD64, OUT PDWORD64, OUT PIMAGEHLP_LINE64))
+		GetProcAddress(hInstDebugHlp, "SymGetLineFromAddr64");
+#else
+	gsSymGetLineFromAddr = (BOOL(__stdcall*)(IN HANDLE, IN DWORD, OUT PDWORD, OUT PIMAGEHLP_LINE))
+		GetProcAddress(hInstDebugHlp, "SymGetLineFromAddr");
+#endif
 
 	char pathname[_MAX_PATH+1];
 	char drive[10];
@@ -151,7 +183,11 @@ BOOL InitSymbolInfo()
 	{
 		// regenerate the name of the app
 		::GetModuleFileName(NULL, pathname, _MAX_PATH);
-		if(::SymLoadModule(process, NULL, pathname, NULL, 0, 0))
+#ifdef _WIN64
+		if (::SymLoadModule64(process, NULL, pathname, NULL, 0, 0)) // Use SymLoadModule64
+#else
+		if (::SymLoadModule(process, NULL, pathname, NULL, 0, 0))
+#endif
 		{
 				//Load any other relevant modules (ie dlls) here
 				return TRUE;
@@ -181,6 +217,68 @@ void UninitSymbolInfo(void)
 
 //*****************************************************************************
 //*****************************************************************************
+#ifdef _WIN64
+void MakeStackTrace(DWORD64 myeip, DWORD64 myesp, DWORD64 myebp, int skipFrames, void (*callback)(const char*))
+{
+	STACKFRAME64      stack_frame;
+	BOOL            b_ret = TRUE;
+
+	HANDLE thread = GetCurrentThread();
+	HANDLE process = GetCurrentProcess();
+
+	memset(&gsContext, 0, sizeof(CONTEXT));
+	gsContext.ContextFlags = CONTEXT_FULL;
+	RtlCaptureContext(&gsContext);
+
+	memset(&stack_frame, 0, sizeof(STACKFRAME64));
+	stack_frame.AddrPC.Mode = AddrModeFlat;
+	stack_frame.AddrPC.Offset = gsContext.Rip;
+	stack_frame.AddrStack.Mode = AddrModeFlat;
+	stack_frame.AddrStack.Offset = gsContext.Rsp;
+	stack_frame.AddrFrame.Mode = AddrModeFlat;
+	stack_frame.AddrFrame.Offset = gsContext.Rbp;
+	{
+		callback("Call Stack\n**********\n");
+
+		// Skip some ?
+		unsigned int skip = skipFrames;
+		DWORD machine_type = IMAGE_FILE_MACHINE_AMD64;
+		while (b_ret && skip)
+		{
+			b_ret = StackWalk64(machine_type,
+				process,
+				thread,
+				&stack_frame,
+				&gsContext,
+				NULL,
+				SymFunctionTableAccess64,
+				SymGetModuleBase64,
+				NULL);
+			skip--;
+		}
+
+		skip = 30;
+		while (b_ret && skip)
+		{
+
+			b_ret = StackWalk64(machine_type,
+				process,
+				thread,
+				&stack_frame,
+				&gsContext,
+				NULL,
+				SymFunctionTableAccess64,
+				SymGetModuleBase64,
+				NULL);
+
+
+
+			if (b_ret) WriteStackLine((void*)stack_frame.AddrPC.Offset, callback);
+			skip--;
+		}
+	}
+}
+#else
 void MakeStackTrace(DWORD myeip,DWORD myesp,DWORD myebp, int skipFrames, void (*callback)(const char*))
 {
 STACKFRAME      stack_frame;
@@ -252,6 +350,7 @@ stack_frame.AddrFrame.Offset = myebp;
 			}
 	}
 }
+#endif
 
 
 //*****************************************************************************
@@ -276,10 +375,24 @@ void GetFunctionDetails(void *pointer, char*name, char*filename, unsigned int* l
 		*address = 0xFFFFFFFF;
 	}
 
+#ifdef _WIN64
+	DWORD64 displacement = 0;
+#else
 	ULONG displacement = 0;
+#endif
 
     HANDLE process = ::GetCurrentProcess();
 
+#ifdef _WIN64
+	char symbol_buffer[512 + sizeof(IMAGEHLP_SYMBOL64)];
+	memset(symbol_buffer, 0, sizeof(symbol_buffer));
+
+	PIMAGEHLP_SYMBOL64 psymbol = (PIMAGEHLP_SYMBOL64)symbol_buffer;
+	psymbol->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+	psymbol->MaxNameLength = 512;
+
+	if (SymGetSymFromAddr64(process, (DWORD64)pointer, &displacement, psymbol))
+#else
     char symbol_buffer[512 + sizeof(IMAGEHLP_SYMBOL)];
     memset(symbol_buffer, 0, sizeof(symbol_buffer));
 
@@ -288,6 +401,7 @@ void GetFunctionDetails(void *pointer, char*name, char*filename, unsigned int* l
     psymbol->MaxNameLength = 512;
 
     if (SymGetSymFromAddr(process, (DWORD) pointer, &displacement, psymbol))
+#endif
     {
 		if (name)
 		{
@@ -300,12 +414,21 @@ void GetFunctionDetails(void *pointer, char*name, char*filename, unsigned int* l
 		{
 			// Unsupported for win95/98 at least with my current dbghelp.dll
 
+#ifdef _WIN64
+			IMAGEHLP_LINE64 line; // Use IMAGEHLP_LINE64
+			memset(&line, 0, sizeof(line));
+			line.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
+
+
+			if (gsSymGetLineFromAddr(process, (DWORD64)pointer, &displacement, &line)) // Use DWORD64
+#else
 			IMAGEHLP_LINE line;
 			memset(&line,0,sizeof(line));
 			line.SizeOfStruct = sizeof(line);
 
 		
 			if (gsSymGetLineFromAddr(process, (DWORD) pointer, &displacement, &line))
+#endif
 			{
 				if (filename)
 				{
@@ -328,6 +451,78 @@ void GetFunctionDetails(void *pointer, char*name, char*filename, unsigned int* l
 //*****************************************************************************
 // Gets last x addresses from the stack
 //*****************************************************************************
+#ifdef _WIN64
+void FillStackAddresses(void** addresses, unsigned int count, unsigned int skip)
+{
+	InitSymbolInfo();
+
+	STACKFRAME64	stack_frame;
+
+
+	HANDLE thread = GetCurrentThread();
+	HANDLE process = GetCurrentProcess();
+
+	memset(&gsContext, 0, sizeof(CONTEXT));
+	gsContext.ContextFlags = CONTEXT_FULL;
+	RtlCaptureContext(&gsContext);
+
+	memset(&stack_frame, 0, sizeof(STACKFRAME64));
+	stack_frame.AddrPC.Mode = AddrModeFlat;
+	stack_frame.AddrPC.Offset = gsContext.Rip;
+	stack_frame.AddrStack.Mode = AddrModeFlat;
+	stack_frame.AddrStack.Offset = gsContext.Rsp;
+	stack_frame.AddrFrame.Mode = AddrModeFlat;
+	stack_frame.AddrFrame.Offset = gsContext.Rbp;
+
+	{
+		Bool stillgoing = TRUE;
+		//	unsigned int cd = count;
+		DWORD machine_type = IMAGE_FILE_MACHINE_AMD64;
+		// Skip some?
+		while (stillgoing && skip)
+		{
+			stillgoing = StackWalk64(machine_type,
+				process,
+				thread,
+				&stack_frame,
+				&gsContext,
+				NULL,
+				SymFunctionTableAccess64,
+				SymGetModuleBase64,
+				NULL) != 0;
+			skip--;
+		}
+
+		while (stillgoing && count)
+		{
+			stillgoing = StackWalk64(machine_type,
+				process,
+				thread,
+				&stack_frame,
+				&gsContext,
+				NULL,
+				SymFunctionTableAccess64,
+				SymGetModuleBase64,
+				NULL) != 0;
+			if (stillgoing)
+			{
+				*addresses = (void*)stack_frame.AddrPC.Offset;
+				addresses++;
+				count--;
+			}
+		}
+
+		// Fill remainder
+		while (count)
+		{
+			*addresses = NULL;
+			addresses++;
+			count--;
+		}
+
+	}
+}
+#else
 void FillStackAddresses(void**addresses, unsigned int count, unsigned int skip)
 {
 	InitSymbolInfo();
@@ -427,6 +622,7 @@ stack_frame.AddrFrame.Offset = myebp;
 	}
 */	
 }
+#endif
 
 
 
@@ -462,7 +658,11 @@ void WriteStackLine(void*address, void (*callback)(const char*))
 	unsigned int addr;
 
 	GetFunctionDetails(address, function_name, filename, &linenumber, &addr);
-    sprintf(line, "  %s(%d) : %s 0x%08p", filename, linenumber, function_name, address);
+#ifdef _WIN64
+	sprintf(line, "  %s(%d) : %s 0x%016llx", filename, linenumber, function_name, (unsigned long long)address);
+#else
+	sprintf(line, "  %s(%d) : %s 0x%08p", filename, linenumber, function_name, address);
+#endif
 		if (g_LastErrorDump.isNotEmpty()) {
 			g_LastErrorDump.concat(line);
 			g_LastErrorDump.concat("\n");
@@ -554,7 +754,11 @@ void DumpExceptionInfo( unsigned int u, EXCEPTION_POINTERS* e_info )
 	{
 		DOUBLE_DEBUG (("Exception code is %x\n", e_info->ExceptionRecord->ExceptionCode));
 	}
-	Int *winMainAddr = (Int *)WinMain;
+#ifdef _WIN64
+	ULONG_PTR* winMainAddr = (ULONG_PTR*)WinMain;
+#else
+	Int* winMainAddr = (Int*)WinMain;
+#endif
 	DOUBLE_DEBUG(("WinMain at %x\n", winMainAddr));
 	/*
 	** Match the exception type with the error string and print it out
@@ -583,7 +787,11 @@ void DumpExceptionInfo( unsigned int u, EXCEPTION_POINTERS* e_info )
 	}
 
 	DOUBLE_DEBUG (("\nStack Dump:\n"));
-	StackDumpFromContext(context->Eip, context->Esp, context->Ebp, NULL);
+#ifdef _WIN64
+    StackDumpFromContext(context->Rip, context->Rsp, context->Rbp, NULL);
+#else
+    StackDumpFromContext(context->Eip, context->Esp, context->Ebp, NULL);
+#endif
 
 	DOUBLE_DEBUG (("\nDetails:\n"));
 
@@ -592,34 +800,47 @@ void DumpExceptionInfo( unsigned int u, EXCEPTION_POINTERS* e_info )
 	/*
 	** Dump the registers.
 	*/
-	DOUBLE_DEBUG ( ( "Eip:%08X\tEsp:%08X\tEbp:%08X\n", context->Eip, context->Esp, context->Ebp));
-	DOUBLE_DEBUG ( ( "Eax:%08X\tEbx:%08X\tEcx:%08X\n", context->Eax, context->Ebx, context->Ecx));
-	DOUBLE_DEBUG ( ( "Edx:%08X\tEsi:%08X\tEdi:%08X\n", context->Edx, context->Esi, context->Edi));
-	DOUBLE_DEBUG ( ( "EFlags:%08X \n", context->EFlags));
-	DOUBLE_DEBUG ( ( "CS:%04x  SS:%04x  DS:%04x  ES:%04x  FS:%04x  GS:%04x\n", context->SegCs, context->SegSs, context->SegDs, context->SegEs, context->SegFs, context->SegGs));
+#ifdef _WIN64
+    DOUBLE_DEBUG(("Rip:%016llX\tRsp:%016llX\tRbp:%016llX\n", context->Rip, context->Rsp, context->Rbp));
+    DOUBLE_DEBUG(("Rax:%016llX\tRbx:%016llX\tRcx:%016llX\n", context->Rax, context->Rbx, context->Rcx));
+    DOUBLE_DEBUG(("Rdx:%016llX\tRsi:%016llX\tRdi:%016llX\n", context->Rdx, context->Rsi, context->Rdi));
+    DOUBLE_DEBUG(("R8 :%016llX\tR9 :%016llX\tR10:%016llX\n", context->R8, context->R9, context->R10));
+    DOUBLE_DEBUG(("R11:%016llX\tR12:%016llX\tR13:%016llX\n", context->R11, context->R12, context->R13));
+    DOUBLE_DEBUG(("R14:%016llX\tR15:%016llX\tEFlags:%08X\n", context->R14, context->R15, context->EFlags));
+#else
+    DOUBLE_DEBUG(("Eip:%08X\tEsp:%08X\tEbp:%08X\n", context->Eip, context->Esp, context->Ebp));
+    DOUBLE_DEBUG(("Eax:%08X\tEbx:%08X\tEcx:%08X\n", context->Eax, context->Ebx, context->Ecx));
+    DOUBLE_DEBUG(("Edx:%08X\tEsi:%08X\tEdi:%08X\n", context->Edx, context->Esi, context->Edi));
+    DOUBLE_DEBUG(("EFlags:%08X\n", context->EFlags));
+#endif
 
 	/*
 	** Dump the bytes at EIP. This will make it easier to match the crash address with later versions of the game.
 	*/
 	char scrap[512];
 	DOUBLE_DEBUG ( ("EIP bytes dump...\n"));
-	wsprintf (scrap, "\nBytes at CS:EIP (%08X)  : ", context->Eip);
+#ifdef _WIN64
+	wsprintf(scrap, "\nBytes at CS:RIP (%p)  : ", (void*)context->Rip);
+	unsigned char* ip_ptr = (unsigned char*)(context->Rip);
+#else
+	wsprintf(scrap, "\nBytes at CS:EIP (%08X)  : ", context->Eip);
+	unsigned char* ip_ptr = (unsigned char*)(context->Eip);
+#endif
 
-	unsigned char *eip_ptr = (unsigned char *) (context->Eip);
 	char bytestr[32];
 
 	for (int c = 0 ; c < 32 ; c++)
 	{
-		if (IsBadReadPtr(eip_ptr, 1))
+		if (IsBadReadPtr(ip_ptr, 1))
 		{
 			lstrcat (scrap, "?? ");
 		}
 		else
 		{
-			sprintf (bytestr, "%02X ", *eip_ptr);
+			sprintf (bytestr, "%02X ", *ip_ptr);
 			strcat (scrap, bytestr);
 		}
-		eip_ptr++;
+		ip_ptr++;
 	}
 
 	strcat (scrap, "\n");
