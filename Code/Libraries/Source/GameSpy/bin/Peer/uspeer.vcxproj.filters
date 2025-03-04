@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerAutoMatch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerCallbacks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerGlobalCallbacks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerHost.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerKeys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerMain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerMangle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerOperations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerPing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerPlayers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerQR.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerRooms.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerSB.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerAscii.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerAutoMatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerCallbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerGlobalCallbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerHost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerKeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerMangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerOperations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerPing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerPlayers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerQR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerRooms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\peerSB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Peer\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{10AFAB7C-30A2-36D0-B2CE-114F3DEB8BF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{537BE621-0C3D-3D87-872A-C224E84AB360}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

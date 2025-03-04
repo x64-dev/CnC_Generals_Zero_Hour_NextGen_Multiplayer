@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvCodec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvCustomDevice.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvDevice.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvFrame.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvMain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvSource.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvSpeex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvUtil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvDirectSound.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvCodec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvCustomDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvGSM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvSpeex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvSpeexSpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\gvDirectSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{10AFAB7C-30A2-36D0-B2CE-114F3DEB8BF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{537BE621-0C3D-3D87-872A-C224E84AB360}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

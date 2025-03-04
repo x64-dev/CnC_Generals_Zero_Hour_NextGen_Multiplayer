@@ -1,0 +1,9 @@
+# CMake generation dependency list for this directory.
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/common/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake

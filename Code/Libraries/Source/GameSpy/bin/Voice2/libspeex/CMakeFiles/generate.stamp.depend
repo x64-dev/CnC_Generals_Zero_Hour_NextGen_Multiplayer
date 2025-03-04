@@ -1,0 +1,31 @@
+# CMake generation dependency list for this directory.
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/CMakeLists.txt
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/Speex.spec.in
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/cmake/FindFFTW.cmake
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/cmake/FindOgg.cmake
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/cmake/FindSpeexDsp.cmake
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/cmake/TestVarArrays.cmake
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/config.h.cmake
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/include/speex/speex_config_types.h.in
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/speex.pc.in
+C:/Program Files/CMake/share/cmake-3.27/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CMakeDependentOption.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckCCompilerFlag.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckSymbolExists.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FeatureSummary.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPkgConfig.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/Internal/CheckCompilerFlag.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/Internal/CheckFlagCommonConfig.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/TestBigEndian.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/WriteBasicConfigVersionFile.cmake

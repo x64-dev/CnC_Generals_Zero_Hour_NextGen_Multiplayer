@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FBF880FC-9A75-37B2-BEA0-A9732397EE23}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>speex</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">speex.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">speex</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">speex.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">speex</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">speex.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">speex</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">speex.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">speex</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP="";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP=\"\";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP="";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP=\"\";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP="";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP=\"\";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP="";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;GSI_WINSOCK2;GS_PEER;RS_FORCE_IP=\"\";UNISPY_USE_HTTPS;GSI_MEM_MANAGED;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy -BC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build --check-stamp-file C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build/Voice2/libspeex/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\Speex.spec.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindFFTW.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindOgg.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindSpeexDsp.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\TestVarArrays.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\config.h.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_config_types.h.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\speex.pc.in;C:\Program Files\CMake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FeatureSummary.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy -BC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build --check-stamp-file C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build/Voice2/libspeex/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\Speex.spec.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindFFTW.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindOgg.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindSpeexDsp.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\TestVarArrays.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\config.h.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_config_types.h.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\speex.pc.in;C:\Program Files\CMake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FeatureSummary.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy -BC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build --check-stamp-file C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build/Voice2/libspeex/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\Speex.spec.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindFFTW.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindOgg.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindSpeexDsp.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\TestVarArrays.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\config.h.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_config_types.h.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\speex.pc.in;C:\Program Files\CMake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FeatureSummary.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/libspeex/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy -BC:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build --check-stamp-file C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/build/Voice2/libspeex/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\Speex.spec.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindFFTW.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindOgg.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\FindSpeexDsp.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\cmake\TestVarArrays.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\config.h.cmake;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_config_types.h.in;C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\speex.pc.in;C:\Program Files\CMake\share\cmake-3.27\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FeatureSummary.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\TestBigEndian.cmake;C:\Program Files\CMake\share\cmake-3.27\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_bits.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_callbacks.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_header.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_stereo.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex\speex_types.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\Voice2\libspeex\include\speex\speex_config_types.h" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\cb_search.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_10_32_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_8_128_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\filters.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\gain_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\hexc_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\high_lsp_tables.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lsp.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\ltp.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\speex.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\stereo.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vbr.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vq.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\bits.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_10_16_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_20_32_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_5_256_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\exc_5_64_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\gain_table_lbr.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\hexc_10_32_table.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lpc.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lsp_tables_nb.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\modes.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\modes_wb.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\nb_celp.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\quant_lsp.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\sb_celp.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\speex_callbacks.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\speex_header.c" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\window.c" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\arch.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\cb_search_arm4.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\cb_search_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\cb_search_sse.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\filters.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\filters_arm4.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\filters_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\filters_sse.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fixed_arm4.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fixed_arm5e.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fixed_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fixed_debug.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lpc.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lpc_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\ltp.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\ltp_arm4.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\ltp_sse.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\math_approx.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\misc_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\nb_celp.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\quant_lsp.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\sb_celp.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\stack_alloc.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vbr.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vq.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vq_arm4.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vq_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\vq_sse.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\cb_search.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fftwrap.h" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fftwrap.c" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\fixed_generic.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lsp.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\lsp_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\ltp_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\modes.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\os_support.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\quant_lsp_bfin.h" />
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\smallft.h" />
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\Voice2\libspeex\libspeex\smallft.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\build\ZERO_CHECK.vcxproj">
+      <Project>{7C43C70E-A9CB-3A1D-B05C-8D7451440FC1}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

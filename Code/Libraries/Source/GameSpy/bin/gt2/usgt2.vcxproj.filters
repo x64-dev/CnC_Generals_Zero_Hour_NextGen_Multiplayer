@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Auth.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Buffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Callback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Connection.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Encode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Filter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Message.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Socket.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Utility.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Auth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Encode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\gt2Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\GENZH\2\jmarshall_x64\Code\Libraries\Source\GameSpy\gt2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{10AFAB7C-30A2-36D0-B2CE-114F3DEB8BF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{537BE621-0C3D-3D87-872A-C224E84AB360}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

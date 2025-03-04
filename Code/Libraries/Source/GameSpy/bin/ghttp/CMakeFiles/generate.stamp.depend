@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/ghttp/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindOpenSSL.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.27/Modules/SelectLibraryConfigurations.cmake
