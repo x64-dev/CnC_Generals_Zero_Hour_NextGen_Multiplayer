@@ -209,7 +209,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>openal32.lib;d3dx8.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d9.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openal32.lib;d3dx8.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;binkw32.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;mss32.lib;d3d9.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\Run\RTSD.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Libraries\OpenAL\bin\RelWithDebInfo;Libraries\DX90SDK\Lib\x86;Libraries\Bink\lib\;GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -235,7 +235,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
 $(TargetDir)buildVersionUpdate.exe .\Main\buildVersion.h
 </Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2Debug.lib;$(ProjectDir)Libraries\Lib\WWDebugDebug.lib;$(ProjectDir)Libraries\Lib\WWUtilDebug.lib;$(ProjectDir)Libraries\Lib\WWLibDebug.lib;$(ProjectDir)Libraries\Lib\WWMathDebug.lib;$(ProjectDir)GameEngine\Lib\GameEngineDebug.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDeviceDebug.lib;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)main\winmain.cpp;$(ProjectDir)main\winmain.h;$(ProjectDir)Libraries\Lib\WW3D2Debug.lib;$(ProjectDir)Libraries\Lib\WWDebugDebug.lib;$(ProjectDir)Libraries\Lib\$(ProjectDir)Libraries\Lib\WWLibDebug.lib;$(ProjectDir)Libraries\Lib\WWMathDebug.lib;$(ProjectDir)GameEngine\Lib\GameEngineDebug.lib;$(ProjectDir)GameEngineDevice\Lib\GameEngineDeviceDebug.lib;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">Incrementing version numbers held in %(FullPath) .\Main\buildVersion.h</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(TargetDir)versionUpdate.exe %(FullPath)
