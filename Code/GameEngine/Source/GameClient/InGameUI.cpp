@@ -1095,7 +1095,7 @@ void InGameUI::init( void )
 		// make the tactical display the full screen width for now
 		TheTacticalView->setWidth( TheDisplay->getWidth());
 		// make the tactical display 0.76 of full screen so no drawing under GUI.
-		TheTacticalView->setHeight( TheDisplay->getHeight() * 0.77f);
+		TheTacticalView->setHeight( TheDisplay->getHeight());
 	}
 	TheTacticalView->setDefaultView(0.0f, 0.0f, 1.0f);
 

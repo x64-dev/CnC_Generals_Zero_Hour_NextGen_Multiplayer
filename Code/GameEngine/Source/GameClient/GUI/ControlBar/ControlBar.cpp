@@ -2920,7 +2920,10 @@ void ControlBar::setDefaultControlBarConfig( void )
 //		m_controlBarSchemeManager->setControlBarSchemeByPlayerTemplate(ThePlayerList->getLocalPlayer()->getPlayerTemplate(), FALSE);
 //	}
 	m_currentControlBarStage = CONTROL_BAR_STAGE_DEFAULT;
-	TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f)); 
+// jmarshall - this optimization is no longer needed.
+//	TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f)); 
+	TheTacticalView->setHeight((Int)(TheDisplay->getHeight()));
+// jmarshall end
 	m_contextParent[ CP_MASTER ]->winSetPosition(m_defaultControlBarPosition.x, m_defaultControlBarPosition.y);
 	m_contextParent[ CP_MASTER ]->winHide(FALSE);
 	repopulateBuildTooltipLayout();
