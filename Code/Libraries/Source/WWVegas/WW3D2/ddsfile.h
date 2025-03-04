@@ -116,6 +116,8 @@ struct LegacyDDPIXELFORMAT
 // It is needed when loading DDS files. DO NOT MODIFY!
 //
 // ----------------------------------------------------------------------------
+#pragma pack(push)  /* push current alignment to stack */
+#pragma pack(4)     /* set alignment to 4 byte boundary */
 
 struct LegacyDDSURFACEDESC2 {
 	unsigned Size;
@@ -135,7 +137,7 @@ struct LegacyDDSURFACEDESC2 {
 	};
 	unsigned AlphaBitDepth;
 	unsigned Reserved;
-	void* Surface;
+	unsigned Surface;
 	union
 	{
 		LegacyDDCOLORKEY CKDestOverlay;
@@ -148,6 +150,8 @@ struct LegacyDDSURFACEDESC2 {
 	LegacyDDSCAPS2 Caps;
 	unsigned TextureStage;
 };
+
+#pragma pack(pop)   /* restore original alignment from stack */
 
 // ----------------------------------------------------------------------------
 //
