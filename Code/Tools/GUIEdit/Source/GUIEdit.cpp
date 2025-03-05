@@ -3553,7 +3553,7 @@ void GUIEdit::stripNameDecorations( GameWindow *root )
 		char *c;
 
 		// skip past the "filename.wnd:" to the name only
-		c = strchr( instData->m_decoratedNameString.str(), ':' );
+		c = (char *)strchr( instData->m_decoratedNameString.str(), ':' );
 		if( c )
 		{
 

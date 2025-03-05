@@ -83,7 +83,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.\Include;.\Resource;..\..\Libraries\Include;..\..\GameEngine\Include;..\..\GameEngineDevice\Include;..\..\Libraries\Source\WWVegas;..\..\Libraries\Source\WWVegas\WWLib;..\..\Libraries\Source\WWVegas\WWMath;..\..\Libraries\Source\WWVegas\WWDebug;..\..\Libraries\Source\WWVegas\WWSaveLoad;..\..\Libraries\Source\WWVegas\WW3D2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -92,7 +92,7 @@
       <ObjectFileName>.\Debug/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
@@ -101,10 +101,10 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>BenchmarkD.lib;WW3D2Debug.lib;WWDebugDebug.lib;WWUtilDebug.lib;WWLibDebug.lib;WWMathDebug.lib;GameEngineDebug.lib;GameEngineDeviceDebug.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;d3d8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Run\GUIEditD.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Libraries\DX90SDK\Lib\x86;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\..\..\Run\GUIEditD.pdb</ProgramDatabaseFile>
@@ -114,6 +114,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -133,7 +134,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.\Include;.\Resource;..\..\Libraries\Include;..\..\GameEngine\Include;..\..\GameEngineDevice\Include;..\..\Libraries\Source\WWVegas;..\..\Libraries\Source\WWVegas\WWLib;..\..\Libraries\Source\WWVegas\WWMath;..\..\Libraries\Source\WWVegas\WWDebug;..\..\Libraries\Source\WWVegas\WWSaveLoad;..\..\Libraries\Source\WWVegas\WW3D2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDOWS;WIN32;NDEBUG;_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_WINDOWS;WIN32;NDEBUG;_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -142,7 +143,7 @@
       <ObjectFileName>.\Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <ResourceCompile>
@@ -150,10 +151,10 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Benchmark.lib;WW3D2.lib;WWDebug.lib;WWLib.lib;WWUtil.lib;WWMath.lib;GameEngine.lib;GameEngineDevice.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;d3d8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Run\GUIEdit.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Libraries\DX90SDK\Lib\x86;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\..\..\Run\GUIEdit.pdb</ProgramDatabaseFile>
@@ -163,6 +164,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -182,7 +184,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.\Include;.\Resource;..\..\Libraries\Include;..\..\GameEngine\Include;..\..\GameEngineDevice\Include;..\..\Libraries\Source\WWVegas;..\..\Libraries\Source\WWVegas\WWLib;..\..\Libraries\Source\WWVegas\WWMath;..\..\Libraries\Source\WWVegas\WWDebug;..\..\Libraries\Source\WWVegas\WWSaveLoad;..\..\Libraries\Source\WWVegas\WW3D2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WIN32;NDEBUG;_WINDOWS;_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -191,7 +193,7 @@
       <ObjectFileName>.\Internal/</ObjectFileName>
       <ProgramDataBaseFileName>.\Internal/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <ResourceCompile>
@@ -199,10 +201,10 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Benchmark.lib;WW3D2Internal.lib;WWDebugInternal.lib;WWLibInternal.lib;WWUtilInternal.lib;WWMathInternal.lib;GameEngineInternal.lib;GameEngineDeviceInternal.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;d3d8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;wsock32.lib;dxguid.lib;dinput8.lib;d3dx8.lib;odbc32.lib;odbccp32.lib;vfw32.lib;winmm.lib;dsound.lib;comctl32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Run\GUIEditI.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Libraries\DX90SDK\Lib\x86;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\Libraries\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\..\..\Run\GUIEditI.pdb</ProgramDatabaseFile>
@@ -212,6 +214,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -281,6 +284,9 @@
       <Project>{54d11ea6-8cd0-42d9-9ed5-82bdc2f894a4}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\GameRenderer\GameRenderer.vcxproj">
+      <Project>{845363af-8d9b-464c-80fa-c2fef7a71c68}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Source\Compression\Compression.vcxproj">
       <Project>{72a36dc7-8fe2-439a-a503-f220901cc311}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -288,6 +294,9 @@
     <ProjectReference Include="..\..\Libraries\Source\WWVegas\WW3D2\ww3d2.vcxproj">
       <Project>{f7415afa-ee56-48f9-a42b-3101d93675f6}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Source\WWVegas\WWDebug\wwdebug.vcxproj">
+      <Project>{4e83553c-d499-4d91-b744-5aac6986a33b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
       <Project>{46cf04d9-1c8e-4f31-af11-ae8dbe8a9004}</Project>
@@ -305,6 +314,30 @@
       <Project>{86908043-4887-4a76-8da4-3350e9932e32}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\brigades\Debug\usbrigades.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Chat\Debug\uschat.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\common\Debug\uscommon.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Direct2Game\Debug\usd2g.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\gcdkey\Debug\uscdkey.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\ghttp\Debug\ushttp.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\GP\Debug\usgp.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\gstats\Debug\usstats.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\gt2\Debug\usgt2.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\natneg\Debug\usnatneg.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Peer\Debug\uspeer.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\pinger\Debug\uspinger.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\pt\Debug\uspt.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\qr2\Debug\usqr2.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\sake\Debug\ussake.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\sc\Debug\ussc.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\serverbrowsing\Debug\usserverbrowsing.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\sharedDll\Debug\UniSpySDK.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Voice2\Debug\usvoice2.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Voice2\libgsm\Debug\gsm.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\Voice2\libspeex\Debug\speex.lib" />
+    <Library Include="..\..\Libraries\Source\GameSpy\bin\webservices\Debug\uswebservice.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
