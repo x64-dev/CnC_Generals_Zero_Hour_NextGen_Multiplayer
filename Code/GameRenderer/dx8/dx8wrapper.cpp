@@ -2289,6 +2289,9 @@ void DX8Wrapper::Set_Light_Environment(LightEnvironmentClass* light_env)
 			light.Direction=(const D3DVECTOR&)(dir);
 			if (light_env->isPointLight(l)) {
 				light.Type = D3DLIGHT_POINT;
+// GeneralCamo - specular
+				(Vector3&)light.Specular = light_env->getPointDiffuse(l);
+// GeneralCamo - specular end
 				(Vector3&)light.Diffuse=light_env->getPointDiffuse(l);
 				(Vector3&)light.Ambient=light_env->getPointAmbient(l);
 				light.Position = (const D3DVECTOR&)light_env->getPointCenter(l);
