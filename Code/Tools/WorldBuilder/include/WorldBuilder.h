@@ -69,7 +69,7 @@
 #define NONE_STRING "<none>"
 
 
-enum {THREE_D_VIEW_WIDTH=800, THREE_D_VIEW_HEIGHT=600};
+enum {THREE_D_VIEW_WIDTH=1280, THREE_D_VIEW_HEIGHT=720};
 enum {MAX_OBJECTS_IN_MAP = 3000};
 
 class CWorldBuilderApp : public CWinApp

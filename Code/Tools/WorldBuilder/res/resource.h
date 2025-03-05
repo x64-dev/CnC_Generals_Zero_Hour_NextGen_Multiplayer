@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by WorldBuilder.rc
 //
 #define IDPREVIEWSOUND                  3
@@ -567,9 +567,9 @@
 #define ID_VIEW_SHOWCLOUDS              32945
 #define ID_EDIT_CONTOUROPTIONS          32946
 #define IDM_RESET_WINDOWS               32947
-#define ID_WINDOW_PREVIEW640X480        32949
-#define ID_WINDOW_PREVIEW800X600        32950
-#define ID_WINDOW_PREVIEW1024X768       32951
+#define ID_WINDOW_PREVIEW1280x720       32949
+#define ID_WINDOW_PREVIEW1920x1080      32950
+#define ID_WINDOW_PREVIEW2954x1662      32951
 #define ID_WINDOW_2DWINDOW              32952
 #define ID_VIEW_BRUSHFEEDBACK           32954
 #define ID_MOLD_TOOL                    32955
@@ -653,6 +653,9 @@
 #define ID_EDIT_PICKSOUNDS              33341
 #define ID_VIEW_SHOW_TERRAIN            33342
 #define ID_VIEW_IMPASSABLEAREAOPTIONS   33343
+#define ID_WINDOW_PREVIEW1280x720       33344
+#define ID_WINDOW_PREVIEW1920x1080      33345
+#define ID_WINDOW_PREVIEW2954x1662      33346
 #define IDS_NEW                         61446
 #define IDS_RESIZE                      61447
 #define IDS_REMOVING_INUSE_TEAM         61448
@@ -696,7 +699,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        232
-#define _APS_NEXT_COMMAND_VALUE         33344
+#define _APS_NEXT_COMMAND_VALUE         33347
 #define _APS_NEXT_CONTROL_VALUE         1326
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
