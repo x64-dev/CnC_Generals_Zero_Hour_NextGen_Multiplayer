@@ -6847,12 +6847,18 @@ void Pathfinder::processHierarchicalCell( const ICoord2D &scanCell, const ICoord
 			return;
 		}
 		
-		newCell->allocateInfo(scanCell);
+		if (!newCell->allocateInfo(scanCell)) {
+			// Out of cells for pathing...
+			return;
+		}
 		if (!newCell->getClosed() && !newCell->getOpen()) {
 			m_closedList = newCell->putOnClosedList(m_closedList);
 		}
 
-		adjNewCell->allocateInfo(adjacentCell);
+		if (!adjNewCell->allocateInfo(adjacentCell)) {
+			// Out of cells for pathing...
+			return;
+		}
 		cellCount++;
 		Int curCost = adjNewCell->costToHierGoal(parentCell);
 		Int remCost = adjNewCell->costToHierGoal(goalCell);
