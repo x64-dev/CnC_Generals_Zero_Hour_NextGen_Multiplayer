@@ -348,7 +348,7 @@ void OpenALAudioManager::setDeviceListenerPosition(void)
      // The first three elements are the "at" vector, the next three are the "up" vector.
     ALfloat listenerOri[6] = {
         m_listenerOrientation.x, m_listenerOrientation.y, m_listenerOrientation.z, // "at" vector
-        0.0f, 0.0f, -1.0f  // "up" vector (as in the original code)
+        0.0f, 0.0f, 1.0f  // "up" vector (as in the original code)
     };
     alListenerfv(AL_ORIENTATION, listenerOri);
 
