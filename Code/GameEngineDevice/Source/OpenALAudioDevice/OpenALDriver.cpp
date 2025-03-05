@@ -26,13 +26,35 @@
 
 #include "OpenALAudioDevice/OpenALAudioLoader.h"
 
-#define NUM_POOLED_SOURCES 32
+#define NUM_POOLED_SOURCES2D 16
+#define NUM_POOLED_SOURCES3D 64
 
-ALuint m_sourcePool2D[NUM_POOLED_SOURCES];
-bool m_sourceInUse2D[NUM_POOLED_SOURCES];
+ALuint m_sourcePool2D[NUM_POOLED_SOURCES2D];
+bool m_sourceInUse2D[NUM_POOLED_SOURCES2D];
 
-ALuint m_sourcePool3D[NUM_POOLED_SOURCES];
-bool m_sourceInUse3D[NUM_POOLED_SOURCES];
+ALuint m_sourcePool3D[NUM_POOLED_SOURCES3D];
+bool m_sourceInUse3D[NUM_POOLED_SOURCES3D];
+
+//-----------------------------------------------------------------------------
+
+UnsignedInt OpenALAudioManager::getNum2DSamples(void) const
+{
+	return NUM_POOLED_SOURCES2D;
+}
+
+//-----------------------------------------------------------------------------
+
+UnsignedInt OpenALAudioManager::getNum3DSamples(void) const
+{
+	return NUM_POOLED_SOURCES3D;
+}
+
+//-----------------------------------------------------------------------------
+
+UnsignedInt OpenALAudioManager::getNumStreams(void) const
+{
+	return NUM_POOLED_SOURCES3D;
+}
 
 //-----------------------------------------------------------------------------
 void OpenALAudioManager::openDevice(void)
@@ -57,15 +79,19 @@ void OpenALAudioManager::openDevice(void)
     alGenSources(1, &m_musicSource);  // This source is used ONLY for music
 
     // Create the pool of SFX sources
-    alGenSources(NUM_POOLED_SOURCES, m_sourcePool2D);
-    alGenSources(NUM_POOLED_SOURCES, m_sourcePool3D);
+    alGenSources(getNum2DSamples(), m_sourcePool2D);
+    alGenSources(getNum3DSamples(), m_sourcePool3D);
 
     // Mark them all as free initially
-    for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+    for (int i = 0; i < getNum3DSamples(); ++i)
     {
-        m_sourceInUse2D[i] = false;
         m_sourceInUse3D[i] = false;
     }
+
+	for (int i = 0; i < getNum2DSamples(); ++i)
+	{
+		m_sourceInUse2D[i] = false;
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -74,7 +100,7 @@ ALuint OpenALAudioManager::getFreeSource(ALuint &poolIndex, bool is3D)
 {
     if (is3D)
     {
-		for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+		for (int i = 0; i < getNum3DSamples(); ++i)
 		{
 			if (!m_sourceInUse3D[i])
 			{
@@ -91,7 +117,7 @@ ALuint OpenALAudioManager::getFreeSource(ALuint &poolIndex, bool is3D)
     }
     else
     {
-		for (int i = 0; i < NUM_POOLED_SOURCES; ++i)
+		for (int i = 0; i < getNum2DSamples(); ++i)
 		{
 			if (!m_sourceInUse2D[i])
 			{
@@ -190,8 +216,8 @@ void OpenALAudioManager::closeDevice(void)
     if (device)
     {
         // Delete all SFX sources in the pool
-        alDeleteSources(NUM_POOLED_SOURCES, m_sourcePool2D);
-        alDeleteSources(NUM_POOLED_SOURCES, m_sourcePool3D);
+        alDeleteSources(getNum2DSamples(), m_sourcePool2D);
+        alDeleteSources(getNum3DSamples(), m_sourcePool3D);
 
         // Delete the dedicated music source
         if (m_musicSource)

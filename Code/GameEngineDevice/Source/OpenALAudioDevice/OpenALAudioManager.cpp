@@ -472,24 +472,6 @@ void OpenALAudioManager::friend_forcePlayAudioEventRTS(const AudioEventRTS* even
 	}
 }
 
-UnsignedInt OpenALAudioManager::getNum2DSamples(void) const
-{
-    // TODO: Return the number of 2D audio samples.
-    return 32;
-}
-
-UnsignedInt OpenALAudioManager::getNum3DSamples(void) const
-{
-    // TODO: Return the number of 3D audio samples.
-    return 32;
-}
-
-UnsignedInt OpenALAudioManager::getNumStreams(void) const
-{
-    // TODO: Return the number of audio streams.
-    return 32;
-}
-
 Bool OpenALAudioManager::doesViolateLimit(AudioEventRTS* event) const
 {
 	Int limit = event->getAudioEventInfo()->m_limit;
