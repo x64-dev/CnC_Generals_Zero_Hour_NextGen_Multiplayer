@@ -167,8 +167,8 @@ protected:
     void stopAllSpeech(void);
     void stopAllAudioImmediately(void);
     void releasePlayingAudio(OpenALPlayingAudio* release);
-    void recycleSource(ALuint poolIndex);
-    ALuint getFreeSource(ALuint&poolIndex);
+    void recycleSource(ALuint poolIndex, bool is3D);
+    ALuint getFreeSource(ALuint&poolIndex, bool is3D);
 
     void* m_digitalHandle;
 
