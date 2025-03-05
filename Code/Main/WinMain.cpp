@@ -38,6 +38,7 @@
 #include <eh.h>
 #include <ole2.h>
 #include <dbt.h>
+#include <shellscalingapi.h>
 
 // USER INCLUDES //////////////////////////////////////////////////////////////
 #include "WinMain.h"
@@ -845,7 +846,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 //	checkProtection();
 
 	{
-
+		SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 		_set_se_translator( DumpExceptionInfo ); // Hook that allows stack trace.
 		//
 		// there is something about checkin in and out the .dsp and .dsw files 

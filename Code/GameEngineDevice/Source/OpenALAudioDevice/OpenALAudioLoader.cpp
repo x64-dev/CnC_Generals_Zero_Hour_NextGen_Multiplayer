@@ -65,7 +65,7 @@ ALuint OpenALAudioLoader::loadFromFile(const std::string& filename) {
     }
 
     ALuint alBuffer = 0;
-    try {
+  //  try {
         if (hasExtension(filename, ".wav")) {
             alBuffer = decodeWav(buffer, fileSize);
         }
@@ -76,11 +76,11 @@ ALuint OpenALAudioLoader::loadFromFile(const std::string& filename) {
             delete[] buffer;
             return 0;
         }
-    }
-    catch (const std::exception& e) {
-        DEBUG_ASSERTLOG(false, ("AudioLoader error: %s\n", e.what()));
-        alBuffer = 0;
-    }
+   // }
+   // catch (const std::exception& e) {
+   //     DEBUG_ASSERTLOG(false, ("AudioLoader error: %s\n", e.what()));
+   //     alBuffer = 0;
+   // }
 
     delete[] buffer;
 
