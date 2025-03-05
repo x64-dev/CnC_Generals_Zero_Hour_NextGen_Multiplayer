@@ -2,6 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by WorldBuilder.rc
 //
+#pragma once
+
 #define IDPREVIEWSOUND                  3
 #define IDC_PREVIEWSOUND                3
 #define IDD_ABOUTBOX                    100
@@ -653,9 +655,11 @@
 #define ID_EDIT_PICKSOUNDS              33341
 #define ID_VIEW_SHOW_TERRAIN            33342
 #define ID_VIEW_IMPASSABLEAREAOPTIONS   33343
+#ifndef ID_WINDOW_PREVIEW1280x720
 #define ID_WINDOW_PREVIEW1280x720       33344
 #define ID_WINDOW_PREVIEW1920x1080      33345
 #define ID_WINDOW_PREVIEW2954x1662      33346
+#endif
 #define IDS_NEW                         61446
 #define IDS_RESIZE                      61447
 #define IDS_REMOVING_INUSE_TEAM         61448

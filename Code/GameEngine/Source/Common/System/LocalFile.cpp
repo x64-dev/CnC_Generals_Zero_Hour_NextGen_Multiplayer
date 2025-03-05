@@ -271,6 +271,7 @@ Bool LocalFile::open( const Char *filename, Int access )
 
 	if( m_handle == -1 )
 	{
+		DEBUG_LOG(("LocalFile::open FAILED %s (total %d)\n", filename, s_totalOpen));
 		goto error;
 	}
 
