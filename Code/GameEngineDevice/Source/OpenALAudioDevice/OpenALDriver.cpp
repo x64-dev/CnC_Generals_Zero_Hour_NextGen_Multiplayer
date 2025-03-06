@@ -244,7 +244,9 @@ void OpenALAudioManager::playSample(AudioEventRTS* event, OpenALPlayingAudio* au
 
     ALuint source = 0;
 
-    if (isMusic)
+    AudioType at = event->getAudioEventInfo()->m_soundType;
+
+    if (at == AT_Music)
     {
         // Always use the dedicated music source
         source = m_musicSource;
@@ -269,11 +271,17 @@ void OpenALAudioManager::playSample(AudioEventRTS* event, OpenALPlayingAudio* au
     alSourcei(source, AL_BUFFER, buffer);
     alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
     alSource3f(source, AL_POSITION, 0.0f, 0.0f, 0.0f);
-    Real volume = event->getVolume();
+    Real volume = event->getVolume() * event->getVolumeShift();
+    if (at == AT_Music)
+        volume *= m_musicVolume;
+    else if (at == AT_Streaming)
+        volume *= m_speechVolume;
+    else // AT_SoundEffect and anything else
+        volume *= m_soundVolume;
     alSourcef(source, AL_GAIN, volume);
 
     // If this is music, you might want to loop it
-    if (isMusic)
+    if (at == AT_Music)
     {
         alSourcei(source, AL_LOOPING, AL_TRUE);
     }
@@ -313,7 +321,7 @@ bool OpenALAudioManager::playSample3D(AudioEventRTS* event, OpenALPlayingAudio* 
 
     // Set 3D position and volume
     alSource3f(source, AL_POSITION, pos->x, pos->y, pos->z);
-    Real volume = event->getVolume();
+    Real volume = event->getVolume() * event->getVolumeShift() * m_sound3DVolume;
     alSourcei(source, AL_SOURCE_RELATIVE, AL_FALSE);
     alSourcef(source, AL_GAIN, volume);
     alSourcef(source, AL_REFERENCE_DISTANCE, event->getAudioEventInfo()->m_minDistance);
