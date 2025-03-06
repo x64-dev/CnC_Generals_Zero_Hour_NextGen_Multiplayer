@@ -457,7 +457,7 @@ void DX8VertexBufferClass::Create_Vertex_Buffer(UsageType usage)
 	WW3D::_Invalidate_Mesh_Cache();
 
 	//@todo: Find some way to invalidate the textures too
-	ret = DX8Wrapper::_Get_D3D_Device8()->ResourceManagerDiscardBytes(0);
+	//TODO: DX9//ret = DX8Wrapper::_Get_D3D_Device8()->ResourceManagerDiscardBytes(0);
 
 	// Try again...
 	ret=DX8Wrapper::_Get_D3D_Device8()->CreateVertexBuffer(

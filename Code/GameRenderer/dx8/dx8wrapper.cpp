@@ -2585,7 +2585,7 @@ DX8Wrapper::Create_Additional_Swap_Chain (HWND render_window)
 void DX8Wrapper::Flush_DX8_Resource_Manager(unsigned int bytes)
 {
 	DX8_Assert();
-	DX8CALL(ResourceManagerDiscardBytes(bytes));
+	//TODO: DX9//DX8CALL(ResourceManagerDiscardBytes(bytes));
 }
 
 unsigned int DX8Wrapper::Get_Free_Texture_RAM()
