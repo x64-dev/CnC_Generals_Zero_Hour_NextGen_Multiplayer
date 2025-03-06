@@ -774,7 +774,7 @@ void TextureClass::_Init_Filters()
 	_MipMapFilters[FILTER_TYPE_DEFAULT]=_MipMapFilters[FILTER_TYPE_BEST];
 
 	for (int stage=0;stage<MeshMatDescClass::MAX_TEX_STAGES;++stage) {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(stage,D3DTSS_MAXANISOTROPY,2);
+		DX8Wrapper::Set_DX8_Texture_Stage_State(stage,D3DTSS_MAXANISOTROPY,16);
 	}
 
 
