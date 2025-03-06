@@ -1236,20 +1236,18 @@ void OpenALAudioManager::closeAnySamplesUsingFile(const void* fileToClose)
 void OpenALAudioManager::adjustPlayingVolume(OpenALPlayingAudio* audio)
 {
 	Real desiredVolume = audio->m_audioEventRTS->getVolume() * audio->m_audioEventRTS->getVolumeShift();
-	if (audio->m_type == PAT_Sample) {
-		alSourcef(audio->source, AL_GAIN, m_soundVolume * desiredVolume);
-	}
-	else if (audio->m_type == PAT_3DSample) {
-		alSourcef(audio->source, AL_GAIN, m_sound3DVolume * desiredVolume);
-	}
-	else if (audio->m_type == PAT_Stream) {
-		if (audio->m_audioEventRTS->getAudioEventInfo()->m_soundType == AT_Music) {
-			alSourcef(audio->source, AL_GAIN, m_sound3DVolume * m_musicVolume * desiredVolume);
-		}
-		else {
-			alSourcef(audio->source, AL_GAIN, m_sound3DVolume * m_speechVolume * desiredVolume);
-		}
-	}
+	AudioType at = audio->m_audioEventRTS->getAudioEventInfo()->m_soundType;
+	Bool isPositionalAudio = audio->m_audioEventRTS->isPositionalAudio();
+
+	if (isPositionalAudio)
+		desiredVolume *= m_sound3DVolume;
+	else if (at == AT_Music)
+		desiredVolume *= m_musicVolume;
+	else if (at == AT_Streaming)
+		desiredVolume *= m_speechVolume;
+	else // AT_SoundEffect and anything else
+		desiredVolume *= m_soundVolume;
+	alSourcef(audio->source, AL_GAIN, desiredVolume);
 }
 
 //-------------------------------------------------------------------------------------------------
