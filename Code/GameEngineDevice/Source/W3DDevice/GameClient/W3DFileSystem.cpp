@@ -50,6 +50,8 @@
 // DEFINES ////////////////////////////////////////////////////////////////////////////////////////
 
 #include <io.h>
+//#include <windows.h>
+//#undef FILE_TYPE_UNKNOWN
 
 //-------------------------------------------------------------------------------------------------
 /** Game file access.  At present this allows us to access test assets, assets from
@@ -65,6 +67,19 @@ typedef enum
 	FILE_TYPE_TGA,
 	FILE_TYPE_DDS,
 } GameFileType;
+
+std::string change_extension(const std::string& filename, const std::string& new_ext) {
+	// Find the last occurrence of the dot character
+	size_t pos = filename.find_last_of('.');
+
+	// If no dot is found, simply append the new extension
+	if (pos == std::string::npos) {
+		return filename + new_ext;
+	}
+
+	// Return the filename up to the dot, then add the new extension
+	return filename.substr(0, pos) + new_ext;
+}
 
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
@@ -158,35 +173,94 @@ char const * GameFileClass::Set_Name( char const *filename )
 	}
 	name[j] = 0;
 
+	m_fileExists = FALSE;
+
 	// test the extension to recognize a few key file types
 	GameFileType fileType = FILE_TYPE_UNKNOWN;
 	if( stricmp( extension, ".w3d" ) == 0 )
 		fileType = FILE_TYPE_W3D;
-	else if( stricmp( extension, ".tga" ) == 0 )
+	else if (stricmp(extension, ".tga") == 0)
+	{
+// jmarshall - hi-res texture overrides
+		std::string newFileName = HD_TGA_DIR_PATH;
+		newFileName += filename;
+		strcpy(m_filePath, newFileName.c_str());
+
+	//	OutputDebugStringA(m_filePath);
+	//	OutputDebugStringA("\n");
+
+		// see if the file exists
+		m_fileExists = TheFileSystem->doesFileExist(m_filePath);
+		if (!m_fileExists)
+		{
+			std::string fileNameTGA = change_extension(filename, ".dds");
+			std::string newFileName = TGA_DIR_PATH + fileNameTGA;
+
+			strcpy(m_filePath, newFileName.c_str());
+
+			// see if the file exists
+			m_fileExists = TheFileSystem->doesFileExist(m_filePath);
+			if (m_fileExists)
+			{
+				fileType = FILE_TYPE_DDS;
+			}
+			else
+			{
+				fileType = FILE_TYPE_TGA;
+			}
+		}
+
+// jmarshall - hi-res texture overrides
 		fileType = FILE_TYPE_TGA;
-	else if( stricmp( extension, ".dds" ) == 0 )
-		fileType = FILE_TYPE_DDS;
+	}
+	else if (stricmp(extension, ".dds") == 0) {
+// jmarshall - hi-res texture overrides
+		std::string fileNameTGA = change_extension(filename, ".tga");
+		std::string newFileName = HD_TGA_DIR_PATH + fileNameTGA;
+
+		strcpy(m_filePath, newFileName.c_str());
+		
+		// see if the file exists
+		m_fileExists = TheFileSystem->doesFileExist(m_filePath);
+
+		//	OutputDebugStringA(m_filePath);
+		//	OutputDebugStringA("\n");
+
+		if (m_fileExists)
+		{
+			fileType = FILE_TYPE_TGA;
+		}
+		else
+		{
+			fileType = FILE_TYPE_DDS;
+		}		
+// jmarshall end
+	}
 
 	// all .w3d files are in W3D_DIR_PATH, all .tga files are in TGA_DIR_PATH
-	if( fileType == FILE_TYPE_W3D )
+	if (m_fileExists == FALSE)
 	{
+		if (fileType == FILE_TYPE_W3D)
+		{
 
-		strcpy( m_filePath, W3D_DIR_PATH );
-		strcat( m_filePath, filename );
+			strcpy(m_filePath, W3D_DIR_PATH);
+			strcat(m_filePath, filename);
 
-	}  // end if
-	else if( isImageFileType(fileType) )
-	{
+		}  // end if
+		else if (isImageFileType(fileType))
+		{
 
-		strcpy( m_filePath, TGA_DIR_PATH );
-		strcat( m_filePath, filename );
+			std::string newFileName = TGA_DIR_PATH;
+			newFileName += filename;
+			strcpy(m_filePath, newFileName.c_str());
 
-	}  // end else if
-	else
-		strcpy( m_filePath, filename );
+		}  // end else if
+		else
+			strcpy(m_filePath, filename);
 
-	// see if the file exists
-	m_fileExists = TheFileSystem->doesFileExist( m_filePath );
+		// see if the file exists
+		m_fileExists = TheFileSystem->doesFileExist(m_filePath);
+	}
 
 	// maintain legacy compatibility directories for now
 	#ifdef MAINTAIN_LEGACY_FILES

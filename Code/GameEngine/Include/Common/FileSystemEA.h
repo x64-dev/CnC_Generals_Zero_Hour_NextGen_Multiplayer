@@ -71,6 +71,7 @@ typedef FilenameList::iterator FilenameListIter;
 //#define TERRAIN_TGA_DIR_PATH "../FinalArt/Terrain/"		///< terrain .tga texture files live here
 #define W3D_DIR_PATH "Art/W3D/"					///< .w3d files live here
 #define TGA_DIR_PATH "Art/Textures/"		///< .tga texture files live here
+#define HD_TGA_DIR_PATH "Art/TexturesHD/"		///< HD .tga texture files live here
 #define TERRAIN_TGA_DIR_PATH "Art/Terrain/"		///< terrain .tga texture files live here
 #define MAP_PREVIEW_DIR_PATH "%sMapPreviews/"	///< We need a common place we can copy the map previews to at runtime.
 #define USER_W3D_DIR_PATH "%sW3D/"					///< .w3d files live here

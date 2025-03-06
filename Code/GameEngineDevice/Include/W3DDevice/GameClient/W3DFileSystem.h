@@ -56,6 +56,9 @@ public:
 	virtual ~GameFileClass(void);
 
 	virtual char const * File_Name(void) const;
+	virtual char const* File_Path(void) const {
+		return m_filePath;
+	}
 	virtual char const * Set_Name(char const *filename);
 	virtual bool Is_Available(int forced=false);
 	virtual bool Is_Open(void) const;

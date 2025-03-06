@@ -286,8 +286,10 @@ void GameLODManager::init(void)
 	//always get this data in case we need it later.
 	testMinimumRequirements(NULL,&m_cpuType,&m_cpuFreq,&m_numRAM,NULL,NULL,NULL);
 
-	if ((Real)(m_numRAM)/(Real)(256*1024*1024) >= PROFILE_ERROR_LIMIT)
-		m_memPassed=TRUE;	//check if they have at least 256 MB
+// jmarshall - memcheck always passes
+	//if ((Real)(m_numRAM)/(Real)(256*1024*1024) >= PROFILE_ERROR_LIMIT)
+	m_memPassed=TRUE;	//check if they have at least 256 MB
+// jmarshall end
 
 	if (m_idealDetailLevel == STATIC_GAME_LOD_UNKNOWN || TheGlobalData->m_forceBenchmark)
 	{

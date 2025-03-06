@@ -44,6 +44,9 @@ DDSFileClass::DDSFileClass(const char* name,unsigned reduction_factor)
 	Name[len-1]='s';
 
 	file_auto_ptr file(_TheFileFactory,Name);	
+	if (strstr(file->File_Path(), ".tga")) {
+		return;
+	}
 	if (!file->Is_Available()) {
 		return;
 	}

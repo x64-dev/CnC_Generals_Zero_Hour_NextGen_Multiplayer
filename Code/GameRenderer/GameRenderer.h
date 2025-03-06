@@ -3,6 +3,8 @@
 
 #pragma once
 
+#define D3DXFX_LARGEADDRESS_HANDLE
+
 #include "dx8/dx8wrapper.h"
 #include "dx8/dx8list.h"
 #include "dx8/dx8renderer.h"
