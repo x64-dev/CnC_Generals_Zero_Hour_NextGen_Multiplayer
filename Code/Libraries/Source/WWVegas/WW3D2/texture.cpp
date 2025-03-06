@@ -37,9 +37,9 @@
 
 #include "texture.h"
 
-#include <d3d8.h>
+#include <d3d9.h>
 #include <stdio.h>
-#include <D3dx8core.h>
+#include <D3dx9core.h>
 #include "GameRenderer.h"
 #include "targa.h"
 #include <nstrdup.h>
@@ -64,6 +64,62 @@ unsigned _MipMapFilters[TextureClass::FILTER_TYPE_COUNT];
 
 // ----------------------------------------------------------------------------
 
+static unsigned CalcTextureSize(unsigned Width, unsigned Height, D3DFORMAT Format)
+{
+	switch (Format)
+	{
+	default:
+	case D3DFMT_UNKNOWN:
+		return 0;
+	case D3DFMT_R3G3B2:
+	case D3DFMT_A8:
+	case D3DFMT_P8:
+	case D3DFMT_L8:
+	case D3DFMT_A4L4:
+		return Width * Height;
+	case D3DFMT_R5G6B5:
+	case D3DFMT_X1R5G5B5:
+	case D3DFMT_A1R5G5B5:
+	case D3DFMT_A4R4G4B4:
+	case D3DFMT_A8R3G3B2:
+	case D3DFMT_X4R4G4B4:
+	case D3DFMT_A8P8:
+	case D3DFMT_A8L8:
+	case D3DFMT_V8U8:
+	case D3DFMT_L6V5U5:
+	case D3DFMT_D16_LOCKABLE:
+	case D3DFMT_D15S1:
+	case D3DFMT_D16:
+	case D3DFMT_UYVY:
+	case D3DFMT_YUY2:
+		return Width * 2 * Height;
+	case D3DFMT_R8G8B8:
+		return Width * 3 * Height;
+	case D3DFMT_A8R8G8B8:
+	case D3DFMT_X8R8G8B8:
+	case D3DFMT_A2B10G10R10:
+	case D3DFMT_A8B8G8R8:
+	case D3DFMT_X8B8G8R8:
+	case D3DFMT_G16R16:
+	case D3DFMT_X8L8V8U8:
+	case D3DFMT_Q8W8V8U8:
+	case D3DFMT_V16U16:
+	case D3DFMT_A2W10V10U10:
+	case D3DFMT_D32:
+	case D3DFMT_D24S8:
+	case D3DFMT_D24X8:
+	case D3DFMT_D24X4S4:
+		return Width * 4 * Height;
+	case D3DFMT_DXT1:
+		return ((Width + 3) >> 2) * ((Height + 3) >> 2) * 8;
+	case D3DFMT_DXT2:
+	case D3DFMT_DXT3:
+	case D3DFMT_DXT4:
+	case D3DFMT_DXT5:
+		return ((Width + 3) >> 2) * ((Height + 3) >> 2) * 16;
+	}
+}
+
 static int Calculate_Texture_Memory_Usage(const TextureClass* texture,int red_factor=0)
 {
 	// Set performance statistics
@@ -74,7 +130,7 @@ static int Calculate_Texture_Memory_Usage(const TextureClass* texture,int red_fa
 	for (unsigned i=red_factor;i<d3d_texture->GetLevelCount();++i) {
 		D3DSURFACE_DESC desc;
 		DX8_ErrorCode(d3d_texture->GetLevelDesc(i,&desc));
-		size+=desc.Size;
+		size+=CalcTextureSize(desc.Width, desc.Height, desc.Format);
 	}
 	return size;
 }

@@ -80,7 +80,7 @@
 #include "GameRenderer.h"
 #include "rinfo.h"
 #include "camera.h"
-#include <D3dx8math.h>
+#include <D3dx9math.h>
 #include "sortingrenderer.h"
 
 // Upgraded to DX8 2/2/01 HY

@@ -20,8 +20,8 @@
 #include "GameRenderer.h"
 #include "vertmaterial.h"
 #include "texture.h"
-#include "d3d8.h"
-#include "D3dx8math.h"
+#include "d3d9.h"
+#include "D3dx9math.h"
 #include "statistics.h"
 
 bool SortingRendererClass::_EnableTriangleDraw=true;

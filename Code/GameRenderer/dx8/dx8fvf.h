@@ -45,7 +45,7 @@
 #define DX8_FVF_H
 
 #include "always.h"
-#include "../../../DX90SDK/include/d3d8.h"
+#include "../../../DX90SDK/include/d3d9.h"
 #ifdef WWDEBUG
 #include "wwdebug.h"
 #endif

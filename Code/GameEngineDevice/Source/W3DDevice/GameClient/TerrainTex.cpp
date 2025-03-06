@@ -52,7 +52,7 @@
 #include "W3DDevice/GameClient/TileData.h"
 #include "common/GlobalData.h"
 #include "GameRenderer.h"
-#include "d3dx8tex.h"
+#include "d3dx9tex.h"
 
 /******************************************************************************
 						TerrainTextureClass

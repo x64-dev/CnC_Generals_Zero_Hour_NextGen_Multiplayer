@@ -87,7 +87,7 @@ static UnsignedByte * saveSurface(IDirect3DSurface8 *surface)
 
 	LPDIRECT3DDEVICE8 m_pDev=DX8Wrapper::_Get_D3D_Device8();
 
-	HRESULT hr=m_pDev->CreateImageSurface(  desc.Width,desc.Height,desc.Format, &tempSurface);
+	HRESULT hr=m_pDev->CreateOffscreenPlainSurface(desc.Width,desc.Height,desc.Format,desc.Pool,&tempSurface,NULL);
 
 	hr=m_pDev->CopyRects(surface,NULL,0,tempSurface,NULL);
  

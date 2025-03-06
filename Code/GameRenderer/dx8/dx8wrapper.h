@@ -45,7 +45,7 @@
 
 #include "always.h"
 #include "dllist.h"
-#include "../../../DX90SDK/include/d3d8.h"
+#include "../../../DX90SDK/include/d3d9.h"
 #include "matrix4.h"
 #include "statistics.h"
 #include "wwstring.h"
@@ -683,22 +683,6 @@ WWINLINE void DX8Wrapper::Set_DX8_Texture(unsigned int stage, IDirect3DBaseTextu
 	if (Textures[stage]) Textures[stage]->AddRef();
 	DX8CALL(SetTexture(stage, texture));
 	DX8_RECORD_TEXTURE_CHANGE();
-}
-
-WWINLINE void DX8Wrapper::_Copy_DX8_Rects(
-  IDirect3DSurface8* pSourceSurface,
-  CONST RECT* pSourceRectsArray,
-  UINT cRects,
-  IDirect3DSurface8* pDestinationSurface,
-  CONST POINT* pDestPointsArray
-)
-{
-	DX8CALL(CopyRects(
-  pSourceSurface,
-  pSourceRectsArray,
-  cRects,
-  pDestinationSurface,
-  pDestPointsArray));
 }
 
 WWINLINE Vector4 DX8Wrapper::Convert_Color(unsigned color)
