@@ -270,12 +270,6 @@ CWorldBuilderApp::~CWorldBuilderApp()
 
 BOOL CWorldBuilderApp::InitInstance()
 {
-	EulaDialog eulaDialog;
-	if( eulaDialog.DoModal() == IDCANCEL )
-	{
-		return FALSE;
-	}
-
 	// initialization
   _set_se_translator( DumpExceptionInfo ); // Hook that allows stack trace.
 
