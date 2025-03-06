@@ -92,6 +92,15 @@ public:
 	** distance from the camera to the z clipping planes.  See implementations for more info.
 	*/
 	WWINLINE void		Init_Ortho(float left,float right,float bottom,float top,float znear,float zfar);
+	WWINLINE void Matrix4::Init_PerspectiveProjection
+	(
+		float left,
+		float right,
+		float bottom,
+		float top,
+		float znear,
+		float zfar
+	);
 	WWINLINE void		Init_Perspective(float fovY, float aspect, float znear, float zfar, float not_used);
 
 	/*
@@ -353,6 +362,30 @@ WWINLINE void Matrix4::Init_Ortho
 	Row[1][3] = -(top + bottom) / (top - bottom);
 	Row[2][2] = -2.0f / (zfar - znear);
 	Row[2][3] = -(zfar + znear) / (zfar - znear);
+}
+
+WWINLINE void Matrix4::Init_PerspectiveProjection
+(
+	float left,
+	float right,
+	float bottom,
+	float top,
+	float znear,
+	float zfar
+)
+{
+	assert(znear > 0.0f);
+	assert(zfar > 0.0f);
+
+	Make_Identity();
+	Row[0][0] = static_cast<float>(2.0 * znear / (right - left));
+	Row[0][2] = (right + left) / (right - left);
+	Row[1][1] = static_cast<float>(2.0 * znear / (top - bottom));
+	Row[1][2] = (top + bottom) / (top - bottom);
+	Row[2][2] = -(zfar + znear) / (zfar - znear);
+	Row[2][3] = static_cast<float>(-(2.0 * zfar * znear) / (zfar - znear));
+	Row[3][2] = -1.0f;
+	Row[3][3] = 0.0f;
 }
 
 WWINLINE void Matrix4::Init_Perspective(float fovY, float aspect, float znear, float zfar, float not_used)
