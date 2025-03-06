@@ -1283,31 +1283,28 @@ void OpenContain::processDamageToContained()
 		ContainedItemsList::const_iterator it;
 		it = items->begin();
 
-		if (it != items->end())
+		while (it != items->end() && *it )
 		{
-			while (*it)
-			{
-				Object* object = *it;
+			Object* object = *it;
 
-				//Advance to the next iterator before we apply the damage.
-				//It's possible that the damage will kill the unit and foobar
-				//the iterator list.
-				++it;
+			//Advance to the next iterator before we apply the damage.
+			//It's possible that the damage will kill the unit and foobar
+			//the iterator list.
+			++it;
 
-				//Calculate the damage to be inflicted on each unit.
-				Real damage = object->getBodyModule()->getMaxHealth() * getOpenContainModuleData()->m_damagePercentageToUnits;
+			//Calculate the damage to be inflicted on each unit.
+			Real damage = object->getBodyModule()->getMaxHealth() * getOpenContainModuleData()->m_damagePercentageToUnits;
 
-				DamageInfo damageInfo;
-				damageInfo.in.m_damageType = DAMAGE_UNRESISTABLE;
-				damageInfo.in.m_deathType = DEATH_BURNED;
-				damageInfo.in.m_sourceID = getObject()->getID();
-				damageInfo.in.m_amount = damage;
-				object->attemptDamage(&damageInfo);
+			DamageInfo damageInfo;
+			damageInfo.in.m_damageType = DAMAGE_UNRESISTABLE;
+			damageInfo.in.m_deathType = DEATH_BURNED;
+			damageInfo.in.m_sourceID = getObject()->getID();
+			damageInfo.in.m_amount = damage;
+			object->attemptDamage(&damageInfo);
 
-				if (!object->isEffectivelyDead() && getOpenContainModuleData()->m_damagePercentageToUnits == 1.0f)
-					object->kill(); // in case we are carrying flame proof troops we have been asked to kill			
+			if (!object->isEffectivelyDead() && getOpenContainModuleData()->m_damagePercentageToUnits == 1.0f)
+				object->kill(); // in case we are carrying flame proof troops we have been asked to kill
 			}
-		}
 	}
 }
 
