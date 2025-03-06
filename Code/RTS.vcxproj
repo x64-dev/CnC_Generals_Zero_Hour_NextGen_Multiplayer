@@ -213,7 +213,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>WW3D2Internal_x64.lib;WWDebugInternal_x64.lib;WWLibInternal_x64.lib;WWUtilInternal_x64.lib;WWMathInternal_x64.lib;GameEngineInternal_x64.lib;GameEngineDeviceInternal_x64.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx8.lib;d3d8.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WW3D2Internal_x64.lib;WWDebugInternal_x64.lib;WWLibInternal_x64.lib;WWUtilInternal_x64.lib;WWMathInternal_x64.lib;GameEngineInternal_x64.lib;GameEngineDeviceInternal_x64.lib;dxguid.lib;dinput8.lib;odbc32.lib;odbccp32.lib;d3dx9.lib;d3d9.lib;dxerr.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\Run\RTSI_x64.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Libraries\DX90SDK\Lib\x64;Libraries\Bink\lib\;GameEngine;GameEngine\Lib;GameEngineDevice\Lib;Libraries\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
