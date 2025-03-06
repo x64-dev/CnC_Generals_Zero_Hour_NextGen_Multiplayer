@@ -1,7 +1,0 @@
-# CMake generation dependency list for this directory.
-C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/Voice2/CMakeLists.txt
-C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/cmake/FindGsm.cmake
-C:/GENZH/2/jmarshall_x64/Code/Libraries/Source/GameSpy/cmake/FindSpeex.cmake
-C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
-C:/Program Files/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake
-C:/Program Files/CMake/share/cmake-3.27/Modules/FindPkgConfig.cmake
