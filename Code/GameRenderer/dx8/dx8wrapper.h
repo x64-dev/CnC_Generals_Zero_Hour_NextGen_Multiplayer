@@ -635,6 +635,17 @@ WWINLINE void DX8Wrapper::Set_DX8_Light(int index, D3DLIGHT8* light)
 
 WWINLINE void DX8Wrapper::Set_DX8_Render_State(D3DRENDERSTATETYPE state, unsigned value)
 {
+	// HACK
+	switch (state)
+	{
+	case D3DRS_ZBIAS:
+		float Biased = static_cast<float>(value) * -0.000005f;
+		value = *reinterpret_cast<unsigned*>(&Biased);
+		DX8CALL(SetRenderState( D3DRS_DEPTHBIAS, value ));
+		return;
+	}
+	// HACK
+
 	// Can't monitor state changes because setShader call to GERD may change the states!
 	if (RenderStates[state]==value) return;
 
@@ -652,6 +663,34 @@ WWINLINE void DX8Wrapper::Set_DX8_Clip_Plane(DWORD Index, CONST float* pPlane)
 
 WWINLINE void DX8Wrapper::Set_DX8_Texture_Stage_State(unsigned stage, D3DTEXTURESTAGESTATETYPE state, unsigned value)
 {
+	// HACK
+	switch (state) {
+	case D3DTSS_ADDRESSU:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSU, value));
+		return;
+	case D3DTSS_ADDRESSV:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSV, value));
+		return;
+	case D3DTSS_ADDRESSW:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSW, value));
+		return;
+	case D3DTSS_MAGFILTER:
+		if (value == D3DTEXF_FLATCUBIC || value == D3DTEXF_GAUSSIANCUBIC)
+			value = D3DTEXF_LINEAR;
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MAGFILTER, value));
+		return;
+	case D3DTSS_MINFILTER:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MINFILTER, value));
+		return;
+	case D3DTSS_MIPFILTER:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MIPFILTER, value));
+		return;
+	case D3DTSS_MAXANISOTROPY:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MAXANISOTROPY, value));
+		return;
+	}
+	// HACK
+
   	if (stage >= MAX_TEXTURE_STAGES)
   	{	DX8CALL(SetTextureStageState( stage, state, value ));
   		return;

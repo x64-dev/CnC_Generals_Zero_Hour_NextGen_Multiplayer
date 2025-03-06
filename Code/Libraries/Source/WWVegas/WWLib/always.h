@@ -250,5 +250,10 @@ template <class T> T max(T a,T b)
 #define size_of(typ,id) sizeof(((typ*)0)->id)
 #endif
 
+#include "dx8to9.h"
+
+#if defined(_DEBUG) || defined(_INTERNAL)
+#define WWDEBUG
+#endif
 
 #endif

@@ -486,6 +486,7 @@
     <ClInclude Include="cpudetect.h" />
     <ClInclude Include="CRC.H" />
     <ClInclude Include="cstraw.h" />
+    <ClInclude Include="dx8to9.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="dsurface.h" />
     <ClInclude Include="ffactory.h" />
