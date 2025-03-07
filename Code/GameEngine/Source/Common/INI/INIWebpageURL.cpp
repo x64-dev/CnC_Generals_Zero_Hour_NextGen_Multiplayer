@@ -32,6 +32,7 @@
 
 #include "Common/INI.h"
 #include "Common/Registry.h"
+#include "GameNetwork/WOLBrowser/WebBrowser.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -82,12 +83,21 @@ AsciiString encodeURL(AsciiString source)
 void INI::parseWebpageURLDefinition( INI* ini )
 {
 	AsciiString tag;
+	WebBrowserURL *url;
 
 	// read the name
 	const char* c = ini->getNextToken();
 	tag.set( c );
 
+	if (TheWebBrowser != NULL)
+	{
+		url = TheWebBrowser->findURL(tag);
 
+		if (url == NULL)
+		{
+			url = TheWebBrowser->makeNewURL(tag);
+		}
+	}
 
 	// find existing item if present
 //	track = TheAudio->Music->getTrack( name );
@@ -103,4 +113,16 @@ void INI::parseWebpageURLDefinition( INI* ini )
 //										 name.str()) );
 
 	// parse the ini definition
+	ini->initFromINI( url, url->getFieldParse() );
+
+	if (url->m_url.startsWith("file://"))
+	{
+		char cwd[_MAX_PATH] = "\\";
+		getcwd(cwd, _MAX_PATH);
+
+		url->m_url.format("file://%s\\Data\\%s\\%s", encodeURL(cwd).str(), GetRegistryLanguage().str(), url->m_url.str()+7);
+		DEBUG_LOG(("INI::parseWebpageURLDefinition() - converted URL to [%s]\n", url->m_url.str()));
+	}
 }  // end parseMusicTrackDefinition
+
+

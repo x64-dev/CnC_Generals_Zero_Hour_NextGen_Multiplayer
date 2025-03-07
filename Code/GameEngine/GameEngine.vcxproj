@@ -716,6 +716,7 @@
     <ClCompile Include="Source\GameNetwork\Transport.cpp" />
     <ClCompile Include="Source\GameNetwork\udp.cpp" />
     <ClCompile Include="Source\GameNetwork\User.cpp" />
+    <ClCompile Include="Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
     <ClCompile Include="Source\Precompiled\PreRTS.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Create</PrecompiledHeader>
@@ -1260,6 +1261,7 @@
     <ClInclude Include="Include\GameNetwork\udp.h" />
     <ClInclude Include="Include\GameNetwork\User.h" />
     <ClInclude Include="Include\GameNetwork\WOLBrowser\FEBDispatch.h" />
+    <ClInclude Include="Include\GameNetwork\WOLBrowser\WebBrowser.h" />
     <ClInclude Include="Include\Precompiled\PreRTS.h" />
   </ItemGroup>
   <ItemGroup>
