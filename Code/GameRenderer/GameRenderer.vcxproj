@@ -32,17 +32,6 @@
     <Text Include="dx8\DX8ToolModifications.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="d3d8to9\d3d8to9.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_base.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_device.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_index_buffer.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_surface.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_swap_chain.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_texture.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_vertex_buffer.cpp" />
-    <ClCompile Include="d3d8to9\d3d8to9_volume.cpp" />
-    <ClCompile Include="d3d8to9\d3d8types.cpp" />
-    <ClCompile Include="d3d8to9\interface_query.cpp" />
     <ClCompile Include="dx8\dx8caps.cpp" />
     <ClCompile Include="dx8\dx8fvf.cpp" />
     <ClCompile Include="dx8\dx8indexbuffer.cpp" />
@@ -54,11 +43,6 @@
     <ClCompile Include="dx8\dx8wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="d3d8to9\d3d8.hpp" />
-    <ClInclude Include="d3d8to9\d3d8to9.hpp" />
-    <ClInclude Include="d3d8to9\d3d8types.hpp" />
-    <ClInclude Include="d3d8to9\d3dx9.hpp" />
-    <ClInclude Include="d3d8to9\interface_query.hpp" />
     <ClInclude Include="dx8\dx8caps.h" />
     <ClInclude Include="dx8\dx8fvf.h" />
     <ClInclude Include="dx8\dx8indexbuffer.h" />
@@ -143,30 +127,12 @@
   <PropertyGroup>
     <_ProjectFileVersion>17.0.35707.178</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\Release\</OutDir>
-    <IntDir>.\Release\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\Debug\</OutDir>
-    <IntDir>.\Debug\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">
-    <OutDir>.\Internal\</OutDir>
-    <IntDir>.\Internal\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\Release_x64\</OutDir>
-    <IntDir>.\Release_x64\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>.\Debug_x64\</OutDir>
-    <IntDir>.\Debug_x64\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
-    <OutDir>.\Internal_x64\</OutDir>
-    <IntDir>.\Internal_x64\</IntDir>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -178,9 +144,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>.\Debug/GameRenderer.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -212,14 +175,12 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Release/GameRenderer_x64.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -308,9 +269,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>.\Internal/GameRenderer.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Internal/</AssemblerListingLocation>
-      <ObjectFileName>.\Internal/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Internal/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -336,21 +294,19 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\wwlib;..\wwdebug;..\wwmath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Libraries\Source\WWVegas\WWSaveLoad\;..\Libraries\Source\WWVegas\WWDebug\;..\Libraries\Source\WWVegas\WWMath\;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\DX90SDK\Include\;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WWLib;../Libraries/Source/Compression;Include/Precompiled;../Libraries/Source/WWVegas;../Libraries/Source/;../Libraries/Source/WWVegas\WWLib;Include;../Libraries/Include;../Libraries/Source/GameSpy;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_LIB;_WINDOWS;WIN32_LEAN_AND_MEAN;_INTERNAL;%(PreprocessorDefinitions);_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Internal/GameRendererInternal_x64.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Internal/</AssemblerListingLocation>
-      <ObjectFileName>.\Internal/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Internal/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -362,7 +318,7 @@
     </Lib>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Internal/GameRenderer.bsc</OutputFile>
+      <OutputFile>.\Internal/GameRenderer_x64.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -377,9 +333,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>.\Release/GameRenderer.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -404,21 +357,19 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\wwlib;..\wwdebug;..\wwmath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Libraries\Source\WWVegas\WWSaveLoad\;..\Libraries\Source\WWVegas\WWDebug\;..\Libraries\Source\WWVegas\WWMath\;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\DX90SDK\Include\;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WWLib;../Libraries/Source/Compression;Include/Precompiled;../Libraries/Source/WWVegas;../Libraries/Source/;../Libraries/Source/WWVegas\WWLib;Include;../Libraries/Include;../Libraries/Source/GameSpy;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_LIB;_WINDOWS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Debug/GameRenderer_x64.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -430,7 +381,7 @@
     </Lib>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/GameRenderer.bsc</OutputFile>
+      <OutputFile>.\Debug/GameRenderer_x64.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
