@@ -389,7 +389,42 @@ void OpenALAudioManager::setDeviceListenerPosition(void)
 //-----------------------------------------------------------------------------
 void OpenALAudioManager::processFadingList(void)
 {
-    // Fading logic (unchanged)...
+    std::list<OpenALPlayingAudio*>::iterator it;
+    OpenALPlayingAudio* playing;
+
+    for (it = m_fadingAudio.begin(); it != m_fadingAudio.end(); /* emtpy */)
+    {
+        playing = *it;
+        if (!playing) {
+            continue;
+        }
+
+        if (playing->m_framesFaded >= getAudioSettings()->m_fadeAudioFrames)
+        {
+            playing->m_status = PS_Stopped;
+            playing->m_requestStop = true;
+            //m_stoppedAudio.push_back(playing);
+            releasePlayingAudio(playing);
+            it = m_fadingAudio.erase(it);
+            continue;
+        }
+
+        ++playing->m_framesFaded;
+
+        /*
+        * This is bad idea because volume settings would be applied twice.
+        * 3D volume math happens in openal anyway.
+        */
+        //Real volume = getEffectiveVolume(playing->m_audioEventRTS);
+
+        Real volume =  playing->m_audioEventRTS->getVolume() * playing->m_audioEventRTS->getVolumeShift();
+        volume *= (1.0f - 1.0f * playing->m_framesFaded / getAudioSettings()->m_fadeAudioFrames);
+
+        playing->m_audioEventRTS->setVolume(volume);
+        adjustPlayingVolume(playing);
+
+        ++it;
+    }
 }
 
 void OpenALAudioManager::stopAudio(AudioAffect which)
