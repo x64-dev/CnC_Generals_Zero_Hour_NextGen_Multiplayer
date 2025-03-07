@@ -55,7 +55,7 @@ typedef struct BINK
 typedef void *(__stdcall *SndOpenCallback)(unsigned long param);
 
 BINKEXPORT HBINK __stdcall BinkOpen(const char *name, unsigned int flags);
-BINKEXPORT void __stdcall BinkSetSoundTrack(unsigned int total_tracks, unsigned int *tracks);
+BINKEXPORT void __stdcall BinkSetSoundTrack(unsigned int track);
 BINKEXPORT int __stdcall BinkSetSoundSystem(SndOpenCallback open, unsigned long param);
 BINKEXPORT void *__stdcall BinkOpenDirectSound(unsigned long param);
 BINKEXPORT void __stdcall BinkClose(HBINK handle);
@@ -63,7 +63,7 @@ BINKEXPORT int __stdcall BinkWait(HBINK handle);
 BINKEXPORT int __stdcall BinkDoFrame(HBINK handle);
 BINKEXPORT int __stdcall BinkCopyToBuffer(
     HBINK handle, void *dest, int destpitch, unsigned int destheight, unsigned int destx, unsigned int desty, unsigned int flags);
-BINKEXPORT void __stdcall BinkSetVolume(HBINK handle, unsigned int trackid, int volume);
+BINKEXPORT void __stdcall BinkSetVolume(HBINK handle, int volume);
 BINKEXPORT void __stdcall BinkNextFrame(HBINK handle);
 BINKEXPORT void __stdcall BinkGoto(HBINK handle, unsigned int frame, int flags);
 

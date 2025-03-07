@@ -27,7 +27,7 @@ BINK *__stdcall BinkOpen(const char *name, unsigned int flags)
     return NULL;
 }
 
-void __stdcall BinkSetSoundTrack(unsigned int total_tracks, unsigned int *tracks)
+void __stdcall BinkSetSoundTrack(unsigned int track)
 {
     
 }
@@ -63,7 +63,7 @@ int __stdcall BinkCopyToBuffer(
     return 0;
 }
 
-void __stdcall BinkSetVolume(BINK *handle, unsigned int trackid, int volume)
+void __stdcall BinkSetVolume(BINK *handle, int volume)
 {
     
 }
