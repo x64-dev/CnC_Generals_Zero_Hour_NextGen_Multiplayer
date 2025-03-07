@@ -115,7 +115,7 @@ int lzhl_send( SOCKET sock, const char* data, int dataSz, int flags ) {
     {
       BYTE tmp[ 5 ];
       BYTE* p = tmp;
-      _putInt( p, compSz );
+      _putInt( p, (unsigned int)compSz );
       int szSz = p - tmp;
       dSz = szSz;
       assert( dSz <= 10 );
@@ -163,7 +163,7 @@ int lzhl_recv( SOCKET sock, char* buf, int bufSz, int flags )
       dh = LZHLCreateDecompressor();
 
     if ( ls.dBuf == 0 ) {
-      unsigned int dataSz, compSz;
+      size_t dataSz, compSz;
       BYTE tmp[ 10 ];
       int bytesRead = 0;
       int hdrSz;
@@ -177,14 +177,14 @@ int lzhl_recv( SOCKET sock, char* buf, int bufSz, int flags )
         bytesRead += bytes;
         BYTE* p = tmp;
 
-        int err = _getInt( p, bytesRead, &dataSz );
+        int err = _getInt( p, bytesRead, (unsigned int*)&dataSz);
 
         if ( err == 1 )
           continue;  //forever
         else if ( err > 0 )
           return -1;
 
-        err = _getInt( p, bytesRead - ( p - tmp ), &compSz );
+        err = _getInt( p, bytesRead - ( p - tmp ), (unsigned int*)&compSz );
 
         if ( err == 1 )
           continue;  //forever
@@ -214,7 +214,7 @@ int lzhl_recv( SOCKET sock, char* buf, int bufSz, int flags )
       ls.dDisp = 0;
       ls.dBuf = new BYTE[ dataSz ];
       
-      int Ok = LZHLDecompress( dh, ls.dBuf, &dataSz, compBuf, &compSz );
+      int Ok = LZHLDecompress( dh, ls.dBuf, &dataSz, compBuf, &compSz);
       delete [] compBuf;
 
       if ( !Ok ) {

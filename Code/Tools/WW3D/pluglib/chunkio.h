@@ -87,6 +87,8 @@
 	are considered data.
 
 **************************************************************************************/
+#pragma pack(push)  /* push current alignment to stack */
+#pragma pack(4)     /* set alignment to 4 byte boundary */
 
 struct ChunkHeader
 {
@@ -125,6 +127,8 @@ struct MicroChunkHeader
 	uint8	ChunkSize;
 };
 
+
+#pragma pack(pop)   /* restore original alignment from stack */
 
 /**************************************************************************************
 **

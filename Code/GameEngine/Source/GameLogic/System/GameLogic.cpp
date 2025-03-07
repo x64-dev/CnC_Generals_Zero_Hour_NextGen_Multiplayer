@@ -201,9 +201,15 @@ void setFPMode( void )
 	UnsignedInt newVal = curVal;
 	newVal = (newVal & ~_MCW_RC) | (_RC_NEAR & _MCW_RC);
 	//newVal = (newVal & ~_MCW_RC) | (_RC_CHOP & _MCW_RC);
+
+#ifdef _WIN64
+	// _MCW_PC (Precision control) not supported on ARM or x64 platforms.
+	_controlfp(newVal, _MCW_RC);
+#else
 	newVal = (newVal & ~_MCW_PC) | (_PC_24   & _MCW_PC);
 
 	_controlfp(newVal, _MCW_PC | _MCW_RC);
+#endif
 }
 
 // ------------------------------------------------------------------------------------------------

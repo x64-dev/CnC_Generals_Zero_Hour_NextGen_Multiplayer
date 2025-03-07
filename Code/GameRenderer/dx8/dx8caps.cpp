@@ -68,14 +68,14 @@ enum {
 
 void DX8Caps::Init_Caps(IDirect3DDevice8* D3DDevice)
 {
-	D3DDevice->SetRenderState(D3DRS_SOFTWAREVERTEXPROCESSING,TRUE);
+	D3DDevice->SetSoftwareVertexProcessing(TRUE);
 	DX8CALL(GetDeviceCaps(&swVPCaps));
 
 	if ((swVPCaps.DevCaps&D3DDEVCAPS_HWTRANSFORMANDLIGHT)==D3DDEVCAPS_HWTRANSFORMANDLIGHT) {
 		UseTnL=true;
 
-		D3DDevice->SetRenderState(D3DRS_SOFTWAREVERTEXPROCESSING,FALSE);
-		DX8CALL(GetDeviceCaps(&hwVPCaps));	
+		D3DDevice->SetSoftwareVertexProcessing(FALSE);
+		DX8CALL(GetDeviceCaps(&hwVPCaps));
 	} else {
 		UseTnL=false;			
 	}

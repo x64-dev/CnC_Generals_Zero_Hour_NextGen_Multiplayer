@@ -56,7 +56,7 @@ size_t LZHLCompressor::compress( BYTE* dst, const BYTE* src, size_t sz ) {
   }
 
   for (;;) {
-    int srcLeft = srcEnd - src;
+    int srcLeft = (int)(srcEnd - src);
     if ( srcLeft < LZMATCH ) {
       if ( srcLeft ) {
         _toBuf( src, srcLeft );

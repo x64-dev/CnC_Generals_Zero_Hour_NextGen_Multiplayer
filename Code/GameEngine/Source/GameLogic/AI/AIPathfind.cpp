@@ -907,7 +907,7 @@ void Path::computePointOnPath(
 		// projected position on the path.  If we are very far off the path, we will move 
 		// directly towards the nearest point on the path, and not the next path node.
 		const Real maxPathError = 3.0f * PATHFIND_CELL_SIZE_F;
-		const Real maxPathErrorInv = 1.0 / maxPathError;
+		const Real maxPathErrorInv = 1.0f / maxPathError;
 		Real k = offsetDist * maxPathErrorInv;
 		if (k > 1.0f)
 			k = 1.0f;
@@ -6847,12 +6847,18 @@ void Pathfinder::processHierarchicalCell( const ICoord2D &scanCell, const ICoord
 			return;
 		}
 		
-		newCell->allocateInfo(scanCell);
+		if (!newCell->allocateInfo(scanCell)) {
+			// Out of cells for pathing...
+			return;
+		}
 		if (!newCell->getClosed() && !newCell->getOpen()) {
 			m_closedList = newCell->putOnClosedList(m_closedList);
 		}
 
-		adjNewCell->allocateInfo(adjacentCell);
+		if (!adjNewCell->allocateInfo(adjacentCell)) {
+			// Out of cells for pathing...
+			return;
+		}
 		cellCount++;
 		Int curCost = adjNewCell->costToHierGoal(parentCell);
 		Int remCost = adjNewCell->costToHierGoal(goalCell);

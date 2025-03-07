@@ -108,7 +108,7 @@
 #include <ini.h>
 #include <windows.h>
 #include <stdio.h>
-#include <D3dx8core.h>
+#include <D3dx9core.h>
 
 #include "texture.h"
 #include "wwprofile.h"
@@ -328,7 +328,6 @@ static void Log_Textures(bool inited,unsigned& total_count, unsigned& total_mem)
 		case D3DFMT_X8L8V8U8: tex_format="D3DFMT_X8L8V8U8"; break;
 		case D3DFMT_Q8W8V8U8: tex_format="D3DFMT_Q8W8V8U8"; break;
 		case D3DFMT_V16U16: tex_format="D3DFMT_V16U16"; break;
-		case D3DFMT_W11V11U10: tex_format="D3DFMT_W11V11U10"; break;
 		case D3DFMT_UYVY: tex_format="D3DFMT_UYVY"; break;
 		case D3DFMT_YUY2: tex_format="D3DFMT_YUY2"; break;
 		case D3DFMT_DXT1: tex_format="D3DFMT_DXT1"; break;
@@ -791,7 +790,7 @@ RenderObjClass * WW3DAssetManager::Create_Render_Obj(const char * name)
 		char filename [MAX_PATH];
 		const char *mesh_name = ::strchr (name, '.');
 		if (mesh_name != NULL) {
-			::lstrcpyn (filename, name, ((int)mesh_name) - ((int)name) + 1);
+			::lstrcpyn (filename, name, ((intptr_t)mesh_name) - ((intptr_t)name) + 1);
 			::lstrcat (filename, ".w3d");
 		} else {
 			sprintf( filename, "%s.w3d", name);

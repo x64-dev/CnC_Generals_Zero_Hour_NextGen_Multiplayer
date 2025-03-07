@@ -954,6 +954,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 	//		AsciiString(VERSION_BUILDUSER), AsciiString(VERSION_BUILDLOC),
 	//		AsciiString(__TIME__), AsciiString(__DATE__));
 
+#if !defined(_DEBUG) && !defined(_INTERNAL)
 		//Create a mutex with a unique name to Generals in order to determine if
 		//our app is already running.
 		//WARNING: DO NOT use this number for any other application except Generals.
@@ -980,6 +981,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 			return 0;
 		}
 		DEBUG_LOG(("Create GeneralsMutex okay.\n"));
+#endif
 
 #ifdef DO_COPY_PROTECTION
 		if (!CopyProtect::notifyLauncher())

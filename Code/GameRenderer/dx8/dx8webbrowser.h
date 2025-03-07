@@ -34,7 +34,7 @@
 #define DX8_WEBBROWSER_H
 
 #include <windows.h>
-#include "d3d8.h"
+#include "d3d9.h"
 
 // ***********************************
 // Set this to 0 to remove all embedded browser code.

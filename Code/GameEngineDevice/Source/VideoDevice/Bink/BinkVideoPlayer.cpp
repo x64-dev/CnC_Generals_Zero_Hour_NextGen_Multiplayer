@@ -287,6 +287,7 @@ void BinkVideoPlayer::initializeBinkWithMiles()
 	
 	if ( driver )
 	{
+		// NOTE: This truncates a pointer, but it should be okay since bink is just a stub.
 		retVal = BinkSoundUseDirectSound(driver);
 	}
 	if( !driver || retVal == 0)
@@ -355,7 +356,7 @@ void BinkVideoStream::frameRender( VideoBuffer *buffer )
 	{
 		void *mem = buffer->lock();
 
-		u32 flags;
+		uint32_t flags;
 
 		switch ( buffer->format())
 		{

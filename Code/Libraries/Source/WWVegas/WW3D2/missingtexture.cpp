@@ -19,7 +19,7 @@
 #include "missingtexture.h"
 #include "texture.h"
 #include "GameRenderer.h"
-#include <D3dx8core.h>
+#include <D3dx9core.h>
 
 static unsigned missing_image_width=128;
 static unsigned missing_image_height=128;
@@ -46,12 +46,14 @@ IDirect3DSurface8* MissingTexture::_Create_Missing_Surface()
 	DX8_ErrorCode(texture_surface->GetDesc(&texture_surface_desc));
 	
 	IDirect3DSurface8 *surface = NULL;	
-	DX8CALL(CreateImageSurface(
+	DX8CALL(CreateOffscreenPlainSurface(
 		texture_surface_desc.Width, 
 		texture_surface_desc.Height, 
 		texture_surface_desc.Format, 
-		&surface));
-	DX8CALL(CopyRects(texture_surface, NULL, 0, surface, NULL));
+		texture_surface_desc.Pool, 
+		&surface,
+		NULL));
+	DX8Wrapper::_Copy_DX8_Rects(texture_surface, NULL, 0, surface, NULL);
 	texture_surface->Release();
 	return surface;
 }

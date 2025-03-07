@@ -1283,7 +1283,7 @@ void OpenContain::processDamageToContained()
 		ContainedItemsList::const_iterator it;
 		it = items->begin();
 
-		while (it != items->end() && *it )
+		while (it != items->end() && *it)
 		{
 			Object* object = *it;
 
@@ -1303,8 +1303,8 @@ void OpenContain::processDamageToContained()
 			object->attemptDamage(&damageInfo);
 
 			if (!object->isEffectivelyDead() && getOpenContainModuleData()->m_damagePercentageToUnits == 1.0f)
-				object->kill(); // in case we are carrying flame proof troops we have been asked to kill
-			}
+				object->kill(); // in case we are carrying flame proof troops we have been asked to kill			
+		}
 	}
 }
 

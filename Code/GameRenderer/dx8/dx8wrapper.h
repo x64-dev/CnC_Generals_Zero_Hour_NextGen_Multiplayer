@@ -45,7 +45,7 @@
 
 #include "always.h"
 #include "dllist.h"
-#include "../../../DX90SDK/include/d3d8.h"
+#include "../../../DX90SDK/include/d3d9.h"
 #include "matrix4.h"
 #include "statistics.h"
 #include "wwstring.h"
@@ -635,6 +635,17 @@ WWINLINE void DX8Wrapper::Set_DX8_Light(int index, D3DLIGHT8* light)
 
 WWINLINE void DX8Wrapper::Set_DX8_Render_State(D3DRENDERSTATETYPE state, unsigned value)
 {
+	// HACK
+	switch (state)
+	{
+	case D3DRS_ZBIAS:
+		float Biased = static_cast<float>(value) * -0.000005f;
+		value = *reinterpret_cast<unsigned*>(&Biased);
+		DX8CALL(SetRenderState( D3DRS_DEPTHBIAS, value ));
+		return;
+	}
+	// HACK
+
 	// Can't monitor state changes because setShader call to GERD may change the states!
 	if (RenderStates[state]==value) return;
 
@@ -652,6 +663,34 @@ WWINLINE void DX8Wrapper::Set_DX8_Clip_Plane(DWORD Index, CONST float* pPlane)
 
 WWINLINE void DX8Wrapper::Set_DX8_Texture_Stage_State(unsigned stage, D3DTEXTURESTAGESTATETYPE state, unsigned value)
 {
+	// HACK
+	switch (state) {
+	case D3DTSS_ADDRESSU:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSU, value));
+		return;
+	case D3DTSS_ADDRESSV:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSV, value));
+		return;
+	case D3DTSS_ADDRESSW:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_ADDRESSW, value));
+		return;
+	case D3DTSS_MAGFILTER:
+		if (value == D3DTEXF_FLATCUBIC || value == D3DTEXF_GAUSSIANCUBIC)
+			value = D3DTEXF_LINEAR;
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MAGFILTER, value));
+		return;
+	case D3DTSS_MINFILTER:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MINFILTER, value));
+		return;
+	case D3DTSS_MIPFILTER:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MIPFILTER, value));
+		return;
+	case D3DTSS_MAXANISOTROPY:
+		DX8CALL(SetSamplerState(stage, D3DSAMP_MAXANISOTROPY, value));
+		return;
+	}
+	// HACK
+
   	if (stage >= MAX_TEXTURE_STAGES)
   	{	DX8CALL(SetTextureStageState( stage, state, value ));
   		return;
@@ -683,22 +722,6 @@ WWINLINE void DX8Wrapper::Set_DX8_Texture(unsigned int stage, IDirect3DBaseTextu
 	if (Textures[stage]) Textures[stage]->AddRef();
 	DX8CALL(SetTexture(stage, texture));
 	DX8_RECORD_TEXTURE_CHANGE();
-}
-
-WWINLINE void DX8Wrapper::_Copy_DX8_Rects(
-  IDirect3DSurface8* pSourceSurface,
-  CONST RECT* pSourceRectsArray,
-  UINT cRects,
-  IDirect3DSurface8* pDestinationSurface,
-  CONST POINT* pDestPointsArray
-)
-{
-	DX8CALL(CopyRects(
-  pSourceSurface,
-  pSourceRectsArray,
-  cRects,
-  pDestinationSurface,
-  pDestPointsArray));
 }
 
 WWINLINE Vector4 DX8Wrapper::Convert_Color(unsigned color)
@@ -769,55 +792,9 @@ WWINLINE unsigned int DX8Wrapper::Convert_Color(const Vector3& color, float alph
 
 WWINLINE void DX8Wrapper::Clamp_Color(Vector4& color)
 {
-	if (!CPUDetectClass::Has_CMOV_Instruction()) {
-		for (int i=0;i<4;++i) {
-			float f=(color[i]<0.0f) ? 0.0f : color[i];
-			color[i]=(f>1.0f) ? 1.0f : f;
-		}
-		return;
-	}
-
-	__asm
-	{
-		mov	esi,dword ptr color
-
-		mov edx,0x3f800000
-
-		mov edi,dword ptr[esi]
-		mov ebx,edi
-		sar edi,31
-		not edi			// mask is now zero if negative value
-		and edi,ebx
-		cmp edi,edx		// if no less than 1.0 set to 1.0
-		cmovnb edi,edx
-		mov dword ptr[esi],edi
-
-		mov edi,dword ptr[esi+4]
-		mov ebx,edi
-		sar edi,31
-		not edi			// mask is now zero if negative value
-		and edi,ebx
-		cmp edi,edx		// if no less than 1.0 set to 1.0
-		cmovnb edi,edx
-		mov dword ptr[esi+4],edi
-
-		mov edi,dword ptr[esi+8]
-		mov ebx,edi
-		sar edi,31
-		not edi			// mask is now zero if negative value
-		and edi,ebx
-		cmp edi,edx		// if no less than 1.0 set to 1.0
-		cmovnb edi,edx
-		mov dword ptr[esi+8],edi
-
-		mov edi,dword ptr[esi+12]
-		mov ebx,edi
-		sar edi,31
-		not edi			// mask is now zero if negative value
-		and edi,ebx
-		cmp edi,edx		// if no less than 1.0 set to 1.0
-		cmovnb edi,edx
-		mov dword ptr[esi+12],edi
+	for (int i = 0; i < 4; ++i) {
+		float f = (color[i] < 0.0f) ? 0.0f : color[i];
+		color[i] = (f > 1.0f) ? 1.0f : f;
 	}
 }
 

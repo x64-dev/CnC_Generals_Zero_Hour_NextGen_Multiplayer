@@ -91,7 +91,7 @@
 #include "ImpassableOptions.h"
 
 
-#include "../../../Libraries/DX90SDK/include/d3dx8.h"
+#include "../../../Libraries/DX90SDK/include/d3dx9.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -523,36 +523,22 @@ void WbView3d::ReAcquireResources(void)
 	}
 	IDirect3DDevice8* pDev = DX8Wrapper::_Get_D3D_Device8();
 	if (pDev) {
-
-//		CDC* pDC = GetDC();
-		LOGFONT logFont;
-		logFont.lfHeight = 20;
-		logFont.lfWidth = 0;
-		logFont.lfEscapement = 0;
-		logFont.lfOrientation = 0;
-		logFont.lfWeight = FW_REGULAR;
-		logFont.lfItalic = FALSE;
-		logFont.lfUnderline = FALSE;
-		logFont.lfStrikeOut = FALSE;
-		logFont.lfCharSet = ANSI_CHARSET;
-		logFont.lfOutPrecision = OUT_DEFAULT_PRECIS;
-		logFont.lfClipPrecision = CLIP_DEFAULT_PRECIS;
-		logFont.lfQuality = DEFAULT_QUALITY;
-		logFont.lfPitchAndFamily = DEFAULT_PITCH;
-		strcpy(logFont.lfFaceName, "Arial");
-
-		HFONT hFont = CreateFontIndirect(&logFont);
-		if (hFont) {
-			D3DXCreateFont(pDev, hFont, &m3DFont);
-			DeleteObject(hFont);
-		} else {
-			m3DFont = NULL;
-		}
-		
+		D3DXCreateFont(
+			pDev,                 // D3D Device
+			20,                   // Height
+			0,                    // Width
+			FW_REGULAR,           // Weight
+			1,                    // MipLevels
+			FALSE,                // Italic
+			ANSI_CHARSET,         // CharSet
+			OUT_DEFAULT_PRECIS,   // OutputPrecision
+			DEFAULT_QUALITY,      // Quality
+			DEFAULT_PITCH,        // PitchAndFamily
+			"Arial",              // FaceName
+			&m3DFont);            // Pointer to ID3DXFont
 	} else {
 		m3DFont = NULL;
 	}
-
 }
 
 // ----------------------------------------------------------------------------
@@ -2174,32 +2160,19 @@ void WbView3d::initWW3D()
 
 		IDirect3DDevice8* pDev = DX8Wrapper::_Get_D3D_Device8();
 		if (pDev) {
-
-//			CDC* pDC = GetDC();
-			LOGFONT logFont;
-			logFont.lfHeight = 20;
-			logFont.lfWidth = 0;
-			logFont.lfEscapement = 0;
-			logFont.lfOrientation = 0;
-			logFont.lfWeight = FW_REGULAR;
-			logFont.lfItalic = FALSE;
-			logFont.lfUnderline = FALSE;
-			logFont.lfStrikeOut = FALSE;
-			logFont.lfCharSet = ANSI_CHARSET;
-			logFont.lfOutPrecision = OUT_DEFAULT_PRECIS;
-			logFont.lfClipPrecision = CLIP_DEFAULT_PRECIS;
-			logFont.lfQuality = DEFAULT_QUALITY;
-			logFont.lfPitchAndFamily = DEFAULT_PITCH;
-			strcpy(logFont.lfFaceName, "Arial");
-
-			HFONT hFont = CreateFontIndirect(&logFont);
-			if (hFont) {
-				D3DXCreateFont(pDev, hFont, &m3DFont);
-				DeleteObject(hFont);
-			} else {
-				m3DFont = NULL;
-			}
-			
+			D3DXCreateFont(
+               pDev,                 // D3D Device
+               20,                   // Height
+               0,                    // Width
+               FW_REGULAR,           // Weight
+               1,                    // MipLevels
+               FALSE,                // Italic
+               ANSI_CHARSET,         // CharSet
+               OUT_DEFAULT_PRECIS,   // OutputPrecision
+               DEFAULT_QUALITY,      // Quality
+               DEFAULT_PITCH,        // PitchAndFamily
+               "Arial",              // FaceName
+               &m3DFont);            // Pointer to ID3DXFont
 		} else {
 			m3DFont = NULL;
 		}
@@ -2383,10 +2356,17 @@ void WbView3d::drawLabels(HDC hdc)
 							RECT rct;
 							pt.y -= 5;
 							pt.x += 1;
-							rct.top = rct.bottom = pt.y;
-							rct.left = rct.right = pt.x;
-							m3DFont->DrawText(name.str(), name.getLength(), &rct, 
-								DT_LEFT | DT_NOCLIP | DT_TOP | DT_SINGLELINE, 0xAF000000 + (red<<16) + (green<<8)); 
+							rct.top = pt.y;
+							rct.left = pt.x;
+							rct.bottom = pt.y + 30;
+							rct.right = pt.x + 200;
+
+							m3DFont->DrawText(NULL,
+								name.str(),
+								name.getLength(),
+								&rct,
+								DT_LEFT | DT_NOCLIP | DT_TOP | DT_SINGLELINE,
+								0xAF000000 + (red << 16) + (green << 8));
 
 						} else if (!m3DFont) {
 							//docToViewCoords(pos, &pt);
@@ -2613,7 +2593,7 @@ Real WbView3d::getCameraPitch(void)
 }
 
 // ----------------------------------------------------------------------------
-void WbView3d::OnTimer(UINT nIDEvent) 
+void WbView3d::OnTimer(UINT_PTR nIDEvent)
 {
 	if (getLastDrawTime()+UPDATE_TIME<::GetTickCount()) 
 	{

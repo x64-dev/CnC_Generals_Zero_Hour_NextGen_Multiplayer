@@ -29,6 +29,10 @@
 # include <time.h>  // for time(), localtime() and timezone variable.
 #endif
 
+#ifdef _WIN64
+# include <intrin.h> // for __cpuid and __rdtsc intrinsics
+#endif
+
 struct OSInfoStruct {
 	const char* Code;
 	const char* SubCode;
@@ -134,7 +138,11 @@ static unsigned Calculate_Processor_Speed(__int64& ticks_per_second)
 		unsigned timer1_l;
 	} Time;
 
-#ifdef WIN32
+#if defined(_WIN64)
+	unsigned __int64 t0 = __rdtsc();
+	Time.timer0_h = (unsigned)(t0 >> 32);
+	Time.timer0_l = (unsigned)t0;
+#elif defined(WIN32)
    __asm {
       ASM_RDTSC;
       mov Time.timer0_h, eax
@@ -149,16 +157,20 @@ static unsigned Calculate_Processor_Speed(__int64& ticks_per_second)
 	unsigned start=TIMEGETTIME();
 	unsigned elapsed;
 	while ((elapsed=TIMEGETTIME()-start)<200) {
-#ifdef WIN32
-      __asm {
-         ASM_RDTSC;
-         mov Time.timer1_h, eax
-         mov Time.timer1_l, edx
-      }
+#if defined(_WIN64)
+		unsigned __int64 t1 = __rdtsc();
+		Time.timer1_h = (unsigned)(t1 >> 32);
+		Time.timer1_l = (unsigned)t1;
+#elif defined(WIN32)
+		__asm {
+			ASM_RDTSC;
+			mov Time.timer1_h, eax
+			mov Time.timer1_l, edx
+		}
 #elif defined(_UNIX)
-      __asm__ ("rdtsc");
-      __asm__("mov %eax, __Time.timer1_h");
-      __asm__("mov %edx, __Time.timer1_l");
+		__asm__ ("rdtsc");
+		__asm__("mov %eax, __Time.timer1_h");
+		__asm__("mov %edx, __Time.timer1_l");
 #endif
 	}
 
@@ -826,7 +838,10 @@ void CPUDetectClass::Init_CPUID_Instruction()
    // because CodeWarrior seems to have problems with
    // the command (huh?)
 
-#ifdef WIN32
+#if defined(_WIN64)
+	// All x86-64 processors support CPUID.
+	cpuid_available = 1;
+#elif defined(WIN32)
    __asm
    {
       mov cpuid_available, 0	// clear flag
@@ -946,7 +961,14 @@ bool CPUDetectClass::CPUID(
 	unsigned u_ecx;
 	unsigned u_edx;
 
-#ifdef WIN32
+#if defined(_WIN64)
+    int regs[4];
+    __cpuid(regs, cpuid_type);
+    u_eax = regs[0];
+    u_ebx = regs[1];
+    u_ecx = regs[2];
+    u_edx = regs[3];
+#elif defined(WIN32)
    __asm
    {
       pushad
@@ -1110,7 +1132,7 @@ void CPUDetectClass::Init_Compact_Log()
 
 	OSInfoStruct os_info;
 	Get_OS_Info(os_info,OSVersionPlatformId,OSVersionNumberMajor,OSVersionNumberMinor,OSVersionBuildNumber);
-	COMPACTLOG(("%s\t",os_info.Code));
+	//COMPACTLOG(("%s\t",os_info.Code));
 
 	if (!stricmp(os_info.SubCode,"UNKNOWN")) {
 		COMPACTLOG(("%d\t",OSVersionBuildNumber&0xffff));

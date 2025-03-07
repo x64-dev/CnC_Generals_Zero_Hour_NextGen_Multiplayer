@@ -1123,7 +1123,8 @@ static void saveOptions( void )
 
 	//-------------------------------------------------------------------------------------------------
 	// mouse mode
-	TheWritableGlobalData->m_useAlternateMouse = GadgetCheckBoxIsChecked(checkAlternateMouse);
+	if (checkAlternateMouse)
+		TheWritableGlobalData->m_useAlternateMouse = GadgetCheckBoxIsChecked(checkAlternateMouse);
 	(*pref)["UseAlternateMouse"] = TheWritableGlobalData->m_useAlternateMouse ? AsciiString("yes") : AsciiString("no");
 
 	//-------------------------------------------------------------------------------------------------
@@ -1694,7 +1695,8 @@ void OptionsMenuInit( WindowLayout *layout, void *userData )
 //	GadgetCheckBoxSetChecked(checkAudioSurround, TheAudio->getSpeakerSurround());
 
  	// set the mouse mode
- 	GadgetCheckBoxSetChecked(checkAlternateMouse, TheGlobalData->m_useAlternateMouse);
+	if (checkAlternateMouse)
+ 		GadgetCheckBoxSetChecked(checkAlternateMouse, TheGlobalData->m_useAlternateMouse);
 
 	// set scroll speed slider
 	Int scrollPos = (Int)(TheGlobalData->m_keyboardScrollFactor*100.0f);

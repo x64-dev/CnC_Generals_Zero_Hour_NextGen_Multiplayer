@@ -5,13 +5,25 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Internal|Win32">
       <Configuration>Internal</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Internal|x64">
+      <Configuration>Internal</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -25,13 +37,31 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
@@ -44,11 +74,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -60,6 +102,7 @@
     <OutDir>.\Internal\</OutDir>
     <IntDir>.\Internal\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\Debug\</OutDir>
     <IntDir>.\Debug\</IntDir>
@@ -73,14 +116,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..\GameRenderer\;..\Libraries\OpenAL\include;..\Libraries\Bink\include;..\Libraries\DX90SDK\Include;..\Libraries\Source\WWVegas\Miles6\include;..\Main;Include;..\GameEngine\Include;..\Libraries\Include;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\Source\WWVegas\WWLib;..\Libraries\Source\WWVegas\WWDebug;..\Libraries\Source\WWVegas\WWMath;..\Libraries\Source\WWVegas\WWSaveLoad;..\Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;NDEBUG;WIN32;_LIB;_WINDOWS;_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;NDEBUG;WIN32;_LIB;_WINDOWS;_INTERNAL;%(PreprocessorDefinitions);_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Internal/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Internal/</AssemblerListingLocation>
-      <ObjectFileName>.\Internal/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Internal/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -88,6 +128,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -95,6 +136,38 @@
     </ResourceCompile>
     <Lib>
       <OutputFile>Lib\GameEngineDeviceInternal.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Internal/GameEngineDevice.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\GameRenderer\;..\Libraries\OpenAL\include;..\Libraries\Bink\include;..\Libraries\DX90SDK\Include;..\Libraries\Source\WWVegas\Miles6\include;..\Main;Include;..\GameEngine\Include;..\Libraries\Include;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\Source\WWVegas\WWLib;..\Libraries\Source\WWVegas\WWDebug;..\Libraries\Source\WWVegas\WWMath;..\Libraries\Source\WWVegas\WWSaveLoad;..\Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;NDEBUG;_LIB;_WINDOWS;_INTERNAL;%(PreprocessorDefinitions);_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Internal/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Internal/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>Lib\GameEngineDeviceInternal_x64.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
     <Bscmake>
@@ -111,9 +184,6 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\Debug/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -135,6 +205,35 @@
       <OutputFile>.\Debug/GameEngineDevice.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\GameRenderer\;..\Libraries\OpenAL\include;..\Libraries\Bink\include;..\Libraries\DX90SDK\Include;..\Libraries\Source\WWVegas\Miles6\include;..\Main;Include;..\GameEngine\Include;..\Libraries\Include;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\Source\WWVegas\WWLib;..\Libraries\Source\WWVegas\WWDebug;..\Libraries\Source\WWVegas\WWMath;..\Libraries\Source\WWVegas\WWSaveLoad;..\Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_DEBUG;_LIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Debug/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>Lib\GameEngineDeviceDebug_x64.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/GameEngineDevice.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -145,9 +244,36 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Release/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Release/</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>Lib\GameEngineDevice.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/GameEngineDevice.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\GameRenderer\;..\Libraries\OpenAL\include;..\Libraries\Bink\include;..\Libraries\DX90SDK\Include;..\Libraries\Source\WWVegas\Miles6\include;..\Main;Include;..\GameEngine\Include;..\Libraries\Include;..\Libraries\Source\WWVegas;..\Libraries\Source\WWVegas\WW3D2;..\Libraries\Source\WWVegas\WWLib;..\Libraries\Source\WWVegas\WWDebug;..\Libraries\Source\WWVegas\WWMath;..\Libraries\Source\WWVegas\WWSaveLoad;..\Libraries\Include\Granny;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_LIB;_WINDOWS;IG_DEBUG_STACKTRACE;WIN32;NDEBUG;_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release/GameEngineDevice.pch</PrecompiledHeaderOutputFile>
       <BrowseInformation>true</BrowseInformation>
       <BrowseInformationFile>.\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
@@ -278,137 +404,253 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\invmonochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\invmonochrome.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\monochrome.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\monochrome.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\monochrome.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\motionblur.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\motionblur.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\motionblur.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\MotionBlur.nvv">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\MotionBlur.vso
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\MotionBlur.vso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\roadnoise2.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\roadnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\roadnoise2.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\terrain.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrain.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\terrain.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\terrainnoise.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Shaders\terrainnoise2.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\terrainnoise2.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\Shaders\terrainnoise2.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Water\wave.nvp">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\wave.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\wave.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.pso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.pso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\wave.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\wave.pso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\wave.pso
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\wave.pso
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\wave.pso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\wave.pso;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="Source\W3DDevice\GameClient\Water\wave.nvv">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.vso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.vso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Run\Shaders\wave.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Run\Shaders\wave.vso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.vso
 if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\Shaders\wave.vso
+if ERRORLEVEL 7 ECHO Warning: Output File Read Only!
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|Win32'">$(SolutionDir)..\Run\Shaders\wave.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">$(SolutionDir)..\Run\Shaders\wave.vso;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\wave.vso
 </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\tools\nvasm\nvasm %(FullPath) $(SolutionDir)..\Run\wave.vso
+</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Run\wave.vso;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Run\wave.vso;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

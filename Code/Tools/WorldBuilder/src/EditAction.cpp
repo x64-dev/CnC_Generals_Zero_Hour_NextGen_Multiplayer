@@ -305,7 +305,7 @@ void EditAction::OnSelchangeScriptActionType()
 
 /** Not actually a timer - just used to send a delayed message to self because rich
 edit control is stupid.  jba. */
-void EditAction::OnTimer(UINT nIDEvent) 
+void EditAction::OnTimer(UINT_PTR nIDEvent)
 {
 	formatScriptActionText(m_curEditParameter);
 }
