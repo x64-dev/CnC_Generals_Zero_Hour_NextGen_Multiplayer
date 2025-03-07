@@ -56,7 +56,7 @@ size_t LZHLCompressor::compress( BYTE* dst, const BYTE* src, size_t sz ) {
   }
 
   for (;;) {
-    size_t srcLeft = srcEnd - src;
+    int srcLeft = (int)(srcEnd - src);
     if ( srcLeft < LZMATCH ) {
       if ( srcLeft ) {
         _toBuf( src, srcLeft );
@@ -67,11 +67,11 @@ size_t LZHLCompressor::compress( BYTE* dst, const BYTE* src, size_t sz ) {
       break;  //forever
     }
 
-    size_t nRaw = 0;
+    int nRaw = 0;
     int maxRaw = min( srcLeft - LZMATCH, LZHLEncoder::maxRaw );
 
     #ifdef LZLAZYMATCH
-     size_t    lazyMatchLen = 0;
+     int    lazyMatchLen = 0;
      int    lazyMatchHashPos;
      LZPOS  lazyMatchBufPos;
      int    lazyMatchNRaw;
@@ -85,7 +85,7 @@ size_t LZHLCompressor::compress( BYTE* dst, const BYTE* src, size_t sz ) {
        int wrapBufPos = _wrap( bufPos );
        table[ hash2 ] = (LZTableItem)wrapBufPos;
 
-       size_t matchLen = 0;
+       int matchLen = 0;
        if ( hashPos != (LZTABLEINT)(-1) && hashPos != wrapBufPos )
        {
          int matchLimit = min( min( _distance( wrapBufPos - hashPos ), srcLeft - nRaw ), LZMIN + LZHLEncoder::maxMatchOver );
