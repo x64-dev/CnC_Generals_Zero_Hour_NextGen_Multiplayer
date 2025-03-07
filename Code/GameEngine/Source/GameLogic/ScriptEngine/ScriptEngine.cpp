@@ -435,13 +435,21 @@ void ScriptEngine::init( void )
 {
 	if (TheGlobalData->m_windowed)
 		if (TheGlobalData->m_scriptDebug) {
+#ifdef _WIN64
+			st_DebugDLL = LoadLibrary("DebugWindow_x64.dll");
+#else
 			st_DebugDLL = LoadLibrary("DebugWindow.dll");
+#endif
 		} else {
 			st_DebugDLL = NULL;
 		}
 		
 		if (TheGlobalData->m_particleEdit) {
+#ifdef _WIN64
+			st_ParticleDLL = LoadLibrary("ParticleEditor_x64.dll");
+#else
 			st_ParticleDLL = LoadLibrary("ParticleEditor.dll");
+#endif
 		} else {
 			st_ParticleDLL = NULL;
 		}

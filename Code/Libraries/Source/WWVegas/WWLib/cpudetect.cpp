@@ -1132,7 +1132,7 @@ void CPUDetectClass::Init_Compact_Log()
 
 	OSInfoStruct os_info;
 	Get_OS_Info(os_info,OSVersionPlatformId,OSVersionNumberMajor,OSVersionNumberMinor,OSVersionBuildNumber);
-	COMPACTLOG(("%s\t",os_info.Code));
+	//COMPACTLOG(("%s\t",os_info.Code));
 
 	if (!stricmp(os_info.SubCode,"UNKNOWN")) {
 		COMPACTLOG(("%d\t",OSVersionBuildNumber&0xffff));

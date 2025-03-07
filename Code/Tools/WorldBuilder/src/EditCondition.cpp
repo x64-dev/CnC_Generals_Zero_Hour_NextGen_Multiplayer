@@ -256,7 +256,7 @@ void EditCondition::OnSelchangeConditionType()
 
 /** Not actually a timer - just used to send a delayed message to self because rich
 edit control is stupid.  jba. */
-void EditCondition::OnTimer(UINT nIDEvent) 
+void EditCondition::OnTimer(UINT_PTR nIDEvent)
 {
 	formatConditionText(m_curEditParameter);
 }
