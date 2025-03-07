@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////
 //
-//  Copyright (C) Microsoft Corporation.  All Rights Reserved.
+//  Copyright (C) 1999 Microsoft Corporation.  All Rights Reserved.
 //
 //  File:       d3dx8shapes.h
 //  Content:    D3DX simple shapes
@@ -192,7 +192,6 @@ HRESULT WINAPI
         FLOAT               Deviation,
         FLOAT               Extrusion,
         LPD3DXMESH*         ppMesh,
-        LPD3DXBUFFER*       ppAdjacency,
         LPGLYPHMETRICSFLOAT pGlyphMetrics);
 
 HRESULT WINAPI
@@ -203,7 +202,6 @@ HRESULT WINAPI
         FLOAT               Deviation,
         FLOAT               Extrusion,
         LPD3DXMESH*         ppMesh,
-        LPD3DXBUFFER*       ppAdjacency,
         LPGLYPHMETRICSFLOAT pGlyphMetrics);
 
 #ifdef UNICODE
