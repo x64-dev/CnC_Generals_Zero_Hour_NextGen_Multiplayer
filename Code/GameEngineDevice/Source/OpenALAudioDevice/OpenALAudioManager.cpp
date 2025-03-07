@@ -46,7 +46,46 @@ OpenALAudioManager::OpenALAudioManager()
 // Destructor
 OpenALAudioManager::~OpenALAudioManager()
 {
-    // TODO: Clean up any allocated resources.
+	// This is a bad idea (destroying resources that is allocated externally) in a **destructor**,
+	// However currently there is no better way to do this since the game engine does not have clean up functionality.
+
+	// We can just call alcCloseDevice(device) and it will do everything
+	// but a common good practice we should cleanup what we requested to allocate.
+
+	// TODO in the logs OpenAL warns about non-deleted buffers, should be investigated more.
+
+	alSourceStop(m_musicSource);
+	alSourcei(m_musicSource, AL_BUFFER, AL_NONE);
+
+	alDeleteSources(1, &m_musicSource);
+
+	for (size_t i = 0; i < getNum2DSamples(); ++i)
+	{
+		// if source in use, stop it and unbind it's buffer
+		if (m_sourceInUse2D[i])
+		{
+			alSourceStop(m_sourcePool2D[i]);
+			alSourcei(m_sourcePool2D[i], AL_BUFFER, AL_NONE);
+		}
+	}
+	alDeleteSources(getNum2DSamples(), m_sourcePool2D);
+
+	for (size_t i = 0; i < getNum3DSamples(); ++i)
+	{
+		// if source in use, stop it and unbind it's buffer
+		if (m_sourceInUse3D[i])
+		{
+			alSourceStop(m_sourcePool3D[i]);
+			alSourcei(m_sourcePool3D[i], AL_BUFFER, AL_NONE);
+		}
+	}
+	alDeleteSources(getNum3DSamples(), m_sourcePool3D);
+
+	alDeleteBuffers(m_buffers.size(), m_buffers.data());
+
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(context);
+	alcCloseDevice(device);
 }
 
 #if defined(_DEBUG) || defined(_INTERNAL)
@@ -778,7 +817,14 @@ ALuint OpenALAudioManager::openFile(AudioEventRTS* eventToOpenFrom)
         return NULL;
     }
 
-    return OpenALAudioLoader::loadFromFile(strToFind.str());
+	ALuint buffer = OpenALAudioLoader::loadFromFile(strToFind.str());
+
+	const auto it = std::find(m_buffers.begin(), m_buffers.end(), buffer);
+	if (it != m_buffers.end())
+	{
+		m_buffers.push_back(buffer);
+	}
+	return buffer;
 }
 
 

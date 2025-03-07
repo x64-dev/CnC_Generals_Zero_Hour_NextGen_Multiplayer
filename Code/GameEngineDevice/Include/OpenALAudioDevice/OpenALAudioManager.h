@@ -8,6 +8,9 @@
 
 #undef stopAudioEvent
 
+#define NUM_POOLED_SOURCES2D 16
+#define NUM_POOLED_SOURCES3D 64
+
 enum OpenALPlayingAudioType
 {
     PAT_Sample,
@@ -198,4 +201,13 @@ protected:
     // This stuff should be cleaned up during the next update cycle. This includes updating counts
     // in the sound engine
     std::list<OpenALPlayingAudio*> m_stoppedAudio;
+
+    private:
+        ALuint m_sourcePool2D[NUM_POOLED_SOURCES2D];
+        bool m_sourceInUse2D[NUM_POOLED_SOURCES2D];
+
+        ALuint m_sourcePool3D[NUM_POOLED_SOURCES3D];
+        bool m_sourceInUse3D[NUM_POOLED_SOURCES3D];
+
+        std::vector<ALuint> m_buffers;
 };

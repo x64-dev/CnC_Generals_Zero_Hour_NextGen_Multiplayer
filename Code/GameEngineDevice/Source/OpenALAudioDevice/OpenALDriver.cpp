@@ -26,15 +26,6 @@
 
 #include "OpenALAudioDevice/OpenALAudioLoader.h"
 
-#define NUM_POOLED_SOURCES2D 16
-#define NUM_POOLED_SOURCES3D 64
-
-ALuint m_sourcePool2D[NUM_POOLED_SOURCES2D];
-bool m_sourceInUse2D[NUM_POOLED_SOURCES2D];
-
-ALuint m_sourcePool3D[NUM_POOLED_SOURCES3D];
-bool m_sourceInUse3D[NUM_POOLED_SOURCES3D];
-
 //-----------------------------------------------------------------------------
 
 UnsignedInt OpenALAudioManager::getNum2DSamples(void) const
