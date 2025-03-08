@@ -521,7 +521,7 @@ void WbView3d::ReAcquireResources(void)
 		TheTerrainRenderObject->loadRoadsAndBridges(NULL,FALSE);
 		TheTerrainRenderObject->worldBuilderUpdateBridgeTowers( m_assetManager, m_scene );
 	}
-	IDirect3DDevice8* pDev = DX8Wrapper::_Get_D3D_Device8();
+	IDirect3DDevice8* pDev = DX8Wrapper::D3DDevice;
 	if (pDev) {
 		D3DXCreateFont(
 			pDev,                 // D3D Device
@@ -2158,7 +2158,7 @@ void WbView3d::initWW3D()
 			}
 		}
 
-		IDirect3DDevice8* pDev = DX8Wrapper::_Get_D3D_Device8();
+		IDirect3DDevice8* pDev = DX8Wrapper::D3DDevice;
 		if (pDev) {
 			D3DXCreateFont(
                pDev,                 // D3D Device

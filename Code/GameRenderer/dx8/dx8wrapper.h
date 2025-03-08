@@ -179,6 +179,7 @@ class DX8Wrapper
 {
 	friend class DX8Caps;
 	friend class DX8WebBrowser;
+	friend class WbView3d;
 
 	enum ChangedStates {
 		WORLD_CHANGED	=	1<<0,
