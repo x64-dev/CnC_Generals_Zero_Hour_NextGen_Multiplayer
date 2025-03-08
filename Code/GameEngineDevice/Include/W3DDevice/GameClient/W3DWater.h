@@ -157,7 +157,6 @@ protected:
 		float tu, tv;
 	}; 
 
-	LPDIRECT3DDEVICE8 m_pDev;						///<pointer to D3D Device
 	LPDIRECT3DVERTEXBUFFER8 m_vertexBufferD3D;		///<D3D vertex buffer
 	LPDIRECT3DINDEXBUFFER8	m_indexBufferD3D;	///<D3D index buffer
 	Int						m_vertexBufferD3DOffset;	///<location to start writing vertices

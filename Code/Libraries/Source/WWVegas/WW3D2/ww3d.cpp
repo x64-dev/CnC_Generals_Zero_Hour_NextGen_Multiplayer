@@ -766,7 +766,7 @@ WW3DErrorType WW3D::Begin_Render(bool clear,bool clearz,const Vector3 & color, f
 	WWASSERT(IsInitted);
 	HRESULT hr;
 
-	if (DX8Wrapper::_Get_D3D_Device8() && (hr=DX8Wrapper::_Get_D3D_Device8()->TestCooperativeLevel()) != D3D_OK)
+	if (!DX8Wrapper::IsDeviceReady())
 	{
         // If the device was lost, do not render until we get it back
         if( D3DERR_DEVICELOST == hr )

@@ -335,7 +335,7 @@ bool DX8Wrapper::Validate_Device(void)
 {	DWORD numPasses=0;
 	HRESULT hRes;
 
-	hRes=_Get_D3D_Device8()->ValidateDevice(&numPasses);
+	hRes=DX8Wrapper::D3DDevice->ValidateDevice(&numPasses);
 
 	return (hRes == D3D_OK);
 }
@@ -354,8 +354,8 @@ void DX8Wrapper::Invalidate_Cached_Render_States(void)
 		}
 		//Need to explicitly set texture to NULL, otherwise app will not be able to
 		//set it to null because of redundant state checker. MW
-		if (_Get_D3D_Device8())
-			_Get_D3D_Device8()->SetTexture(a,NULL);
+		if (DX8Wrapper::D3DDevice)
+			DX8Wrapper::D3DDevice->SetTexture(a,NULL);
 		if (Textures[a] != NULL)
 			Textures[a]->Release();
 		Textures[a]=NULL;
@@ -461,7 +461,7 @@ bool DX8Wrapper::Reset_Device(bool reload_assets)
 		DynamicIBAccessClass::_Deinit();
 		DX8TextureManagerClass::Release_Textures();
 
-		HRESULT hr=_Get_D3D_Device8()->TestCooperativeLevel();
+		HRESULT hr=DX8Wrapper::D3DDevice->TestCooperativeLevel();
 		if (hr != D3DERR_DEVICELOST )
 		{	DX8CALL_HRES(Reset(&_PresentParameters),hr)
 			if (hr != D3D_OK)
@@ -523,8 +523,6 @@ void DX8Wrapper::Release_Device(void)
 
 void DX8Wrapper::Enumerate_Devices()
 {
-	DX8_Assert();
-
 	int adapter_count = D3DInterface->GetAdapterCount();
 	for (int adapter_index=0; adapter_index<adapter_count; adapter_index++) {
 		
@@ -1402,7 +1400,7 @@ unsigned long DX8Wrapper::Get_FrameCount(void) {return FrameCount;}
 
 void DX8_Assert()
 {
-	WWASSERT(DX8Wrapper::_Get_D3D8());
+	WWASSERT(DX8Wrapper::D3DDevice);
 	DX8_THREAD_ASSERT();
 }
 
@@ -1423,7 +1421,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 
 	if (flip_frames) {
 		DX8_Assert();
-		HRESULT hr=_Get_D3D_Device8()->Present(NULL, NULL, NULL, NULL);
+		HRESULT hr=DX8Wrapper::D3DDevice->Present(NULL, NULL, NULL, NULL);
 		number_of_DX8_calls++;
 
 		if (SUCCEEDED(hr)) {
@@ -1437,7 +1435,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 
 		// If the device was lost we need to check for cooperative level and possibly reset the device
 		if (hr==D3DERR_DEVICELOST) {
-			hr=_Get_D3D_Device8()->TestCooperativeLevel();
+			hr=DX8Wrapper::D3DDevice->TestCooperativeLevel();
 			if (hr==D3DERR_DEVICENOTRESET) {
 				Reset_Device();
 			}
@@ -1469,7 +1467,7 @@ void DX8Wrapper::Flip_To_Primary(void)
 		int resetAttempts = 0;
 
 		while ((flipCount > 0) && (resetAttempts < 3)) {
-			HRESULT hr = _Get_D3D_Device8()->TestCooperativeLevel();
+			HRESULT hr = DX8Wrapper::D3DDevice->TestCooperativeLevel();
 
 			if (FAILED(hr)) {
 				WWDEBUG_SAY(("TestCooperativeLevel Failed!\n"));
@@ -1486,7 +1484,7 @@ void DX8Wrapper::Flip_To_Primary(void)
 				}
 			} else {
 				WWDEBUG_SAY(("Flipping: %ld\n", FrameCount));
-				hr = _Get_D3D_Device8()->Present(NULL, NULL, NULL, NULL);
+				hr = DX8Wrapper::D3DDevice->Present(NULL, NULL, NULL, NULL);
 
 				if (SUCCEEDED(hr)) {
 					FrameCount++;
@@ -1966,7 +1964,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	// which case we return NULL.
 	if (rendertarget) {
 		unsigned ret=D3DXCreateTexture(
-			DX8Wrapper::_Get_D3D_Device8(), 
+			DX8Wrapper::DX8Wrapper::D3DDevice, 
 			width, 
 			height,
 			mip_level_count,
@@ -1994,7 +1992,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	// Don't allow any errors in non-render target
 	// texture creation.
 	DX8_ErrorCode(D3DXCreateTexture(
-		DX8Wrapper::_Get_D3D_Device8(), 
+		DX8Wrapper::DX8Wrapper::D3DDevice, 
 		width, 
 		height,
 		mip_level_count,
@@ -2025,7 +2023,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	// function as well, so if we later want to second-guess D3DX's format conversion decisions
 	// we can do so after this function is called..
 	unsigned result = D3DXCreateTextureFromFileExA(
-		_Get_D3D_Device8(), 
+		DX8Wrapper::D3DDevice, 
 		filename,
 		D3DX_DEFAULT, 
 		D3DX_DEFAULT, 
@@ -2662,7 +2660,7 @@ unsigned int DX8Wrapper::Get_Free_Texture_RAM()
 {
 	DX8_Assert();
 	number_of_DX8_calls++;
-	return DX8Wrapper::_Get_D3D_Device8()->GetAvailableTextureMem();	
+	return DX8Wrapper::DX8Wrapper::D3DDevice->GetAvailableTextureMem();	
 }
 
 // Converts a linear gamma ramp to one that is controlled by:
@@ -2706,7 +2704,7 @@ void DX8Wrapper::Set_Gamma(float gamma,float bright,float contrast,bool calibrat
 	}
 
 	if (DX8Caps::Support_Gamma())	{
-		DX8Wrapper::_Get_D3D_Device8()->SetGammaRamp(0,flag,&ramp);
+		DX8Wrapper::DX8Wrapper::D3DDevice->SetGammaRamp(0,flag,&ramp);
 	} else {
 		HWND hwnd = GetDesktopWindow();
 		HDC hdc = GetDC(hwnd);

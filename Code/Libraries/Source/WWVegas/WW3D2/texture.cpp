@@ -783,7 +783,7 @@ bool Validate_Filters(unsigned type)
 	DX8Wrapper::Set_DX8_Texture_Stage_State(0,D3DTSS_MAGFILTER,_MagTextureFilters[type]);
 	DX8Wrapper::Set_DX8_Texture_Stage_State(0,D3DTSS_MIPFILTER,_MipMapFilters[type]);
 	unsigned long passes;
-	HRESULT hres=DX8Wrapper::_Get_D3D_Device8()->ValidateDevice(&passes);
+	HRESULT hres=DX8Wrapper::ValidateDevice(&passes);
 	return !FAILED(hres);
 }
 */

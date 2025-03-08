@@ -69,13 +69,13 @@ enum {
 void DX8Caps::Init_Caps(IDirect3DDevice8* D3DDevice)
 {
 	D3DDevice->SetSoftwareVertexProcessing(TRUE);
-	DX8CALL(GetDeviceCaps(&swVPCaps));
+	D3DDevice->GetDeviceCaps(&swVPCaps);
 
 	if ((swVPCaps.DevCaps&D3DDEVCAPS_HWTRANSFORMANDLIGHT)==D3DDEVCAPS_HWTRANSFORMANDLIGHT) {
 		UseTnL=true;
 
 		D3DDevice->SetSoftwareVertexProcessing(FALSE);
-		DX8CALL(GetDeviceCaps(&hwVPCaps));
+		D3DDevice->GetDeviceCaps(&hwVPCaps);
 	} else {
 		UseTnL=false;			
 	}
@@ -152,7 +152,7 @@ void DX8Caps::Check_Texture_Format_Support(D3DFORMAT display_format,const D3DCAP
 		}
 		else {
 			SupportTextureFormat[i]=SUCCEEDED(
-				DX8Wrapper::_Get_D3D8()->CheckDeviceFormat(
+				DX8Wrapper::D3DInterface->CheckDeviceFormat(
 					caps.AdapterOrdinal,
 					caps.DeviceType,
 					display_format,

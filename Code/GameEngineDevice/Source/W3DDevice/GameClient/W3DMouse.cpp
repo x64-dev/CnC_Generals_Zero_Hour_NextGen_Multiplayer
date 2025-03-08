@@ -113,13 +113,8 @@ W3DMouse::W3DMouse( void )
 
 W3DMouse::~W3DMouse( void )
 {
-	LPDIRECT3DDEVICE8 m_pDev=DX8Wrapper::_Get_D3D_Device8();
-
-	if (m_pDev)
-	{
-		m_pDev->ShowCursor(FALSE);	//kill DX8 cursor
-		Win32Mouse::setCursor(ARROW); //enable default windows cursor
-	}
+	DX8Wrapper::ShowCursor(FALSE);	//kill DX8 cursor
+	Win32Mouse::setCursor(ARROW); //enable default windows cursor
 
 	freeD3DAssets();
 	freeW3DAssets();
@@ -391,23 +386,22 @@ void W3DMouse::setCursor( MouseCursor cursor )
 	{
 		SetCursor(NULL);	//Kill Windows Cursor
 
-		LPDIRECT3DDEVICE8 m_pDev=DX8Wrapper::_Get_D3D_Device8();
 		Bool doImageChange=FALSE;
 
-		if (m_pDev != NULL)
+		DX8Wrapper::ShowCursor(FALSE);	//disable DX8 cursor
+		if (cursor != m_currentD3DCursor)
 		{
-			m_pDev->ShowCursor(FALSE);	//disable DX8 cursor
-			if (cursor != m_currentD3DCursor)
-			{	if (!isThread)
-				{	releaseD3DCursorTextures(m_currentD3DCursor);
-					//Since this type of cursor is updated from a non-D3D thread, we need
-					//to preallocate all surfaces in main thread.
-					loadD3DCursorTextures(cursor);
-				}	
+			if (!isThread)
+			{
+				releaseD3DCursorTextures(m_currentD3DCursor);
+				//Since this type of cursor is updated from a non-D3D thread, we need
+				//to preallocate all surfaces in main thread.
+				loadD3DCursorTextures(cursor);
 			}
-			if (m_currentD3DSurface[0])
-				doImageChange=TRUE;
 		}
+		if (m_currentD3DSurface[0])
+			doImageChange = TRUE;
+
 		//For DX8 Cursors, we continually set the image on every call even when
 		//it didn't change.  This is needed to prevent the cursor from flickering.
 		if (doImageChange)
@@ -416,8 +410,8 @@ void W3DMouse::setCursor( MouseCursor cursor )
 			m_currentHotSpot = m_cursorInfo[cursor].hotSpotPosition;
 			m_currentFMS = m_cursorInfo[cursor].fps/1000.0f;
 			m_currentAnimFrame = 0;	//reset animation when cursor changes
-			res = m_pDev->SetCursorProperties(m_currentHotSpot.x,m_currentHotSpot.y,m_currentD3DSurface[(Int)m_currentAnimFrame]->Peek_D3D_Surface());
-			m_pDev->ShowCursor(TRUE);	//Enable DX8 cursor
+			res = DX8Wrapper::SetCursorProperties(m_currentHotSpot.x,m_currentHotSpot.y,m_currentD3DSurface[(Int)m_currentAnimFrame]->Peek_D3D_Surface());
+			DX8Wrapper::ShowCursor(TRUE);	//Enable DX8 cursor
 			m_currentD3DFrame=(Int)m_currentAnimFrame;
 			m_currentD3DCursor = cursor;
 			m_lastAnimTime=timeGetTime();
@@ -487,31 +481,28 @@ void W3DMouse::draw(void)
 	{
 		//called from upate thread or rendering loop.  Tells D3D where
 		//to draw the mouse cursor.
-		LPDIRECT3DDEVICE8 m_pDev=DX8Wrapper::_Get_D3D_Device8();
-		if (m_pDev)
-		{	m_pDev->ShowCursor(TRUE);	//Enable DX8 cursor
+		DX8Wrapper::ShowCursor(TRUE);	//Enable DX8 cursor
 
-			if (TheDisplay && !TheDisplay->getWindowed())
-			{	//if we're full-screen, need to manually move cursor image
-				POINT ptCursor;
+		if (TheDisplay && !TheDisplay->getWindowed())
+		{	//if we're full-screen, need to manually move cursor image
+			POINT ptCursor;
 
-				GetCursorPos( &ptCursor );
-				ScreenToClient( ApplicationHWnd, &ptCursor );
-				m_pDev->SetCursorPosition( ptCursor.x, ptCursor.y, D3DCURSOR_IMMEDIATE_UPDATE);
-			}
-			//Check if animated cursor and new frame
-			if (m_currentFrames > 1)
+			GetCursorPos(&ptCursor);
+			ScreenToClient(ApplicationHWnd, &ptCursor);
+			DX8Wrapper::SetCursorPosition(ptCursor.x, ptCursor.y, D3DCURSOR_IMMEDIATE_UPDATE);
+		}
+		//Check if animated cursor and new frame
+		if (m_currentFrames > 1)
+		{
+			Int msTime = timeGetTime();
+			m_currentAnimFrame += (msTime - m_lastAnimTime) * m_currentFMS;
+			m_currentAnimFrame = fmod(m_currentAnimFrame, m_currentFrames);
+			m_lastAnimTime = msTime;
+
+			if ((Int)m_currentAnimFrame != m_currentD3DFrame)
 			{
-				Int msTime=timeGetTime();
-				m_currentAnimFrame += (msTime-m_lastAnimTime) * m_currentFMS;
-				m_currentAnimFrame=fmod(m_currentAnimFrame,m_currentFrames);
-				m_lastAnimTime=msTime;
-
-				if ((Int)m_currentAnimFrame != m_currentD3DFrame)
-				{
-					m_currentD3DFrame=(Int)m_currentAnimFrame;
-					m_pDev->SetCursorProperties(m_currentHotSpot.x,m_currentHotSpot.y,m_currentD3DSurface[m_currentD3DFrame]->Peek_D3D_Surface());
-				}
+				m_currentD3DFrame = (Int)m_currentAnimFrame;
+				DX8Wrapper::SetCursorProperties(m_currentHotSpot.x, m_currentHotSpot.y, m_currentD3DSurface[m_currentD3DFrame]->Peek_D3D_Surface());
 			}
 		}
 	}
