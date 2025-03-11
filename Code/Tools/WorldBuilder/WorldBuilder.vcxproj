@@ -78,7 +78,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../GameRenderer/;../../Libraries/OpenAL/include;../../Libraries/Source/WWVegas/Miles6/Include;./include;./res;../../libraries/include;../../gameengine/include;../../gameenginedevice/include/;../../libraries/source/wwvegas;../../libraries/source/wwvegas/ww3d2;../../libraries/source/wwvegas/wwdebug;../../libraries/source/wwvegas/wwlib;../../libraries/source/wwvegas/wwmath;../../libraries/source/wwvegas/wwsaveload;../../Libraries/Source/Compression;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WWDEBUG;_DEBUG;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WWDEBUG;_DEBUG;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\Debug/WorldBuilder.pch</PrecompiledHeaderOutputFile>
@@ -129,7 +129,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../GameRenderer/;../../Libraries/OpenAL/include;../../Libraries/Source/WWVegas/Miles6/Include;./include;./res;../../libraries/include;../../gameengine/include;../../gameenginedevice/include/;../../libraries/source/wwvegas;../../libraries/source/wwvegas/ww3d2;../../libraries/source/wwvegas/wwdebug;../../libraries/source/wwvegas/wwlib;../../libraries/source/wwvegas/wwmath;../../libraries/source/wwvegas/wwsaveload;../../Libraries/Source/Compression;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;NDEBUG;_INTERNAL;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;NDEBUG;_INTERNAL;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -180,7 +180,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../GameRenderer/;../../Libraries/OpenAL/include;../../Libraries/Source/WWVegas/Miles6/Include;./include;./res;../../libraries/include;../../gameengine/include;../../gameenginedevice/include/;../../libraries/source/wwvegas;../../libraries/source/wwvegas/ww3d2;../../libraries/source/wwvegas/wwdebug;../../libraries/source/wwvegas/wwlib;../../libraries/source/wwvegas/wwmath;../../libraries/source/wwvegas/wwsaveload;../../Libraries/Source/Compression;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;IG_DEBUG_STACKTRACE;NDEBUG;_RELEASE;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;IG_DEBUG_STACKTRACE;NDEBUG;_RELEASE;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
