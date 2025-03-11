@@ -2,7 +2,7 @@
 
 ## Contributors
 - jmarshall23
-- Drewminator
+- Andrew-2E128
 - Disarray(x64 support great work!).
 
 ## New Features
