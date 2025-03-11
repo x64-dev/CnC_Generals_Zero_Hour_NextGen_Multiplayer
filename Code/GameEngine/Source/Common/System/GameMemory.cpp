@@ -203,10 +203,11 @@ static Bool theMainInitFlag = false;
 // PRIVATE PROTOTYPES 
 // ----------------------------------------------------------------------------
 
-/// @todo srj -- make this work for 8
-#define MEM_BOUND_ALIGNMENT 4
+// jmarshall - x64
+#define MEM_BOUND_ALIGNMENT 8
+// jmarshall end
 
-static Int roundUpMemBound(Int i);
+static size_t roundUpMemBound(size_t i);
 static void *sysAllocate(Int numBytes);
 static void *sysAllocateDoNotZero(Int numBytes);
 static void sysFree(void* p);
@@ -223,10 +224,12 @@ static void preMainInitMemoryManager();
 
 //-----------------------------------------------------------------------------
 /** round up to the nearest multiple of MEM_BOUND_ALIGNMENT */
-static Int roundUpMemBound(Int i)
+// jmarshall
+static size_t roundUpMemBound(size_t i)
 {
-	return (i + (MEM_BOUND_ALIGNMENT-1)) & ~(MEM_BOUND_ALIGNMENT-1);
+	return (i + (MEM_BOUND_ALIGNMENT - 1)) & ~(MEM_BOUND_ALIGNMENT - 1);
 }
+// jmarshall - end
 //-----------------------------------------------------------------------------
 /**
 	identical to sysAllocateDoNotZero, except that the memory block returned
@@ -463,7 +466,7 @@ private:
 
 public:
 	
-	static Int calcRawBlockSize(Int logicalSize);
+	static size_t calcRawBlockSize(size_t logicalSize);
 	static MemoryPoolSingleBlock *rawAllocateSingleBlock(MemoryPoolSingleBlock **pRawListHead, Int logicalSize, MemoryPoolFactory *owningFactory DECLARE_LITERALSTRING_ARG2);
 	void removeBlockFromList(MemoryPoolSingleBlock **pHead);
 
@@ -566,7 +569,9 @@ inline void **BlockCheckpointInfo::getStacktraceInfo() { return m_stacktrace; }
 */
 inline void* MemoryPoolSingleBlock::getUserDataNoDbg()
 {
-	char* p = ((char*)this) + sizeof(MemoryPoolSingleBlock);
+// jmarshall
+	char* p = reinterpret_cast<char*>(this) + static_cast<size_t>(sizeof(MemoryPoolSingleBlock));
+// jmarshall end
 	#ifdef MEMORYPOOL_BOUNDINGWALL
 	p += WALLSIZE;
 	#endif
@@ -590,14 +595,17 @@ inline void* MemoryPoolSingleBlock::getUserData()
 	given a desired logical block size, calculate the physical size needed for each
 	MemoryPoolSingleBlock (including overhead, etc.)
 */
-inline /*static*/ Int MemoryPoolSingleBlock::calcRawBlockSize(Int logicalSize) 
-{ 
-	Int s = ::roundUpMemBound(logicalSize) + sizeof(MemoryPoolSingleBlock);
-	#ifdef MEMORYPOOL_BOUNDINGWALL
-	s += WALLSIZE*2;
-	#endif
-	return s;
+// jmarshall
+size_t MemoryPoolSingleBlock::calcRawBlockSize(size_t logicalSize)
+{
+	return roundUpMemBound(logicalSize)
+		+ sizeof(MemoryPoolSingleBlock)
+#ifdef MEMORYPOOL_BOUNDINGWALL
+		+ (WALLSIZE * 2)
+#endif
+		;
 }
+// jmarshall end
 
 /**
 	accessor
@@ -1213,8 +1221,10 @@ void MemoryPoolBlob::initBlob(MemoryPool *owningPool, Int allocationCount)
 	m_totalBlocksInBlob = allocationCount;
 	m_usedBlocksInBlob = 0;
 
-	Int rawBlockSize = MemoryPoolSingleBlock::calcRawBlockSize(m_owningPool->getAllocationSize());
-	m_blockData = (char *)::sysAllocate(rawBlockSize * m_totalBlocksInBlob);	// throws on failure
+// jmarshall
+	size_t rawBlockSize = MemoryPoolSingleBlock::calcRawBlockSize(m_owningPool->getAllocationSize());
+	m_blockData = static_cast<char*>(::sysAllocate(rawBlockSize * static_cast<size_t>(m_totalBlocksInBlob)));
+// jmarshall end
 
 	// set up the list of free blocks in the blob (namely, all of 'em)
 	MemoryPoolSingleBlock *block = (MemoryPoolSingleBlock *)m_blockData;

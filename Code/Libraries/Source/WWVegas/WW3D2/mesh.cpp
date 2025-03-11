@@ -734,7 +734,10 @@ void MeshClass::Render(RenderInfoClass & rinfo)
 			for (int i=0; i<rinfo.Additional_Pass_Count(); i++) {
 				
 				MaterialPassClass * matpass = rinfo.Peek_Additional_Pass(i);
-
+// jmarshall
+				if (matpass == nullptr)
+					return;
+// jmarshall end
 				if ((!Is_Translucent()) || (matpass->Is_Enabled_On_Translucent_Meshes())) {
 					fvf_container->Add_Visible_Material_Pass(matpass,this);
 					rendered_something = true;
