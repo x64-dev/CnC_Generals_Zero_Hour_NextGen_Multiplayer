@@ -198,7 +198,7 @@ int LCW_Uncomp(void const * source, void * dest, unsigned long )
 int LCW_Comp(void const * source, void * dest, int datasize)
 {
 	int retval = 0;
-#if defined(_WINDOWS) && defined(WIN32)
+#if defined(WIN32) && !defined(_WIN64)
 	long inlen = 0;
 	long a1stdest = 0;
 	long a1stsrc = 0;

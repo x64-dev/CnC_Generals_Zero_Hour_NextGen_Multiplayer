@@ -3924,7 +3924,7 @@ void HeightMapRenderObjClass::Render(RenderInfoClass & rinfo)
  
  		//Specify all textures that this shader may need.
  		W3DShaderManager::setTexture(0,m_stageZeroTexture);
- 		W3DShaderManager::setTexture(1,m_stageZeroTexture);
+ 		W3DShaderManager::setTexture(1,m_map->getAlphaTerrainTexture());
  		W3DShaderManager::setTexture(2,m_stageTwoTexture);	//cloud
  		W3DShaderManager::setTexture(3,m_stageThreeTexture);//noise
 		//Disable writes to destination alpha channel (if there is one)
@@ -3949,6 +3949,9 @@ void HeightMapRenderObjClass::Render(RenderInfoClass & rinfo)
 		for (j=0; j<m_numVBTilesY; j++)
 			for (i=0; i<m_numVBTilesX; i++)
 			{
+				//Int cellNdx = i + j * m_map->getXExtent();
+				//Int blend = m_map->m_blendTileNdxes[cellNdx];
+
 				static int count = 0;
 				count++;
 				Int numPolys = VERTEX_BUFFER_TILE_LENGTH*VERTEX_BUFFER_TILE_LENGTH*2;
@@ -4039,18 +4042,19 @@ void HeightMapRenderObjClass::Render(RenderInfoClass & rinfo)
 		ShaderClass::Invalidate();
 		DX8Wrapper::Apply_Render_State_Changes();
 
+
 		m_bridgeBuffer->drawBridges(&rinfo.Camera, m_disableTextures, m_stageTwoTexture);
 
 		if (TheTerrainTracksRenderObjClassSystem)
 			TheTerrainTracksRenderObjClassSystem->flush();
-
-		if (m_shroud && rinfo.Additional_Pass_Count())
-		{
-			rinfo.Peek_Additional_Pass(0)->Install_Materials();
-			renderTerrainPass(&rinfo.Camera);
-			rinfo.Peek_Additional_Pass(0)->UnInstall_Materials();
-		}
-
+// jmarshall - fix me
+		//if (m_shroud && rinfo.Additional_Pass_Count())
+		//{
+		//	rinfo.Peek_Additional_Pass(0)->Install_Materials();
+		//	renderTerrainPass(&rinfo.Camera);
+		//	rinfo.Peek_Additional_Pass(0)->UnInstall_Materials();
+		//}
+// jmarshall - fix me
 		ShaderClass::Invalidate();
 		DX8Wrapper::Apply_Render_State_Changes();
 	}

@@ -102,6 +102,7 @@ RTS3DScene::RTS3DScene()
 	m_scratchLight = NEW_REF( LightClass, (LightClass::DIRECTIONAL) );
 //	REF_PTR_SET(m_globalLight[lightIndex], pLight);
 
+#if 0 
 #if defined(_DEBUG) || defined(_INTERNAL)
 	if (TheGlobalData->m_shroudOn)
 		m_shroudMaterialPass = NEW_REF(W3DShroudMaterialPassClass,());
@@ -109,6 +110,9 @@ RTS3DScene::RTS3DScene()
 		m_shroudMaterialPass = NULL;
 #else
 	m_shroudMaterialPass = NEW_REF(W3DShroudMaterialPassClass,());
+#endif
+#else
+	m_shroudMaterialPass = NULL;
 #endif
 
 	m_maskMaterialPass = NEW_REF(W3DMaskMaterialPassClass,());

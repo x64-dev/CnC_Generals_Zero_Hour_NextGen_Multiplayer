@@ -51,7 +51,7 @@
 
 #include <io.h>
 //#include <windows.h>
-//#undef FILE_TYPE_UNKNOWN
+#undef FILE_TYPE_UNKNOWN
 
 //-------------------------------------------------------------------------------------------------
 /** Game file access.  At present this allows us to access test assets, assets from

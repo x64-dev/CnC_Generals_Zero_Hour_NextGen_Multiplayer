@@ -231,7 +231,7 @@ class TextureClass : public W3DMPO, public RefCountClass
 		TxtAddrMode VAddressMode;
 
 		// Direct3D texture object
-		IDirect3DTexture8 *D3DTexture;
+		IDirect3DTexture8 *D3DTexture = NULL;
 		bool Initialized;
 
 		// Name

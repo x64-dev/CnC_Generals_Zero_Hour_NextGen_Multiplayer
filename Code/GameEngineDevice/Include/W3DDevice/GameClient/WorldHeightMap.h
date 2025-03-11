@@ -111,7 +111,7 @@ public:
 		STRETCH_DRAW_HEIGHT = 65
 	};
 
-protected:
+
 	Int m_width;				///< Height map width.
 	Int m_height;				///< Height map height (y size of array).
 	Int m_borderSize;		///< Non-playable border area.
@@ -128,7 +128,7 @@ protected:
 	Short  *m_cliffInfoNdxes;  ///< matches m_Data, indexes into m_cliffInfo.	 0 means no cliff info.
 	Short  *m_extraBlendTileNdxes;  ///< matches m_Data, indexes into m_extraBlendedTiles.  0 means no blend info.	
 
-	
+protected:
 	Int m_numBitmapTiles;	// Number of tiles initialized from bitmaps in m_SourceTiles.
 	Int m_numEdgeTiles;	// Number of tiles initialized from bitmaps in m_SourceTiles.
 	Int m_numBlendedTiles;	// Number of blended tiles created from bitmap tiles.
@@ -161,7 +161,7 @@ protected:
 	Int	m_terrainTexHeight; /// Height of m_terrainTex allocated.
 	/** The texture that contains the alpha edge tiles that get blended on 
 			top of the base texture. getAlphaUVData does the mapping. */
-	AlphaTerrainTextureClass *m_alphaTerrainTex;
+	AlphaTerrainTextureClass * m_alphaTerrainTex;	
 	Int	m_alphaTexHeight; /// Height of m_alphaTerrainTex allocated.
 
 	/** The texture that contains custom blend edge tiles. */

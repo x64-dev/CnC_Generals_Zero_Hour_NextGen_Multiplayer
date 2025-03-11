@@ -1,6 +1,10 @@
 #ifndef DX8TO9_H
 #define DX8TO9_H
 
+// jmarshall: added D3D9on12 support. 
+
+#include <d3d9on12.h>
+
 // Direct3D interfaces
 #define IDirect3D8                 IDirect3D9
 #define IDirect3DDevice8           IDirect3DDevice9
@@ -14,9 +18,6 @@
 #define IDirect3DSurface8          IDirect3DSurface9
 #define IDirect3DVolume8           IDirect3DVolume9
 #define IDirect3DSwapChain8        IDirect3DSwapChain9
-
-// Function renames
-#define Direct3DCreate8            Direct3DCreate9
 
 // Pointer renames
 #define LPDIRECT3DDEVICE8           LPDIRECT3DDEVICE9

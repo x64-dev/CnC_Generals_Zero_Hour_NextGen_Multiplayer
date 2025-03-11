@@ -1276,9 +1276,10 @@ class TerrainShader8Stage : public W3DShaderInterface
 ///Pixel shader based terrain shader - fastest method for the newest cards.
 class TerrainShaderPixelShader : public W3DShaderInterface
 {
-	DWORD					m_dwBasePixelShader;	///<handle to terrain D3D pixel shader
-	DWORD					m_dwBaseNoise1PixelShader;	///<handle to terrain/single noise D3D pixel shader
-	DWORD					m_dwBaseNoise2PixelShader;	///<handle to terrain/double noise D3D pixel shader
+	IDirect3DVertexShader9* m_terrainVertexShader;
+	IDirect3DPixelShader9* m_dwBasePixelShader;	///<handle to terrain D3D pixel shader
+	IDirect3DPixelShader9* m_dwBaseNoise1PixelShader;	///<handle to terrain/single noise D3D pixel shader
+	IDirect3DPixelShader9* m_dwBaseNoise2PixelShader;	///<handle to terrain/double noise D3D pixel shader
 
 	virtual Int set(Int pass);		///<setup shader for the specified rendering pass.
 	virtual void reset(void);		///<do any custom resetting necessary to bring W3D in sync.
@@ -1704,36 +1705,36 @@ Int TerrainShaderPixelShader::init( void )
 	{
 		if (res >= DC_GENERIC_PIXEL_SHADER_1_1)
 		{
-			//TODO: DX9
-			/*
 			//this shader needs some assets that need to be loaded
 			//shader decleration
-			DWORD Declaration[]=
+			// Corrected vertex declaration for DirectX 9.
+			D3DVERTEXELEMENT9 Declaration[] =
 			{
-				(D3DVSD_STREAM(0)),
-				(D3DVSD_REG(0, D3DVSDT_FLOAT3)), // Position
-				(D3DVSD_REG(1, D3DVSDT_D3DCOLOR)), // Diffuse
-				(D3DVSD_REG(2, D3DVSDT_FLOAT2)), //  Texture Coordinates
-				(D3DVSD_REG(3, D3DVSDT_FLOAT2)), //  Texture Coordinates
-				(D3DVSD_END())
+				{ 0,  0, D3DDECLTYPE_FLOAT3,  D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 }, // Position (3 floats)
+				{ 0, 12, D3DDECLTYPE_D3DCOLOR,  D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 }, // Diffuse color
+				{ 0, 16, D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 }, // Texture Coordinates 0 (2 floats)
+				{ 0, 24, D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  1 }, // Texture Coordinates 1 (2 floats)
+				D3DDECL_END()
 			};
-			
+
 			//base version which doesn't apply any noise textures.
-			HRESULT hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrain.pso", &Declaration[0], 0, false, &m_dwBasePixelShader);
+			HRESULT hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrain.hlsl", &Declaration[0], 0, false, nullptr, &m_dwBasePixelShader);
+			if (FAILED(hr))
+				return FALSE;
+
+			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrain_vert.hlsl", &Declaration[0], 0, true, &m_terrainVertexShader, nullptr);
 			if (FAILED(hr))
 				return FALSE;
 
 			//version which blends 1 noise texture.
-			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrainnoise.pso", &Declaration[0], 0, false, &m_dwBaseNoise1PixelShader);
+			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrainnoise.hlsl", &Declaration[0], 0, false, nullptr, &m_dwBaseNoise1PixelShader);
 			if (FAILED(hr))
 				return FALSE;
 
 			//version which blends 2 noise textures.
-			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrainnoise2.pso", &Declaration[0], 0, false, &m_dwBaseNoise2PixelShader);
+			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrainnoise2.hlsl", &Declaration[0], 0, false, nullptr, &m_dwBaseNoise2PixelShader);
 			if (FAILED(hr))
 				return FALSE;
-				*/
-			return FALSE;
 
 			W3DShaders[W3DShaderManager::ST_TERRAIN_BASE]=&terrainShaderPixelShader;
 			W3DShaders[W3DShaderManager::ST_TERRAIN_BASE_NOISE1]=&terrainShaderPixelShader;
@@ -1751,112 +1752,29 @@ Int TerrainShaderPixelShader::init( void )
 
 Int TerrainShaderPixelShader::set(Int pass)
 {
+	IDirect3DTexture9* albedoTexture = W3DShaderManager::getShaderTexture(0)->Peek_DX8_Texture();
+	IDirect3DTexture9* layerTexture = W3DShaderManager::getShaderTexture(1)->Peek_DX8_Texture();
+	IDirect3DTexture9* lightTexture = W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture();
+	
+	DX8Wrapper::SetVertexShader(m_terrainVertexShader);
+
 	//force WW3D2 system to set it's states so it won't later overwrite our custom settings.
 	DX8Wrapper::Apply_Render_State_Changes();
 
-	//setup base pass
-	DX8Wrapper::SetTexture(0, W3DShaderManager::getShaderTexture(0)->Peek_DX8_Texture());
-	DX8Wrapper::SetTexture(1, W3DShaderManager::getShaderTexture(1)->Peek_DX8_Texture());
+	//setup base pass	
+	DX8Wrapper::SetTexture(0, albedoTexture);
+	DX8Wrapper::SetTexture(1, layerTexture);
+	DX8Wrapper::SetTexture(2, lightTexture);
 
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 0, D3DTSS_ADDRESSU, D3DTADDRESS_CLAMP);
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 0, D3DTSS_ADDRESSV, D3DTADDRESS_CLAMP);
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 1, D3DTSS_ADDRESSU, D3DTADDRESS_CLAMP);
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 1, D3DTSS_ADDRESSV, D3DTADDRESS_CLAMP);
-
-	//tell pixel shader which UV set to use for each stage
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 0, D3DTSS_TEXCOORDINDEX, 0 );
-	DX8Wrapper::Set_DX8_Texture_Stage_State( 1, D3DTSS_TEXCOORDINDEX, 1 );
-
-	if (TheGlobalData && TheGlobalData->m_bilinearTerrainTex || TheGlobalData->m_trilinearTerrainTex) {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MINFILTER, D3DTEXF_LINEAR);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MINFILTER, D3DTEXF_LINEAR);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-	} else {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MINFILTER, D3DTEXF_POINT);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MAGFILTER, D3DTEXF_POINT);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MINFILTER, D3DTEXF_POINT);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MAGFILTER, D3DTEXF_POINT);
-	}
-	if (TheGlobalData && TheGlobalData->m_trilinearTerrainTex) {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MIPFILTER, D3DTEXF_LINEAR);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MIPFILTER, D3DTEXF_LINEAR);
-	} else {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(0, D3DTSS_MIPFILTER, D3DTEXF_POINT);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MIPFILTER, D3DTEXF_LINEAR);
-	}
-
-	if (W3DShaderManager::getCurrentShader() >= W3DShaderManager::ST_TERRAIN_BASE_NOISE1)
-	{	
-		Matrix4 curView;
-		DX8Wrapper::_Get_DX8_Transform(D3DTS_VIEW, curView);
-
-		D3DXMATRIX inv;
-		float det;
-		D3DXMatrixInverse(&inv, &det, (D3DXMATRIX*)&curView);
-
-		DX8Wrapper::Set_DX8_Texture_Stage_State(2,  D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEPOSITION);
-		// Two output coordinates are used.
-		DX8Wrapper::Set_DX8_Texture_Stage_State(2,  D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);	
-
-		DX8Wrapper::Set_DX8_Texture_Stage_State(2,  D3DTSS_ADDRESSU, D3DTADDRESS_WRAP);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(2,  D3DTSS_ADDRESSV, D3DTADDRESS_WRAP);
-		
-		if (W3DShaderManager::getCurrentShader() == W3DShaderManager::ST_TERRAIN_BASE_NOISE12)
-		{	//full shader
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3,  D3DTSS_ADDRESSU, D3DTADDRESS_WRAP);
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3,  D3DTSS_ADDRESSV, D3DTADDRESS_WRAP);
-			DX8Wrapper::SetTexture(2, W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture());
-			DX8Wrapper::SetTexture(3, W3DShaderManager::getShaderTexture(3)->Peek_DX8_Texture());
-			//TODO: DX9//DX8Wrapper::SetPixelShader(m_dwBaseNoise2PixelShader);
-
-			DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MINFILTER, D3DTEXF_LINEAR);
-			DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3, D3DTSS_MINFILTER, D3DTEXF_POINT);
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-
-			terrainShader2Stage.updateNoise1(((D3DXMATRIX*)&curView),&inv);	//update curView with texture matrix
-			DX8Wrapper::_Set_DX8_Transform(D3DTS_TEXTURE2, curView);
-
-			terrainShader2Stage.updateNoise2(((D3DXMATRIX*)&curView),&inv);	//update curView with texture matrix
-			DX8Wrapper::_Set_DX8_Transform(D3DTS_TEXTURE3, curView);
-
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3,  D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEPOSITION);
-			// Two output coordinates are used.
-			DX8Wrapper::Set_DX8_Texture_Stage_State(3,  D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);	
-		}
-		else
-		{	//single noise texture shader
-			//TODO: DX9//DX8Wrapper::SetPixelShader(m_dwBaseNoise1PixelShader);
-
-			if (W3DShaderManager::getCurrentShader() == W3DShaderManager::ST_TERRAIN_BASE_NOISE1)
-			{	//cloud map
-				DX8Wrapper::SetTexture(2, W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture());
-				terrainShader2Stage.updateNoise1(((D3DXMATRIX*)&curView),&inv);	//update curView with texture matrix
-				DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MINFILTER, D3DTEXF_LINEAR);
-				DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-			}
-			else
-			{	//light map
-				DX8Wrapper::SetTexture(2, W3DShaderManager::getShaderTexture(3)->Peek_DX8_Texture());
-				terrainShader2Stage.updateNoise2(((D3DXMATRIX*)&curView),&inv);	//update curView with texture matrix
-				DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MINFILTER, D3DTEXF_POINT);
-				DX8Wrapper::Set_DX8_Texture_Stage_State(2, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
-			}
-			DX8Wrapper::_Set_DX8_Transform(D3DTS_TEXTURE2, curView);
-		}
-	}
-	else
-	{	//just base texturing
-		//TODO: DX9//DX8Wrapper::SetPixelShader(m_dwBasePixelShader);
-	}
+	DX8Wrapper::SetPixelShader(m_dwBaseNoise2PixelShader);
 
 	return TRUE;
 }
 
 void TerrainShaderPixelShader::reset(void)
 {
+	DX8Wrapper::SetVertexShader(NULL);
+
 	DX8Wrapper::SetTexture(2,NULL);	//release reference to any texture
 	DX8Wrapper::SetTexture(3,NULL);	//release reference to any texture
 
@@ -1957,7 +1875,8 @@ void CloudTextureShader::reset(void)
 /*===========================================================================================*/
 class RoadShaderPixelShader : public W3DShaderInterface
 {
-	DWORD					m_dwBaseNoise2PixelShader;	///<handle to road/double noise D3D pixel shader
+	IDirect3DVertexShader9*		m_dwBaseNoise2VertexShader;
+	IDirect3DPixelShader9		*m_dwBaseNoise2PixelShader;	///<handle to road/double noise D3D pixel shader
 
 	virtual Int set(Int pass);		///<setup shader for the specified rendering pass.
 	virtual void reset(void);		///<do any custom resetting necessary to bring W3D in sync.
@@ -2000,24 +1919,26 @@ Int RoadShaderPixelShader::init( void )
 	{
 		if (res >= DC_GENERIC_PIXEL_SHADER_1_1)
 		{
-			//TODO: DX9
-			/*
 			//this shader needs some assets that need to be loaded
 			//shader decleration
-			DWORD Declaration[]=
+			D3DVERTEXELEMENT9 Declaration[] =
 			{
-				(D3DVSD_STREAM(0)),
-				(D3DVSD_REG(0, D3DVSDT_FLOAT3)), // Position
-				(D3DVSD_REG(1, D3DVSDT_D3DCOLOR)), // Diffuse
-				(D3DVSD_REG(2, D3DVSDT_FLOAT2)), //  Texture Coordinates
-				(D3DVSD_END())
+				{ 0,  0, D3DDECLTYPE_FLOAT3,  D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 }, // Position (3 floats)
+				{ 0, 12, D3DDECLTYPE_D3DCOLOR,  D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 }, // Diffuse color
+				{ 0, 16, D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 }, // Texture Coordinates 0 (2 floats)
+				{ 0, 24, D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  1 }, // Texture Coordinates 1 (2 floats)
+				D3DDECL_END()
 			};
 
 			//version which blends 2 noise textures.
-			HRESULT hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\roadnoise2.pso", &Declaration[0], 0, false, &m_dwBaseNoise2PixelShader);
+			HRESULT hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\roadnoise2.hlsl", &Declaration[0], 0, false, nullptr, &m_dwBaseNoise2PixelShader);
 			if (FAILED(hr))
 				return FALSE;
-				*/
+
+			hr = W3DShaderManager::LoadAndCreateD3DShader("shaders\\terrain_vert.hlsl", &Declaration[0], 0, true, &m_dwBaseNoise2VertexShader, nullptr);
+			if (FAILED(hr))
+				return FALSE;
+
 			return FALSE;
 
 			//Only set this shader for use in dual noise mode.  The 2Stage shader will take care of
@@ -2079,7 +2000,8 @@ Int RoadShaderPixelShader::set(Int pass)
 	DX8Wrapper::Set_DX8_Texture_Stage_State(2,  D3DTSS_ADDRESSV, D3DTADDRESS_WRAP);
 	DX8Wrapper::SetTexture(1, W3DShaderManager::getShaderTexture(1)->Peek_DX8_Texture());
 	DX8Wrapper::SetTexture(2, W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture());
-	//TODO: DX9//DX8Wrapper::SetPixelShader(m_dwBaseNoise2PixelShader);
+	DX8Wrapper::SetVertexShader(m_dwBaseNoise2VertexShader);
+	DX8Wrapper::SetPixelShader(m_dwBaseNoise2PixelShader);
 
 	DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MINFILTER, D3DTEXF_LINEAR);
 	DX8Wrapper::Set_DX8_Texture_Stage_State(1, D3DTSS_MAGFILTER, D3DTEXF_LINEAR);
@@ -2105,6 +2027,7 @@ void RoadShaderPixelShader::reset(void)
 	DX8Wrapper::SetTexture(2,NULL);	//release reference to any texture
 	DX8Wrapper::SetTexture(3,NULL);	//release reference to any texture
 
+	DX8Wrapper::SetVertexShader(0);
 	DX8Wrapper::SetPixelShader(0);	//turn off pixel shader
 
 	DX8Wrapper::SetTexture(0, NULL);
@@ -2675,57 +2598,67 @@ ChipsetType W3DShaderManager::getChipset( void )
 //=============================================================================
 /** Loads and creates a D3D pixel or vertex shader.*/
 //=============================================================================
-HRESULT W3DShaderManager::LoadAndCreateD3DShader(char* strFilePath, const DWORD* pDeclaration, DWORD Usage, Bool ShaderType, DWORD* pHandle)
+HRESULT W3DShaderManager::LoadAndCreateD3DShader(char* strFilePath, const D3DVERTEXELEMENT9* pDeclaration, DWORD Usage, Bool ShaderType, IDirect3DVertexShader9** pVertexShaderHandle, IDirect3DPixelShader9 **pPixelShaderHandle)
 {
-	try
+	HRESULT hr = S_OK;
+	LPD3DXBUFFER pShaderBuffer = NULL;
+	LPD3DXBUFFER pErrorBuffer = NULL;
+
+	// Choose shader profile based on the shader type.
+	// For a vertex shader use "vs_3_0" and for a pixel shader use "ps_3_0".
+	const char* pProfile = ShaderType ? "vs_3_0" : "ps_3_0";
+
+	// Compile the shader from file. Assumes the entry point is "main".
+	hr = D3DXCompileShaderFromFileA(
+		strFilePath,       // Source file name.
+		NULL,              // Optional macros.
+		NULL,              // Optional include interface.
+		"main",            // Entry point function name.
+		pProfile,          // Target profile.
+		0,                 // Shader compile options.
+		&pShaderBuffer,    // Compiled shader code.
+		&pErrorBuffer,     // Compilation errors.
+		NULL               // Optional constant table.
+	);
+
+	if (FAILED(hr))
 	{
-		File *file = NULL;
-		HRESULT hr;
-
-		file = TheFileSystem->openFile(strFilePath, File::READ | File::BINARY);
-		if (file == NULL)
+		if (pErrorBuffer)
 		{
-			OutputDebugString("Could not find file \n" );
-			return E_FAIL;
+			// Output any error messages.
+			OutputDebugStringA((char*)pErrorBuffer->GetBufferPointer());
+			pErrorBuffer->Release();
 		}
-
-		FileInfo fileInfo;
-		TheFileSystem->getFileInfo(AsciiString(strFilePath), &fileInfo);
-		DWORD dwFileSize = fileInfo.sizeLow;
-
-		const DWORD* pShader = (DWORD*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, dwFileSize);
-		if (!pShader)
+		if (pShaderBuffer)
 		{
-			OutputDebugString( "Failed to allocate memory to load shader\n " );
-			return E_FAIL;
+			pShaderBuffer->Release();
 		}
-
-		file->read((void *)pShader, dwFileSize);
-
-		file->close();
-		file = NULL;
-
-		if (ShaderType == TRUE)//SHADERTYPE_VERTEX)
-		{
-			hr = E_FAIL;//TODO: DX9//hr = DX8Wrapper::CreateVertexShader(pDeclaration, pShader, pHandle, Usage);
-		}
-		else if (ShaderType == FALSE)//SHADERTYPE_PIXEL)
-		{
-			hr = E_FAIL;//TODO: DX9//hr = DX8Wrapper::CreatePixelShader(pShader, pHandle);
-		}
-
-		HeapFree(GetProcessHeap(), 0, (void*)pShader);
-
-		if (FAILED(hr))
-		{
-			OutputDebugString( "Failed to create shader\n "); 
-			return E_FAIL;
-		}
+		return hr;
 	}
-	catch(...)
+
+	// Release the error buffer if present.
+	if (pErrorBuffer)
+		pErrorBuffer->Release();
+
+	// Get a pointer to the compiled shader code.
+	const DWORD* pShaderCode = (const DWORD*)pShaderBuffer->GetBufferPointer();
+
+	// Create the shader.
+	if (ShaderType) // Create a vertex shader.
 	{
-		OutputDebugString( "Error opening file \n" );
-		return E_FAIL;
+		hr = DX8Wrapper::CreateVertexShader(pDeclaration, pShaderCode, pVertexShaderHandle, Usage);
+	}
+	else // Create a pixel shader.
+	{
+		hr = DX8Wrapper::CreatePixelShader(pShaderCode, pPixelShaderHandle);
+	}
+
+	pShaderBuffer->Release();
+
+	if (FAILED(hr))
+	{
+		OutputDebugStringA("Failed to create shader\n");
+		return hr;
 	}
 
 	return S_OK;
