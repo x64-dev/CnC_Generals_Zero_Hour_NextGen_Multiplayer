@@ -66,6 +66,9 @@
 //#include "GeneratedVersion.h"
 #include "Resource.h"
 
+// NGMP
+#include "../NextGenMPShared/NextGenMP_defines.h"
+
 #ifdef _INTERNAL
 // for occasional debugging...
 //#pragma optimize("", off)
@@ -954,6 +957,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 	//		AsciiString(VERSION_BUILDUSER), AsciiString(VERSION_BUILDLOC),
 	//		AsciiString(__TIME__), AsciiString(__DATE__));
 
+#if !defined(ALLOW_MULTIPLE_INSTANCES)
 #if !defined(_DEBUG) && !defined(_INTERNAL)
 		//Create a mutex with a unique name to Generals in order to determine if
 		//our app is already running.
@@ -981,6 +985,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 			return 0;
 		}
 		DEBUG_LOG(("Create GeneralsMutex okay.\n"));
+#endif
 #endif
 
 #ifdef DO_COPY_PROTECTION
