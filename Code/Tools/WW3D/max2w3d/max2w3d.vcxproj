@@ -112,7 +112,6 @@
       <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
       <ObjectFileName>.\Debug/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -137,10 +136,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Debug/Max2w3d.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/max2w3d.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -163,7 +158,6 @@
       <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
       <ObjectFileName>.\Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -187,10 +181,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Release/Max2w3d.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/max2w3d.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Max4Release|x64'">
     <Midl>
@@ -213,7 +203,6 @@
       <AssemblerListingLocation>.\Max4Release/</AssemblerListingLocation>
       <ObjectFileName>.\Max4Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Max4Release/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -237,10 +226,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Max4Release/Max2w3d.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Max4Release/max2w3d.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
     <Midl>
@@ -260,7 +245,6 @@
       <AssemblerListingLocation>.\Hybrid/</AssemblerListingLocation>
       <ObjectFileName>.\Hybrid/</ObjectFileName>
       <ProgramDataBaseFileName>.\Hybrid/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -284,10 +268,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Hybrid/Max2w3d.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Hybrid/max2w3d.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Max4Hybrid|x64'">
     <Midl>
@@ -307,7 +287,6 @@
       <AssemblerListingLocation>.\Max4Hybrid/</AssemblerListingLocation>
       <ObjectFileName>.\Max4Hybrid/</ObjectFileName>
       <ProgramDataBaseFileName>.\Max4Hybrid/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -333,10 +312,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Max4Hybrid/Max2w3d.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Max4Hybrid/max2w3d.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\pluglib\realcrc.cpp" />

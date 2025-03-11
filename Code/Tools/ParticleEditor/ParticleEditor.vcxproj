@@ -90,10 +90,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Release/ParticleEditor.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/ParticleEditor.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -135,10 +131,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Debug/ParticleEditorD.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/ParticleEditor.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CButtonShowColor.cpp" />

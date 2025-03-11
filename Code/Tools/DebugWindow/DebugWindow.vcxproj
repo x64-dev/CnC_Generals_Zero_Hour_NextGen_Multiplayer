@@ -90,10 +90,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Debug/DebugWindowD.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/DebugWindow.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -135,10 +131,6 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Release/DebugWindow.lib</ImportLibrary>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/DebugWindow.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DebugWindow.cpp" />
