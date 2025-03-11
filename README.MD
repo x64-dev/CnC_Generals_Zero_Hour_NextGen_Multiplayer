@@ -1,5 +1,10 @@
 # Command & Conquer Generals NextGen Fork
 
+## Contributors
+jmarshall23
+Drewminator
+Disarray(x64 support great work!).
+
 ## New Features
 - D3D12 support
 - Widescreen support
