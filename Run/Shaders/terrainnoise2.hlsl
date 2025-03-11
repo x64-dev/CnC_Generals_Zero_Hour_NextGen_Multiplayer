@@ -29,5 +29,5 @@ float4 main(PS_INPUT input) : COLOR
 
     // Modulate with texture 2 and texture 3 sequentially
     float4 modulated = lit * color2;
-    return blended * color2 * float4(input.Diffuse.x, input.Diffuse.y, input.Diffuse.z, color1.r);
+    return modulated;
 }
