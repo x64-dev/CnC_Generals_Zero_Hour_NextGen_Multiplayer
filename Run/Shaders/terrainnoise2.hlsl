@@ -6,7 +6,8 @@ sampler2D Tex3 : register(s3);
 
 struct PS_INPUT
 {
-    float2 TexCoord : TEXCOORD3;
+    float2 TexCoord : TEXCOORD0;
+    float2 TexCoord : TEXCOORD1;
     float4 Diffuse  : COLOR0; // Diffuse color; its alpha is used as blend factor
 };
 
@@ -14,7 +15,7 @@ float4 main(PS_INPUT input) : COLOR
 {
     // Sample all four textures
     float4 color0 = tex2D(Tex0, input.TexCoord);
-    float4 color1 = tex2D(Tex1, input.TexCoord);
+    float4 color1 = tex2D(Tex1, input.TexCoord1);
     float4 color2 = tex2D(Tex2, input.TexCoord);
     float4 color3 = tex2D(Tex3, input.TexCoord);
     
@@ -25,8 +26,8 @@ float4 main(PS_INPUT input) : COLOR
     
     // Apply diffuse lighting
     float4 lit = blended * input.Diffuse;
-    
+
     // Modulate with texture 2 and texture 3 sequentially
-    float4 modulated = lit * color2 * color3;
-    return float4(input.TexCoord.x, input.TexCoord.y, 0.0, 1.0);
+    float4 modulated = lit * color2;
+    return blended * color2 * float4(input.Diffuse.x, input.Diffuse.y, input.Diffuse.z, color1.r);
 }

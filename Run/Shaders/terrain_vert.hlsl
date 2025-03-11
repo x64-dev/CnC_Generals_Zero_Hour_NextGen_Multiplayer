@@ -16,6 +16,7 @@ struct VS_OUTPUT
 {
     float4 Position : POSITION;   // o0    
     float2 TexCoord : TEXCOORD0;  // o3.xy -> mapped to TEXCOORD0 in D3D9
+    float2 TexCoord1 : TEXCOORD0;
     float4 Color    : COLOR0;     // o1
 };
 
@@ -37,6 +38,7 @@ VS_OUTPUT main(VS_INPUT IN)
     OUT.Position = pos;
     OUT.Color = saturate(IN.Color);
     OUT.TexCoord = IN.Tex1.xy;
+    OUT.TexCoord1 = IN.Tex0.xy;
 
     return OUT;
 }

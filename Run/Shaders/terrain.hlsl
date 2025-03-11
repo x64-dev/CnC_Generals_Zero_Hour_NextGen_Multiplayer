@@ -18,5 +18,5 @@ float4 main(PS_INPUT input) : COLOR
     float4 blended = lerp(color0, color1, input.Diffuse.a);
     
     // Multiply by the diffuse lighting
-    return blended * input.Diffuse;
+        return float4(1, 0, 0, 1);
 }
