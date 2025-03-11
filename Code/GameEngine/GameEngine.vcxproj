@@ -1264,12 +1264,6 @@
     <ClInclude Include="Include\GameNetwork\WOLBrowser\WebBrowser.h" />
     <ClInclude Include="Include\Precompiled\PreRTS.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Libraries\Source\EABrowserDispatch\EABrowserDispatch.vcxproj">
-      <Project>{60f187a6-9f0a-4867-9098-a9686d0e831e}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
