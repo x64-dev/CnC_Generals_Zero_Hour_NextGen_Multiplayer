@@ -216,22 +216,22 @@ AudioManager::~AudioManager()
 void AudioManager::init()
 {
 	INI ini;
-	ini.load( AsciiString( "Data\\INI\\AudioSettings.ini" ), INI_LOAD_OVERWRITE, NULL);
+	ini.load( "Data\\INI\\AudioSettings.ini", INI_LOAD_OVERWRITE, NULL);
 
-	ini.load( AsciiString( "Data\\INI\\Default\\Music.ini" ), INI_LOAD_OVERWRITE, NULL );
-	ini.load( AsciiString( "Data\\INI\\Music.ini" ), INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Default\\Music.ini", INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Music.ini", INI_LOAD_OVERWRITE, NULL );
 
-	ini.load( AsciiString( "Data\\INI\\Default\\SoundEffects.ini" ), INI_LOAD_OVERWRITE, NULL );
-	ini.load( AsciiString( "Data\\INI\\SoundEffects.ini" ), INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Default\\SoundEffects.ini", INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\SoundEffects.ini", INI_LOAD_OVERWRITE, NULL );
 
-	ini.load( AsciiString( "Data\\INI\\Default\\Speech.ini" ), INI_LOAD_OVERWRITE, NULL );
-	ini.load( AsciiString( "Data\\INI\\Speech.ini" ), INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Default\\Speech.ini", INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Speech.ini", INI_LOAD_OVERWRITE, NULL );
 
-	ini.load( AsciiString( "Data\\INI\\Default\\Voice.ini" ), INI_LOAD_OVERWRITE, NULL );
-	ini.load( AsciiString( "Data\\INI\\Voice.ini" ), INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Default\\Voice.ini", INI_LOAD_OVERWRITE, NULL );
+	ini.load( "Data\\INI\\Voice.ini", INI_LOAD_OVERWRITE, NULL );
 
 	// do the miscellaneous sound files last so that we find the audioeventrts associated with the events.
-	ini.load( AsciiString( "Data\\INI\\MiscAudio.ini" ), INI_LOAD_OVERWRITE, NULL);
+	ini.load( "Data\\INI\\MiscAudio.ini", INI_LOAD_OVERWRITE, NULL);
 	
 	// determine if one of the music tracks exists. Since their now BIGd, one implies all.
 	// If they don't exist, then attempt to load them from the CD. 
@@ -412,7 +412,7 @@ void AudioManager::getInfoForAudioEvent( const AudioEventRTS *eventToFindAndFill
 //-------------------------------------------------------------------------------------------------
 AudioHandle AudioManager::addAudioEvent(const AudioEventRTS *eventToAdd)
 {
-	if (eventToAdd->getEventName().isEmpty() || eventToAdd->getEventName() == AsciiString("NoSound")) {
+	if (eventToAdd->getEventName().isEmpty() || eventToAdd->getEventName() == "NoSound") {
 		return AHSV_NoSound;
 	}
 
