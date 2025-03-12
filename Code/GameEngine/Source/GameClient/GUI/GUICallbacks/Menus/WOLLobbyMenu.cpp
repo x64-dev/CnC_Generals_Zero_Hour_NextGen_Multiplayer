@@ -495,6 +495,9 @@ static Int insertPlayerInListbox(const PlayerInfo& info, Color color)
 
 void PopulateLobbyPlayerListbox(void)
 {
+	// TODO_NGMP
+	return;
+
 	if (!listboxLobbyPlayers)
 		return;
 
@@ -901,6 +904,10 @@ static const char* getMessageString(Int t)
 //-------------------------------------------------------------------------------------------------
 static void refreshGameList( Bool forceRefresh )
 {
+	// TODO_NGMP: rate limit this like before
+	RefreshGameListBoxes();
+
+	/*
 	Int refreshInterval = gameListRefreshInterval;
 
 	if (forceRefresh || ((gameListRefreshTime == 0) || ((gameListRefreshTime + refreshInterval) <= timeGetTime())))
@@ -917,6 +924,7 @@ static void refreshGameList( Bool forceRefresh )
 	} else {
 		//DEBUG_LOG(("gameListRefreshTime: %d refreshInterval: %d\n"));
 	}
+	*/
 }
 //-------------------------------------------------------------------------------------------------
 /** refreshPlayerList 
@@ -1518,9 +1526,12 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 
 						if (lastID != req.stagingRoom.id || now > lastFrame + 60)
 						{
+							// TODO_NGMP: Impl this again
+							/*
 							TheGameSpyPeerMessageQueue->addRequest(req);
+							*/
 						}
-
+						
 						lastID = req.stagingRoom.id;
 						lastFrame = now;
 					}
