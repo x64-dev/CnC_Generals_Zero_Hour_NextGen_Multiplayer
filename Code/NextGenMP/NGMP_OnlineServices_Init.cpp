@@ -1,6 +1,7 @@
 #include "NGMP_OnlineServices_Init.h"
 #include "common/gsPlatformUtil.h"
 #include <fstream>
+#include "../NextGenMPShared/NextGenMP_defines.h"
 
 NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager = nullptr;
 
@@ -82,12 +83,12 @@ void NGMP_OnlineServicesManager::Init()
 		PlatformOptions.Flags = EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D9 | EOS_PF_WINDOWS_ENABLE_OVERLAY_D3D10;
 		PlatformOptions.CacheDirectory = szTempDir;
 
-		PlatformOptions.ProductId = "BRING_YOUR_OWN";
-		PlatformOptions.SandboxId = "BRING_YOUR_OWN";
-		PlatformOptions.EncryptionKey = "BRING_YOUR_OWN";
-		PlatformOptions.DeploymentId = "BRING_YOUR_OWN";
-		PlatformOptions.ClientCredentials.ClientId = "BRING_YOUR_OWN";
-		PlatformOptions.ClientCredentials.ClientSecret = "BRING_YOUR_OWN";
+		PlatformOptions.ProductId = NGMP_EOS_PRODUCT_ID;
+		PlatformOptions.SandboxId = NGMP_EOS_SANDBOX_ID;
+		PlatformOptions.EncryptionKey = NGMP_EOS_ENCRYPTION_KEY;
+		PlatformOptions.DeploymentId = NGMP_EOS_DEPLOYMENT_ID;
+		PlatformOptions.ClientCredentials.ClientId = NGMP_EOS_CLIENT_ID;
+		PlatformOptions.ClientCredentials.ClientSecret = NGMP_EOS_CLIENT_SECRET;
 
 		double timeout = 5000.f;
 		PlatformOptions.TaskNetworkTimeoutSeconds = &timeout;
