@@ -102,11 +102,48 @@ public:
 
 	void CreateLobby()
 	{
-		// TODO_NGMP: Impl
+		// TODO_NGMP: Correct values
+		EOS_HLobby lobbyHandle = EOS_Platform_GetLobbyInterface(m_EOSPlatformHandle);
+
+		EOS_Lobby_CreateLobbyOptions* createLobbyOpts = new EOS_Lobby_CreateLobbyOptions();
+		createLobbyOpts->ApiVersion = EOS_LOBBY_CREATELOBBY_API_LATEST;
+		createLobbyOpts->LocalUserId = m_EOSUserID;
+		createLobbyOpts->MaxLobbyMembers = 4;
+		createLobbyOpts->PermissionLevel = EOS_ELobbyPermissionLevel::EOS_LPL_PUBLICADVERTISED;
+		createLobbyOpts->bPresenceEnabled = false;
+		createLobbyOpts->BucketId = "TODO_NGMP";
+		createLobbyOpts->bDisableHostMigration = true; // Generals doesnt support host migration during lobby... maybe we should fix that
+		createLobbyOpts->bEnableRTCRoom = false;
+		createLobbyOpts->LocalRTCOptions = nullptr;
+		createLobbyOpts->bEnableJoinById = true;
+		createLobbyOpts->bRejoinAfterKickRequiresInvite = false;
+		createLobbyOpts->AllowedPlatformIds = nullptr;
+		createLobbyOpts->AllowedPlatformIdsCount = 0;
+		createLobbyOpts->bCrossplayOptOut = false;
+		createLobbyOpts->RTCRoomJoinActionType = EOS_ELobbyRTCRoomJoinActionType::EOS_LRRJAT_ManualJoin;
+		
+		EOS_Lobby_CreateLobby(lobbyHandle, createLobbyOpts, nullptr, [](const EOS_Lobby_CreateLobbyCallbackInfo* Data)
+			{
+				if (Data->ResultCode == EOS_EResult::EOS_Success)
+				{
+					OutputDebugString("Lobby created!\n");
+				}
+				else
+				{
+					OutputDebugString("Failed to create lobby!\n");
+				}
+
+				// TODO_NGMP: Impl
+				NGMP_OnlineServicesManager::GetInstance()->InvokeCreateLobbyCallback(Data->ResultCode == EOS_EResult::EOS_Success);
+			});
+	}
+
+	void InvokeCreateLobbyCallback(bool bSuccess)
+	{
 		for (auto cb : m_vecCreateLobby_PendingCallbacks)
 		{
 			// TODO_NGMP: Support failure
-			cb(true);
+			cb(bSuccess);
 		}
 		m_vecCreateLobby_PendingCallbacks.clear();
 	}
@@ -137,6 +174,7 @@ public:
 
 private:
 	EOS_HPlatform m_EOSPlatformHandle = nullptr;
+	EOS_ProductUserId m_EOSUserID = nullptr;
 
 	std::vector<uint8> m_vecSteamAuthSessionTicket;
 

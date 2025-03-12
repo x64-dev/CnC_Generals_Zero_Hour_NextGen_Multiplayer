@@ -285,6 +285,8 @@ void NGMP_OnlineServicesManager::LoginToEpic()
 
 void NGMP_OnlineServicesManager::OnEpicLoginComplete(EOS_ProductUserId userID)
 {
+	m_EOSUserID = userID;
+
 	char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
 	int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
 	EOS_EResult r = EOS_ProductUserId_ToString(userID, szUserID, &len);
