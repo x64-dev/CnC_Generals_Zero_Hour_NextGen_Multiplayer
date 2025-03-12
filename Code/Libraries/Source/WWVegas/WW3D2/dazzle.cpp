@@ -668,7 +668,7 @@ void DazzleRenderObjClass::Init_Type(const DazzleInitClass& i)
 		for (unsigned a=0;a<type_count;++a) {
 			new_types[a]=types[a];
 		}
-		for (;a<new_count;++a) {
+		for (unsigned a = type_count;a<new_count;++a) {
 			new_types[a]=0;
 		}
 		delete[] types;
@@ -691,7 +691,7 @@ void DazzleRenderObjClass::Init_Lensflare(const LensflareInitClass& i)
 		for (unsigned a=0;a<lensflare_count;++a) {
 			new_lensflares[a]=lensflares[a];
 		}
-		for (;a<new_count;++a) {
+		for (unsigned a = lensflare_count;a<new_count;++a) {
 			new_lensflares[a]=0;
 		}
 		delete[] lensflares;

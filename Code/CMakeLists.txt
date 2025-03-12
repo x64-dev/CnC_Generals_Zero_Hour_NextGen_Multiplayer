@@ -5,10 +5,6 @@ project(RTS LANGUAGES C CXX)
 # Force multi-config for Visual Studio (Debug, Internal, Release)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Internal;Release" CACHE STRING "Configs" FORCE)
 
-if(MSVC)
-    add_compile_options(/Zc:forScope-)
-endif()
-
 add_subdirectory(GameEngine)
 add_subdirectory(GameEngineDevice)
 add_subdirectory(GameRenderer)

@@ -330,7 +330,8 @@ void CTeamsDialog::UpdateTeamsList()
 	Int numTeams = m_sides.getNumTeams();
 	Bool selected = false;
 
-	for (Int i=0, inserted = 0; i<numTeams; i++)
+	Int inserted = 0;
+	for (Int i=0; i<numTeams; i++)
 	{
 		TeamsInfo *ti = m_sides.getTeamInfo(i);
 		if (ti->getDict()->getAsciiString(TheKey_teamOwner) == playerNameForUI(m_sides, which).str())

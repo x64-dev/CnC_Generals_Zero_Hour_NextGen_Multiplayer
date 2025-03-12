@@ -90,9 +90,10 @@ BOOL LZHLDecompressor::decompress( BYTE* dst, size_t* dstSz, const BYTE* src, si
       int lastNBits = 0;
       int pos = 0;
 
-      for ( i=0; i < 16 ; ++i ) {
+      for (int i=0; i < 16 ; ++i ) {
 
-        for ( int n=0 ;; ++n )
+        int n = 0;
+        for ( n=0 ;; ++n )
           if ( _get( src, endSrc, 1 ) )
             break;
 

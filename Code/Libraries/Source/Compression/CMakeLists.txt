@@ -78,10 +78,6 @@ target_compile_definitions(Compression PRIVATE
 
 target_compile_options(Compression PRIVATE
   $<$<C_COMPILER_ID:MSVC>:
-    # The .vcxproj has "AdditionalOptions>/Zc:forScope-</AdditionalOptions>" => disables /Zc:forScope
-    # We'll replicate that with a direct command-line option:
-    /Zc:forScope-
-
     # Debug => /Od (Optimization=Disabled), /MDd (MultiThreadedDebugDLL)
     $<$<CONFIG:Debug>:/Od /MDd /RTC1 /Zi>
 

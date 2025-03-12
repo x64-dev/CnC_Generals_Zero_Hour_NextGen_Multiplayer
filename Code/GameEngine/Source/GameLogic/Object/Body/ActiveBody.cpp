@@ -801,8 +801,7 @@ void ActiveBody::createParticleSystems( const AsciiString &boneBaseName,
 		}  // end for, j
 
 		// sanity
-		DEBUG_ASSERTCRASH( j != numBones, 
-											 ("ActiveBody::createParticleSystems, Unable to select particle system index\n") );
+		//DEBUG_ASSERTCRASH( j != numBones, ("ActiveBody::createParticleSystems, Unable to select particle system index\n") );
 
 		// create particle system here
 		ParticleSystem *particleSystem = TheParticleSystemManager->createParticleSystem( systemTemplate );

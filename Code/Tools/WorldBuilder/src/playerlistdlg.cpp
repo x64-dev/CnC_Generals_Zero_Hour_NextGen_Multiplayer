@@ -524,13 +524,13 @@ void PlayerListDlg::updateTheUI(void)
 		factions->ResetContent();
 		if (ThePlayerTemplateStore)
 		{
-			for (i = 0; i < ThePlayerTemplateStore->getPlayerTemplateCount(); i++)
+			for (Int i = 0; i < ThePlayerTemplateStore->getPlayerTemplateCount(); i++)
 			{
 				AsciiString nm = ThePlayerTemplateStore->getNthPlayerTemplate(i)->getName();
 				factions->AddString(nm.str());
 			}
 		}
-		i = factions->FindStringExact(-1, pdict->getAsciiString(TheKey_playerFaction).str());
+		Int i = factions->FindStringExact(-1, pdict->getAsciiString(TheKey_playerFaction).str());
 		factions->SetCurSel(i);
 	}
 
@@ -554,7 +554,7 @@ void PlayerListDlg::updateTheUI(void)
 	regardMe->ResetContent();
 	const char* rstr;
 	AsciiString pname;
-	for (i = 0; i < m_sides.getNumSides(); i++)
+	for (Int i = 0; i < m_sides.getNumSides(); i++)
 	{
 		pname = m_sides.getSideInfo(i)->getDict()->getAsciiString(TheKey_playerName);
 		if (pname.isEmpty() || pname == cur_pname)
@@ -687,7 +687,8 @@ void PlayerListDlg::OnSelectPlayerColor()
 		pCombo->GetWindowText(str);
 		Int index = -1;
 		Int numColors = TheMultiplayerSettings->getNumColors();
-		for (Int c=0; c<numColors; ++c)
+		Int c = 0;
+		for (c=0; c<numColors; ++c)
 		{
 			MultiplayerColorDefinition *def = TheMultiplayerSettings->getColor(c);
 			if (!def)
