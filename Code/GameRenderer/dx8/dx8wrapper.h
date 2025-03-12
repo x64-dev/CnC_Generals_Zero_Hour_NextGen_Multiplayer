@@ -59,6 +59,8 @@
 #include "dx8indexbuffer.h"
 #include "vertmaterial.h"
 
+#include "../dx12/tinydx.h"
+
 #include <vector>
 
 const unsigned MAX_TEXTURE_STAGES=2;
@@ -676,12 +678,12 @@ protected:
 
 	static IDirect3D8 *					D3DInterface;			//d3d8;
 	static IDirect3DDevice8 *			D3DDevice;				//d3ddevice8;	
+	static tr_renderer					*D3D12Renderer;
 
 	static IDirect3DSurface8 *			CurrentRenderTarget;
 	static IDirect3DSurface8 *			DefaultRenderTarget;
 
 	static IDirect3DDevice9On12*		device9On12;
-	static ID3D12Device*				D3D12Device;
 
 	friend void DX8_Assert();
 	friend class WW3D;

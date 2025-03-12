@@ -110,6 +110,8 @@ D3DMATRIX						DX8Wrapper::old_world;
 D3DMATRIX						DX8Wrapper::old_view;
 D3DMATRIX						DX8Wrapper::old_prj;
 
+tr_renderer* DX8Wrapper::D3D12Renderer;
+
 bool								DX8Wrapper::world_identity;
 unsigned							DX8Wrapper::RenderStates[256];
 unsigned							DX8Wrapper::TextureStageStates[MAX_TEXTURE_STAGES][32];
@@ -125,7 +127,7 @@ IDirect3DDevice8 *			DX8Wrapper::D3DDevice									= NULL;
 IDirect3DSurface8 *			DX8Wrapper::CurrentRenderTarget						= NULL;
 IDirect3DSurface8 *			DX8Wrapper::DefaultRenderTarget						= NULL;
 IDirect3DDevice9On12*		DX8Wrapper::device9On12 = NULL;
-ID3D12Device* DX8Wrapper::D3D12Device = NULL;
+
 int DX8Wrapper::numDeviceVertexShaders = 0;
 DeviceVertexShader DX8Wrapper::deviceVertexShaders[256];
 
@@ -267,18 +269,17 @@ bool DX8Wrapper::Init(void * hwnd)
 	*/
 
 // jmarshall - d3d9on12
-	//D3DInterface = Direct3DCreate8(D3D_SDK_VERSION);		// TODO: handle failure cases...
-	//if (!D3DInterface)
-	//	return false;
-	D3D9ON12_ARGS dArgs;
-	ID3D12Device* d3d12 = NULL;
+	tr_renderer_settings settings = {};
+	tr_create_renderer("Command and Conquer Generals", &settings, &D3D12Renderer);
 
-	D3D12CreateDevice(nullptr, D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&d3d12));
-	LUID adapter_LUID = d3d12->GetAdapterLuid();
-	ZeroMemory(&dArgs, sizeof(D3D9ON12_ARGS));
-	dArgs.Enable9On12 = TRUE;
-	dArgs.pD3D12Device = d3d12;
-	D3DInterface = Direct3DCreate9On12(D3D_SDK_VERSION, &dArgs, 1);
+	LUID adapter_LUID = D3D12Renderer->dx_device->GetAdapterLuid();
+	D3D9ON12_ARGS d3d9On12Args = {};
+	d3d9On12Args.Enable9On12 = TRUE;
+	d3d9On12Args.pD3D12Device = D3D12Renderer->dx_device;
+	d3d9On12Args.ppD3D12Queues[0] = D3D12Renderer->graphics_queue->dx_queue; // pointer to our queue
+	d3d9On12Args.NumQueues = 1;
+	d3d9On12Args.NodeMask = 0; // Single-GPU scenario
+	D3DInterface = Direct3DCreate9On12(D3D_SDK_VERSION, &d3d9On12Args, 1);
 // jmarshall end
 	
 	IsInitted = true;	
@@ -488,8 +489,6 @@ bool DX8Wrapper::Create_Device(void)
 	}
 
 	D3DDevice->QueryInterface(IID_PPV_ARGS(&device9On12));
-	device9On12->GetD3D12Device(IID_PPV_ARGS(&D3D12Device));
-
 	D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
 
 	/*
