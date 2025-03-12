@@ -543,7 +543,7 @@ void WOLWelcomeMenuInit( WindowLayout *layout, void *userData )
 		TheFirewallHelper = NULL;
 	}
 	*/
-	
+
 	// Show Menu
 	layout->hide(FALSE);
 
@@ -704,6 +704,12 @@ void WOLWelcomeMenuInit( WindowLayout *layout, void *userData )
 	raiseMessageBoxes = TRUE;
 	TheTransitionHandler->setGroup("WOLWelcomeMenuFade");
 #endif
+
+	// TODO_NGMP: disable things we havent implemented yet
+	buttonQuickMatch->winEnable(false);
+	buttonMyInfo->winEnable(false);
+	buttonBuddies->winEnable(false);
+	buttonbuttonOptions->winEnable(false);
 } // WOLWelcomeMenuInit
 
 //-------------------------------------------------------------------------------------------------
