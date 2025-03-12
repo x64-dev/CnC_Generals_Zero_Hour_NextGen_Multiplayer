@@ -59,12 +59,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)..\Run\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)..\Run\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)..\Run\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -81,9 +89,6 @@
       <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WWDEBUG;_DEBUG;EDITOR;WIN32;_WINDOWS;REGEX_MALLOC;STDC_HEADERS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\Debug/WorldBuilder.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -96,14 +101,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>d3d12.lib;openal32.lib;dxguid.lib;dinput8.lib;ddraw.lib;d3dx9.lib;d3d9.lib;dxerr.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;brigades\Debug\usbrigades.lib;Chat\Debug\uschat.lib;common\Debug\uscommon.lib;Direct2Game\Debug\usd2g.lib;gcdkey\Debug\uscdkey.lib;ghttp\Debug\ushttp.lib;GP\Debug\usgp.lib;gstats\Debug\usstats.lib;gt2\Debug\usgt2.lib;natneg\Debug\usnatneg.lib;Peer\Debug\uspeer.lib;pinger\Debug\uspinger.lib;pt\Debug\uspt.lib;qr2\Debug\usqr2.lib;sake\Debug\ussake.lib;sc\Debug\ussc.lib;serverbrowsing\Debug\usserverbrowsing.lib;sharedDll\Debug\UniSpySDK.lib;Voice2\Debug\usvoice2.lib;Voice2\libgsm\Debug\gsm.lib;Voice2\libspeex\Debug\speex.lib;webservices\Debug\uswebservice.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../../../Run/WorldBuilderD_x64.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Libraries\Source\GameSpy\bin\x64;..\..\Libraries\OpenAL\bin\x64\RelWithDebInfo;..\..\Libraries\Source\WWVegas\Miles6\Libraries\Win64\DebugRelease\;..\..\Libraries\DX90SDK\Lib\x64;..\..\Libraries\Lib;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../../Run/WorldBuilderD.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>../../../Run/WorldBuilderD.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
@@ -111,10 +113,6 @@
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalOptions>/force %(AdditionalOptions)</AdditionalOptions>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/WorldBuilder.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <Midl>
@@ -133,9 +131,6 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\Internal/WorldBuilder.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -147,14 +142,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>d3d12.lib;openal32.lib;dxguid.lib;dinput8.lib;ddraw.lib;d3dx9.lib;d3d9.lib;dxerr.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;brigades\RelWithDebInfo\usbrigades.lib;Chat\RelWithDebInfo\uschat.lib;common\RelWithDebInfo\uscommon.lib;Direct2Game\RelWithDebInfo\usd2g.lib;gcdkey\RelWithDebInfo\uscdkey.lib;ghttp\RelWithDebInfo\ushttp.lib;GP\RelWithDebInfo\usgp.lib;gstats\RelWithDebInfo\usstats.lib;gt2\RelWithDebInfo\usgt2.lib;natneg\RelWithDebInfo\usnatneg.lib;Peer\RelWithDebInfo\uspeer.lib;pinger\RelWithDebInfo\uspinger.lib;pt\RelWithDebInfo\uspt.lib;qr2\RelWithDebInfo\usqr2.lib;sake\RelWithDebInfo\ussake.lib;sc\RelWithDebInfo\ussc.lib;serverbrowsing\RelWithDebInfo\usserverbrowsing.lib;sharedDll\RelWithDebInfo\UniSpySDK.lib;Voice2\RelWithDebInfo\usvoice2.lib;Voice2\libgsm\RelWithDebInfo\gsm.lib;Voice2\libspeex\RelWithDebInfo\speex.lib;webservices\RelWithDebInfo\uswebservice.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../../../Run/WorldBuilderI_x64.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Libraries\Source\GameSpy\bin\x64;..\..\Libraries\OpenAL\bin\x64\RelWithDebInfo;..\..\Libraries\Source\WWVegas\Miles6\Libraries\Win64\DebugRelease\;..\..\Libraries\DX90SDK\Lib\x64;..\..\Libraries\Lib;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../../Run/WorldBuilderI.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>../../../Run/WorldBuilderI.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
@@ -162,10 +154,6 @@
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalOptions>/force %(AdditionalOptions)</AdditionalOptions>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Internal/WorldBuilder.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -184,9 +172,6 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\Release/WorldBuilder.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -198,14 +183,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>d3d12.lib;openal32.lib;dxguid.lib;dinput8.lib;ddraw.lib;d3dx9.lib;d3d9.lib;dxerr.lib;winmm.lib;vfw32.lib;dsound.lib;wsock32.lib;imm32.lib;wininet.lib;brigades\RelWithDebInfo\usbrigades.lib;Chat\RelWithDebInfo\uschat.lib;common\RelWithDebInfo\uscommon.lib;Direct2Game\RelWithDebInfo\usd2g.lib;gcdkey\RelWithDebInfo\uscdkey.lib;ghttp\RelWithDebInfo\ushttp.lib;GP\RelWithDebInfo\usgp.lib;gstats\RelWithDebInfo\usstats.lib;gt2\RelWithDebInfo\usgt2.lib;natneg\RelWithDebInfo\usnatneg.lib;Peer\RelWithDebInfo\uspeer.lib;pinger\RelWithDebInfo\uspinger.lib;pt\RelWithDebInfo\uspt.lib;qr2\RelWithDebInfo\usqr2.lib;sake\RelWithDebInfo\ussake.lib;sc\RelWithDebInfo\ussc.lib;serverbrowsing\RelWithDebInfo\usserverbrowsing.lib;sharedDll\RelWithDebInfo\UniSpySDK.lib;Voice2\RelWithDebInfo\usvoice2.lib;Voice2\libgsm\RelWithDebInfo\gsm.lib;Voice2\libspeex\RelWithDebInfo\speex.lib;webservices\RelWithDebInfo\uswebservice.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../../../Run/WorldBuilder_x64.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Libraries\Source\GameSpy\bin\x64;..\..\Libraries\OpenAL\bin\x64\RelWithDebInfo;..\..\Libraries\Source\WWVegas\Miles6\Libraries\Win64\DebugRelease\;..\..\Libraries\DX90SDK\Lib\x64;..\..\Libraries\Lib;..\..\GameEngine\Lib;..\..\GameEngineDevice\Lib;..\..\GameEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../../Run/WorldBuilder.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>../../../Run/WorldBuilder.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
@@ -213,10 +195,6 @@
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalOptions>/force %(AdditionalOptions)</AdditionalOptions>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/WorldBuilder.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\addplayerdialog.cpp">

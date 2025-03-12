@@ -56,7 +56,20 @@
   <PropertyGroup>
     <_ProjectFileVersion>17.0.35707.178</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\out\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\out\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>$(ProjectName)_$(Configuration)_$(Platform)</TargetName>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\out\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -66,9 +79,6 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug/GameEngine_x64.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Debug/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -83,10 +93,6 @@
       <OutputFile>Lib/GameEngineDebug_x64.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/GameEngine.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <ClCompile>
@@ -99,9 +105,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Internal/GameEngine_x64.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Internal/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -113,14 +116,6 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
-    <Lib>
-      <OutputFile>Lib/GameEngineInternal_x64.lib</OutputFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </Lib>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Internal/GameEngine.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,9 +128,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreRTS.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release/GameEngine_x64.pch</PrecompiledHeaderOutputFile>
-      <BrowseInformation>true</BrowseInformation>
-      <BrowseInformationFile>.\Release/</BrowseInformationFile>
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -145,14 +137,6 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
-    <Lib>
-      <OutputFile>Lib/GameEngine.lib</OutputFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </Lib>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/GameEngine.bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Audio\AudioEventRTS.cpp" />
@@ -1263,12 +1247,6 @@
     <ClInclude Include="Include\GameNetwork\WOLBrowser\FEBDispatch.h" />
     <ClInclude Include="Include\GameNetwork\WOLBrowser\WebBrowser.h" />
     <ClInclude Include="Include\Precompiled\PreRTS.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Libraries\Source\EABrowserDispatch\EABrowserDispatch.vcxproj">
-      <Project>{60f187a6-9f0a-4867-9098-a9686d0e831e}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
