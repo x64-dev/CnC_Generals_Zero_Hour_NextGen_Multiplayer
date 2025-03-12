@@ -611,11 +611,23 @@ void PopulateLobbyPlayerListbox(void)
 
 }
 
+void NGMP_WOLLobbyMenu_CreateLobbyCallback(bool bSuccess)
+{
+	buttonPushed = true;
+	nextScreen = "Menus/GameSpyGameOptionsMenu.wnd";
+	TheShell->pop();
+	//TheGameSpyInfo->markAsStagingRoomHost();
+	//TheGameSpyInfo->setGameOptions();
+}
+
 //-------------------------------------------------------------------------------------------------
 /** Initialize the WOL Lobby Menu */
 //-------------------------------------------------------------------------------------------------
 void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 {
+	// NGMP: Register for login callback
+	NGMP_OnlineServicesManager::GetInstance()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
+
 	nextScreen = NULL;
 	buttonPushed = false;
 	isShuttingDown = false;
@@ -790,12 +802,14 @@ void WOLLobbyMenuShutdown( WindowLayout *layout, void *userData )
 
 	ReleaseWindowInfo();
 
-	TheGameSpyInfo->unregisterTextWindow(listboxLobbyChat);
+	// TODO_NGMP
+	//TheGameSpyInfo->unregisterTextWindow(listboxLobbyChat);
 
 	//TheGameSpyChat->stopListingGames();
-	PeerRequest req;
-	req.peerRequestType = PeerRequest::PEERREQUEST_STOPGAMELIST;
-	TheGameSpyPeerMessageQueue->addRequest(req);
+	// TODO_NGMP
+	//PeerRequest req;
+	//req.peerRequestType = PeerRequest::PEERREQUEST_STOPGAMELIST;
+	//TheGameSpyPeerMessageQueue->addRequest(req);
 
 	listboxLobbyChat = NULL;
 	listboxLobbyPlayers = NULL;
@@ -939,8 +953,8 @@ void WOLLobbyMenuUpdate( WindowLayout * layout, void *userData)
 	{
 		SignalUIInteraction(SHELL_SCRIPT_HOOK_GENERALS_ONLINE_ENTERED_FROM_GAME);
 	}
-	
 
+	
 	// We'll only be successful if we've requested to 
 	if(isShuttingDown && TheShell->isAnimFinished() && TheTransitionHandler->isFinished())
 		shutdownComplete(layout);
@@ -1563,7 +1577,8 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 
 					SetLobbyAttemptHostJoin( TRUE );
 					TheLobbyQueuedUTMs.clear();
-					groupRoomToJoin = TheGameSpyInfo->getCurrentGroupRoom();
+					// TODO_NGMP
+					//groupRoomToJoin = TheGameSpyInfo->getCurrentGroupRoom();
 					GameSpyOpenOverlay(GSOVERLAY_GAMEOPTIONS);
 				}
 				else if ( controlID == buttonJoinID )

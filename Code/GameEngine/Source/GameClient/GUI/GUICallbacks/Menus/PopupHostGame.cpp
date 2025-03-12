@@ -71,6 +71,7 @@
 #include "GameNetwork/GameSpy/LadderDefs.h"
 #include "Common/CustomMatchPreferences.h"
 #include "Common/LadderPreferences.h"
+#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
 
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////
@@ -311,13 +312,15 @@ void PopulateCustomLadderComboBox( void )
 //-------------------------------------------------------------------------------------------------
 void PopupHostGameInit( WindowLayout *layout, void *userData )
 {
+	// TODO_NGMP
 	parentPopupID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:ParentHostPopUp"));
 	parentPopup = TheWindowManager->winGetWindowFromId(NULL, parentPopupID);
 
 	textEntryGameNameID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:TextEntryGameName"));
 	textEntryGameName = TheWindowManager->winGetWindowFromId(parentPopup, textEntryGameNameID);
 	UnicodeString name;
-	name.translate(TheGameSpyInfo->getLocalName());
+	//name.translate(TheGameSpyInfo->getLocalName());
+	name.translate("TODO_NGMP");
 	GadgetTextEntrySetText(textEntryGameName, name);
 
 	textEntryGameDescriptionID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:TextEntryGameDescription"));
@@ -545,12 +548,16 @@ WindowMsgHandledType PopupHostGameSystem( GameWindow *window, UnsignedInt msg, W
 
 void createGame( void )
 {
-	TheGameSpyInfo->setCurrentGroupRoom(0);
+	NGMP_OnlineServicesManager::GetInstance()->CreateLobby();
+	return;
+
+	// TODO_NGMP: Everything using TheGameSpy%
+	//TheGameSpyInfo->setCurrentGroupRoom(0);
 	PeerRequest req;
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
 	req.peerRequestType = PeerRequest::PEERREQUEST_CREATESTAGINGROOM;
 	req.text = gameName.str();
-	TheGameSpyGame->setGameName(gameName);
+	//TheGameSpyGame->setGameName(gameName);
 	AsciiString passwd;
 	passwd.translate(GadgetTextEntryGetText(textEntryGamePassword));
 	req.password = passwd.str();
@@ -559,11 +566,15 @@ void createGame( void )
 	customPref.setAllowsObserver(aO);
 	customPref.write();
 	req.stagingRoomCreation.allowObservers = aO;
-	TheGameSpyGame->setAllowObservers(aO);
+	//TheGameSpyGame->setAllowObservers(aO);
 	req.stagingRoomCreation.exeCRC = TheGlobalData->m_exeCRC;
 	req.stagingRoomCreation.iniCRC = TheGlobalData->m_iniCRC;
-	req.stagingRoomCreation.gameVersion = TheGameSpyInfo->getInternalIP();
-	req.stagingRoomCreation.restrictGameList = TheGameSpyConfig->restrictGamesToLobby();
+
+
+	req.stagingRoomCreation.gameVersion = 1;
+	req.stagingRoomCreation.restrictGameList = false;
+	//req.stagingRoomCreation.gameVersion = TheGameSpyInfo->getInternalIP();
+	//req.stagingRoomCreation.restrictGameList = TheGameSpyConfig->restrictGamesToLobby();
 
 	Int ladderSelectPos = -1, ladderID = -1;
 	GadgetComboBoxGetSelectedPos(comboBoxLadderName, &ladderSelectPos);
@@ -583,9 +594,13 @@ void createGame( void )
 			}
 		}
 	}
-	TheGameSpyGame->setLadderIP(req.ladderIP.c_str());
-	TheGameSpyGame->setLadderPort(req.stagingRoomCreation.ladPort);
-	req.hostPingStr = TheGameSpyInfo->getPingString().str();
+	//TheGameSpyGame->setLadderIP(req.ladderIP.c_str());
+	//TheGameSpyGame->setLadderPort(req.stagingRoomCreation.ladPort);
+	//req.hostPingStr = TheGameSpyInfo->getPingString().str();
+	req.hostPingStr = "NGMP_TODO";
 
-	TheGameSpyPeerMessageQueue->addRequest(req);
+	//TheGameSpyPeerMessageQueue->addRequest(req);
+
+
+
 }

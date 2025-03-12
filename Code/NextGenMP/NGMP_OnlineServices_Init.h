@@ -100,6 +100,22 @@ public:
 		m_vecLogin_PendingCallbacks.push_back(callback);
 	}
 
+	void CreateLobby()
+	{
+		// TODO_NGMP: Impl
+		for (auto cb : m_vecCreateLobby_PendingCallbacks)
+		{
+			// TODO_NGMP: Support failure
+			cb(true);
+		}
+		m_vecCreateLobby_PendingCallbacks.clear();
+	}
+
+	void RegisterForCreateLobbyCallback(std::function<void(bool)> callback)
+	{
+		m_vecCreateLobby_PendingCallbacks.push_back(callback);
+	}
+
 	STEAM_CALLBACK(NGMP_OnlineServicesManager, OnAuthSessionTicketResponse, GetTicketForWebApiResponse_t);
 
 	EOS_HPlatform GetEOSPlatformHandle() {
@@ -125,6 +141,7 @@ private:
 	std::vector<uint8> m_vecSteamAuthSessionTicket;
 
 	std::vector<std::function<void(bool)>> m_vecLogin_PendingCallbacks = std::vector<std::function<void(bool)>>();
+	std::vector<std::function<void(bool)>> m_vecCreateLobby_PendingCallbacks = std::vector<std::function<void(bool)>>();
 
 	std::string m_strDisplayName = "NO_USER";
 

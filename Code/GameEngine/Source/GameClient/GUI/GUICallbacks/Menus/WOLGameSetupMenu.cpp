@@ -301,7 +301,9 @@ void WOLPositionStartSpots( void )
 
 	} else {
 		DEBUG_ASSERTCRASH(win != NULL, ("no map preview window"));
-		positionStartSpots( TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition, win);
+
+		// TODO_NGMP
+		//positionStartSpots( TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition, win);
 	}
 }
 static void savePlayerInfo( void )
@@ -906,6 +908,9 @@ static void StartPressed(void)
 //-------------------------------------------------------------------------------------------------
 void WOLDisplayGameOptions( void )
 {
+	// TODO_NGMP
+
+	/*
 	GameSpyStagingRoom *theGame = TheGameSpyInfo->getCurrentStagingRoom();
 	if (!parentWOLGameSetup || !theGame)
 		return;
@@ -932,6 +937,7 @@ void WOLDisplayGameOptions( void )
 	}
 	WOLPositionStartSpots();
 	updateMapStartSpots(TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition);
+	*/
 }
 
 //  -----------------------------------------------------------------------------------------
@@ -939,6 +945,8 @@ void WOLDisplayGameOptions( void )
 //-------------------------------------------------------------------------------------------------
 void WOLDisplaySlotList( void )
 {
+	// TODO_NGMP
+	/*
 	if (!parentWOLGameSetup || !TheGameSpyInfo->getCurrentStagingRoom())
 		return;
 
@@ -988,6 +996,7 @@ void WOLDisplaySlotList( void )
 				genericPingWindow[i]->winHide(TRUE);
 		}
 	}
+	*/
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -995,7 +1004,8 @@ void WOLDisplaySlotList( void )
 //-------------------------------------------------------------------------------------------------
 void InitWOLGameGadgets( void )
 {
-	GameSpyStagingRoom *theGameInfo = TheGameSpyInfo->getCurrentStagingRoom();
+	// TODO_NGMP
+	//GameSpyStagingRoom *theGameInfo = TheGameSpyInfo->getCurrentStagingRoom();
 	pingImages[0] = TheMappedImageCollection->findImageByName("Ping03");
 	pingImages[1] = TheMappedImageCollection->findImageByName("Ping02");
 	pingImages[2] = TheMappedImageCollection->findImageByName("Ping01");
@@ -1037,14 +1047,19 @@ void InitWOLGameGadgets( void )
 	GameWindow *staticTextTitle = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, staticTextTitleID );
 	if (staticTextTitle)
 	{
-		GadgetStaticTextSetText(staticTextTitle, TheGameSpyGame->getGameName());
+		// TODO_NGMP
+		GadgetStaticTextSetText(staticTextTitle, UnicodeString(L"TODO_NGMP"));
+		//GadgetStaticTextSetText(staticTextTitle, TheGameSpyGame->getGameName());
 	}
 
+	// TODO_NGMP
+	/*
 	if (!theGameInfo)
 	{
 		DEBUG_CRASH(("No staging room!"));
 		return;
 	}
+	*/
 
 	for (Int i = 0; i < MAX_SLOTS; i++)
 	{
@@ -1059,13 +1074,19 @@ void InitWOLGameGadgets( void )
 		staticTextPlayerID[i] = TheNameKeyGenerator->nameToKey( tmpString );
 		staticTextPlayer[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, staticTextPlayerID[i] );
 		staticTextPlayer[i]->winSetTooltipFunc(playerTooltip);
-		if (TheGameSpyInfo->amIHost())
+		
+		// TODO_NGMP
+		//if (TheGameSpyInfo->amIHost())
+		bool bIsHost = true;
+		if (bIsHost)
 			staticTextPlayer[i]->winHide(TRUE);
 
-		if(i==0 && TheGameSpyInfo->amIHost())
+		if(i==0 && bIsHost)
 		{
 			UnicodeString uName;
-			uName.translate(TheGameSpyInfo->getLocalName());
+			// TODO_NGMP
+			//uName.translate(TheGameSpyInfo->getLocalName());
+			uName.translate("TODO_NGMP");
 			GadgetComboBoxAddEntry(comboBoxPlayer[i],uName,GameSpyColor[GSCOLOR_PLAYER_OWNER]);
 			GadgetComboBoxSetSelectedPos(comboBoxPlayer[0],0);
 		}
@@ -1083,20 +1104,26 @@ void InitWOLGameGadgets( void )
 		comboBoxColorID[i] = TheNameKeyGenerator->nameToKey( tmpString );
 		comboBoxColor[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxColorID[i] );
 		DEBUG_ASSERTCRASH(comboBoxColor[i], ("Could not find the comboBoxColor[%d]",i ));
-		PopulateColorComboBox(i, comboBoxColor, theGameInfo);
+
+		// TODO_NGMP
+		//PopulateColorComboBox(i, comboBoxColor, theGameInfo);
 		GadgetComboBoxSetSelectedPos(comboBoxColor[i], 0);
 		
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ComboBoxPlayerTemplate%d", i);
 		comboBoxPlayerTemplateID[i] = TheNameKeyGenerator->nameToKey( tmpString );
 		comboBoxPlayerTemplate[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxPlayerTemplateID[i] );
 		DEBUG_ASSERTCRASH(comboBoxPlayerTemplate[i], ("Could not find the comboBoxPlayerTemplate[%d]",i ));
-		PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, theGameInfo, theGameInfo->getAllowObservers());
+
+		// TODO_NGMP
+		//PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, theGameInfo, theGameInfo->getAllowObservers());
 
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ComboBoxTeam%d", i);
 		comboBoxTeamID[i] = TheNameKeyGenerator->nameToKey( tmpString );
 		comboBoxTeam[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxTeamID[i] );
 		DEBUG_ASSERTCRASH(comboBoxTeam[i], ("Could not find the comboBoxTeam[%d]",i ));
-		PopulateTeamComboBox(i, comboBoxTeam, theGameInfo);
+
+		// TODO_NGMP
+		//PopulateTeamComboBox(i, comboBoxTeam, theGameInfo);
 
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ButtonAccept%d", i); 
 		buttonAcceptID[i] = TheNameKeyGenerator->nameToKey( tmpString );
@@ -1172,6 +1199,8 @@ Bool initialAcceptEnable = FALSE;
 //-------------------------------------------------------------------------------------------------
 void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 {
+	// TODO_NGMP
+	/*
 	if (TheGameSpyGame && TheGameSpyGame->isGameInProgress())
 	{
 		TheGameSpyGame->setGameInProgress(FALSE);
@@ -1204,7 +1233,10 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 		}
 		return;
 	}
-	TheGameSpyInfo->setCurrentGroupRoom(0);
+	*/
+
+	// TODO_NGMP
+	//TheGameSpyInfo->setCurrentGroupRoom(0);
 
 	if (TheNAT != NULL) {
 		delete TheNAT;
@@ -1220,15 +1252,23 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	EnableSlotListUpdates(FALSE);
 	InitWOLGameGadgets();
 	EnableSlotListUpdates(TRUE);
-	TheGameSpyInfo->registerTextWindow(listboxGameSetupChat);
+	// TODO_NGMP
+	//TheGameSpyInfo->registerTextWindow(listboxGameSetupChat);
 
 	//The dialog needs to react differently depending on whether it's the host or not.
 	TheMapCache->updateCache();
-	GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
-	GameSpyGameSlot *hostSlot = game->getGameSpySlot(0);
-	hostSlot->setAccept();
-	if (TheGameSpyInfo->amIHost())
+
+	// TODO_NGMP
+	//GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+	//GameSpyGameSlot *hostSlot = game->getGameSpySlot(0);
+	//hostSlot->setAccept();
+
+	bool bIsHost = true;
+
+	if (bIsHost)
 	{
+		// TODO_NGMP
+		/*
 		OptionPreferences natPref;
 		CustomMatchPreferences customPref;
 		hostSlot->setColor( customPref.getPreferredColor() );
@@ -1236,7 +1276,10 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 		hostSlot->setNATBehavior((FirewallHelperClass::FirewallBehaviorType)natPref.getFirewallBehavior());
 		hostSlot->setPingString(TheGameSpyInfo->getPingString());
 		game->setMap(customPref.getPreferredMap());
+		*/
 
+		// TODO_NGMP
+		/*
 		for (Int i=1; i<MAX_SLOTS; ++i)
 		{
 			GameSpyGameSlot *slot = game->getGameSpySlot(i);
@@ -1254,6 +1297,7 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 
 			game->adjustSlotsForMap(); // BGC- adjust the slots for the new map.
 		}
+		*/
 
 
 		WOLDisplaySlotList();
@@ -1261,6 +1305,8 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	}
 	else
 	{
+		// TODO_NGMP
+		/*
 		OptionPreferences natPref;
 		CustomMatchPreferences customPref;
 		AsciiString options;
@@ -1287,6 +1333,7 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 
 		game->setMapCRC( game->getMapCRC() );		// force a recheck
 		game->setMapSize( game->getMapSize() ); // of if we have the map
+		*/
 
 		for (Int i = 0; i < MAX_SLOTS; ++i)
 		{
@@ -1314,7 +1361,9 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	GadgetTextEntrySetText(textEntryChat, UnicodeString::TheEmptyString);	
 
 	initDone = true;
-	TheGameSpyInfo->setGameOptions();
+
+	// TODO_NGMP
+	//TheGameSpyInfo->setGameOptions();
 	//TheShell->registerWithAnimateManager(parentWOLGameSetup, WIN_ANIMATION_SLIDE_TOP, TRUE);
 	WOLPositionStartSpots();
 
