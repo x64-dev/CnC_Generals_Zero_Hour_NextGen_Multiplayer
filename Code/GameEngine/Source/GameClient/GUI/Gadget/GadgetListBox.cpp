@@ -729,7 +729,7 @@ WindowMsgHandledType GadgetListBoxInput( GameWindow *window, UnsignedInt msg,
 								DisplayString *dString = (DisplayString *)cell->data;
 								if(!dString)
 									continue;
-								for(j = 0; j < TheKeyboard->MAX_KEY_STATES; ++j)
+								for(Int j = 0; j < TheKeyboard->MAX_KEY_STATES; ++j)
 								{								
 									if(dString->getText().getCharAt(0) == TheKeyboard->getPrintableKey(mData1, j))
 									{
@@ -1633,7 +1633,8 @@ WindowMsgHandledType GadgetListBoxSystem( GameWindow *window, UnsignedInt msg,
 			if( list->multiSelect )
 			{
 				// forced selections override the entire selection list.
-				for (Int i=0; i<selectCount && i<list->endPos; ++i)
+				Int i = 0;
+				for (i=0; i<selectCount && i<list->endPos; ++i)
 				{
 					// don't select off the end
 					if (list->listLength <= selectList[i])
@@ -1749,8 +1750,7 @@ WindowMsgHandledType GadgetListBoxSystem( GameWindow *window, UnsignedInt msg,
 
 			//
 			// remove the display or links to images after the shift
-			//
-			for(i = 0; i < (Int)mData1; i ++)
+			for(Int i = 0; i < (Int)mData1; i ++)
 			{
 				list->listData[list->endPos + i].cell = NULL;
 			}

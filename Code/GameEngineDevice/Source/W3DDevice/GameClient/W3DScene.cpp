@@ -172,7 +172,7 @@ RTS3DScene::RTS3DScene()
 			vmtl->Release_Ref();	//material pass is holding the pointer so release ref.
 		}
 #else
-		for (i=0; i<MAX_PLAYER_COUNT; i++)
+		for (Int i=0; i<MAX_PLAYER_COUNT; i++)
 			m_occludedMaterialPass[i]=NULL;
 #endif
 
@@ -213,7 +213,7 @@ RTS3DScene::~RTS3DScene()
 	if (m_potentialOccluders)
 		delete [] m_potentialOccluders;
 
-	for (i=0; i<MAX_PLAYER_COUNT; i++)
+	for (Int i=0; i<MAX_PLAYER_COUNT; i++)
 	{	REF_PTR_RELEASE(m_occludedMaterialPass[i]);
 	}
 
@@ -1335,7 +1335,7 @@ void RTS3DScene::flushOccludedObjectsIntoStencil(RenderInfoClass & rinfo)
 		//a color index.  Render all objects using the same color index at once.
 		//We render potential occludees first because this allows them to z-sort correctly
 		//when they are behind an occluder.
-		for (i=0; i<MAX_PLAYER_COUNT; i++)
+		for (Int i=0; i<MAX_PLAYER_COUNT; i++)
 		{
 			if ((numObjects=lastPlayerObject[i]-&playerObjects[i][0]) != 0)
 			{	
@@ -1376,7 +1376,7 @@ void RTS3DScene::flushOccludedObjectsIntoStencil(RenderInfoClass & rinfo)
 		//but need to render here so that they don't interfere with building occlusion.
 		DX8Wrapper::Set_DX8_Render_State(D3DRS_STENCILENABLE, FALSE );	//these objects are not stored in stencil
 		RenderObjClass **nonOccluderOrOccludeeList=m_nonOccludersOrOccludees;
-		for (i=0; i<m_numNonOccluderOrOccludee; i++)
+		for (Int i=0; i<m_numNonOccluderOrOccludee; i++)
 		{
 			renderOneObject(rinfo, (*nonOccluderOrOccludeeList), localPlayerIndex);
 			nonOccluderOrOccludeeList++;	//advance to next one
@@ -1397,7 +1397,7 @@ void RTS3DScene::flushOccludedObjectsIntoStencil(RenderInfoClass & rinfo)
 
 		//Render all potential occluders on top of already rendered potential occludees.
 		RenderObjClass **occluderList=m_potentialOccluders;
-		for (i=0; i<m_numPotentialOccluders; i++)
+		for (Int i=0; i<m_numPotentialOccluders; i++)
 		{
 			renderOneObject(rinfo, (*occluderList), localPlayerIndex);
 			occluderList++;	//advance to next one
@@ -1409,7 +1409,7 @@ void RTS3DScene::flushOccludedObjectsIntoStencil(RenderInfoClass & rinfo)
 		//INDX contains the occluded player's color index.  We walk through all the player colors and
 		//draw them wherever the stencil matches the color's index.
 		Int usedPlayerColorBits=0;
-		for (i=0; i<numVisiblePlayerColors; i++)
+		for (Int i=0; i<numVisiblePlayerColors; i++)
 		{
 			Int color=visiblePlayerColors[i];
 			Int stencilRef=(playerIndexToColorIndex(i+1)<<3)|0x80;
@@ -1435,21 +1435,21 @@ void RTS3DScene::flushOccludedObjectsIntoStencil(RenderInfoClass & rinfo)
 		//objects like normal because they were skipped in the main scene traversal.
 
 		RenderObjClass **occludeeList=m_potentialOccludees;
-		for (i=0; i<m_numPotentialOccludees; i++)
+		for (Int i=0; i<m_numPotentialOccludees; i++)
 		{
 			renderOneObject(rinfo, (*occludeeList), localPlayerIndex);
 			occludeeList++;	//advance to next one
 		}
 
 		RenderObjClass **occluderList=m_potentialOccluders;
-		for (i=0; i<m_numPotentialOccluders; i++)
+		for (Int i=0; i<m_numPotentialOccluders; i++)
 		{
 			renderOneObject(rinfo, (*occluderList), localPlayerIndex);
 			occluderList++;	//advance to next one
 		}
 
 		RenderObjClass **nonOccluderOrOccludeeList=m_nonOccludersOrOccludees;
-		for (i=0; i<m_numNonOccluderOrOccludee; i++)
+		for (Int i=0; i<m_numNonOccluderOrOccludee; i++)
 		{
 			renderOneObject(rinfo, (*nonOccluderOrOccludeeList), localPlayerIndex);
 			nonOccluderOrOccludeeList++;	//advance to next one
@@ -1516,7 +1516,7 @@ void RTS3DScene::flushOccludedObjects(RenderInfoClass & rinfo)
 		if (DX8Wrapper::Has_Stencil())
 			DX8Wrapper::Set_DX8_Render_State(D3DRS_STENCILREF,      0 );
 
-		for (i=0; i<m_occludedObjectsCount; i++)
+		for (Int i=0; i<m_occludedObjectsCount; i++)
 		{
 			robj=m_potentialOccludees[i];
 			renderOneObject(rinfo, robj, localPlayerIndex);//WW3D::Render(*robj,rinfo);

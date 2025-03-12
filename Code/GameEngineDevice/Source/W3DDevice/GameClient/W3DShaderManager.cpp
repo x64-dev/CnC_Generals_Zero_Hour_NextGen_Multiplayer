@@ -2372,7 +2372,7 @@ void W3DShaderManager::shutdown(void)
 		}
 	}
 
- 	for ( i=0; i < FT_MAX; i++)
+	for (Int i=0; i < FT_MAX; i++)
  	{	
  		if (W3DFilters[i])
  		{

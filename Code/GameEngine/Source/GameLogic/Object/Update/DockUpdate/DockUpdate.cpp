@@ -174,7 +174,7 @@ Bool DockUpdate::reserveApproachPosition( Object* docker, Coord3D *position, Int
 
 		loadDockPositions();// refresh this new one
 
-		positionIndex = m_approachPositionOwners.size() - 1;// The new last spot
+		Int positionIndex = m_approachPositionOwners.size() - 1;// The new last spot
 		m_approachPositionOwners[positionIndex] = dockerID;
 		*position = computeApproachPosition( positionIndex, docker );
 		*index = positionIndex;
@@ -580,7 +580,7 @@ void DockUpdate::xfer( Xfer *xfer )
 	vectorSize = m_approachPositionOwners.size();
 	xfer->xferInt( &vectorSize );
 	m_approachPositionOwners.resize(vectorSize);
-	for( vectorIndex = 0; vectorIndex < vectorSize; ++vectorIndex )
+	for( Int vectorIndex = 0; vectorIndex < vectorSize; ++vectorIndex )
 	{
 		xfer->xferObjectID( &m_approachPositionOwners[vectorIndex] );
 	}
@@ -589,7 +589,7 @@ void DockUpdate::xfer( Xfer *xfer )
 	vectorSize = m_approachPositionReached.size();
 	xfer->xferInt( &vectorSize );
 	m_approachPositionReached.resize(vectorSize);
-	for( vectorIndex = 0; vectorIndex < vectorSize; ++vectorIndex )
+	for( Int vectorIndex = 0; vectorIndex < vectorSize; ++vectorIndex )
 	{
 		// Vector of Bool gets packed as bitfield internally
 		Bool unpack = m_approachPositionReached[vectorIndex];

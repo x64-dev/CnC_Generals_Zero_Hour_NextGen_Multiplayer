@@ -316,7 +316,8 @@ static INIBlockParse findBlockParse(const char* token)
 //-------------------------------------------------------------------------------------------------
 static INIFieldParseProc findFieldParse(const FieldParse* parseTable, const char* token, int& offset, const void*& userData)
 {
-	for (const FieldParse* parse = parseTable; parse->token; ++parse)
+	const FieldParse* parse = nullptr;
+	for (parse = parseTable; parse->token; ++parse)
 	{
 		if (strcmp( parse->token, token ) == 0)
 		{

@@ -139,7 +139,7 @@ Bool Transport::init( UnsignedInt ip, UnsignedShort port )
 		m_delayedInBuffer[i].message.length = 0;
 #endif
 	}
-	for (i=0; i<MAX_TRANSPORT_STATISTICS_SECONDS; ++i)
+	for (int i=0; i<MAX_TRANSPORT_STATISTICS_SECONDS; ++i)
 	{
 		m_incomingBytes[i] = 0;
 		m_outgoingBytes[i] = 0;

@@ -1142,7 +1142,7 @@ void GameClient::preloadAssets( TimeOfDay timeOfDay )
 	};
 
 	GlobalMemoryStatus(&before);
-	for (i=0; *textureNames[i]; ++i)
+	for (Int i=0; *textureNames[i]; ++i)
 		TheDisplay->preloadTextureAssets(textureNames[i]);
 	GlobalMemoryStatus(&after);
 
