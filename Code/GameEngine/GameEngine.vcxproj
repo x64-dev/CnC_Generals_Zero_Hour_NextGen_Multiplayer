@@ -80,7 +80,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
-      <OutputFile>Lib/GameEngineDebug_x64.lib</OutputFile>
+      <OutputFile>Lib/GameEngineDebug.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
     <Bscmake>
@@ -114,7 +114,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
-      <OutputFile>Lib/GameEngineInternal_x64.lib</OutputFile>
+      <OutputFile>Lib/GameEngineInternal.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
     <Bscmake>
