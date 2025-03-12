@@ -20,6 +20,7 @@
     <Text Include="dx8\DX8ToolModifications.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dx12\tinydx.cpp" />
     <ClCompile Include="dx8\dx8caps.cpp" />
     <ClCompile Include="dx8\dx8fvf.cpp" />
     <ClCompile Include="dx8\dx8indexbuffer.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="dx8\dx8wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dx12\tinydx.h" />
     <ClInclude Include="dx8\dx8caps.h" />
     <ClInclude Include="dx8\dx8fvf.h" />
     <ClInclude Include="dx8\dx8indexbuffer.h" />
