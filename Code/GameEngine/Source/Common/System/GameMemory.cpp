@@ -3263,11 +3263,11 @@ void MemoryPoolFactory::debugMemoryReport(Int flags, Int startCheckpoint, Int en
 	to ensure that's the case)
 */
 #if defined(_DEBUG)
-	#pragma comment(lib, "GameEngine_Debug_x64")
+	#pragma comment(lib, "GameEngineDebug")
 #elif defined(_INTERNAL)
-	#pragma comment(lib, "GameEngine_Internal_x64")
+	#pragma comment(lib, "GameEngineInternal")
 #else
-	#pragma comment(lib, "GameEngine_Release_x64")
+	#pragma comment(lib, "GameEngine")
 #endif
 
 #ifdef MEMORYPOOL_OVERRIDE_MALLOC
