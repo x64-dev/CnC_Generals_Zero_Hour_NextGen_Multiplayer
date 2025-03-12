@@ -66,6 +66,8 @@
 #include "GameNetwork/GameSpy/ThreadUtils.h"
 #include "GameNetwork/GameSpy/MainMenuUtils.h"
 #include "GameNetwork/WOLBrowser/WebBrowser.h"
+#include "../../NextGenMPShared/NextGenMP_defines.h"
+#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -240,12 +242,17 @@ static void updateNumPlayersOnline(void)
 		GadgetStaticTextSetText(playersOnlineWindow, valStr);
 	}
 
-	if (listboxInfo && TheGameSpyInfo)
+	// TODO_NGMP
+	//if (listboxInfo && TheGameSpyInfo)
+	if (listboxInfo)
 	{
 		GadgetListBoxReset(listboxInfo);
 		AsciiString aLine;
 		UnicodeString line;
-		AsciiString aMotd = TheGameSpyInfo->getMOTD();
+
+		// TODO_NGMP
+		lastNumPlayersOnline = 1;
+		AsciiString aMotd = "TODO MOTD GOES HERE";
 		UnicodeString headingStr;
 		headingStr.format(TheGameText->fetch("MOTD:NumPlayersHeading"), lastNumPlayersOnline);
 
@@ -353,10 +360,19 @@ static void updateOverallStats(void)
 	UnicodeString usa, china, gla;
 	GameWindow *win;
 
-	usa = calcPercent(s_statsUSA, STATS_LASTWEEK, TheGameText->fetch("SIDE:America"));
-	china = calcPercent(s_statsChina, STATS_LASTWEEK, TheGameText->fetch("SIDE:China"));
-	gla = calcPercent(s_statsGLA, STATS_LASTWEEK, TheGameText->fetch("SIDE:GLA"));
+	// TODO_NGMP
+	//usa = calcPercent(s_statsUSA, STATS_LASTWEEK, TheGameText->fetch("SIDE:America"));
+	//china = calcPercent(s_statsChina, STATS_LASTWEEK, TheGameText->fetch("SIDE:China"));
+	//gla = calcPercent(s_statsGLA, STATS_LASTWEEK, TheGameText->fetch("SIDE:GLA"));
+
+	usa = L"TODO";
+	china = L"TODO";
+	gla = L"TODO";
+
 	DEBUG_LOG(("Last Week: %ls %ls %ls\n", usa.str(), china.str(), gla.str()));
+
+	
+
 	win = TheWindowManager->winGetWindowFromId( NULL, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextUSALastWeek") );
 	GadgetStaticTextSetText(win, usa);
 	win = TheWindowManager->winGetWindowFromId( NULL, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextChinaLastWeek") );
@@ -364,9 +380,15 @@ static void updateOverallStats(void)
 	win = TheWindowManager->winGetWindowFromId( NULL, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextGLALastWeek") );
 	GadgetStaticTextSetText(win, gla);
 
-	usa = calcPercent(s_statsUSA, STATS_TODAY, TheGameText->fetch("SIDE:America"));
-	china = calcPercent(s_statsChina, STATS_TODAY, TheGameText->fetch("SIDE:China"));
-	gla = calcPercent(s_statsGLA, STATS_TODAY, TheGameText->fetch("SIDE:GLA"));
+	// TODO_NGMP
+	//usa = calcPercent(s_statsUSA, STATS_TODAY, TheGameText->fetch("SIDE:America"));
+	//china = calcPercent(s_statsChina, STATS_TODAY, TheGameText->fetch("SIDE:China"));
+	//gla = calcPercent(s_statsGLA, STATS_TODAY, TheGameText->fetch("SIDE:GLA"));
+
+	usa = L"TODO";
+	china = L"TODO";
+	gla = L"TODO";
+
 	DEBUG_LOG(("Today: %ls %ls %ls\n", usa.str(), china.str(), gla.str()));
 	win = TheWindowManager->winGetWindowFromId( NULL, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextUSAToday") );
 	GadgetStaticTextSetText(win, usa);
@@ -411,6 +433,134 @@ static Bool raiseMessageBoxes = FALSE;
 //-------------------------------------------------------------------------------------------------
 void WOLWelcomeMenuInit( WindowLayout *layout, void *userData )
 {
+#if defined(NEXT_GEN_MP)
+	nextScreen = NULL;
+	buttonPushed = FALSE;
+	isShuttingDown = FALSE;
+
+	welcomeLayout = layout;
+
+	//TheWOL->reset();
+
+	parentWOLWelcomeID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:WOLWelcomeMenuParent"));
+	buttonBackID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonBack"));
+	parentWOLWelcome = TheWindowManager->winGetWindowFromId(NULL, parentWOLWelcomeID);
+	buttonBack = TheWindowManager->winGetWindowFromId(NULL, buttonBackID);
+	buttonOptionsID = TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:ButtonOptions");
+	buttonbuttonOptions = TheWindowManager->winGetWindowFromId(NULL, buttonOptionsID);
+	listboxInfoID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:InfoListbox"));
+
+	listboxInfo = TheWindowManager->winGetWindowFromId(NULL, listboxInfoID);
+
+	staticTextServerName = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextServerName"));
+	staticTextLastUpdated = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextLastUpdated"));
+
+	staticTextLadderWins = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextLadderWins"));
+	staticTextLadderLosses = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextLadderLosses"));
+	staticTextLadderPoints = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextLadderPoints"));
+	staticTextLadderRank = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextLadderRank"));
+	staticTextLadderDisconnects = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextDisconnects"));
+
+	staticTextHighscoreWins = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextHighscoreWins"));
+	staticTextHighscoreLosses = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextHighscoreLosses"));
+	staticTextHighscorePoints = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextHighscorePoints"));
+	staticTextHighscoreRank = TheWindowManager->winGetWindowFromId(parentWOLWelcome,
+		TheNameKeyGenerator->nameToKey("WOLWelcomeMenu.wnd:StaticTextHighscoreRank"));
+
+	if (staticTextServerName)
+	{
+		GadgetStaticTextSetText(staticTextServerName, gServerName);
+	}
+
+	// TODO_NGMP
+	/*
+	GameWindow* staticTextTitle = TheWindowManager->winGetWindowFromId(parentWOLWelcome, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextTitle"));
+	if (staticTextTitle && TheGameSpyInfo)
+	{
+		UnicodeString title;
+		title.format(TheGameText->fetch("GUI:WOLWelcome"), TheGameSpyInfo->getLocalBaseName().str());
+		GadgetStaticTextSetText(staticTextTitle, title);
+	}
+	*/
+	GameWindow* staticTextTitle = TheWindowManager->winGetWindowFromId(parentWOLWelcome, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextTitle"));
+	if (staticTextTitle)
+	{
+		UnicodeString title;
+		title.format(TheGameText->fetch("GUI:WOLWelcome"), NGMP_OnlineServicesManager::GetInstance()->GetDisplayName());
+		GadgetStaticTextSetText(staticTextTitle, title);
+	}
+
+	// Clear some defaults
+	/*
+	UnicodeString questionMark = UnicodeString(L"?");
+	GadgetStaticTextSetText(staticTextLastUpdated, questionMark);
+	GadgetStaticTextSetText(staticTextLadderWins, questionMark);
+	GadgetStaticTextSetText(staticTextLadderLosses, questionMark);
+	GadgetStaticTextSetText(staticTextLadderPoints, questionMark);
+	GadgetStaticTextSetText(staticTextLadderRank, questionMark);
+	GadgetStaticTextSetText(staticTextLadderDisconnects, questionMark);
+	GadgetStaticTextSetText(staticTextHighscoreWins, questionMark);
+	GadgetStaticTextSetText(staticTextHighscoreLosses, questionMark);
+	GadgetStaticTextSetText(staticTextHighscorePoints, questionMark);
+	GadgetStaticTextSetText(staticTextHighscoreRank, questionMark);
+	*/
+
+	//DEBUG_ASSERTCRASH(listboxInfo, ("No control found!"));
+
+	buttonQuickMatchID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonQuickMatch"));
+	buttonQuickMatch = TheWindowManager->winGetWindowFromId(parentWOLWelcome, buttonQuickMatchID);
+
+	buttonLobbyID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonCustomMatch"));
+	buttonLobby = TheWindowManager->winGetWindowFromId(parentWOLWelcome, buttonLobbyID);
+
+	buttonBuddiesID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonBuddies"));
+	buttonBuddies = TheWindowManager->winGetWindowFromId(parentWOLWelcome, buttonBuddiesID);
+
+	buttonMyInfoID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonMyInfo"));
+	buttonMyInfo = TheWindowManager->winGetWindowFromId(parentWOLWelcome, buttonMyInfoID);
+
+	buttonLadderID = TheNameKeyGenerator->nameToKey(AsciiString("WOLWelcomeMenu.wnd:ButtonLadder"));
+	buttonLadder = TheWindowManager->winGetWindowFromId(parentWOLWelcome, buttonLadderID);
+
+	// TODO_NGMP
+	/*
+	if (TheFirewallHelper == NULL) {
+		TheFirewallHelper = createFirewallHelper();
+	}
+	if (TheFirewallHelper->detectFirewall() == TRUE) {
+		// don't need to detect firewall, already been done.
+		delete TheFirewallHelper;
+		TheFirewallHelper = NULL;
+	}
+	*/
+	
+	// Show Menu
+	layout->hide(FALSE);
+
+	// Set Keyboard to Main Parent
+	TheWindowManager->winSetFocus(parentWOLWelcome);
+
+	enableControls(true);
+	TheShell->showShellMap(TRUE);
+
+	// TODO_NGMP
+	updateNumPlayersOnline();
+	updateOverallStats();
+	UpdateLocalPlayerStats();
+
+	raiseMessageBoxes = TRUE;
+	TheTransitionHandler->setGroup("WOLWelcomeMenuFade");
+#else
 	nextScreen = NULL;
 	buttonPushed = FALSE;
 	isShuttingDown = FALSE;
@@ -553,7 +703,7 @@ void WOLWelcomeMenuInit( WindowLayout *layout, void *userData )
 
 	raiseMessageBoxes = TRUE;
 	TheTransitionHandler->setGroup("WOLWelcomeMenuFade");
-
+#endif
 } // WOLWelcomeMenuInit
 
 //-------------------------------------------------------------------------------------------------
@@ -842,8 +992,13 @@ WindowMsgHandledType WOLWelcomeMenuSystem( GameWindow *window, UnsignedInt msg,
 				{
 					//TheGameSpyChat->clearGroupRoomList();
 					//peerListGroupRooms(TheGameSpyChat->getPeer(), ListGroupRoomsCallback, NULL, PEERTrue);
-					TheGameSpyInfo->joinBestGroupRoom();
-					enableControls( FALSE );
+
+					// TODO_NGMP
+					//TheGameSpyInfo->joinBestGroupRoom();
+					//enableControls( FALSE );
+					buttonPushed = TRUE;
+					nextScreen = "Menus/WOLCustomLobby.wnd";
+					TheShell->pop();
 
 
 					/*

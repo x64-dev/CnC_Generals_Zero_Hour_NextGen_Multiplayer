@@ -1,3 +1,7 @@
 #pragma once
 
 #define ALLOW_MULTIPLE_INSTANCES 1
+
+#define ALLOW_NON_PROFILED_LOGIN 1
+
+#define NEXT_GEN_MP 1

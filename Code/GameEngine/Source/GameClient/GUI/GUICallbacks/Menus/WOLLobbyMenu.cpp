@@ -69,6 +69,7 @@
 #include "GameNetwork/GameSpy/PersistentStorageThread.h"
 #include "GameNetwork/GameSpy/LobbyUtils.h"
 #include "GameNetwork/RankPointValue.h"
+#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -344,6 +345,8 @@ static void populateGroupRoomListbox(GameWindow *lb)
 	GroupRoomMap::iterator iter;
 
 	// now populate the combo box
+	// TODO_NGMP
+	/*
 	for (iter = TheGameSpyInfo->getGroupRoomList()->begin(); iter != TheGameSpyInfo->getGroupRoomList()->end(); ++iter)
 	{
 		GameSpyGroupRoom room = iter->second;
@@ -365,6 +368,25 @@ static void populateGroupRoomListbox(GameWindow *lb)
 		else
 		{
 			DEBUG_LOG(("populateGroupRoomListbox(): skipping QM groupID %d\n", room.m_groupID));
+		}
+	}
+	*/
+
+	NGMP_OnlineServicesManager* pOnlineServicesManager = NGMP_OnlineServicesManager::GetInstance();
+	for (NetworkRoom netRoom : pOnlineServicesManager->GetGroupRooms())
+	{
+		// TODO_NGMP: Support current group color highlighting again
+		int roomID = netRoom.GetRoomID();
+		if (roomID == 0)
+		{
+			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomName(), GameSpyColor[GSCOLOR_CURRENTROOM]);
+			GadgetComboBoxSetItemData(lb, selected, (void*)(roomID));
+			indexToSelect = selected;
+		}
+		else
+		{
+			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomName(), GameSpyColor[GSCOLOR_ROOM]);
+			GadgetComboBoxSetItemData(lb, selected, (void*)(roomID));
 		}
 	}
 
@@ -634,7 +656,9 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 
 	listboxLobbyChatID = TheNameKeyGenerator->nameToKey(AsciiString("WOLCustomLobby.wnd:ListboxChat"));
 	listboxLobbyChat = TheWindowManager->winGetWindowFromId(parent, listboxLobbyChatID);
-	TheGameSpyInfo->registerTextWindow(listboxLobbyChat);
+
+	// TODO_NGMP
+	//TheGameSpyInfo->registerTextWindow(listboxLobbyChat);
 
 	comboLobbyGroupRoomsID = TheNameKeyGenerator->nameToKey(AsciiString("WOLCustomLobby.wnd:ComboBoxGroupRooms"));
 	comboLobbyGroupRooms = TheWindowManager->winGetWindowFromId(parent, comboLobbyGroupRoomsID);
@@ -647,6 +671,8 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	layout->hide( FALSE );
 
 	// if we're not in a room, this will join the best available one
+	// TODO_NGMP
+	/*
 	if (!TheGameSpyInfo->getCurrentGroupRoom())
 	{
 		if (groupRoomToJoin)
@@ -665,21 +691,30 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	{
 		DEBUG_LOG(("WOLLobbyMenuInit() - not joining group room because we're already in one\n"));
 	}
+	*/
 
 	GrabWindowInfo();
 
-	TheGameSpyInfo->clearStagingRoomList();
+	// TODO_NGMP
+	//TheGameSpyInfo->clearStagingRoomList();
+
+	// TODO_NGMP
+	/*
 	PeerRequest req;
 	req.peerRequestType = PeerRequest::PEERREQUEST_STARTGAMELIST;
 	req.gameList.restrictGameList = TheGameSpyConfig->restrictGamesToLobby();
 	TheGameSpyPeerMessageQueue->addRequest(req);
+	*/
 
 	// animate controls
 //	TheShell->registerWithAnimateManager(parent, WIN_ANIMATION_SLIDE_TOP, TRUE);
 	TheShell->showShellMap(TRUE);
-	TheGameSpyGame->reset();
+
+	// TODO_NGMP
+	//TheGameSpyGame->reset();
 	
-	CustomMatchPreferences pref;
+	// TODO_NGMP
+	//CustomMatchPreferences pref;
 //	GameWindow *slider = TheWindowManager->winGetWindowFromId(parent, sliderChatAdjustID);
 //	if (slider)
 //	{
@@ -687,10 +722,14 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 //		doSliderTrack(slider, pref.getChatSizeSlider());
 //	}
 //
+
+	// TODO_NGMP
+	/*
 	if (pref.usesLongGameList())
 	{
 		ToggleGameListType();
 	}
+	*/
 
 	// Set Keyboard to chat window
 	TheWindowManager->winSetFocus( textEntryChat );
@@ -1627,7 +1666,10 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 					if (!txtInput.isEmpty())
 					{
 						// Send the message
-						TheGameSpyInfo->sendChat( txtInput, FALSE, listboxLobbyPlayers ); // 'emote' button now just sends text
+						NGMP_OnlineServicesManager::GetInstance()->SendNetworkRoomChat(txtInput);
+						
+						// TODO_NGMP: Support this functionality again
+						//TheGameSpyInfo->sendChat( txtInput, FALSE, listboxLobbyPlayers ); // 'emote' button now just sends text
 					}
 				}
 				

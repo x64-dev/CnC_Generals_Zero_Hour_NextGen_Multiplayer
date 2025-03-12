@@ -109,6 +109,7 @@
 
 
 #include "Common/Version.h"
+#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -566,6 +567,8 @@ DECLARE_PERF_TIMER(GameEngine_update)
  * @todo Allow the client to run as fast as possible, but limit the execution
  * of TheNetwork and TheGameLogic to a fixed framerate.
  */
+
+static NGMP_OnlineServicesManager* g_pOnlineServicesMgr = nullptr;
 void GameEngine::update( void )
 { 
 	USE_PERF_TIMER(GameEngine_update)
@@ -580,6 +583,13 @@ void GameEngine::update( void )
 
 			/// @todo Move audio init, update, etc, into GameClient update
 			
+			// NGMP
+			if (g_pOnlineServicesMgr == nullptr)
+			{
+				g_pOnlineServicesMgr = new NGMP_OnlineServicesManager();
+			}
+			NGMP_OnlineServicesManager::GetInstance()->Tick();
+
 			TheAudio->UPDATE();
 			TheGameClient->UPDATE();
 			TheMessageStream->propagateMessages();

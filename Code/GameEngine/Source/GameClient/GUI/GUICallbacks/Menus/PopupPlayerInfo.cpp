@@ -248,6 +248,8 @@ void GetAdditionalDisconnectsFromUserFile(PSPlayerStats *stats)
 // default values
 RankPoints::RankPoints(void)
 {
+	// TODO_NGMP
+	/*
 	m_ranks[RANK_PRIVATE]							= 0;
 	m_ranks[RANK_CORPORAL]						= TheGameSpyConfig->getPointsForRank(RANK_CORPORAL); // 5
 	m_ranks[RANK_SERGEANT]						= TheGameSpyConfig->getPointsForRank(RANK_SERGEANT); // 10
@@ -258,6 +260,17 @@ RankPoints::RankPoints(void)
 	m_ranks[RANK_BRIGADIER_GENERAL]		= TheGameSpyConfig->getPointsForRank(RANK_BRIGADIER_GENERAL); // 500
 	m_ranks[RANK_GENERAL]							= TheGameSpyConfig->getPointsForRank(RANK_GENERAL); // 1000
 	m_ranks[RANK_COMMANDER_IN_CHIEF]	= TheGameSpyConfig->getPointsForRank(RANK_COMMANDER_IN_CHIEF); // 2000
+	*/
+	m_ranks[RANK_PRIVATE] = 0;
+	m_ranks[RANK_CORPORAL] = 5;
+	m_ranks[RANK_SERGEANT] = 10;
+	m_ranks[RANK_LIEUTENANT] = 20;
+	m_ranks[RANK_CAPTAIN] = 50;
+	m_ranks[RANK_MAJOR] = 100;
+	m_ranks[RANK_COLONEL] = 200;
+	m_ranks[RANK_BRIGADIER_GENERAL] = 500;
+	m_ranks[RANK_GENERAL] = 1000;
+	m_ranks[RANK_COMMANDER_IN_CHIEF] = 2000;
 
 	m_winMultiplier = 3.0f;
 	m_lostMultiplier = 0.0f;
@@ -741,6 +754,8 @@ static GameWindow* findWindow(GameWindow *parent, AsciiString baseWindow, AsciiS
 
 void PopulatePlayerInfoWindows( AsciiString parentWindowName )
 {
+	// TODO_NGMP
+	/*
 	Int lookupID = TheGameSpyInfo->getLocalProfileID();
 	if(parentWindowName == "PopupPlayerInfo.wnd")
 	{
@@ -748,18 +763,80 @@ void PopulatePlayerInfoWindows( AsciiString parentWindowName )
 		if (lookAtPlayerID <= 0 || !parent)
 			return;
 	}
+	*/
 
-	PSPlayerStats stats = TheGameSpyPSMessageQueue->findPlayerStatsByID(lookupID);
+	// TODO_NGMP
+	//PSPlayerStats stats = TheGameSpyPSMessageQueue->findPlayerStatsByID(lookupID);
+
+	PSPlayerStats stats;
+	stats.id = 0;
+	stats.wins = PerGeneralMap{ { 0, 1 } };
+	stats.losses = PerGeneralMap{ { 0, 1 } };
+	stats.games = PerGeneralMap{ { 0, 1 } };
+	stats.duration = PerGeneralMap{ { 0, 1 } };
+	stats.unitsKilled = PerGeneralMap{ { 0, 1 } };
+	stats.unitsLost = PerGeneralMap{ { 0, 1 } };
+	stats.unitsBuilt = PerGeneralMap{ { 0, 1 } };
+	stats.buildingsKilled = PerGeneralMap{ { 0, 1 } };
+	stats.buildingsLost = PerGeneralMap{ { 0, 1 } };
+	stats.buildingsBuilt = PerGeneralMap{ { 0, 1 } };
+	stats.earnings = PerGeneralMap{ { 0, 1 } };
+	stats.techCaptured = PerGeneralMap{ { 0, 1 } };
+	stats.discons = PerGeneralMap{ { 0, 1 } };
+	stats.desyncs = PerGeneralMap{ { 0, 1 } };
+	stats.surrenders = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf2p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf3p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf4p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf5p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf6p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf7p = PerGeneralMap{ { 0, 1 } };
+	stats.gamesOf8p = PerGeneralMap{ { 0, 1 } };
+	stats.customGames = PerGeneralMap{ { 0, 1 } };
+	stats.QMGames = PerGeneralMap{ { 0, 1 } };
+	stats.locale = 0;
+	stats.gamesAsRandom = 0;
+	stats.options = std::string("TODO_NGMP");
+	stats.systemSpec = std::string("TODO_NGMP");
+	stats.lastFPS = 0;
+	stats.lastGeneral = 0;
+	stats.gamesInRowWithLastGeneral = 0;
+	stats.challengeMedals = 0;
+	stats.battleHonors = 0;
+	stats.QMwinsInARow = 0;
+	stats.maxQMwinsInARow = 0;
+
+	stats.winsInARow = 0;
+	stats.maxWinsInARow = 0;
+	stats.lossesInARow = 0;
+	stats.maxLossesInARow = 0;
+	stats.disconsInARow = 0;
+	stats.maxDisconsInARow = 0;
+	stats.desyncsInARow = 0;
+	stats.maxDesyncsInARow = 0;
+
+	stats.builtParticleCannon = 0;
+	stats.builtNuke = 0;
+	stats.builtSCUD = 0;
+
+	stats.lastLadderPort = 0;;
+	stats.lastLadderHost = std::string("TODO_NGMP");
 
 	Bool weHaveStats = (stats.id != 0);
 
 	// if we don't have the stats from the server, see if we have cached stats
+	// TODO_NGMP
+	/*
 	if( !weHaveStats && lookupID == TheGameSpyInfo->getLocalProfileID() )
 	{
 		stats = TheGameSpyInfo->getCachedLocalPlayerStats();
 
 		weHaveStats = TRUE;
 	}
+	*/
+	weHaveStats = TRUE;
+	TheRankPointValues = NEW RankPoints;
+
 	
 	Int currentRank = 0;
 	Int rankPoints = CalculateRank(stats);
@@ -790,7 +867,8 @@ void PopulatePlayerInfoWindows( AsciiString parentWindowName )
 		numDiscons += it->second;
 	}
 
-	numDiscons += GetAdditionalDisconnectsFromUserFile(lookupID);
+	// TODO_NGMP
+	//numDiscons += GetAdditionalDisconnectsFromUserFile(lookupID);
 
 	numGames = numWins + numLosses + numDiscons;
 	

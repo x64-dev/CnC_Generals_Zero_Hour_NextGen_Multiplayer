@@ -155,6 +155,12 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\NextGenMP\NGMP_OnlineServices_Auth.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\NextGenMP\NGMP_OnlineServices_Init.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\Common\Audio\AudioEventRTS.cpp" />
     <ClCompile Include="Source\Common\Audio\AudioRequest.cpp" />
     <ClCompile Include="Source\Common\Audio\GameAudio.cpp" />
@@ -750,6 +756,8 @@
     <ClInclude Include="..\Libraries\Source\GameSpy\GameSpy\peer\peerRooms.h" />
     <ClInclude Include="..\Libraries\Source\GameSpy\GameSpy\pinger\pinger.h" />
     <ClInclude Include="..\Libraries\Source\GameSpy\GameSpy\queryreporting\gqueryreporting.h" />
+    <ClInclude Include="..\NextGenMP\NGMP_OnlineServices_Auth.h" />
+    <ClInclude Include="..\NextGenMP\NGMP_OnlineServices_Init.h" />
     <ClInclude Include="Include\Common\ActionManager.h" />
     <ClInclude Include="Include\Common\ArchiveFile.h" />
     <ClInclude Include="Include\Common\ArchiveFileSystem.h" />
