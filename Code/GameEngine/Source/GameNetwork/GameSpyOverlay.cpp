@@ -125,6 +125,19 @@ void GSMessageBoxOkCancel(UnicodeString title, UnicodeString message, GameWinMsg
 	cancelFunc = newCancelFunc;
 }
 
+
+/**
+	* GSMessageBoxOkCancel puts up a Cancel dialog box and saves the
+	* pointers to it and its callbacks.
+	*/
+void GSMessageBoxCancel(UnicodeString title, UnicodeString message, GameWinMsgBoxFunc newCancelFunc)
+{
+	ClearGSMessageBoxes();
+	messageBoxWindow = MessageBoxCancel(title, message, messageBoxCancel);
+	okFunc = nullptr;
+	cancelFunc = newCancelFunc;
+}
+
 /**
 	* GSMessageBoxYesNo puts up a Yes/No dialog box and saves the
 	* pointers to it and its callbacks.

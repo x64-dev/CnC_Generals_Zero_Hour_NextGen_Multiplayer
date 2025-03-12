@@ -504,7 +504,7 @@ void WOLLoginMenuInit( WindowLayout *layout, void *userData )
 	TheTransitionHandler->setGroup("GameSpyLoginProfileFade");
 
 	// NGMP
-	GSMessageBoxOk(UnicodeString(L"Logging In"), UnicodeString(L"Logging in using your Steam account"), []()
+	GSMessageBoxCancel(UnicodeString(L"Logging In"), UnicodeString(L"Logging in using your Steam account"), []()
 		{
 			
 		});
