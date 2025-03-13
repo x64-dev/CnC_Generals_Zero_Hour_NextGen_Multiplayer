@@ -38,11 +38,11 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/code/build" >> "$GITHUB_OUTPUT"
         echo "build-src-dir=${{ github.workspace }}/code" >> "$GITHUB_OUTPUT"
-
+#cmake -G "Visual Studio 17 2022" -B ${{github.workspace}}/code/build/ -DCMAKE_BUILD_TYPE=Debug -T ClangCL -DCOMPILER=Clang
     - name: Configure CMake
       run: |
         cd ${{steps.strings.outputs.build-src-dir }}
-        cmake -G "Visual Studio 17 2022" -B ${{github.workspace}}/code/build/ -DCMAKE_BUILD_TYPE=Debug -T ClangCL -DCOMPILER=Clang
+        cmake -G "Visual Studio 17 2022" -B ${{github.workspace}}/code/build/ -DCMAKE_BUILD_TYPE=Debug -DCOMPILER=cl
 
     - name: Build.
       run: |
