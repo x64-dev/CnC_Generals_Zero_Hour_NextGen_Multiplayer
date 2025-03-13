@@ -47,4 +47,4 @@ jobs:
     - name: Build.
       run: |
         cd ${{steps.strings.outputs.build-src-dir }}
-        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target RTS
