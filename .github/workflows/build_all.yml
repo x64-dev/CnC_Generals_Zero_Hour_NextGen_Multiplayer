@@ -1,0 +1,40 @@
+name: Build All
+
+on:
+  push:
+    branches: [ "main", "cicd" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: true
+
+      matrix:
+        os: [windows-latest]
+        build_type: [Debug, Internal, Release]
+        c_compiler: [cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/code/build" >> "$GITHUB_OUTPUT"
+        echo "build-src-dir=${{ github.workspace }}/code" >> "$GITHUB_OUTPUT"
+
+    - name: Configure CMake
+      run: |
+        cmake -G "Visual Studio 17 2022" -B ${{ steps.strings.outputs.build-output-dir }} -S ${{steps.strings.outputs.build-src-dir }}  -DCMAKE_EXE_LINKER_FLAGS_DEBUG="" -DCMAKE_EXE_LINKER_FLAGS_DEBUGE="" -DCMAKE_EXE_LINKER_FLAGS_INTERNAL=""  -DCMAKE_EXE_LINKER_FLAGS_PROFILE="" -DCMAKE_EXE_LINKER_FLAGS_PROFILEE=""
+
+    - name: Build.
+      run: |
+        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target RTS
