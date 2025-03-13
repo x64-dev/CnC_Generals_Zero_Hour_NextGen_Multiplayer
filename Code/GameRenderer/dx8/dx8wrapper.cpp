@@ -1142,6 +1142,10 @@ const char * DX8Wrapper::Get_Render_Device_Name(int device_index)
 
 bool DX8Wrapper::Set_Device_Resolution(int width,int height,int bits,int windowed, bool resize_window)
 {
+	if (!windowed) {
+		return true;
+	}
+
 	if (D3DDevice != NULL) {
 
 		if (width != -1) {
