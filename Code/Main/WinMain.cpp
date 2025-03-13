@@ -96,6 +96,10 @@ static Bool isWinMainActive = false;
 
 static HBITMAP gLoadScreenBitmap = NULL;
 
+bool IsWorldBuilder() {
+	return false;
+}
+
 //#define DEBUG_WINDOWS_MESSAGES
 
 #ifdef DEBUG_WINDOWS_MESSAGES

@@ -864,44 +864,60 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 			int x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (ResolutionWidth / 2);
 			int y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (ResolutionHeight / 2);
 
-			// Resize the window to fit this resolution
-			if (!windowed)
+			if (IsWorldBuilder())
 			{
-				// Assume hwnd is your application’s window handle
-				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
-
-				// Remove all overlapped-window styles and add WS_POPUP
-				style &= ~(WS_OVERLAPPEDWINDOW);
-				style |= WS_POPUP;
-
-				// Apply the new style
-				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
-
-				// Move window to (0,0) with the monitor’s resolution:
-				SetWindowPos(
-					_Hwnd,
-					HWND_TOP,
-					0,
-					0,
-					width,
-					height,
-					SWP_FRAMECHANGED | SWP_NOOWNERZORDER
-				);
-
+				if (!windowed)
+					::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOSIZE | SWP_NOMOVE);
+				else
+					::SetWindowPos(_Hwnd,
+						NULL,
+						0,
+						0,
+						rect.right - rect.left,
+						rect.bottom - rect.top,
+						SWP_NOZORDER | SWP_NOMOVE);
 			}
 			else
 			{
-				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
-				style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
-				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+				// Resize the window to fit this resolution
+				if (!windowed)
+				{
+					// Assume hwnd is your application’s window handle
+					LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
 
-				::SetWindowPos(_Hwnd,
-					NULL,
-					x,
-					y,
-					rect.right - rect.left,
-					rect.bottom - rect.top,
-					0);
+					// Remove all overlapped-window styles and add WS_POPUP
+					style &= ~(WS_OVERLAPPEDWINDOW);
+					style |= WS_POPUP;
+
+					// Apply the new style
+					SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+					// Move window to (0,0) with the monitor’s resolution:
+					SetWindowPos(
+						_Hwnd,
+						HWND_TOP,
+						0,
+						0,
+						width,
+						height,
+						SWP_FRAMECHANGED | SWP_NOOWNERZORDER
+					);
+
+				}
+				else
+				{
+					LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
+					style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+					SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+					::SetWindowPos(_Hwnd,
+						NULL,
+						x,
+						y,
+						rect.right - rect.left,
+						rect.bottom - rect.top,
+						0);
+				}
 			}
 		}
 	}
