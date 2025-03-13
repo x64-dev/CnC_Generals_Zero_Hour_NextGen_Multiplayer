@@ -409,9 +409,19 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 
 			//-------------------------------------------------------------------------
 			case WM_SIZE:
-				// When W3D initializes, it resizes the window.  So stop repainting.
-				if (!gInitializing) 
-					gDoPaint = false;
+				{
+					int width = LOWORD(lParam);
+					int height = HIWORD(lParam);
+					if (TheDisplay != nullptr && TheTacticalView != nullptr)
+					{
+						TheDisplay->setDisplayMode(width, height, 32, true);
+
+						// We have to recreate the shell. 
+						void Shell_Recreate(void);
+						Shell_Recreate();
+					}
+				}				
+
 				break;
 
 			//-------------------------------------------------------------------------
@@ -430,12 +440,12 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 			{
 //				DWORD threadId=GetCurrentThreadId();
 				if ((bool) wParam != isWinMainActive)
-				{	isWinMainActive = (BOOL) wParam;
+				{
+					isWinMainActive = true; // jmarshall never let alt tab change if this is active or not. 
 					
-					if (TheGameEngine)
-						TheGameEngine->setIsActive(isWinMainActive);
+				if (TheGameEngine)
+					TheGameEngine->setIsActive(isWinMainActive);
 
-					Reset_D3D_Device(isWinMainActive);
 					if (isWinMainActive)
 					{	//restore mouse cursor to our custom version.
 						if (TheWin32Mouse)
@@ -677,10 +687,12 @@ static Bool initializeAppWindows( HINSTANCE hInstance, Int nCmdShow, Bool runWin
 
    // Create our main window
 	windowStyle =  WS_POPUP|WS_VISIBLE;
-	if (runWindowed) 
-		windowStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
-	else
-		windowStyle |= WS_EX_TOPMOST | WS_SYSMENU;
+	windowStyle |= WS_EX_TOPMOST | WS_SYSMENU;
+
+	//if (runWindowed) 
+	//	windowStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+	//else
+		
 
 	RECT rect;
 	rect.left = 0;
@@ -697,7 +709,7 @@ static Bool initializeAppWindows( HINSTANCE hInstance, Int nCmdShow, Bool runWin
 	gInitializing = true;
 
   HWND hWnd = CreateWindow( TEXT("Game Window"),
-                            TEXT("Command and Conquer Generals"),
+                            TEXT("Command and Conquer Generals Next-Gen"),
                             windowStyle, 
 														(GetSystemMetrics( SM_CXSCREEN ) / 2) - (startWidth / 2), // original position X
 														(GetSystemMetrics( SM_CYSCREEN ) / 2) - (startHeight / 2),// original position Y

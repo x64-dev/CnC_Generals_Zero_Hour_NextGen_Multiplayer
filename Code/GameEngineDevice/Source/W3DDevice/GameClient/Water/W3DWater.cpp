@@ -1925,7 +1925,8 @@ void WaterRenderObjClass::drawSea(RenderInfoClass & rinfo)
 	DX8Wrapper::SetFVF(DX8_FVF_XYZDUV1);	//turn off custom vertex shader
 
 	DX8Wrapper::Invalidate_Cached_Render_States();
-
+// jmarshall - shroud
+#if 0
 	if (TheTerrainRenderObject->getShroud())
 	{
 		//do second pass to apply the shroud on water plane
@@ -1950,7 +1951,8 @@ void WaterRenderObjClass::drawSea(RenderInfoClass & rinfo)
 		}
 		W3DShaderManager::resetShader(W3DShaderManager::ST_SHROUD_TEXTURE);
 	}
-
+#endif
+// jmarshall - shroud
 }
 
 
@@ -2856,6 +2858,8 @@ void WaterRenderObjClass::drawRiverWater(PolygonTrigger *pTrig)
 
 
 	//do second pass to apply the shroud on water plane
+// jmarshall - shroud
+#if 0
 	if (TheTerrainRenderObject->getShroud())
 	{
 		W3DShaderManager::setTexture(0,TheTerrainRenderObject->getShroud()->getShroudTexture());
@@ -2868,6 +2872,8 @@ void WaterRenderObjClass::drawRiverWater(PolygonTrigger *pTrig)
 		DX8Wrapper::SetRenderState(D3DRS_ZFUNC, D3DCMP_EQUAL);
 		W3DShaderManager::resetShader(W3DShaderManager::ST_SHROUD_TEXTURE);
 	}
+#endif
+// jmarshall - shroud end
 	DX8Wrapper::SetRenderState(D3DRS_CULLMODE, cull);
 
 
@@ -3213,7 +3219,8 @@ void WaterRenderObjClass::drawTrapezoidWater(Vector3 points[4])
 	//Restore alpha blend to default values since we may have changed them to feather edges.
 	DX8Wrapper::Set_DX8_Render_State(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
 	DX8Wrapper::Set_DX8_Render_State(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-
+// jmarhsall - shroud
+#if 0
 	if (TheTerrainRenderObject->getShroud())
 	{
 		if (m_trapezoidWaterPixelShader)
@@ -3235,6 +3242,8 @@ void WaterRenderObjClass::drawTrapezoidWater(Vector3 points[4])
 			W3DShaderManager::resetShader(W3DShaderManager::ST_SHROUD_TEXTURE);
 		}
 	}
+#endif
+// jmarhsall - shroud
 	DX8Wrapper::SetRenderState(D3DRS_CULLMODE, cull);
 }
 

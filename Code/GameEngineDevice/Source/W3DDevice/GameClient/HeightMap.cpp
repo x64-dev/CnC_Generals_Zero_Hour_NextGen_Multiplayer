@@ -2467,7 +2467,7 @@ void HeightMapRenderObjClass::updateShorelineTiles(Int minX, Int minY, Int maxX,
 	Real transparentDepth=TheWaterTransparency->m_transparentWaterDepth*TheWaterTransparency->m_minWaterOpacity;
 	Real depthScaleFactor = 1.0f/transparentDepth;
 
-	for (j=minY; j<maxY; j++)
+	for (Int j=minY; j<maxY; j++)
 		for (Int i=minX; i<maxX; i++)
 		{
 				waterSide=(waterZ0=TheWaterRenderObj->getWaterHeight((i-border)*MAP_XY_FACTOR,(j-border)*MAP_XY_FACTOR)) > ((terrainZ0=MAP_HEIGHT_SCALE*pMap->getHeight(i,j)));

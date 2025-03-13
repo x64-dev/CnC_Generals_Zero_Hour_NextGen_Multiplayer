@@ -679,6 +679,19 @@ void W3DDisplay::init( void )
 	m_2DRender = NEW Render2DClass;
 	DEBUG_ASSERTCRASH( m_2DRender, ("Cannot create Render2DClass") );
 
+
+// jmarshall - borderless fullscreen
+	DEVMODE dm = {};
+	if (!getWindowed())
+	{
+		dm.dmSize = sizeof(dm);
+		EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dm);
+
+		TheWritableGlobalData->m_xResolution = dm.dmPelsWidth;
+		TheWritableGlobalData->m_yResolution = dm.dmPelsHeight;
+	}
+// jmarshall 
+
 	// set our default width and height and bit depth
 	/// @todo we should set this according to options read from a file
 	setWidth( TheGlobalData->m_xResolution );

@@ -792,7 +792,7 @@ void WorldHeightMapEdit::saveToFile(DataChunkOutput &chunkWriter)
 				chunkWriter.writeReal(TheGlobalData->m_terrainObjectsLighting[i+TIME_OF_DAY_FIRST][j].lightPos.y);
 				chunkWriter.writeReal(TheGlobalData->m_terrainObjectsLighting[i+TIME_OF_DAY_FIRST][j].lightPos.z);
 			}
-			for (j=1; j<MAX_GLOBAL_LIGHTS; j++)
+			for (Int j=1; j<MAX_GLOBAL_LIGHTS; j++)
 			{
 				chunkWriter.writeReal(TheGlobalData->m_terrainLighting[i+TIME_OF_DAY_FIRST][j].ambient.red);
 				chunkWriter.writeReal(TheGlobalData->m_terrainLighting[i+TIME_OF_DAY_FIRST][j].ambient.green);

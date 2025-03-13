@@ -3134,7 +3134,7 @@ void ControlBar::initSpecialPowershortcutBar( Player *player)
 	parentName = layoutName;
 	parentName.concat(":ButtonParent%d");
 	m_currentlyUsedSpecialPowersButtons = MIN(pt->getSpecialPowerShortcutButtonCount(), MAX_SPECIAL_POWER_SHORTCUTS);
-	for( i = 0; i < m_currentlyUsedSpecialPowersButtons; i++ )
+	for( Int i = 0; i < m_currentlyUsedSpecialPowersButtons; i++ )
 	{
 		windowName.format( tempName, i+1 );
 		id = TheNameKeyGenerator->nameToKey( windowName.str() );

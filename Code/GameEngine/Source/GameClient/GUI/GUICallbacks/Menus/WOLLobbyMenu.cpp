@@ -592,6 +592,7 @@ void PopulateLobbyPlayerListbox(void)
 		// restore selection
 		if (indicesToSelect.size())
 		{
+			Int i = 0;
 			std::set<Int>::const_iterator indexIt;
 			Int *newIndices = NEW Int[indicesToSelect.size()];
 			for (i=0, indexIt = indicesToSelect.begin(); indexIt != indicesToSelect.end(); ++i, ++indexIt)

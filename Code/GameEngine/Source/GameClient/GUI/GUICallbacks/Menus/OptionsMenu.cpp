@@ -1014,51 +1014,53 @@ static void saveOptions( void )
 
 	//-------------------------------------------------------------------------------------------------
 	// Resolution
-	GadgetComboBoxGetSelectedPos( comboBoxResolution, &index );
-	Int xres, yres, bitDepth;
-	
-	oldDispSettings.xRes = TheDisplay->getWidth();
-	oldDispSettings.yRes = TheDisplay->getHeight();
-	oldDispSettings.bitDepth = TheDisplay->getBitDepth();
-	oldDispSettings.windowed = TheDisplay->getWindowed();
-	
-	if (index < TheDisplay->getDisplayModeCount() && index >= 0)
+	if(TheDisplay->getWindowed())
 	{
-		TheDisplay->getDisplayModeDescription(index,&xres,&yres,&bitDepth);
-		if (TheGlobalData->m_xResolution != xres || TheGlobalData->m_yResolution != yres)
+		GadgetComboBoxGetSelectedPos( comboBoxResolution, &index );
+		Int xres, yres, bitDepth;
+	
+		oldDispSettings.xRes = TheDisplay->getWidth();
+		oldDispSettings.yRes = TheDisplay->getHeight();
+		oldDispSettings.bitDepth = TheDisplay->getBitDepth();
+		oldDispSettings.windowed = TheDisplay->getWindowed();
+	
+		if (index < TheDisplay->getDisplayModeCount() && index >= 0)
 		{
-			
-			if (TheDisplay->setDisplayMode(xres,yres,bitDepth,TheDisplay->getWindowed()))
+			TheDisplay->getDisplayModeDescription(index, &xres, &yres, &bitDepth);
+			if (TheGlobalData->m_xResolution != xres || TheGlobalData->m_yResolution != yres)
 			{
-				dispChanged = TRUE;
-				TheWritableGlobalData->m_xResolution = xres;
-				TheWritableGlobalData->m_yResolution = yres;
+				if (TheDisplay->setDisplayMode(xres, yres, bitDepth, TheDisplay->getWindowed()))
+				{
+					dispChanged = TRUE;
+					TheWritableGlobalData->m_xResolution = xres;
+					TheWritableGlobalData->m_yResolution = yres;
 
-				TheHeaderTemplateManager->headerNotifyResolutionChange();
-				TheMouse->mouseNotifyResolutionChange();
-				
-				//Save new settings for a dialog box confirmation after options are accepted
-				newDispSettings.xRes = xres;
-				newDispSettings.yRes = yres;
-				newDispSettings.bitDepth = bitDepth;
-				newDispSettings.windowed = TheDisplay->getWindowed();
+					TheHeaderTemplateManager->headerNotifyResolutionChange();
+					TheMouse->mouseNotifyResolutionChange();
 
-				AsciiString prefString;
-				prefString.format("%d %d", xres, yres );
-				(*pref)["Resolution"] = prefString;
+					//Save new settings for a dialog box confirmation after options are accepted
+					newDispSettings.xRes = xres;
+					newDispSettings.yRes = yres;
+					newDispSettings.bitDepth = bitDepth;
+					newDispSettings.windowed = TheDisplay->getWindowed();
 
-				// delete the shell
-				delete TheShell;
-				TheShell = NULL;
+					AsciiString prefString;
+					prefString.format("%d %d", xres, yres);
+					(*pref)["Resolution"] = prefString;
 
-				// create the shell
-				TheShell = MSGNEW("GameClientSubsystem") Shell;
-				if( TheShell )
-					TheShell->init();
-				
-				TheInGameUI->recreateControlBar();
+					// delete the shell
+					delete TheShell;
+					TheShell = NULL;
 
-				TheShell->push( AsciiString("Menus/MainMenu.wnd") );
+					// create the shell
+					TheShell = MSGNEW("GameClientSubsystem") Shell;
+					if (TheShell)
+						TheShell->init();
+
+					TheInGameUI->recreateControlBar();
+
+					TheShell->push(AsciiString("Menus/MainMenu.wnd"));
+				}
 			}
 		}
 	}
@@ -1550,7 +1552,7 @@ void OptionsMenuInit( WindowLayout *layout, void *userData )
 	// populate resolution modes
 	GadgetComboBoxReset(comboBoxResolution);
 	Int numResolutions = TheDisplay->getDisplayModeCount();
-	for( i = 0; i < numResolutions; ++i )
+	for(Int i = 0; i < numResolutions; ++i )
 	{	Int xres,yres,bitDepth;
 		TheDisplay->getDisplayModeDescription(i,&xres,&yres,&bitDepth);
 		str.format(L"%d x %d",xres,yres);
@@ -2064,3 +2066,21 @@ WindowMsgHandledType OptionsMenuSystem( GameWindow *window, UnsignedInt msg,
 	return MSG_HANDLED;
 
 }  // end OptionsMenuSystem
+
+void Shell_Recreate(void) {
+	if (TheShell == NULL)
+		return;
+
+	// delete the shell
+	delete TheShell;
+	TheShell = NULL;
+
+	// create the shell
+	TheShell = MSGNEW("GameClientSubsystem") Shell;
+	if (TheShell)
+		TheShell->init();
+
+	TheInGameUI->recreateControlBar();
+
+	TheShell->push(AsciiString("Menus/MainMenu.wnd"));
+}

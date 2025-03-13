@@ -90,7 +90,7 @@ inline int LZBuffer::_nMatch( int pos, const BYTE* p, int nLimit )
      int shift = LZBUFSIZE - begin;
      int n = nLimit - shift;
 
-     for( i = 0; i < n ; i++ )
+     for(int i = 0; i < n ; i++ )
        if( buf[ i ] != p[ shift + i ] )
           return shift + i;
 

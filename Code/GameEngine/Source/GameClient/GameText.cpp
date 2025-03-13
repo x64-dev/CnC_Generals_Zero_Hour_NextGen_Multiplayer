@@ -371,13 +371,13 @@ void GameTextManager::init( void )
 	}
 
 	qsort( m_stringLUT, m_textCount, sizeof(StringLookUp), compareLUT  );
-
+#if 0
 	UnicodeString ourName = fetch("GUI:Command&ConquerGenerals");
 	extern HWND ApplicationHWnd;  ///< our application window handle
 	if (ApplicationHWnd) {
 		::SetWindowTextW(ApplicationHWnd, ourName.str());
 	}
-
+#endif
 }
 
 //============================================================================

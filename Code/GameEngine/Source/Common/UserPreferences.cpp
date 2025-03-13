@@ -820,7 +820,7 @@ Bool LadderPreferences::loadProfile( Int profileID )
 			continue;
 
 		p.lastPlayDate = atoi( ptr + 1 );
-		for (i=0; i<strlen(ptr); ++i)
+		for (Int i=0; i<strlen(ptr); ++i)
 		{
 			ladData.removeLastChar();
 		}

@@ -136,7 +136,7 @@ PolygonTrigger *PolygonTool::pickPolygon(Coord3D loc, CPoint viewPt, WbView* pVi
 			return pTrig;
 		}
 	}
-	for (pTrig=PolygonTrigger::getFirstPolygonTrigger(); pTrig; pTrig = pTrig->getNext()) {
+	for (PolygonTrigger* pTrig=PolygonTrigger::getFirstPolygonTrigger(); pTrig; pTrig = pTrig->getNext()) {
 		if (WaterTool::isActive() && !pTrig->isWaterArea()) {
 			continue;
 		}

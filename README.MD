@@ -7,6 +7,7 @@
 
 ## New Features
 - D3D12 support
+- MSAA 4x support
 - Widescreen support
 - Visual Studio 2022 support
 - Memory crash fixes

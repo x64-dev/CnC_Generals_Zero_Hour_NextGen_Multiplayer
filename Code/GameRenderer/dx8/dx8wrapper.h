@@ -59,6 +59,8 @@
 #include "dx8indexbuffer.h"
 #include "vertmaterial.h"
 
+#include "../dx12/tinydx.h"
+
 #include <vector>
 
 const unsigned MAX_TEXTURE_STAGES=2;
@@ -187,6 +189,7 @@ class DX8Wrapper
 	friend class DX8Caps;
 	friend class DX8WebBrowser;
 	friend class WbView3d;
+	friend class Direct3D9on12Texture;
 
 	enum ChangedStates {
 		WORLD_CHANGED	=	1<<0,
@@ -338,8 +341,7 @@ public:
 		TextureClass::MipCountType mip_level_count,
 		D3DPOOL pool=D3DPOOL_MANAGED,
 		bool rendertarget=false);
-	static IDirect3DTexture8 * _Create_DX8_Texture(const char *filename, TextureClass::MipCountType mip_level_count);
-	static IDirect3DTexture8 * _Create_DX8_Texture(IDirect3DSurface8 *surface, TextureClass::MipCountType mip_level_count);
+		static IDirect3DTexture8 * _Create_DX8_Texture(IDirect3DSurface8 *surface, TextureClass::MipCountType mip_level_count);
 
 	static IDirect3DSurface8 * _Create_DX8_Surface(unsigned int width, unsigned int height, WW3DFormat format);
 	static IDirect3DSurface8 * _Create_DX8_Surface(const char *filename);
@@ -429,7 +431,8 @@ public:
 
 	/// Returns the display format - added by TR for video playback - not part of W3D
 	static WW3DFormat	getBackBufferFormat( void );
-	static bool Reset_Device(bool reload_assets=true);
+	static bool			RecreateGBuffer(void);
+
 	static HRESULT SetTexture(DWORD Stage, IDirect3DBaseTexture8* pTexture) {
 		return D3DDevice->SetTexture(Stage, pTexture);
 	}
@@ -676,12 +679,17 @@ protected:
 
 	static IDirect3D8 *					D3DInterface;			//d3d8;
 	static IDirect3DDevice8 *			D3DDevice;				//d3ddevice8;	
+	static tr_renderer					*D3D12Renderer;
 
 	static IDirect3DSurface8 *			CurrentRenderTarget;
 	static IDirect3DSurface8 *			DefaultRenderTarget;
 
 	static IDirect3DDevice9On12*		device9On12;
-	static ID3D12Device*				D3D12Device;
+
+	// MSAA and frame g_buffer targets;
+	static LPDIRECT3DSURFACE9			g_pRT_MSAA; 
+	static LPDIRECT3DSURFACE9			g_pDS_MSAA;
+	static LPDIRECT3DSURFACE9			g_pRT_Resolved; 
 
 	friend void DX8_Assert();
 	friend class WW3D;

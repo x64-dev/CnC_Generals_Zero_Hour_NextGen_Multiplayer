@@ -1,4 +1,4 @@
-/Code/.vs/
+**/.vs
 *.sbr
 *.bsc
 *.pch
@@ -14,5 +14,3 @@
 *.tli
 *.exp
 *.ilk
-
-Run/

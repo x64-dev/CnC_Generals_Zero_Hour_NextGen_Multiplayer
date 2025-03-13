@@ -197,7 +197,7 @@ static void SpitLights()
 	}
 
 	DEBUG_LOG(("GlobalLighting Code\n\n"));
-	for (time=0; time<4; time++) {
+	for (Int time=0; time<4; time++) {
 		for (Int light=0; light<3; light++) {
 			Int theTime = time+TIME_OF_DAY_FIRST;
 			GlobalData::TerrainLighting tl = TheGlobalData->m_terrainLighting[theTime][light];

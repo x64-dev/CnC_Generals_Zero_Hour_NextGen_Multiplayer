@@ -1550,7 +1550,7 @@ BEGIN
         BEGIN
             VALUE "Comments", "Beta - not supported by Customer Support"
             VALUE "CompanyName", "Electronic Arts"
-            VALUE "FileDescription", "Command And Conquer Generals World Builder"
+            VALUE "FileDescription", "World Builder for Command And Conquer Generals Next-Gen"
             VALUE "FileVersion", "0, 8, 0, 0"
             VALUE "InternalName", "WorldBuilder"
             VALUE "LegalCopyright", "Copyright (C) 2003"
@@ -2292,7 +2292,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "Generals World Builder\nMission\nMission\n Missions (*.map)\n.map\nGeneralsMap\n Generals Mission Map"
+    IDR_MAINFRAME           "Generals Next-Gen World Builder\nMission\nMission\n Missions (*.map)\n.map\nGeneralsMap\n Generals Mission Map"
     IDS_SKELETON            "SkeletonWindow"
 END
 
