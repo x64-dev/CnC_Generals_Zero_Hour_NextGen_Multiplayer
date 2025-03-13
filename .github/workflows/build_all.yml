@@ -42,7 +42,7 @@ jobs:
     - name: Configure CMake
       run: |
         cd ${{steps.strings.outputs.build-src-dir }}
-        cmake -G "Visual Studio 17 2022" -B ${{ steps.strings.outputs.build-output-dir }} -DCMAKE_BUILD_TYPE=Debug -T ClangCL -DCOMPILER=Clang
+        cmake -G "Visual Studio 17 2022" -B ${{ steps.strings.outputs.build-output-dir }} -DCMAKE_BUILD_TYPE=Debug -T ClangCL -DCOMPILER=Clang -DCMAKE_EXE_LINKER_FLAGS_DEBUGE=""
 
     - name: Build.
       run: |
