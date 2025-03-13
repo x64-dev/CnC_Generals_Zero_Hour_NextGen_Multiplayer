@@ -817,7 +817,7 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 	} else if (dev != -1) {
 		CurRenderDevice = dev;
 	}
-	
+
 	/*
 	** If user doesn't want to change res, set the res variables to match the 
 	** current resolution
@@ -867,7 +867,27 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 			// Resize the window to fit this resolution
 			if (!windowed)
 			{
-				::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOSIZE | SWP_NOMOVE);
+				// Assume hwnd is your application’s window handle
+				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
+
+				// Remove all overlapped-window styles and add WS_POPUP
+				style &= ~(WS_OVERLAPPEDWINDOW);
+				style |= WS_POPUP;
+
+				// Apply the new style
+				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+				// Move window to (0,0) with the monitor’s resolution:
+				SetWindowPos(
+					_Hwnd,
+					HWND_TOP,
+					0,
+					0,
+					width,
+					height,
+					SWP_FRAMECHANGED | SWP_NOOWNERZORDER
+				);
+
 			}
 			else
 			{
@@ -901,7 +921,7 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 	_PresentParameters.MultiSampleType = D3DMULTISAMPLE_NONE;
 	_PresentParameters.SwapEffect = IsWindowed ? D3DSWAPEFFECT_DISCARD : D3DSWAPEFFECT_FLIP;		// Shouldn't this be D3DSWAPEFFECT_FLIP?
 	_PresentParameters.hDeviceWindow = _Hwnd;
-	_PresentParameters.Windowed = IsWindowed;
+	_PresentParameters.Windowed = TRUE; // always windowed
 
 	_PresentParameters.EnableAutoDepthStencil = TRUE;				// Driver will attempt to match Z-buffer depth
 	_PresentParameters.Flags=0;											// We're not going to lock the backbuffer

@@ -437,12 +437,12 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 			{
 //				DWORD threadId=GetCurrentThreadId();
 				if ((bool) wParam != isWinMainActive)
-				{	isWinMainActive = (BOOL) wParam;
+				{
+					isWinMainActive = true; // jmarshall never let alt tab change if this is active or not. 
 					
-					if (TheGameEngine)
-						TheGameEngine->setIsActive(isWinMainActive);
+				if (TheGameEngine)
+					TheGameEngine->setIsActive(isWinMainActive);
 
-					Reset_D3D_Device(isWinMainActive);
 					if (isWinMainActive)
 					{	//restore mouse cursor to our custom version.
 						if (TheWin32Mouse)
