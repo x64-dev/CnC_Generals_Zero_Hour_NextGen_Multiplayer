@@ -2,50 +2,50 @@
 #include <windows.h>
 #include <processenv.h>
 #include <string.h>
-#include "Vendor/EpicOnlineServices/Include/eos_common.h"
+#include <eos_common.h>
 
 
-#include "Vendor/EpicOnlineServices/Include/eos_p2p_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_auth_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_connect_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_auth.h"
-#include "Vendor/EpicOnlineServices/Include/eos_connect.h"
-#include "Vendor/EpicOnlineServices/Include/eos_sdk.h"
-#include "Vendor/EpicOnlineServices/Include/eos_p2p.h"
-#include "Vendor/EpicOnlineServices/Include/eos_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_sessions.h"
-#include "Vendor/EpicOnlineServices/Include/eos_lobby.h"
-#include "Vendor/EpicOnlineServices/Include/eos_lobby_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_metrics.h"
-#include "Vendor/EpicOnlineServices/Include/eos_userinfo.h"
-#include "Vendor/EpicOnlineServices/Include/eos_sanctions.h"
-#include "Vendor/EpicOnlineServices/Include/eos_playerdatastorage.h"
-#include "Vendor/EpicOnlineServices/Include/eos_playerdatastorage_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_achievements.h"
-#include "Vendor/EpicOnlineServices/Include/eos_logging.h"
-#include "Vendor/EpicOnlineServices/Include/eos_titlestorage.h"
-#include "Vendor/EpicOnlineServices/Include/eos_titlestorage_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_friends.h"
-#include "Vendor/EpicOnlineServices/Include/eos_friends_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_stats.h"
-#include "Vendor/EpicOnlineServices/Include/eos_stats_types.h"
-#include "Vendor/EpicOnlineServices/Include/eos_reports.h"
-#include "Vendor/EpicOnlineServices/Include/Windows/eos_windows.h"
-#include "Vendor/EpicOnlineServices/Include/eos_integratedplatform_types.h"
+#include <eos_p2p_types.h>
+#include <eos_auth_types.h>
+#include <eos_connect_types.h>
+#include <eos_auth.h>
+#include <eos_connect.h>
+#include <eos_sdk.h>
+#include <eos_p2p.h>
+#include <eos_types.h>
+#include <eos_sessions.h>
+#include <eos_lobby.h>
+#include <eos_lobby_types.h>
+#include <eos_metrics.h>
+#include <eos_userinfo.h>
+#include <eos_sanctions.h>
+#include <eos_playerdatastorage.h>
+#include <eos_playerdatastorage_types.h>
+#include <eos_achievements.h>
+#include <eos_logging.h>
+#include <eos_titlestorage.h>
+#include <eos_titlestorage_types.h>
+#include <eos_friends.h>
+#include <eos_friends_types.h>
+#include <eos_stats.h>
+#include <eos_stats_types.h>
+#include <eos_reports.h>
+#include <Windows/eos_windows.h>
+#include <eos_integratedplatform_types.h>
 
 
-#include "Vendor/Steamworks/include/steam_api.h"
+#include <steam_api.h>
 
 #include <minwindef.h>
-#include "Vendor/Steamworks/include/steam_api_common.h"
+#include <steam_api_common.h>
 #include <vector>
 #include <functional>
 #include <string>
 #include "Common/UnicodeString.h"
 
-#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//EpicOnlineServices//Lib//EOSSDK-Win64-Shipping.lib")
-#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//Steamworks//Lib//steam_api64.lib")
-#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//Steamworks//Lib//sdkencryptedappticket64.lib")
+#pragma comment(lib, "EOSSDK-Win64-Shipping.lib")
+#pragma comment(lib, "steam_api64.lib")
+#pragma comment(lib, "sdkencryptedappticket64.lib")
 
 class NetworkRoom
 {

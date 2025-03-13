@@ -6,6 +6,7 @@
 
 #define NEXT_GEN_MP 1
 
+// NOTE: This is a test product. We change these to a real product for releases
 #define NGMP_EOS_PRODUCT_ID "f94032c81d28492789089d7d0d0109dd"
 #define NGMP_EOS_SANDBOX_ID "36bf3bb683954103b8e12098da4c2bef"
 #define NGMP_EOS_ENCRYPTION_KEY "397b401e2dd62f74651f6499e2babc5e522ccf5aedc5bfeec182077882d0add4"

@@ -58,6 +58,8 @@ target_include_directories(RTS PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/GameRenderer"
     "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Bink/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/DX90SDK/Include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/EpicOnlineServices/Include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Steamworks/Include"
     "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Source/WWVegas/Miles6/Include"
     "${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Include"
     "${CMAKE_CURRENT_SOURCE_DIR}/GameEngine/Include"
@@ -218,6 +220,8 @@ target_link_libraries(RTS PRIVATE
 # 7) If you need library directories beyond the full paths, you can do:
 #-----------------------------------------------------------------------------------
 target_link_directories(RTS PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/DX90SDK/Lib/x64
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/EpicOnlineServices/Lib/
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Steamworks/Lib/
     $<$<CONFIG:Debug>:${CMAKE_CURRENT_SOURCE_DIR}/Libraries/d3d9on12/bin/src/Release>
     $<$<CONFIG:Debug>:${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Source/GameSpy/bin/x64>
     $<$<CONFIG:Debug>:${CMAKE_CURRENT_SOURCE_DIR}/Libraries/OpenAL/bin/x64/RelWithDebInfo>

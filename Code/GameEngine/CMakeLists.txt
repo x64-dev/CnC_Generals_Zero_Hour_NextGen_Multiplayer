@@ -578,6 +578,8 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/Include
     ../Libraries/Source/GameSpy
     ../Libraries/DX90SDK/Include
+    ../Libraries/EpicOnlineServices/Include
+    ../Libraries/Steamworks/Include
     Include/Precompiled
     Include
     Source/Precompiled
@@ -592,6 +594,8 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/Include
     ../Libraries/Source/GameSpy
     ../Libraries/DX90SDK/Include
+    ../Libraries/EpicOnlineServices/Include
+    ../Libraries/Steamworks/Include
     Include/Precompiled
     Source/Precompiled
     Include
@@ -607,6 +611,8 @@ target_include_directories(GameEngine PRIVATE
     Source/Precompiled
     ../Libraries/Source/GameSpy
     ../Libraries/DX90SDK/Include
+    ../Libraries/EpicOnlineServices/Include
+    ../Libraries/Steamworks/Include
     ../Libraries/STLport-4.5.3/stlport
     Include/Precompiled
     Include
