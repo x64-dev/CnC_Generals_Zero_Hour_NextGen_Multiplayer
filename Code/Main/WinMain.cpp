@@ -406,9 +406,19 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 
 			//-------------------------------------------------------------------------
 			case WM_SIZE:
-				// When W3D initializes, it resizes the window.  So stop repainting.
-				if (!gInitializing) 
-					gDoPaint = false;
+				{
+					int width = LOWORD(lParam);
+					int height = HIWORD(lParam);
+					if (TheDisplay != nullptr && TheTacticalView != nullptr)
+					{
+						TheDisplay->setDisplayMode(width, height, 32, true);
+
+						// We have to recreate the shell. 
+						void Shell_Recreate(void);
+						Shell_Recreate();
+					}
+				}				
+
 				break;
 
 			//-------------------------------------------------------------------------
@@ -674,10 +684,12 @@ static Bool initializeAppWindows( HINSTANCE hInstance, Int nCmdShow, Bool runWin
 
    // Create our main window
 	windowStyle =  WS_POPUP|WS_VISIBLE;
-	if (runWindowed) 
-		windowStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
-	else
-		windowStyle |= WS_EX_TOPMOST | WS_SYSMENU;
+	windowStyle |= WS_EX_TOPMOST | WS_SYSMENU;
+
+	//if (runWindowed) 
+	//	windowStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+	//else
+		
 
 	RECT rect;
 	rect.left = 0;

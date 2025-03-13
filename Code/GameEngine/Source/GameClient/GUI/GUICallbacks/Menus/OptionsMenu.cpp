@@ -2064,3 +2064,21 @@ WindowMsgHandledType OptionsMenuSystem( GameWindow *window, UnsignedInt msg,
 	return MSG_HANDLED;
 
 }  // end OptionsMenuSystem
+
+void Shell_Recreate(void) {
+	if (TheShell == NULL)
+		return;
+
+	// delete the shell
+	delete TheShell;
+	TheShell = NULL;
+
+	// create the shell
+	TheShell = MSGNEW("GameClientSubsystem") Shell;
+	if (TheShell)
+		TheShell->init();
+
+	TheInGameUI->recreateControlBar();
+
+	TheShell->push(AsciiString("Menus/MainMenu.wnd"));
+}

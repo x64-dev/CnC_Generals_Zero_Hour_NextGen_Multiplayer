@@ -861,17 +861,28 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 			DWORD dwstyle = ::GetWindowLong (_Hwnd, GWL_STYLE);
 			AdjustWindowRect (&rect, dwstyle, FALSE);
 
+			int x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (ResolutionWidth / 2);
+			int y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (ResolutionHeight / 2);
+
 			// Resize the window to fit this resolution
 			if (!windowed)
-				::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right-rect.left, rect.bottom-rect.top,SWP_NOSIZE |SWP_NOMOVE);
+			{
+				::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOSIZE | SWP_NOMOVE);
+			}
 			else
-				::SetWindowPos (_Hwnd,
-								 NULL,
-								 0,
-								 0,
-								 rect.right-rect.left,
-								 rect.bottom-rect.top,
-								 SWP_NOZORDER | SWP_NOMOVE);
+			{
+				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
+				style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+				::SetWindowPos(_Hwnd,
+					NULL,
+					x,
+					y,
+					rect.right - rect.left,
+					rect.bottom - rect.top,
+					0);
+			}
 		}
 	}
 #endif
@@ -1142,16 +1153,28 @@ bool DX8Wrapper::Set_Device_Resolution(int width,int height,int bits,int windowe
 				AdjustWindowRect (&rect, dwstyle, FALSE);
 
 				// Resize the window to fit this resolution
+				int x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (ResolutionWidth / 2);
+				int y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (ResolutionHeight / 2);
+
+				// Resize the window to fit this resolution
 				if (!windowed)
-					::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right-rect.left, rect.bottom-rect.top,SWP_NOSIZE |SWP_NOMOVE);
+				{
+					::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOSIZE | SWP_NOMOVE);
+				}
 				else
-					::SetWindowPos (_Hwnd,
-									 NULL,
-									 0,
-									 0,
-									 rect.right-rect.left,
-									 rect.bottom-rect.top,
-									 SWP_NOZORDER | SWP_NOMOVE);
+				{
+					LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
+					style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+					SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+					::SetWindowPos(_Hwnd,
+						NULL,
+						x,
+						y,
+						rect.right - rect.left,
+						rect.bottom - rect.top,
+						0);
+				}
 			}
 		}
 
