@@ -14,3 +14,14 @@
 *.tli
 *.exp
 *.ilk
+*.stamp
+*.filters
+*.stamp.depend
+
+Code/CMakeFiles/*
+CMakeCache.txt
+
+Code/GameEngine/Include/GameNetwork/NextGenMP/Vendor/*
+
+Run/*
+Code/out/

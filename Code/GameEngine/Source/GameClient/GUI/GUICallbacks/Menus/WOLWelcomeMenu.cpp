@@ -66,8 +66,8 @@
 #include "GameNetwork/GameSpy/ThreadUtils.h"
 #include "GameNetwork/GameSpy/MainMenuUtils.h"
 #include "GameNetwork/WOLBrowser/WebBrowser.h"
-#include "../../NextGenMPShared/NextGenMP_defines.h"
-#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NextGenMP_defines.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

@@ -1,7 +1,7 @@
-#include "NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 #include "common/gsPlatformUtil.h"
 #include <fstream>
-#include "../NextGenMPShared/NextGenMP_defines.h"
+#include "GameNetwork/NextGenMP/NextGenMP_defines.h"
 
 NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager = nullptr;
 

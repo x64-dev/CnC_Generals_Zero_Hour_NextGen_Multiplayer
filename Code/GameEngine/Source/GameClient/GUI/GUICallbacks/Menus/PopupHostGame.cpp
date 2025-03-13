@@ -71,7 +71,7 @@
 #include "GameNetwork/GameSpy/LadderDefs.h"
 #include "Common/CustomMatchPreferences.h"
 #include "Common/LadderPreferences.h"
-#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////

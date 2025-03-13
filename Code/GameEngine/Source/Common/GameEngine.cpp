@@ -109,7 +109,7 @@
 
 
 #include "Common/Version.h"
-#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

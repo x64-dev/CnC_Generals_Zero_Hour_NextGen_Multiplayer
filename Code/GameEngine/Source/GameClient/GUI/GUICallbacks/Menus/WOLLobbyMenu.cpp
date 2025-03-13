@@ -69,7 +69,7 @@
 #include "GameNetwork/GameSpy/PersistentStorageThread.h"
 #include "GameNetwork/GameSpy/LobbyUtils.h"
 #include "GameNetwork/RankPointValue.h"
-#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

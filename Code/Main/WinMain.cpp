@@ -66,9 +66,6 @@
 //#include "GeneratedVersion.h"
 #include "Resource.h"
 
-// NGMP
-#include "../NextGenMPShared/NextGenMP_defines.h"
-
 #ifdef _INTERNAL
 // for occasional debugging...
 //#pragma optimize("", off)

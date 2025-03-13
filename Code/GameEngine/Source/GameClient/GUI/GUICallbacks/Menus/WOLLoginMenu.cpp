@@ -69,7 +69,7 @@ void NGMP_WOLLoginMenu_LoginCallback(bool bSuccess);
 #include "GameNetwork/GameSpyOverlay.h"
 
 #include "GameNetwork/WOLBrowser/WebBrowser.h"
-#include "../../NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

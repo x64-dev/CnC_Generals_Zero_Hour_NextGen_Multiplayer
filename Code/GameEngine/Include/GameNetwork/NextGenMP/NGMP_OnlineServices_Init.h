@@ -43,9 +43,9 @@
 #include <string>
 #include "Common/UnicodeString.h"
 
-#pragma comment(lib, "NextGenMP//Vendor//EpicOnlineServices//Lib//EOSSDK-Win64-Shipping.lib")
-#pragma comment(lib, "NextGenMP//Vendor//Steamworks//Lib//steam_api64.lib")
-#pragma comment(lib, "NextGenMP//Vendor//Steamworks//Lib//sdkencryptedappticket64.lib")
+#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//EpicOnlineServices//Lib//EOSSDK-Win64-Shipping.lib")
+#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//Steamworks//Lib//steam_api64.lib")
+#pragma comment(lib, "GameEngine//Include//GameNetwork//NextGenMP//Vendor//Steamworks//Lib//sdkencryptedappticket64.lib")
 
 class NetworkRoom
 {
