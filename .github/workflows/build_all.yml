@@ -38,7 +38,9 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/code/build" >> "$GITHUB_OUTPUT"
         echo "build-src-dir=${{ github.workspace }}/code" >> "$GITHUB_OUTPUT"
-        cd ${{steps.strings.outputs.build-src-dir }}
+
+    - name: Change Dir
+      run:  cd ${{steps.strings.outputs.build-src-dir }}
 
     - name: Configure CMake
       run: >
