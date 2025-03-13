@@ -189,6 +189,7 @@ class DX8Wrapper
 	friend class DX8Caps;
 	friend class DX8WebBrowser;
 	friend class WbView3d;
+	friend class Direct3D9on12Texture;
 
 	enum ChangedStates {
 		WORLD_CHANGED	=	1<<0,
@@ -683,6 +684,11 @@ protected:
 	static IDirect3DSurface8 *			DefaultRenderTarget;
 
 	static IDirect3DDevice9On12*		device9On12;
+
+	// MSAA and frame g_buffer targets;
+	static LPDIRECT3DSURFACE9			g_pRT_MSAA; 
+	static LPDIRECT3DSURFACE9			g_pDS_MSAA;
+	static LPDIRECT3DSURFACE9			g_pRT_Resolved; 
 
 	friend void DX8_Assert();
 	friend class WW3D;

@@ -128,6 +128,10 @@ IDirect3DSurface8 *			DX8Wrapper::CurrentRenderTarget						= NULL;
 IDirect3DSurface8 *			DX8Wrapper::DefaultRenderTarget						= NULL;
 IDirect3DDevice9On12*		DX8Wrapper::device9On12 = NULL;
 
+LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_MSAA;
+PDIRECT3DSURFACE9			DX8Wrapper::g_pDS_MSAA;
+LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_Resolved;
+
 int DX8Wrapper::numDeviceVertexShaders = 0;
 DeviceVertexShader DX8Wrapper::deviceVertexShaders[256];
 
@@ -490,6 +494,66 @@ bool DX8Wrapper::Create_Device(void)
 
 	D3DDevice->QueryInterface(IID_PPV_ARGS(&device9On12));
 	D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
+
+	DWORD msQuality = 0;
+
+	hr = D3DInterface->CheckDeviceMultiSampleType(
+		D3DADAPTER_DEFAULT,
+		D3DDEVTYPE_HAL,
+		D3DFMT_X8R8G8B8,
+		TRUE,                       // TRUE if windowed
+		D3DMULTISAMPLE_4_SAMPLES,
+		&msQuality
+	);
+
+	// Create multi-sampled render target
+	// Note: The dimensions and format match your back buffer, but you enable MSAA here.
+	hr = D3DDevice->CreateRenderTarget(
+		ResolutionWidth,
+		ResolutionHeight,
+		D3DFMT_X8R8G8B8,
+		D3DMULTISAMPLE_4_SAMPLES,
+		0, 
+		FALSE,          
+		&g_pRT_MSAA,
+		nullptr);
+
+	if (FAILED(hr))
+	{
+		return false;
+	}
+
+	hr = D3DDevice->CreateDepthStencilSurface(
+		ResolutionWidth,
+		ResolutionHeight,
+		D3DFMT_D24S8,   // 24-bit depth + 8-bit stencil is common
+		D3DMULTISAMPLE_4_SAMPLES,
+		0,
+		TRUE,           // Discard? If TRUE, the driver can discard depth data
+		&g_pDS_MSAA,
+		nullptr
+	);
+	if (FAILED(hr))
+	{
+		// If depth creation fails, release the color RT & fail out
+		g_pRT_MSAA->Release();
+		g_pRT_MSAA = nullptr;
+		return false;
+	}
+
+	// Create the single-sample render target (resolved target)
+	if (FAILED(D3DDevice->CreateRenderTarget(
+		ResolutionWidth,
+		ResolutionHeight,
+		D3DFMT_X8R8G8B8,
+		D3DMULTISAMPLE_NONE,
+		0,
+		FALSE,
+		&g_pRT_Resolved,
+		nullptr)))
+	{
+		return false;
+	}
 
 	/*
 	** Initialize all subsystems
@@ -1444,6 +1508,17 @@ void DX8Wrapper::Begin_Scene(void)
 	DX8_THREAD_ASSERT();
 	DX8CALL(BeginScene());
 
+	D3DDevice->SetRenderTarget(0, g_pRT_MSAA);
+	D3DDevice->SetDepthStencilSurface(g_pDS_MSAA);
+	D3DDevice->Clear(
+		0,
+		nullptr,
+		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+		D3DCOLOR_XRGB(0, 0, 0),
+		1.0f,
+		0
+	);
+
 	DX8WebBrowser::Update();
 }
 
@@ -1451,6 +1526,27 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
 	DX8CALL(EndScene());
+
+	D3DDevice->StretchRect(
+		g_pRT_MSAA,     // Source
+		nullptr,
+		g_pRT_Resolved, // Destination
+		nullptr,
+		D3DTEXF_NONE    // Filter = NONE ensures a proper MSAA resolve
+	);
+
+	LPDIRECT3DSURFACE9 pBackBuffer = nullptr;
+	if (SUCCEEDED(D3DDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer)))
+	{
+		D3DDevice->StretchRect(
+			g_pRT_Resolved,
+			nullptr,
+			pBackBuffer,
+			nullptr,
+			D3DTEXF_NONE
+		);
+		pBackBuffer->Release();
+	}
 
 	DX8WebBrowser::Render(0);
 
