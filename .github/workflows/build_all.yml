@@ -42,7 +42,7 @@ jobs:
     - name: Configure CMake
       run: |
         cd ${{steps.strings.outputs.build-src-dir }}
-        cmake -G "Visual Studio 17 2022" -T v143
+        cmake -G "Visual Studio 17 2022" -B ${{github.workspace}}/code/build/ -DCMAKE_BUILD_TYPE=Debug -T 143 -DCOMPILER=cl
 
     - name: Build.
       run: |
