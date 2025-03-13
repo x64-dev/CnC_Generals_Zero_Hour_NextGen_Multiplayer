@@ -128,9 +128,9 @@ IDirect3DSurface8 *			DX8Wrapper::CurrentRenderTarget						= NULL;
 IDirect3DSurface8 *			DX8Wrapper::DefaultRenderTarget						= NULL;
 IDirect3DDevice9On12*		DX8Wrapper::device9On12 = NULL;
 
-LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_MSAA;
-PDIRECT3DSURFACE9			DX8Wrapper::g_pDS_MSAA;
-LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_Resolved;
+LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_MSAA = NULL;
+PDIRECT3DSURFACE9			DX8Wrapper::g_pDS_MSAA = NULL;
+LPDIRECT3DSURFACE9			DX8Wrapper::g_pRT_Resolved = NULL;
 
 int DX8Wrapper::numDeviceVertexShaders = 0;
 DeviceVertexShader DX8Wrapper::deviceVertexShaders[256];
@@ -495,9 +495,33 @@ bool DX8Wrapper::Create_Device(void)
 	D3DDevice->QueryInterface(IID_PPV_ARGS(&device9On12));
 	D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
 
+	if (!RecreateGBuffer()) {
+		return false;
+	}
+
+	/*
+	** Initialize all subsystems
+	*/
+	Do_Onetime_Device_Dependent_Inits();
+	return true;
+}
+
+bool DX8Wrapper::RecreateGBuffer(void) {
 	DWORD msQuality = 0;
 
-	hr = D3DInterface->CheckDeviceMultiSampleType(
+	if (g_pRT_MSAA)
+	{
+		g_pRT_MSAA->Release();
+		g_pRT_MSAA = nullptr;
+
+		g_pDS_MSAA->Release();
+		g_pDS_MSAA = nullptr;
+
+		g_pRT_Resolved->Release();
+		g_pRT_Resolved = nullptr;
+	}
+
+	HRESULT hr = D3DInterface->CheckDeviceMultiSampleType(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
 		D3DFMT_X8R8G8B8,
@@ -513,8 +537,8 @@ bool DX8Wrapper::Create_Device(void)
 		ResolutionHeight,
 		D3DFMT_X8R8G8B8,
 		D3DMULTISAMPLE_4_SAMPLES,
-		0, 
-		FALSE,          
+		0,
+		FALSE,
 		&g_pRT_MSAA,
 		nullptr);
 
@@ -555,50 +579,7 @@ bool DX8Wrapper::Create_Device(void)
 		return false;
 	}
 
-	/*
-	** Initialize all subsystems
-	*/
-	Do_Onetime_Device_Dependent_Inits();
 	return true;
-}
-
-bool DX8Wrapper::Reset_Device(bool reload_assets)
-{
-	DX8_THREAD_ASSERT();
-	if ((IsInitted) && (D3DDevice != NULL)) {
-		// Release all non-MANAGED stuff
-		Set_Vertex_Buffer (NULL);
-		Set_Index_Buffer (NULL, 0);
-		if (m_pCleanupHook) {
-			m_pCleanupHook->ReleaseResources();
-		}
-		DynamicVBAccessClass::_Deinit();
-		DynamicIBAccessClass::_Deinit();
-		DX8TextureManagerClass::Release_Textures();
-
-		HRESULT hr=DX8Wrapper::D3DDevice->TestCooperativeLevel();
-		if (hr != D3DERR_DEVICELOST )
-		{	DX8CALL_HRES(Reset(&_PresentParameters),hr)
-			if (hr != D3D_OK)
-				return false;	//reset failed.
-		}
-		else
-			return false;	//device is lost and can't be reset.
-
-		D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
-
-		if (reload_assets)
-		{
-			DX8TextureManagerClass::Recreate_Textures();
-			if (m_pCleanupHook) {
-				m_pCleanupHook->ReAcquireResources();
-			}
-		}
-		Invalidate_Cached_Render_States();
-		Set_Default_Global_Render_States();
-		return true;
-	}
-	return false;
 }
 
 void DX8Wrapper::Release_Device(void)
@@ -1000,10 +981,11 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 	
 	bool ret;
 
-	if (reset_device)
-		ret = Reset_Device(restore_assets);	//reset device without restoring data - we're likely switching out of the app.
-	else
-		ret = Create_Device();
+	//if (reset_device)
+	//	ret = Reset_Device(restore_assets);	//reset device without restoring data - we're likely switching out of the app.
+	//else
+	//	ret = Create_Device();
+	ret = Create_Device();
 
 	WWDEBUG_SAY(("Reset/Create_Device done, reset_device=%d, restore_assets=%d\n", reset_device, restore_assets));
 
@@ -1072,8 +1054,8 @@ void DX8Wrapper::Set_Swap_Interval(int swap)
 		case 3: _PresentParameters.PresentationInterval = D3DPRESENT_INTERVAL_THREE; break;
 		default: _PresentParameters.PresentationInterval = D3DPRESENT_INTERVAL_ONE ; break;
 	}
-	
-	Reset_Device();
+	// TODO: dx12
+	//Reset_Device();
 }
 
 int DX8Wrapper::Get_Swap_Interval(void)
@@ -1173,8 +1155,11 @@ bool DX8Wrapper::Set_Device_Resolution(int width,int height,int bits,int windowe
 			}
 		}
 
-#pragma message("TODO: support changing windowed status and changing the bit depth")
-		return Reset_Device();
+
+		if (!RecreateGBuffer())
+			return false;
+
+		return true;
 	} else {
 		return false;
 	}
@@ -1565,15 +1550,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 		}
 
 		// If the device was lost we need to check for cooperative level and possibly reset the device
-		if (hr==D3DERR_DEVICELOST) {
-			hr=DX8Wrapper::D3DDevice->TestCooperativeLevel();
-			if (hr==D3DERR_DEVICENOTRESET) {
-				Reset_Device();
-			}
-		}
-		else {
-			DX8_ErrorCode(hr);
-		}
+		DX8_ErrorCode(hr);
 	}
 
 	// Each frame, release all of the buffers and textures.
@@ -1610,7 +1587,7 @@ void DX8Wrapper::Flip_To_Primary(void)
 
 				if (D3DERR_DEVICENOTRESET == hr) {
 					WWDEBUG_SAY(("DEVICENOTRESET: Resetting device.\n"));
-					Reset_Device();
+					//Reset_Device();
 					resetAttempts++;
 				}
 			} else {

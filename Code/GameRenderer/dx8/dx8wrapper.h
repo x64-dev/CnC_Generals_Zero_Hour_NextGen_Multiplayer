@@ -431,7 +431,8 @@ public:
 
 	/// Returns the display format - added by TR for video playback - not part of W3D
 	static WW3DFormat	getBackBufferFormat( void );
-	static bool Reset_Device(bool reload_assets=true);
+	static bool			RecreateGBuffer(void);
+
 	static HRESULT SetTexture(DWORD Stage, IDirect3DBaseTexture8* pTexture) {
 		return D3DDevice->SetTexture(Stage, pTexture);
 	}
