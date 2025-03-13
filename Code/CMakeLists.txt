@@ -5,12 +5,6 @@ project(RTS LANGUAGES C CXX)
 # Force multi-config for Visual Studio (Debug, Internal, Release)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Internal;Release" CACHE STRING "Configs" FORCE)
 
-set(CMAKE_EXE_LINKER_FLAGS_DEBUGE "")
-set(CMAKE_EXE_LINKER_FLAGS_INTERNAL "")
-set(CMAKE_EXE_LINKER_FLAGS_INTERNALE "")
-set(CMAKE_EXE_LINKER_FLAGS_PROFILE "")
-set(CMAKE_EXE_LINKER_FLAGS_PROFILEE "")
-
 add_subdirectory(GameEngine)
 add_subdirectory(GameEngineDevice)
 add_subdirectory(GameRenderer)
