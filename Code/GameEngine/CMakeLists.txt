@@ -515,6 +515,8 @@ add_library(GameEngine STATIC
     Source/GameLogic/System/RankInfo.cpp
     Source/GameNetwork/NextGenMP/NGMP_OnlineServices_Init.cpp
     Source/GameNetwork/NextGenMP/NGMP_OnlineServices_Auth.cpp
+    Source/GameNetwork/NextGenMP/NGMP_OnlineServices_LobbyInterface.cpp
+    Source/GameNetwork/NextGenMP/NGMP_OnlineServices_RoomsInterface.cpp
     Source/GameNetwork/Connection.cpp
     Source/GameNetwork/ConnectionManager.cpp
     Source/GameNetwork/DisconnectManager.cpp

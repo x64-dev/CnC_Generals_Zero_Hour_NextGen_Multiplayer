@@ -69,7 +69,7 @@
 #include "GameNetwork/GameSpy/PersistentStorageThread.h"
 #include "GameNetwork/GameSpy/LobbyUtils.h"
 #include "GameNetwork/RankPointValue.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -707,7 +707,7 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	*/
 
 	// NGMP: Register for login callback
-	NGMP_OnlineServicesManager::GetInstance()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
 
 	// NGMP: Request lobbies
 	GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Welcome to C&C Generals NextGen Multiplayer!"), GameMakeColor(255, 194, 15, 255), -1, -1);

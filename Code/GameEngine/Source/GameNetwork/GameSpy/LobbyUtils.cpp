@@ -62,6 +62,7 @@
 
 #include "Common/STLTypedefs.h"
 #include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_LobbyInterface.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -856,7 +857,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 	}
 	int prevPos = GadgetListBoxGetTopVisibleEntry(win);
 
-	NGMP_OnlineServicesManager::GetInstance()->SearchForLobbies(
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->SearchForLobbies(
 		[=]()
 		{
 			win->winEnable(false);

@@ -71,7 +71,7 @@
 #include "GameNetwork/GameSpy/LadderDefs.h"
 #include "Common/CustomMatchPreferences.h"
 #include "Common/LadderPreferences.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////
@@ -549,7 +549,7 @@ WindowMsgHandledType PopupHostGameSystem( GameWindow *window, UnsignedInt msg, W
 void createGame( void )
 {
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
-	NGMP_OnlineServicesManager::GetInstance()->CreateLobby(gameName);
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName);
 	return;
 
 	// TODO_NGMP: Everything using TheGameSpy%

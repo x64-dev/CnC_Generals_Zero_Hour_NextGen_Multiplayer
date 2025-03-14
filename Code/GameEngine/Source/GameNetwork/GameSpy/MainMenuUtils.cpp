@@ -56,6 +56,7 @@
 
 // NGMP
 #include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Auth.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -228,7 +229,7 @@ static void startOnline( void )
 	bool bQuickLogin = false;
 
 	NGMP_OnlineServicesManager::GetInstance()->Init();
-	NGMP_OnlineServicesManager::GetInstance()->Auth();
+	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->Auth();
 
 	if (bQuickLogin)
 	{

@@ -69,7 +69,7 @@ void NGMP_WOLLoginMenu_LoginCallback(bool bSuccess);
 #include "GameNetwork/GameSpyOverlay.h"
 
 #include "GameNetwork/WOLBrowser/WebBrowser.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -434,7 +434,7 @@ void WOLLoginMenuInit( WindowLayout *layout, void *userData )
 	loginAttemptTime = 0;
 
 	// NGMP: Register for login callback
-	NGMP_OnlineServicesManager::GetInstance()->RegisterForLoginCallback(NGMP_WOLLoginMenu_LoginCallback);
+	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->RegisterForLoginCallback(NGMP_WOLLoginMenu_LoginCallback);
 
 
 	/*
