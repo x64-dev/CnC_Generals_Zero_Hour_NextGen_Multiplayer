@@ -68,8 +68,9 @@
 #if defined(_DEBUG) || defined(_INTERNAL)
 static Bool TheHurtSelectionMode = false;
 static Bool TheHandOfGodSelectionMode = false;
-static Bool TheDebugSelectionMode = false;
 #endif
+
+wwCVar g_DebugSelectionMode("g_DebugSelectionMode", "0", "Enables debug selection mode", CVAR_BOOL);
 
 //-----------------------------------------------------------------------------
 static Bool currentlyLookingForSelection( )
@@ -810,7 +811,7 @@ GameMessageDisposition SelectionTranslator::translateGameMessage(const GameMessa
 					}
 
 #ifdef DEBUG_OBJECT_ID_EXISTS
-					if (TheDebugSelectionMode && draw && draw->getObject())
+					if (g_DebugSelectionMode.GetBool() && draw && draw->getObject())
 					{
 						if (TheObjectIDToDebug == 0)
 						{
@@ -1201,12 +1202,7 @@ GameMessageDisposition SelectionTranslator::translateGameMessage(const GameMessa
 		//-----------------------------------------------------------------------------------------
 		case GameMessage::MSG_META_DEMO_DEBUG_SELECTION:
 		{
-			TheDebugSelectionMode = !TheDebugSelectionMode;
-			TheInGameUI->message( UnicodeString( L"Debug-Selected-Item Mode is %s" ), TheDebugSelectionMode ? L"ON" : L"OFF" );
-		#ifdef DEBUG_OBJECT_ID_EXISTS
-			TheObjectIDToDebug = INVALID_ID;
-		#endif
-			disp = DESTROY_MESSAGE;
+			
 			break;
 		}
 #endif

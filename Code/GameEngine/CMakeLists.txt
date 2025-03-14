@@ -1,5 +1,7 @@
 add_library(GameEngine STATIC
     source/Console/Console.cpp
+    source/Console/Cvar.cpp
+    source/Console/CvarManager.cpp
     Source/Common/Audio/AudioEventRTS.cpp
     Source/Common/Audio/AudioRequest.cpp
     Source/Common/Audio/GameAudio.cpp
@@ -538,7 +540,7 @@ add_library(GameEngine STATIC
     Source/GameNetwork/User.cpp
     Source/GameNetwork/WOLBrowser/WebBrowser.cpp
     Source/Precompiled/PreRTS.cpp
-)
+ "Source/Console/CvarManager.h" "Source/Console/CvarManager.cpp")
 
 target_include_directories(GameEngine PRIVATE
     ../Libraries/Include
