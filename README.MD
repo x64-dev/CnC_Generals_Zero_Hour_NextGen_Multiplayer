@@ -6,11 +6,13 @@
 - Disarray(x64 support great work!).
 
 ## New Features
+- Quake style console(open/close via the ` key)
 - D3D12 support
 - MSAA 4x support
 - Widescreen support
 - Visual Studio 2022 support
 - Memory crash fixes
+- ImGui support
 - x64 support
 
 ---
