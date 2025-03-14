@@ -1,5 +1,16 @@
 # Command & Conquer Generals NextGen Fork
 
+## About this specific fork
+This fork is an effort to replace GameSpy with modern multiplayer game services provided by Steam and Epic Games.
+
+- Current status: Heavily WIP. Once the golden path works, a more fine grain list of what is implemented / not implemented will be provided.
+
+- Known restrictions:
+  Only the Steam version of the game is supported
+
+- Build status:
+[![Build All](https://github.com/x64-dev/CnC_Generals_Zero_Hour_NextGen_Multiplayer/actions/workflows/build_all.yml/badge.svg)](https://github.com/x64-dev/CnC_Generals_Zero_Hour_NextGen_Multiplayer/actions/workflows/build_all.yml)
+
 ## Contributors
 - jmarshall23
 - Andrew-2E128
