@@ -379,13 +379,13 @@ static void populateGroupRoomListbox(GameWindow *lb)
 		int roomID = netRoom.GetRoomID();
 		if (roomID == 0)
 		{
-			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomName(), GameSpyColor[GSCOLOR_CURRENTROOM]);
+			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomDisplayName(), GameSpyColor[GSCOLOR_CURRENTROOM]);
 			GadgetComboBoxSetItemData(lb, selected, (void*)(roomID));
 			indexToSelect = selected;
 		}
 		else
 		{
-			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomName(), GameSpyColor[GSCOLOR_ROOM]);
+			Int selected = GadgetComboBoxAddEntry(lb, netRoom.GetRoomDisplayName(), GameSpyColor[GSCOLOR_ROOM]);
 			GadgetComboBoxSetItemData(lb, selected, (void*)(roomID));
 		}
 	}
@@ -495,11 +495,20 @@ static Int insertPlayerInListbox(const PlayerInfo& info, Color color)
 
 void PopulateLobbyPlayerListbox(void)
 {
-	// TODO_NGMP
+	for (NetworkRoomMember netRoomMember : NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom())
+	{
+		// TODO_NGMP: fill out more
+		PlayerInfo pi;
+		pi.m_name = netRoomMember.m_strName;
+		insertPlayerInListbox(pi, pi.isIgnored() ? GameSpyColor[GSCOLOR_PLAYER_IGNORED] : GameSpyColor[GSCOLOR_PLAYER_NORMAL]);
+	}
+
 	return;
 
 	if (!listboxLobbyPlayers)
 		return;
+
+	// TODO_NGMP: Implement friends etc again, retain selection, etc
 
 	// Display players
 	PlayerInfoMap *players = TheGameSpyInfo->getPlayerInfoMap();
@@ -713,6 +722,22 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Welcome to C&C Generals NextGen Multiplayer!"), GameMakeColor(255, 194, 15, 255), -1, -1);
 	//GadgetListBoxSetItemData(listboxLobbyChat, (void*)-1, index);
 	
+	// TODO_NGMP: player list change callbacks
+
+
+	// attempt to join the first room
+	NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->JoinRoom(0, []()
+		{
+			GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Attempting to join room"), GameMakeColor(255, 194, 15, 255), -1, -1);
+		},
+		[]()
+		{
+			GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Joined room"), GameMakeColor(255, 194, 15, 255), -1, -1);
+
+			// refresh on join
+			refreshPlayerList(TRUE);
+		});
+
 	GrabWindowInfo();
 
 	// TODO_NGMP

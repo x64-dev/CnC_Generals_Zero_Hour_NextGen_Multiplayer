@@ -14,10 +14,11 @@ class NGMP_OnlineServices_RoomsInterface;
 class NetworkRoom
 {
 public:
-	NetworkRoom(int roomID, wchar_t* strRoomName)
+	NetworkRoom(int roomID, const wchar_t* strRoomName, const char* szRoomInternalName)
 	{
 		m_RoomID = roomID;
-		m_strRoomName = UnicodeString(strRoomName);
+		m_strRoomDisplayName = UnicodeString(strRoomName);
+		m_strRoomInternalName = AsciiString(szRoomInternalName);
 	}
 
 	~NetworkRoom()
@@ -26,11 +27,13 @@ public:
 	}
 
 	int GetRoomID() const { return m_RoomID; }
-	UnicodeString GetRoomName() const { return m_strRoomName; }
+	UnicodeString GetRoomDisplayName() const { return m_strRoomDisplayName; }
+	AsciiString GetRoomInternalName() const { return m_strRoomInternalName; }
 
 private:
 	int m_RoomID;
-	UnicodeString m_strRoomName;
+	UnicodeString m_strRoomDisplayName;
+	AsciiString m_strRoomInternalName;
 };
 
 enum NGMP_ENATType : uint8_t
@@ -136,8 +139,8 @@ private:
 	// TODO_NGMP: Get this from title storage or session query instead
 	std::vector<NetworkRoom> m_vecRooms =
 	{
-		NetworkRoom(0, L"First Ever Room!"),
-		NetworkRoom(1, L"Another room!")
+		NetworkRoom(0, L"Room 1", "NETWORK_ROOM_0aaaa"),
+		NetworkRoom(1, L"Room 2", "NETWORK_ROOM_1")
 	};
 
 	NGMP_ENATType m_NATType = NGMP_ENATType::NAT_TYPE_UNDETERMINED;
