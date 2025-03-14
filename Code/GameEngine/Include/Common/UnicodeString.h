@@ -199,9 +199,9 @@ public:
 		Replace the contents of self with the given string.
 		Note that a copy of the string is made; the input ptr is not saved.
 	*/
-	void set(const WideChar* s, int len = -1);
+	void set(const WideChar* s);
 
-	void set(const UnsignedShort* s, int len = -1);
+	void set(const UnsignedShort* s);
 
 	/**
 		replace contents of self with the given string. Note the

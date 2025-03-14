@@ -168,12 +168,12 @@ void UnicodeString::set(const UnicodeString& stringSrc)
 }
 
 // -----------------------------------------------------
-void UnicodeString::set(const WideChar* s, int len)
+void UnicodeString::set(const WideChar* s)
 {
 	validate();
 	if (!m_data || s != peek())
 	{
-		len = s ? wcslen(s) : 0;
+		int len = s ? wcslen(s) : 0;
 		if (len)
 		{
 			ensureUniqueBufferOfSize(len + 1, false, s, NULL);
@@ -186,12 +186,12 @@ void UnicodeString::set(const WideChar* s, int len)
 	validate();
 }
 
-void UnicodeString::set(const UnsignedShort* s1, int len) {
+void UnicodeString::set(const UnsignedShort* s1) {
 	validate();
 	const WideChar* s = (const WideChar* )s1;
 	if (!m_data || s != peek())
 	{
-		len = s ? wcslen(s) : 0;
+		int len = s ? wcslen(s) : 0;
 		if (len)
 		{
 			ensureUniqueBufferOfSize(len + 1, false, s, NULL);
