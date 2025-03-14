@@ -1587,8 +1587,11 @@ void DX8Wrapper::Begin_Scene(void)
 		0
 	);
 
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
+	if (!IsWorldBuilder())
+	{
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+	}
 
 	DX8WebBrowser::Update();
 }
@@ -1596,8 +1599,12 @@ void DX8Wrapper::Begin_Scene(void)
 void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+	if (!IsWorldBuilder())
+	{
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}
 
 	D3DDevice->EndScene();
 
