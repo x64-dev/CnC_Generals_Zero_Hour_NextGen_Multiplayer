@@ -1,25 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
-
-#------------------------------------------------------------------------------
-# Set up a project that has three explicit configurations: Debug, Internal, Release
-# (This is typical in a multi-config IDE like Visual Studio; for single-config
-# generators such as Makefiles, you'd choose one config at a time with CMAKE_BUILD_TYPE.)
-#------------------------------------------------------------------------------
-project(GameEngine LANGUAGES CXX)
-
-# If you're on a generator that supports multi-configuration (like Visual Studio),
-# you can define that you want these three:
-set(CMAKE_CONFIGURATION_TYPES Debug Internal Release CACHE STRING "Configs" FORCE)
-
-#------------------------------------------------------------------------------
-# Create the target as a STATIC library (matching "ConfigurationType>StaticLibrary")
-#------------------------------------------------------------------------------
-
 add_library(GameEngine STATIC
-    # --------------------------------------------------------------------------
-    # Below is the long list of source files from <ItemGroup><ClCompile> in the vcxproj,
-    # EXCEPT those always ExcludedFromBuild for every config. (GameSpy.cpp, etc.)
-    # --------------------------------------------------------------------------
     Source/Common/Audio/AudioEventRTS.cpp
     Source/Common/Audio/AudioRequest.cpp
     Source/Common/Audio/GameAudio.cpp
@@ -560,116 +539,64 @@ add_library(GameEngine STATIC
     Source/Precompiled/PreRTS.cpp
 )
 
-#------------------------------------------------------------------------------
-# Replicate the configuration-specific compile definitions, includes, runtime library, etc.
-#------------------------------------------------------------------------------
-
-#
-# 1) Include directories that differ per configuration
-#
 target_include_directories(GameEngine PRIVATE
-  $<$<CONFIG:Debug>: 
-    ../Libraries/Source/Compression
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source
-    ../Libraries/Source/WWVegas/WWLib
     ../Libraries/Include
-    ../Libraries/Source/GameSpy
-    ../Libraries/DX90SDK/Include
-    Include/Precompiled
-    Include
-    Source/Precompiled
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source/WWVegas/WWLib
-  >
-  $<$<CONFIG:Internal>: 
-    ../Libraries/Source/Compression
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source
-    ../Libraries/Source/WWVegas/WWLib
-    ../Libraries/Include
-    ../Libraries/Source/GameSpy
-    ../Libraries/DX90SDK/Include
-    Include/Precompiled
-    Source/Precompiled
-    Include
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source/WWVegas/WWLib
-  >
-  $<$<CONFIG:Release>:
     ../Libraries/Source
     ../Libraries/Source/Compression
+    ../Libraries/Source/GameSpy
     ../Libraries/Source/WWVegas
     ../Libraries/Source/WWVegas/WWLib
-    ../Libraries/Include
-    Source/Precompiled
-    ../Libraries/Source/GameSpy
     ../Libraries/DX90SDK/Include
-    ../Libraries/STLport-4.5.3/stlport
-    Include/Precompiled
     Include
-  >
+    Include/Precompiled
+    Source/Precompiled
 )
 
-#
-# 2) Preprocessor definitions (the <PreprocessorDefinitions> from each ItemDefinitionGroup)
-#
+target_link_libraries(GameEngine PRIVATE
+    GameEngineDevice
+    GameRenderer
+    wwmath
+    wwlib
+    WWDownload
+    Compression
+)
+
 target_compile_definitions(GameEngine PRIVATE
+  _CRT_SECURE_NO_WARNINGS
+  _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+  _LIB
+  _WINDOWS
+  Z_PREFIX
+
   $<$<CONFIG:Debug>:
-    _CRT_SECURE_NO_WARNINGS
-    _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
     _DEBUG
     BROWSER_DEBUG
-    _LIB
-    _WINDOWS
-    Z_PREFIX
     _DISABLE_STRING_ANNOTATION
     _DISABLE_VECTOR_ANNOTATION
   >
 
   $<$<CONFIG:Internal>:
-    _CRT_SECURE_NO_WARNINGS
-    _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
     NDEBUG
     _INTERNAL
-    _LIB
-    _WINDOWS
-    Z_PREFIX
     _DISABLE_STRING_ANNOTATION
     _DISABLE_VECTOR_ANNOTATION
   >
 
   $<$<CONFIG:Release>:
-    _CRT_SECURE_NO_WARNINGS
-    _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
     IG_DEBUG_STACKTRACE
     NDEBUG
     _RELEASE
-    _LIB
-    _WINDOWS
     WIN32
-    Z_PREFIX
   >
 )
 
-#
-# 3) Compiler / runtime library / optimization flags that differ by configuration:
-#    (The .vcxproj sets /Od in Debug, /O2 in Release & Internal, uses /MDd for Debug, /MD for others, etc.)
-#    We replicate with typical MSVC flags:
-#
-#    Debug => /Od (no optimization), /MDd (debug runtime), /Zi (debug symbols)
-#    Internal => /O2 (max optimize), /MD (release runtime), /Zi if you want .pdb
-#    Release => /O2 (max optimize), /MD (release runtime), possibly no /Zi, but it had ProgramDatabase...
-#
-#    Also note "StringPooling" => /GF, "FunctionLevelLinking" => /Gy, etc. in Internal & Release
-#
-target_compile_options(GameEngine PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    $<$<CONFIG:Debug>:/Od /MDd /Zi>
-    $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
-    $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
-  >
-)
+if (MSVC)
+    target_compile_options(GameEngine PRIVATE
+        $<$<CONFIG:Debug>:/Od /MDd /Zi>
+        $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
+        $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
+    )
+endif()
 
 #
 # 4) Precompiled header usage
@@ -689,30 +616,9 @@ target_compile_options(GameEngine PRIVATE
 #   the PCH and everything else "uses" it, but the above is the simpler modern route in CMake.
 #
 
-#------------------------------------------------------------------------------
-# 5) Output library naming: the vcxproj sets:
-#    Debug => "Lib/GameEngineDebug.lib"
-#    Internal => "Lib/GameEngineInternal.lib"
-#    Release => "Lib/GameEngine.lib"
-#
-# We replicate that via ARCHIVE_OUTPUT_DIRECTORY_XXX + OUTPUT_NAME_XXX
-#------------------------------------------------------------------------------
+# DO NOT TOUCH THIS, CODE RELAYS ON IT BEING LIKE THIS
 set_target_properties(GameEngine PROPERTIES
   OUTPUT_NAME_DEBUG      "GameEngineDebug"
   OUTPUT_NAME_Internal   "GameEngineInternal"
   OUTPUT_NAME_Release    "GameEngine"
 )
-
-#------------------------------------------------------------------------------
-# 6) If needed, replicate some of the .bsc, .pdb, or other MSVC-specific settings:
-#    The .vcxproj sets "BrowseInformationFile", "Bscmake", etc. but these are normally
-#    automatically handled by MSVC in a typical CMake build. You usually don't have to
-#    replicate them explicitly. If you truly must replicate them, see:
-#    https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#visual-studio-and-the-visual-studio-generators
-#
-# 7) The project references another project "EABrowserDispatch.vcxproj".
-#    In CMake, you can use `add_subdirectory(...)` to bring that in as a separate library
-#    target, then do `target_link_libraries(GameEngine PRIVATE EABrowserDispatch)` if needed.
-#------------------------------------------------------------------------------
-
-message(STATUS "GameEngine CMake conversion loaded. Configs = ${CMAKE_CONFIGURATION_TYPES}")

@@ -1,22 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
-
-#------------------------------------------------------------------------------
-# The project name "GameEngineDevice" is chosen to match typical usage.
-#------------------------------------------------------------------------------
-project(GameEngineDevice LANGUAGES CXX)
-
-# If using a generator that supports multiple configs (like Visual Studio),
-# you can set them like so:
-set(CMAKE_CONFIGURATION_TYPES Debug Internal Release CACHE STRING "Configs" FORCE)
-
-#------------------------------------------------------------------------------
-# Create a STATIC library target (matches <ConfigurationType>StaticLibrary).
-#------------------------------------------------------------------------------
-
 add_library(GameEngineDevice STATIC
-    # --------------------------------------------------------------------------
-    # List of all .cpp files from the <ItemGroup><ClCompile> (none are excluded).
-    # --------------------------------------------------------------------------
     Source/MilesAudioDevice/MilesAudioCache.cpp
     Source/MilesAudioDevice/MilesAudioManager.cpp
     Source/OpenALAudioDevice/OpenALAudioLoader.cpp
@@ -115,15 +97,13 @@ add_library(GameEngineDevice STATIC
 )
 
 #------------------------------------------------------------------------------
-# Include paths (identical for Debug, Internal, Release):
+# Include paths
 #------------------------------------------------------------------------------
 target_include_directories(GameEngineDevice PRIVATE
-  $<$<CONFIG:Debug>:
     ../GameRenderer
     ../Libraries/OpenAL/include
     ../Libraries/Bink/include
     ../Libraries/DX90SDK/Include
-    ../Libraries/Source/WWVegas/Miles6/include
     ../Main
     Include
     ../GameEngine/Include
@@ -135,71 +115,30 @@ target_include_directories(GameEngineDevice PRIVATE
     ../Libraries/Source/WWVegas/WWMath
     ../Libraries/Source/WWVegas/WWSaveLoad
     ../Libraries/Include/Granny
-  >
-  $<$<CONFIG:Internal>:
-    ../GameRenderer
-    ../Libraries/OpenAL/include
-    ../Libraries/Bink/include
-    ../Libraries/DX90SDK/Include
-    ../Libraries/Source/WWVegas/Miles6/include
-    ../Main
-    Include
-    ../GameEngine/Include
-    ../Libraries/Include
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source/WWVegas/WW3D2
-    ../Libraries/Source/WWVegas/WWLib
-    ../Libraries/Source/WWVegas/WWDebug
-    ../Libraries/Source/WWVegas/WWMath
-    ../Libraries/Source/WWVegas/WWSaveLoad
-    ../Libraries/Include/Granny
-  >
-  $<$<CONFIG:Release>:
-    ../GameRenderer
-    ../Libraries/OpenAL/include
-    ../Libraries/Bink/include
-    ../Libraries/DX90SDK/Include
-    ../Libraries/Source/WWVegas/Miles6/include
-    ../Main
-    Include
-    ../GameEngine/Include
-    ../Libraries/Include
-    ../Libraries/Source/WWVegas
-    ../Libraries/Source/WWVegas/WW3D2
-    ../Libraries/Source/WWVegas/WWLib
-    ../Libraries/Source/WWVegas/WWDebug
-    ../Libraries/Source/WWVegas/WWMath
-    ../Libraries/Source/WWVegas/WWSaveLoad
-    ../Libraries/Include/Granny
-  >
+)
+
+target_link_libraries(GameEngineDevice PRIVATE
+    ww3d2
 )
 
 #------------------------------------------------------------------------------
 # Preprocessor definitions by configuration:
 #------------------------------------------------------------------------------
-
 target_compile_definitions(GameEngineDevice PRIVATE
-  $<$<CONFIG:Debug>: 
-    __PLACEMENT_VEC_NEW_INLINE
-    _DEBUG
-    _LIB
-    _WINDOWS
-  >
+  __PLACEMENT_VEC_NEW_INLINE
+  _LIB
+  _WINDOWS
+
+  $<$<CONFIG:Debug>:_DEBUG>
 
   $<$<CONFIG:Internal>:
-    __PLACEMENT_VEC_NEW_INLINE
     NDEBUG
-    _LIB
-    _WINDOWS
     _INTERNAL
     _DISABLE_STRING_ANNOTATION
     _DISABLE_VECTOR_ANNOTATION
   >
 
   $<$<CONFIG:Release>:
-    __PLACEMENT_VEC_NEW_INLINE
-    _LIB
-    _WINDOWS
     IG_DEBUG_STACKTRACE
     WIN32
     NDEBUG
@@ -212,48 +151,13 @@ target_compile_definitions(GameEngineDevice PRIVATE
 #------------------------------------------------------------------------------
 target_compile_options(GameEngineDevice PRIVATE
   $<$<C_COMPILER_ID:MSVC>:
-    # Debug => /Od /MDd /Zi (No optimization, debug runtime, PDB)
+    # Debug
     $<$<CONFIG:Debug>:/Od /MDd /Zi /RTC1>
 
-    # Internal => /O2 /Ob1 /MD /Zi + /GF + /Gy
+    # Internal
     $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
 
-    # Release => /O2 /Ob2 /MD + /GF + /Gy (the .vcxproj had ProgramDatabase for Release, 
-    # you could optionally add /Zi if you want .pdb in Release as well)
+    # Release
     $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
   >
 )
-
-#------------------------------------------------------------------------------
-# Output library naming: sets the .lib names exactly as in the vcxproj:
-# - Debug => "Lib/GameEngineDeviceDebug_x64.lib"
-# - Internal => "Lib/GameEngineDeviceInternal_x64.lib"
-# - Release => "Lib/GameEngineDevice.lib"
-#------------------------------------------------------------------------------
-set_target_properties(GameEngineDevice PROPERTIES
-  OUTPUT_NAME_DEBUG      "GameEngineDeviceDebug_x64"
-  OUTPUT_NAME_Internal   "GameEngineDeviceInternal_x64"
-  OUTPUT_NAME_Release    "GameEngineDevice"
-)
-
-#------------------------------------------------------------------------------
-# Precompiled headers (OPTIONAL). The .vcxproj here does not specify a .h to create/use,
-# but if you ever want to do it with CMake:
-#
-# target_precompile_headers(GameEngineDevice PRIVATE
-#     $<$<COMPILE_LANGUAGE:CXX>:SomePchHeader.h>
-# )
-#
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# Project references:
-# If you have EABrowserDispatch as a separate CMake target, you'd do:
-#
-#   add_subdirectory(../Libraries/Source/EABrowserDispatch EABrowserDispatch)
-#   target_link_libraries(GameEngineDevice PRIVATE EABrowserDispatch)
-#
-# Or, if it is another top-level project you open separately, you can just omit 
-# or do an external library approach. 
-#------------------------------------------------------------------------------
-message(STATUS "GameEngineDevice CMake conversion loaded. Configs = ${CMAKE_CONFIGURATION_TYPES}")

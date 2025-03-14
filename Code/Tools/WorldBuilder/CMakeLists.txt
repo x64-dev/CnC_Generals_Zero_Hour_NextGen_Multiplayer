@@ -1,24 +1,7 @@
-cmake_minimum_required(VERSION 3.20)
-
-#------------------------------------------------------------------------------
-# Project name "WorldBuilder" – an MFC application
-#------------------------------------------------------------------------------
-project(WorldBuilder LANGUAGES CXX)
-
-#------------------------------------------------------------------------------
-# We have three configurations from the vcxproj: Debug, Internal, Release.
-#------------------------------------------------------------------------------
-set(CMAKE_CONFIGURATION_TYPES Debug Internal Release CACHE STRING "Configs" FORCE)
-
-#------------------------------------------------------------------------------
-# 1) Create an executable target named "WorldBuilder"
-#    We'll replicate the .cpp sources from the <ItemGroup><ClCompile>.
-#------------------------------------------------------------------------------
 add_executable(WorldBuilder WIN32
     # Resource:
     res/WorldBuilder.rc
 
-    # From "src\..." blocks
     src/addplayerdialog.cpp
     src/AutoEdgeOutTool.cpp
     src/BaseBuildProps.cpp
@@ -126,127 +109,57 @@ set_property(TARGET WorldBuilder PROPERTY
     # MFC_FLAG = 2 => Use MFC in a Shared DLL
     MFC_FLAG 2
 )
-# Also define '_AFXDLL' (for dynamic MFC) and '_MBCS' (since CharacterSet=MultiByte).
-target_compile_definitions(WorldBuilder PRIVATE
-    $<$<CONFIG:Debug>:_AFXDLL _MBCS>
-    $<$<CONFIG:Internal>:_AFXDLL _MBCS>
-    $<$<CONFIG:Release>:_AFXDLL _MBCS>
-)
 
 #------------------------------------------------------------------------------
 # 3) Configuration-specific include paths:
 #------------------------------------------------------------------------------
 target_include_directories(WorldBuilder PRIVATE
-  # Debug
-  $<$<CONFIG:Debug>:
     ../../GameRenderer/
     ../../Libraries/OpenAL/include
-    ../../Libraries/Source/WWVegas/Miles6/Include
-    ./include
-    ./res
-    ../../libraries/include
+    ../../Libraries/Source/Compression
     ../../gameengine/include
     ../../gameenginedevice/include
+    ../../libraries/include
     ../../libraries/source/wwvegas
     ../../libraries/source/wwvegas/ww3d2
     ../../libraries/source/wwvegas/wwdebug
     ../../libraries/source/wwvegas/wwlib
     ../../libraries/source/wwvegas/wwmath
     ../../libraries/source/wwvegas/wwsaveload
-    ../../Libraries/Source/Compression
-    # Many .cpp specifically add "..\res", but it's the same for Debug/Internal/Release,
-    # so we unify it here
-    ../res
-  >
-
-  # Internal
-  $<$<CONFIG:Internal>:
-    ../../GameRenderer/
-    ../../Libraries/OpenAL/include
-    ../../Libraries/Source/WWVegas/Miles6/Include
-    ./include
     ./res
-    ../../libraries/include
-    ../../gameengine/include
-    ../../gameenginedevice/include
-    ../../libraries/source/wwvegas
-    ../../libraries/source/wwvegas/ww3d2
-    ../../libraries/source/wwvegas/wwdebug
-    ../../libraries/source/wwvegas/wwlib
-    ../../libraries/source/wwvegas/wwmath
-    ../../libraries/source/wwvegas/wwsaveload
-    ../../Libraries/Source/Compression
-    ../res
-  >
-
-  # Release
-  $<$<CONFIG:Release>:
-    ../../GameRenderer/
-    ../../Libraries/OpenAL/include
-    ../../Libraries/Source/WWVegas/Miles6/Include
     ./include
-    ./res
-    ../../libraries/include
-    ../../gameengine/include
-    ../../gameenginedevice/include
-    ../../libraries/source/wwvegas
-    ../../libraries/source/wwvegas/ww3d2
-    ../../libraries/source/wwvegas/wwdebug
-    ../../libraries/source/wwvegas/wwlib
-    ../../libraries/source/wwvegas/wwmath
-    ../../libraries/source/wwvegas/wwsaveload
-    ../../Libraries/Source/Compression
-    ../res
-  >
+    .
 )
 
-#------------------------------------------------------------------------------
-# 4) Configuration-specific preprocessor defs and compile options:
-#    The .vcxproj sets different sets for each config. We'll replicate:
-#------------------------------------------------------------------------------
 target_compile_definitions(WorldBuilder PRIVATE
+  _AFXDLL
+  _MBCS
+  __PLACEMENT_VEC_NEW_INLINE
+  WIN32
+  _WINDOWS
+  EDITOR
+  REGEX_MALLOC
+  STDC_HEADERS
+  WIN32_LEAN_AND_MEAN
 
   # Debug
-  $<$<CONFIG:Debug>:
-    __PLACEMENT_VEC_NEW_INLINE    
-    _DEBUG
-    EDITOR
-    WIN32
-    _WINDOWS
-    REGEX_MALLOC
-    STDC_HEADERS
-    WIN32_LEAN_AND_MEAN
-  >
+  $<$<CONFIG:Debug>:_DEBUG>
 
   # Internal
   $<$<CONFIG:Internal>:
-    __PLACEMENT_VEC_NEW_INLINE
     _DISABLE_STRING_ANNOTATION
     _DISABLE_VECTOR_ANNOTATION
     NDEBUG
     _INTERNAL
-    EDITOR
-    WIN32
-    _WINDOWS
-    REGEX_MALLOC
-    STDC_HEADERS
-    WIN32_LEAN_AND_MEAN
   >
 
   # Release
   $<$<CONFIG:Release>:
-    __PLACEMENT_VEC_NEW_INLINE
     _DISABLE_STRING_ANNOTATION
     _DISABLE_VECTOR_ANNOTATION
     IG_DEBUG_STACKTRACE
     NDEBUG
     _RELEASE
-    EDITOR
-    WIN32
-    _WINDOWS
-    REGEX_MALLOC
-    STDC_HEADERS
-    WIN32_LEAN_AND_MEAN
   >
 )
 
@@ -254,215 +167,45 @@ target_compile_definitions(WorldBuilder PRIVATE
 target_compile_options(WorldBuilder PRIVATE
   $<$<C_COMPILER_ID:MSVC>:
 
-    # Debug => /Od (or /O2 if we exactly replicate <Optimization>Disabled vs "MaxSpeed"), 
-    #   but the .vcxproj says <Optimization>Disabled => /Od
-    #   plus /MDd for "MultiThreadedDebugDLL"
     $<$<CONFIG:Debug>:/Od /MDd /Zi /RTC1>
 
-    # Internal => <Optimization>MaxSpeed => /O2, <InlineFunctionExpansion>OnlyExplicitInline => /Ob1
-    #   plus /MD
     $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
 
-    # Release => <Optimization>MaxSpeed => /O2, <InlineFunctionExpansion>AnySuitable => /Ob2
-    #   plus /MD
     $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
   >
 )
 
-#------------------------------------------------------------------------------
-# 5) Resource compilation:
-#   The .vcxproj sets <PreprocessorDefinitions>_DEBUG or NDEBUG for each config,
-#   plus it includes "res" folder in each config's ResourceCompile steps.
-#   We rely on `target_include_directories(...)` for that "res" path.
-#   If you need to specifically define Resource preprocessor macros, you can do so similarly:
-#------------------------------------------------------------------------------
-if(MSVC)
-  # Just an example to define resource macros; adapt as needed.
-  target_compile_definitions(WorldBuilder PRIVATE
-    $<$<CONFIG:Debug>:_DEBUG>
-    $<$<CONFIG:Internal>:NDEBUG>
-    $<$<CONFIG:Release>:NDEBUG>
-  )
-endif()
-
-#------------------------------------------------------------------------------
-# 6) Linking logic: The .vcxproj has big AdditionalDependencies, AdditionalLibraryDirectories, 
-#    plus different output exes and ignoring default libs. We'll replicate them with generator expressions.
-#------------------------------------------------------------------------------
-# a) Link libraries
 target_link_libraries(WorldBuilder PRIVATE
+    # Common DirectX
+    d3d12
+    dxguid
+    dinput8
+    ddraw
+    d3dx9
+    d3d9
+    dxerr
+    winmm
+    vfw32
+    dsound
+    wsock32
+    imm32
+    wininet
+
+    # External Dependencies
+    OpenAL::OpenAL
+
+    # GameSpy SDK
+    UniSpySDK
+
     GameEngine
-    GameEngineDevice
-    GameRenderer
-    Compression
-    ww3d2
-    WWDebug
-    WWDownload
-    wwlib
-    wwmath
-    wwsaveload
-
-  $<$<CONFIG:Debug>: 
-    d3d12
-    openal32
-    dxguid
-    dinput8
-    ddraw
-    d3dx9
-    d3d9
-    dxerr
-    winmm
-    vfw32
-    dsound
-    wsock32
-    imm32
-    wininet
-    # GameSpy & sub-libs in "brigades\Debug\usbrigades", etc. 
-    # Typically you'd do absolute or relative paths; here we list them as placeholders:
-    brigades/Debug/usbrigades
-    Chat/Debug/uschat
-    common/Debug/uscommon
-    Direct2Game/Debug/usd2g
-    gcdkey/Debug/uscdkey
-    ghttp/Debug/ushttp
-    GP/Debug/usgp
-    gstats/Debug/usstats
-    gt2/Debug/usgt2
-    natneg/Debug/usnatneg
-    Peer/Debug/uspeer
-    pinger/Debug/uspinger
-    pt/Debug/uspt
-    qr2/Debug/usqr2
-    sake/Debug/ussake
-    sc/Debug/ussc
-    serverbrowsing/Debug/usserverbrowsing
-    sharedDll/Debug/UniSpySDK
-    Voice2/Debug/usvoice2
-    Voice2/libgsm/Debug/gsm
-    Voice2/libspeex/Debug/speex
-    webservices/Debug/uswebservice
-  >
-
-  $<$<CONFIG:Internal>:
-    d3d12
-    openal32
-    dxguid
-    dinput8
-    ddraw
-    d3dx9
-    d3d9
-    dxerr
-    winmm
-    vfw32
-    dsound
-    wsock32
-    imm32
-    wininet
-    # Similarly for Internal config:
-    brigades/RelWithDebInfo/usbrigades
-    Chat/RelWithDebInfo/uschat
-    common/RelWithDebInfo/uscommon
-    Direct2Game/RelWithDebInfo/usd2g
-    gcdkey/RelWithDebInfo/uscdkey
-    ghttp/RelWithDebInfo/ushttp
-    GP/RelWithDebInfo/usgp
-    gstats/RelWithDebInfo/usstats
-    gt2/RelWithDebInfo/usgt2
-    natneg/RelWithDebInfo/usnatneg
-    Peer/RelWithDebInfo/uspeer
-    pinger/RelWithDebInfo/uspinger
-    pt/RelWithDebInfo/uspt
-    qr2/RelWithDebInfo/usqr2
-    sake/RelWithDebInfo/ussake
-    sc/RelWithDebInfo/ussc
-    serverbrowsing/RelWithDebInfo/usserverbrowsing
-    sharedDll/RelWithDebInfo/UniSpySDK
-    Voice2/RelWithDebInfo/usvoice2
-    Voice2/libgsm/RelWithDebInfo/gsm
-    Voice2/libspeex/RelWithDebInfo/speex
-    webservices/RelWithDebInfo/uswebservice
-  >
-
-  $<$<CONFIG:Release>:
-    d3d12
-    openal32
-    dxguid
-    dinput8
-    ddraw
-    d3dx9
-    d3d9
-    dxerr
-    winmm
-    vfw32
-    dsound
-    wsock32
-    imm32
-    wininet
-    # Similarly for Release config:
-    brigades/RelWithDebInfo/usbrigades
-    Chat/RelWithDebInfo/uschat
-    common/RelWithDebInfo/uscommon
-    Direct2Game/RelWithDebInfo/usd2g
-    gcdkey/RelWithDebInfo/uscdkey
-    ghttp/RelWithDebInfo/ushttp
-    GP/RelWithDebInfo/usgp
-    gstats/RelWithDebInfo/usstats
-    gt2/RelWithDebInfo/usgt2
-    natneg/RelWithDebInfo/usnatneg
-    Peer/RelWithDebInfo/uspeer
-    pinger/RelWithDebInfo/uspinger
-    pt/RelWithDebInfo/uspt
-    qr2/RelWithDebInfo/usqr2
-    sake/RelWithDebInfo/ussake
-    sc/RelWithDebInfo/ussc
-    serverbrowsing/RelWithDebInfo/usserverbrowsing
-    sharedDll/RelWithDebInfo/UniSpySDK
-    Voice2/RelWithDebInfo/usvoice2
-    Voice2/libgsm/RelWithDebInfo/gsm
-    Voice2/libspeex/RelWithDebInfo/speex
-    webservices/RelWithDebInfo/uswebservice
-  >
 )
 
-# If we want to ignore default libraries for certain configs:
 target_link_options(WorldBuilder PRIVATE
-  $<$<CONFIG:Debug>:/NODEFAULTLIB:libcd /DYNAMICBASE:NO /FORCE>
-  $<$<CONFIG:Internal>:/NODEFAULTLIB:libc /DYNAMICBASE:NO /FORCE>
-  $<$<CONFIG:Release>:/NODEFAULTLIB:libc /DYNAMICBASE:NO /FORCE>
+  /NODEFAULTLIB:libcd /DYNAMICBASE:NO /FORCE
 )
 
-# b) Additional library directories:
 target_link_directories(WorldBuilder PRIVATE
-  $<$<CONFIG:Debug>:
-    ../../Libraries/Source/GameSpy/bin/x64
-    ../../Libraries/OpenAL/bin/x64/RelWithDebInfo
-    ../../Libraries/Source/WWVegas/Miles6/Libraries/Win64/DebugRelease
     ../../Libraries/DX90SDK/Lib/x64
-    ../../Libraries/Lib
-    ../../GameEngine/Lib
-    ../../GameEngineDevice/Lib
-    ../../GameEngine
-  >
-  $<$<CONFIG:Internal>:
-    ../../Libraries/Source/GameSpy/bin/x64
-    ../../Libraries/OpenAL/bin/x64/RelWithDebInfo
-    ../../Libraries/Source/WWVegas/Miles6/Libraries/Win64/DebugRelease
-    ../../Libraries/DX90SDK/Lib/x64
-    ../../Libraries/Lib
-    ../../GameEngine/Lib
-    ../../GameEngineDevice/Lib
-    ../../GameEngine
-  >
-  $<$<CONFIG:Release>:
-    ../../Libraries/Source/GameSpy/bin/x64
-    ../../Libraries/OpenAL/bin/x64/RelWithDebInfo
-    ../../Libraries/Source/WWVegas/Miles6/Libraries/Win64/DebugRelease
-    ../../Libraries/DX90SDK/Lib/x64
-    ../../Libraries/Lib
-    ../../GameEngine/Lib
-    ../../GameEngineDevice/Lib
-    ../../GameEngine
-  >
 )
 
 set_target_properties(WorldBuilder PROPERTIES
@@ -477,19 +220,3 @@ set_target_properties(WorldBuilder PROPERTIES
     OUTPUT_NAME_INTERNAL "WorldBuilder_internal"   # Internal
     OUTPUT_NAME_RELEASE "WorldBuilder"     # Release
 )
-
-
-#------------------------------------------------------------------------------
-# 8) Project references:
-#   The vcxproj references other .vcxproj (GameEngine, GameEngineDevice, etc.).
-#   In CMake, you typically do:
-#       add_subdirectory(...) # to define those library targets
-#       target_link_libraries(WorldBuilder PRIVATE GameEngine GameEngineDevice etc.)
-#   If no direct CMakeLists exist for them, you can link them as external  files.
-#------------------------------------------------------------------------------
-# Example (assuming you have separate CMakeLists in those paths):
-# add_subdirectory("../../GameEngine" GameEngine)
-# add_subdirectory("../../GameEngineDevice" GameEngineDevice)
-# target_link_libraries(WorldBuilder PRIVATE GameEngine GameEngineDevice GameRenderer Compression wwsaveload ...)
-
-message(STATUS "WorldBuilder MFC CMake conversion loaded. Configs = ${CMAKE_CONFIGURATION_TYPES}")
