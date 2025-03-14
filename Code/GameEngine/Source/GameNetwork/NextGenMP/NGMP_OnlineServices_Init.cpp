@@ -300,6 +300,50 @@ void NGMP_OnlineServicesManager::OnEpicLoginComplete(EOS_ProductUserId userID)
 	OutputDebugString("EOS Logged in!\n");
 	m_strDisplayName = SteamFriends()->GetPersonaName();
 
+	EOS_HP2P P2PHandle = EOS_Platform_GetP2PInterface(m_EOSPlatformHandle);
+
+	// start caching NAT type immediately, its asynchronous and requires packet transmission to a remote server
+	EOS_P2P_QueryNATTypeOptions queryNatOpts;
+	queryNatOpts.ApiVersion = EOS_P2P_QUERYNATTYPE_API_LATEST;
+	EOS_P2P_QueryNATType(P2PHandle, &queryNatOpts, nullptr, [](const EOS_P2P_OnQueryNATTypeCompleteInfo* Data)
+		{
+			if (Data->ResultCode == EOS_EResult::EOS_Success)
+			{
+				// convert NAT type to our enum for abstraction
+				NGMP_ENATType natType = NGMP_ENATType::NAT_TYPE_UNDETERMINED;
+				switch (Data->NATType)
+				{
+					default:
+					case EOS_ENATType::EOS_NAT_Unknown:
+						natType = NGMP_ENATType::NAT_TYPE_UNDETERMINED;
+						break;
+
+					case EOS_ENATType::EOS_NAT_Open:
+						natType = NGMP_ENATType::NAT_TYPE_OPEN;
+						break;
+
+					case EOS_ENATType::EOS_NAT_Moderate:
+						natType = NGMP_ENATType::NAT_TYPE_MODERATE;
+						break;
+
+					case EOS_ENATType::EOS_NAT_Strict:
+						natType = NGMP_ENATType::NAT_TYPE_STRICT;
+						break;
+				}
+				NGMP_OnlineServicesManager::GetInstance()->CacheNATType(natType);
+			}
+			else
+			{
+				OutputDebugString("NAT Type Query Failed\n");
+			}
+		});
+
+	// always allow relays
+	EOS_P2P_SetRelayControlOptions relayOpts;
+	relayOpts.ApiVersion = EOS_P2P_SETRELAYCONTROL_API_LATEST;
+	relayOpts.RelayControl = EOS_ERelayControl::EOS_RC_AllowRelays;
+	EOS_P2P_SetRelayControl(P2PHandle, &relayOpts);
+
 	for (auto cb : m_vecLogin_PendingCallbacks)
 	{
 		// TODO_NGMP: Support failure

@@ -1,0 +1,1 @@
+-win -fps -nofade -nocinematic -packetloss -latavg -latamp -latperiod -latnoise -nologo -quickstart

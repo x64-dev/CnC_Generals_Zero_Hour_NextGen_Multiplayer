@@ -629,9 +629,6 @@ void NGMP_WOLLobbyMenu_CreateLobbyCallback(bool bSuccess)
 //-------------------------------------------------------------------------------------------------
 void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 {
-	// NGMP: Register for login callback
-	NGMP_OnlineServicesManager::GetInstance()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
-
 	nextScreen = NULL;
 	buttonPushed = false;
 	isShuttingDown = false;
@@ -709,6 +706,13 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	}
 	*/
 
+	// NGMP: Register for login callback
+	NGMP_OnlineServicesManager::GetInstance()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
+
+	// NGMP: Request lobbies
+	GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Welcome to C&C Generals NextGen Multiplayer!"), GameMakeColor(255, 194, 15, 255), -1, -1);
+	//GadgetListBoxSetItemData(listboxLobbyChat, (void*)-1, index);
+	
 	GrabWindowInfo();
 
 	// TODO_NGMP
@@ -758,6 +762,9 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	if(win)
 		win->winHide(TRUE);
 	DontShowMainMenu = TRUE;
+
+	//  NGMP: do a lobby search on init / first time into the gui
+	refreshGameList(true);
 } // WOLLobbyMenuInit
 
 //-------------------------------------------------------------------------------------------------
@@ -1706,6 +1713,8 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 		//---------------------------------------------------------------------------------------------
 		case GCM_SELECTED:
 			{
+			// TODO_NGMP: Support this functionality again
+			/*
 				if (s_tryingToHostOrJoin)
 					break;
 				GameWindow *control = (GameWindow *)mData1;
@@ -1738,6 +1747,7 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 						}
 					}
 				}
+				*/
 			} // case GCM_SELECTED
 			break;
 

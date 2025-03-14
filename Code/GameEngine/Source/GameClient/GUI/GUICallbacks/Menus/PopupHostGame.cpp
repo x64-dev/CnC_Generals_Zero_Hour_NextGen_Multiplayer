@@ -548,11 +548,13 @@ WindowMsgHandledType PopupHostGameSystem( GameWindow *window, UnsignedInt msg, W
 
 void createGame( void )
 {
-	NGMP_OnlineServicesManager::GetInstance()->CreateLobby();
+	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
+	NGMP_OnlineServicesManager::GetInstance()->CreateLobby(gameName);
 	return;
 
 	// TODO_NGMP: Everything using TheGameSpy%
 	//TheGameSpyInfo->setCurrentGroupRoom(0);
+	/*
 	PeerRequest req;
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
 	req.peerRequestType = PeerRequest::PEERREQUEST_CREATESTAGINGROOM;
@@ -594,13 +596,14 @@ void createGame( void )
 			}
 		}
 	}
+
 	//TheGameSpyGame->setLadderIP(req.ladderIP.c_str());
 	//TheGameSpyGame->setLadderPort(req.stagingRoomCreation.ladPort);
 	//req.hostPingStr = TheGameSpyInfo->getPingString().str();
 	req.hostPingStr = "NGMP_TODO";
 
 	//TheGameSpyPeerMessageQueue->addRequest(req);
-
+	*/
 
 
 }

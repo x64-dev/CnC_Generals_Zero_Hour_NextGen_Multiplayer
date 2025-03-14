@@ -61,6 +61,7 @@
 #include "GameNetwork/GameSpy/GSConfig.h"
 
 #include "Common/STLTypedefs.h"
+#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -198,6 +199,9 @@ static void gameTooltip(GameWindow *window,
 													WinInstanceData *instData,
 													UnsignedInt mouse)
 {
+	// TODO_NGMP
+	return;
+
 	Int x, y, row, col;
 	x = LOLONGTOSHORT(mouse);
 	y = HILONGTOSHORT(mouse);
@@ -514,7 +518,7 @@ struct GameSortStruct
 	}
 };
 
-static Int insertGame( GameWindow *win, GameSpyStagingRoom *gameNull, Bool showMap )
+static Int insertGame( GameWindow *win, NGMP_LobbyInfo& lobbyInfo, Bool showMap )
 {
 	// TODO_NGMP
 	//game->cleanUpSlotPointers();
@@ -531,13 +535,16 @@ static Int insertGame( GameWindow *win, GameSpyStagingRoom *gameNull, Bool showM
 	{
 		//gameColor = GameSpyColor[GSCOLOR_GAME_CRCMISMATCH];
 	}
-	UnicodeString gameName = UnicodeString(L"Test Game");
+	UnicodeString gameName;
+	gameName.translate(lobbyInfo.strLobbyName);
+	int numPlayers = lobbyInfo.numMembers;
+	int maxPlayers = lobbyInfo.maxMembers;
+
 	AsciiString lobbyMapName = AsciiString("Homeland Alliance");
 	AsciiString ladder = AsciiString("TODO_NGMP");
 	USHORT ladderPort = 1;
 	int gameID = 0;
-	int numPlayers = 1;
-	int maxPlayers = 4;
+	
 	bool bHasPassword = false;
 	bool bAllowSpectators = true;
 	int latency = 5;
@@ -840,7 +847,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 
 	// save off selection
 	Int selectedIndex = -1;
-	Int indexToSelect = -1;
+	
 	Int selectedID = 0;
 	GadgetListBoxGetSelected(win, &selectedIndex);
 	if (selectedIndex != -1)
@@ -849,26 +856,64 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 	}
 	int prevPos = GadgetListBoxGetTopVisibleEntry(win);
 
+	NGMP_OnlineServicesManager::GetInstance()->SearchForLobbies(
+		[=]()
+		{
+			win->winEnable(false);
+			GadgetListBoxAddEntryText(win, UnicodeString(L"Searching for public lobbies..."), GameMakeColor(255, 194, 15, 255), -1, -1);
+		},
+		[=](std::vector<NGMP_LobbyInfo> vecLobbies)
+		{
+			size_t numResults = vecLobbies.size();
+
+			GadgetListBoxReset(win);
+			if (numResults == 0)
+			{
+				win->winEnable(false);
+				GadgetListBoxAddEntryText(win, UnicodeString(L"No lobbies were found"), GameMakeColor(255, 194, 15, 255), -1, -1);
+			}
+			else
+			{
+				win->winEnable(true);
+
+				Int indexToSelect = -1;
+
+				int i = 0;
+				for (NGMP_LobbyInfo lobby : vecLobbies)
+				{
+					Int index = insertGame(win, lobby, showMap);
+					if (i == selectedID)
+					{
+						indexToSelect = index;
+					}
+
+					++i;
+				}
+
+				// restore selection
+				GadgetListBoxSetSelected(win, indexToSelect); // even for -1, so we can disable the 'Join Game' button
+				//	if(prevPos > 10)
+				GadgetListBoxSetTopVisibleEntry(win, prevPos);//+ 1
+
+				if (indexToSelect < 0 && selectedID)
+				{
+					TheWindowManager->winSetLoneWindow(NULL);
+				}
+			}
+		});
+
 	// TODO_NGMP
 	// populate listbox
-	for (int i = 0; i < 10; ++i)
-	{
-		Int index = insertGame(win, nullptr, showMap);
-		if (i == selectedID)
-		{
-			indexToSelect = index;
-		}
-	}
+// 	for (int i = 0; i < 10; ++i)
+// 	{
+// 		Int index = insertGame(win, nullptr, showMap);
+// 		if (i == selectedID)
+// 		{
+// 			indexToSelect = index;
+// 		}
+// 	}
 
-	// restore selection
-	GadgetListBoxSetSelected(win, indexToSelect); // even for -1, so we can disable the 'Join Game' button
-	//	if(prevPos > 10)
-	GadgetListBoxSetTopVisibleEntry(win, prevPos);//+ 1
-
-	if (indexToSelect < 0 && selectedID)
-	{
-		TheWindowManager->winSetLoneWindow(NULL);
-	}
+	
 
 #if 0 // jmarshall - gamespy
 	// save off selection

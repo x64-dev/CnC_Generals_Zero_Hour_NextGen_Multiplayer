@@ -230,8 +230,24 @@ static UnsignedByte grabUByte(const char *s)
 	return b;
 }
 
+static UnsignedByte grabUByte(const wchar_t* ws)
+{
+	wchar_t tmp[5] = L"0xff";
+	tmp[2] = ws[0];
+	tmp[3] = ws[1];
+	UnsignedByte b = wcstol(tmp, NULL, 16);
+	return b;
+}
+
 static void updateNumPlayersOnline(void)
 {
+	NGMP_OnlineServicesManager::GetInstance()->RegisterForNATTypeChanges([=](NGMP_ENATType previousNATType, NGMP_ENATType newNATType)
+		{
+			updateNumPlayersOnline(); // UI refresh
+			//UnicodeString headingStr;
+			//headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n\nYour NAT type is %hs", NGMP_OnlineServicesManager::GetInstance()->GetNATTypeString().str());
+		});
+
 	GameWindow *playersOnlineWindow = TheWindowManager->winGetWindowFromId(
 		NULL, NAMEKEY("WOLWelcomeMenu.wnd:StaticTextNumPlayersOnline") );
 
@@ -247,14 +263,38 @@ static void updateNumPlayersOnline(void)
 	if (listboxInfo)
 	{
 		GadgetListBoxReset(listboxInfo);
-		AsciiString aLine;
 		UnicodeString line;
 
 		// TODO_NGMP
 		lastNumPlayersOnline = 1;
 		AsciiString aMotd = "TODO MOTD GOES HERE";
 		UnicodeString headingStr;
-		headingStr.format(TheGameText->fetch("MOTD:NumPlayersHeading"), lastNumPlayersOnline);
+
+		// TODO_NGMP: We dont really have access to a player count, what do we want to show here?
+		//headingStr.format(TheGameText->fetch("MOTD:NumPlayersHeading"), lastNumPlayersOnline);
+
+		NGMP_ENATType natType = NGMP_OnlineServicesManager::GetInstance()->GetNATType();
+		AsciiString natTypeColor;
+		switch (natType)
+		{
+			case NGMP_ENATType::NAT_TYPE_UNDETERMINED:
+				natTypeColor = "FF5DE2E7";
+				break;
+
+			case NGMP_ENATType::NAT_TYPE_OPEN:
+				natTypeColor = "FF00FF00";
+				break;
+
+			case NGMP_ENATType::NAT_TYPE_MODERATE:
+				natTypeColor = "FFFFFD55";
+				break;
+
+			case NGMP_ENATType::NAT_TYPE_STRICT:
+				natTypeColor = "FFFF0000";
+				break;
+		}
+
+		headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n\n<hexcol>%hsYour NAT type is %hs", natTypeColor.str(), NGMP_OnlineServicesManager::GetInstance()->GetNATTypeString().str());
 
 		while (headingStr.nextToken(&line, UnicodeString(L"\n")))
 		{
@@ -268,10 +308,38 @@ static void updateNumPlayersOnline(void)
 				line = UnicodeString(L" ");
 			}
 
-			GadgetListBoxAddEntryText(listboxInfo, line, GameSpyColor[GSCOLOR_MOTD_HEADING], -1, -1);
+			Color c = GameSpyColor[GSCOLOR_MOTD_HEADING];
+			if (line.getCharAt(0) == '\\' && line.getCharAt(1) == '\\')
+			{
+				line = line.str() + 1;
+			}
+			//<hexcol>
+			//else if (line.getCharAt(0) == '\\' && line.getLength() > 9)
+			else if (line.getCharAt(0) == '<' 
+				&& line.getCharAt(1) == 'h'
+				&& line.getCharAt(2) == 'e'
+				&& line.getCharAt(3) == 'x'
+				&& line.getCharAt(4) == 'c'
+				&& line.getCharAt(5) == 'o'
+				&& line.getCharAt(6) == 'l'
+				&& line.getCharAt(7) == '>'
+				&& line.getLength() > 17)
+			{
+				// take out the hex value from strings starting as "\ffffffffText"
+				UnsignedByte a, r, g, b;
+				a = grabUByte(line.str() + 1 + 7);
+				r = grabUByte(line.str() + 3 + 7);
+				g = grabUByte(line.str() + 5 + 7);
+				b = grabUByte(line.str() + 7 + 7);
+				c = GameMakeColor(r, g, b, a);
+				DEBUG_LOG(("MOTD line '%s' has color %X\n", line.str(), c));
+				line = line.str() + 9 + 7;
+			}
+			GadgetListBoxAddEntryText(listboxInfo, line, c, -1, -1);
 		}
 		GadgetListBoxAddEntryText(listboxInfo, UnicodeString(L" "), GameSpyColor[GSCOLOR_MOTD_HEADING], -1, -1);
 
+		AsciiString aLine;
 		while (aMotd.nextToken(&aLine, "\n"))
 		{
 			if (aLine.getCharAt(aLine.getLength()-1) == '\r')
@@ -496,7 +564,7 @@ void WOLWelcomeMenuInit( WindowLayout *layout, void *userData )
 	if (staticTextTitle)
 	{
 		UnicodeString title;
-		title.format(TheGameText->fetch("GUI:WOLWelcome"), NGMP_OnlineServicesManager::GetInstance()->GetDisplayName());
+		title.format(TheGameText->fetch("GUI:WOLWelcome"), NGMP_OnlineServicesManager::GetInstance()->GetDisplayName().str());
 		GadgetStaticTextSetText(staticTextTitle, title);
 	}
 
