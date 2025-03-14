@@ -10,6 +10,12 @@ project(GameRenderer LANGUAGES CXX)
 #
 set(GAMERENDERER_SOURCES
     dx12/tinydx.cpp
+    imgui/imgui.cpp
+    imgui/imgui_draw.cpp
+    imgui/imgui_impl_dx9.cpp
+    imgui/imgui_impl_win32.cpp
+    imgui/imgui_tables.cpp
+    imgui/imgui_widgets.cpp
     dx8/dx8caps.cpp
     dx8/dx8fvf.cpp
     dx8/dx8indexbuffer.cpp

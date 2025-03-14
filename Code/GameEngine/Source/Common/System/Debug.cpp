@@ -219,6 +219,8 @@ static const char *prepBuffer(const char* format, char *buffer)
 #ifdef DEBUG_LOGGING
 static void doLogOutput(const char *buffer)
 {
+	DevConsole.AddLog(buffer);
+
 	// log message to file
 	if (theDebugFlags & DEBUG_FLAG_LOG_TO_FILE)
 	{

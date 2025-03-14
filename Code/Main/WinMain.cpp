@@ -66,6 +66,10 @@
 //#include "GeneratedVersion.h"
 #include "Resource.h"
 
+#include "../gamerenderer/imgui/imgui.h"
+#include "../gamerenderer/imgui/imgui_impl_win32.h"
+#include "../gamerenderer/imgui/imgui_impl_dx9.h"
+
 #ifdef _INTERNAL
 // for occasional debugging...
 //#pragma optimize("", off)
@@ -76,6 +80,7 @@
 HINSTANCE ApplicationHInstance = NULL;  ///< our application instance
 HWND ApplicationHWnd = NULL;  ///< our application window handle
 Bool ApplicationIsWindowed = true;
+Bool IsConsoleActive = false;
 Win32Mouse *TheWin32Mouse= NULL;  ///< for the WndProc() only
 DWORD TheMessageTime = 0;	///< For getting the time that a message was posted from Windows.
 
@@ -302,12 +307,16 @@ static const char *messageToString(unsigned int message)
 }
 #endif
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 // WndProc ====================================================================
 /** Window Procedure */
 //=============================================================================
 LRESULT CALLBACK WndProc( HWND hWnd, UINT message, 
 													WPARAM wParam, LPARAM lParam )
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+		return 1;
 
 	try
 	{
@@ -492,6 +501,9 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 
 				switch( key )
 				{
+					case 192:
+						IsConsoleActive = !IsConsoleActive;
+						break;
 
 					//---------------------------------------------------------------------
 					case VK_ESCAPE:

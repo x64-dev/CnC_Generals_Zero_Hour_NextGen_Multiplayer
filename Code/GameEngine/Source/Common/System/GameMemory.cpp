@@ -3523,7 +3523,7 @@ static void preMainInitMemoryManager()
 	if (TheMemoryPoolFactory == NULL)
 	{
 		DEBUG_INIT(DEBUG_FLAGS_DEFAULT);
-		DEBUG_LOG(("*** Initing Memory Manager prior to main!\n"));
+		//DEBUG_LOG(("*** Initing Memory Manager prior to main!\n"));
 
 		Int numSubPools;
 		const PoolInitRec *pParms;

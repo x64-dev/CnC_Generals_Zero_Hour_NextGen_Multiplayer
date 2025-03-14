@@ -20,6 +20,7 @@ add_library(GameEngine STATIC
     # Below is the long list of source files from <ItemGroup><ClCompile> in the vcxproj,
     # EXCEPT those always ExcludedFromBuild for every config. (GameSpy.cpp, etc.)
     # --------------------------------------------------------------------------
+    source/Console/Console.cpp
     Source/Common/Audio/AudioEventRTS.cpp
     Source/Common/Audio/AudioRequest.cpp
     Source/Common/Audio/GameAudio.cpp
