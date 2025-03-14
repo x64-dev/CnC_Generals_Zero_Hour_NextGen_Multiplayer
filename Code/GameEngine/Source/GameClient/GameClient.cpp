@@ -488,6 +488,11 @@ DECLARE_PERF_TIMER(GameClient_draw)
 void GameClient::update( void )
 {
 	USE_PERF_TIMER(GameClient_update)
+
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();		
+
 	// create the FRAME_TICK message
 	GameMessage *frameMsg = TheMessageStream->appendMessage( GameMessage::MSG_FRAME_TICK );
 	frameMsg->appendTimestampArgument( getFrame() );
@@ -707,6 +712,16 @@ void GameClient::update( void )
 	{
 		TheDisplay->UPDATE();
 	}
+
+	{
+		extern Bool IsConsoleActive;
+		if (IsConsoleActive)
+		{
+			DevConsole.Draw(0.5f);
+		}
+	}
+
+	ImGui::EndFrame();
 
 	{
 		USE_PERF_TIMER(GameClient_draw)

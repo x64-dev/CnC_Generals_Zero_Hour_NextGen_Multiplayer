@@ -12,7 +12,7 @@ add_library(usd2g
     Direct2Game.h
 )
 
-target_link_libraries(usd2g PUBLIC ushttp uswebservice)
+target_link_libraries(usd2g PUBLIC ushttp uswebservices)
 
 target_compile_definitions(usd2g PRIVATE -DGHTTP_EXTENDEDERROR)
 

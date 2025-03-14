@@ -1,17 +1,3 @@
-cmake_minimum_required(VERSION 3.15)
-
-# Tell CMake that we have these six configurations available.
-# This ensures that Visual Studio will show all six in “Solution Configurations.”
-set(CMAKE_CONFIGURATION_TYPES
-    "DebugE;Debug;Internal;ProfileE;Profile;Release"
-    CACHE STRING "Available configurations" FORCE
-)
-
-project(ww3d2 LANGUAGES CXX)
-
-# -- 1. List all your .cpp source files (from <ClCompile> in the vcxproj).
-#    You can group them into variables as you like, but here we just
-#    collect them all in one list:
 set(SOURCES
     aabtree.cpp
     aabtreebuilder.cpp
@@ -131,106 +117,50 @@ set(HEADERS
 #   "State Management.txt"
 #   "intersec.inl"
 # )
-# You can then add them to the target with SOURCES, or do a custom target. For now we omit them.
 
-# -- 4. Create a static library target out of all the .cpp/.h files.
 add_library(ww3d2 STATIC
     ${SOURCES}
     ${HEADERS}
     # ${RESOURCES}  # If you want them in the project
 )
 
-#
-# -- 5. Per-configuration *include paths*:
-#
-#    Notice in your .vcxproj each config has a slightly different set of
-#    AdditionalIncludeDirectories. We can replicate that via generator expressions:
-#
 target_include_directories(ww3d2 PRIVATE
-    $<$<CONFIG:Debug>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../../GameRenderer"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
-    $<$<CONFIG:Release>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../GameRenderer"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
-    $<$<CONFIG:Internal>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../GameRenderer"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
-    $<$<CONFIG:Profile>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../srsdk1x/include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
-    $<$<CONFIG:DebugE>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../srsdk1x/include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
-    $<$<CONFIG:ProfileE>:
-        "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../srsdk1x/include"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwcpuid"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../wwaudio"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../miles6/include"
-    >
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../../GameRenderer"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../wwmath"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../wwsaveload"
 )
 
-#
-# -- 6. Per-configuration *preprocessor definitions*:
-# 
+target_link_libraries(ww3d2 PRIVATE
+    GameRenderer
+    d3dx9
+    wwlib
+    wwmath
+    WWDebug
+    wwsaveload
+)
+
 target_compile_definitions(ww3d2 PRIVATE
-    # Debug  (i.e., "Debug|x64")
-    $<$<CONFIG:Debug>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;_DEBUG;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN>
+    WINDOWS_IGNORE_PACKING_MISMATCH
+    __PLACEMENT_VEC_NEW_INLINE
+    WINVER=0x400
+    _WINDOWS
+    WIN32_LEAN_AND_MEAN
+
+    # Debug
+    $<$<CONFIG:Debug>:_DEBUG>
     # Release
-    $<$<CONFIG:Release>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN;NDEBUG;WIN32;IG_DEBUG_STACKTRACE>
+    $<$<CONFIG:Release>:NDEBUG;WIN32;IG_DEBUG_STACKTRACE>
     # Internal
-    $<$<CONFIG:Internal>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;NDEBUG;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN;_INTERNAL;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION>
+    $<$<CONFIG:Internal>:NDEBUG;_INTERNAL;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION>
     # Profile
-    $<$<CONFIG:Profile>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;NDEBUG;WWDEBUG;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN;WIN32>
+    $<$<CONFIG:Profile>:NDEBUG;WWDEBUG;WIN32>
     # DebugE
-    $<$<CONFIG:DebugE>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;_DEBUG;WWDEBUG;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN;WIN32;PARAM_EDITING_ON>
+    $<$<CONFIG:DebugE>:_DEBUG;WWDEBUG;WIN32;PARAM_EDITING_ON>
     # ProfileE
-    $<$<CONFIG:ProfileE>:WINDOWS_IGNORE_PACKING_MISMATCH;__PLACEMENT_VEC_NEW_INLINE;NDEBUG;WWDEBUG;WINVER=0x400;_WINDOWS;WIN32_LEAN_AND_MEAN;WIN32;PARAM_EDITING_ON>
+    $<$<CONFIG:ProfileE>:NDEBUG;WWDEBUG;WIN32;PARAM_EDITING_ON>
 )
 
 #
@@ -249,12 +179,3 @@ target_compile_definitions(ww3d2 PRIVATE
 #       # etc...
 #   )
 # endif()
-#
-# You can also set /DEBUG /Z7 /Zi /WX or other flags.  Modify as needed to replicate
-# your .vcxproj "ClCompile" settings exactly.
-
-#
-# Done! Generators like Visual Studio will now see all six configurations
-# (Debug, DebugE, Internal, Profile, ProfileE, Release).  When building each
-# configuration, you get the matching library output and matching defines/includes.
-#

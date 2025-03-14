@@ -129,3 +129,9 @@ class STLSpecialAlloc;
 
 #include "Common/Thing.h"
 #include "Common/UnicodeString.h"
+
+
+#include "../../../gamerenderer/imgui/imgui.h"
+#include "../../../gamerenderer/imgui/imgui_impl_win32.h"
+#include "../../../gamerenderer/imgui/imgui_impl_dx9.h"
+#include "../Console/Console.h"

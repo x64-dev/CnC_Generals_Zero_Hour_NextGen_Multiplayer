@@ -1,7 +1,7 @@
-add_library(UniSpySDK dllmain.c)
+add_library(UniSpySDK STATIC dllmain.c)
 
-target_link_libraries(UniSpySDK SHARED
-    #usbrigades
+target_link_libraries(UniSpySDK PUBLIC
+    usbrigades
     uscommon
     uschat
     uscdkey

@@ -43,11 +43,6 @@
 #define __WIN32DIMOUSE_H_
 
 // SYSTEM INCLUDES ////////////////////////////////////////////////////////////
-#ifndef DIRECTINPUT_VERSION
-#	define DIRECTINPUT_VERSION	0x800
-#endif
-
-#include <dinput.h>
 
 // USER INCLUDES //////////////////////////////////////////////////////////////
 #include "GameClient/Mouse.h"
@@ -88,13 +83,6 @@ protected:
 	// new internal methods for our direct input implemetation
 	void openMouse( void );  ///< create the direct input mouse 
 	void closeMouse( void );  ///< close and release mouse resources
-	/// map direct input mouse data to our own format
-	void mapDirectInputMouse( MouseIO *mouse, DIDEVICEOBJECTDATA *mdat );
-
-	// internal data members for our direct input mouse
-	LPDIRECTINPUT8 m_pDirectInput;  ///< pointer to direct input interface
-	LPDIRECTINPUTDEVICE8 m_pMouseDevice;  ///< pointer to mouse device
-
 };  // end class DirectInputMouse
 
 // INLINING ///////////////////////////////////////////////////////////////////

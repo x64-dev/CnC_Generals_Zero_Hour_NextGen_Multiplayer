@@ -11,7 +11,7 @@ add_library(ussc
     sciSerialize.h
 )
 
-target_link_libraries(ussc PUBLIC uswebservice)
+target_link_libraries(ussc PUBLIC uswebservices)
 
 if(UNISPY_BUILD_TESTS)
     add_subdirectory(sctest)

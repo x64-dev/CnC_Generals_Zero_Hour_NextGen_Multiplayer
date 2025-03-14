@@ -39,11 +39,7 @@
 
 //#define CREATE_DX8_MULTI_THREADED
 
-#include "dx8wrapper.h"
-#include "dx8fvf.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
-#include "dx8renderer.h"
+#include "../GameRenderer.h"
 #include "ww3d.h"
 #include "camera.h"
 #include "wwstring.h"
@@ -495,6 +491,27 @@ bool DX8Wrapper::Create_Device(void)
 	D3DDevice->QueryInterface(IID_PPV_ARGS(&device9On12));
 	D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
 
+
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsLight();
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplWin32_Init(_Hwnd);
+	ImGui_ImplDX9_Init(D3DDevice);
+	io.Fonts->AddFontDefault();	
+	g_BigConsoleFont = io.Fonts->AddFontFromFileTTF(
+		"Fonts\\Arial.ttf",
+		25.0f
+	);
+
 	if (!RecreateGBuffer()) {
 		return false;
 	}
@@ -508,6 +525,9 @@ bool DX8Wrapper::Create_Device(void)
 
 bool DX8Wrapper::RecreateGBuffer(void) {
 	DWORD msQuality = 0;
+
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = ImVec2((float)ResolutionWidth, (float)ResolutionHeight);
 
 	if (g_pRT_MSAA)
 	{
@@ -864,44 +884,60 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 			int x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (ResolutionWidth / 2);
 			int y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (ResolutionHeight / 2);
 
-			// Resize the window to fit this resolution
-			if (!windowed)
+			if (IsWorldBuilder())
 			{
-				// Assume hwnd is your application’s window handle
-				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
-
-				// Remove all overlapped-window styles and add WS_POPUP
-				style &= ~(WS_OVERLAPPEDWINDOW);
-				style |= WS_POPUP;
-
-				// Apply the new style
-				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
-
-				// Move window to (0,0) with the monitor’s resolution:
-				SetWindowPos(
-					_Hwnd,
-					HWND_TOP,
-					0,
-					0,
-					width,
-					height,
-					SWP_FRAMECHANGED | SWP_NOOWNERZORDER
-				);
-
+				if (!windowed)
+					::SetWindowPos(_Hwnd, HWND_TOPMOST, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOSIZE | SWP_NOMOVE);
+				else
+					::SetWindowPos(_Hwnd,
+						NULL,
+						0,
+						0,
+						rect.right - rect.left,
+						rect.bottom - rect.top,
+						SWP_NOZORDER | SWP_NOMOVE);
 			}
 			else
 			{
-				LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
-				style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
-				SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+				// Resize the window to fit this resolution
+				if (!windowed)
+				{
+					// Assume hwnd is your application’s window handle
+					LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
 
-				::SetWindowPos(_Hwnd,
-					NULL,
-					x,
-					y,
-					rect.right - rect.left,
-					rect.bottom - rect.top,
-					0);
+					// Remove all overlapped-window styles and add WS_POPUP
+					style &= ~(WS_OVERLAPPEDWINDOW);
+					style |= WS_POPUP;
+
+					// Apply the new style
+					SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+					// Move window to (0,0) with the monitor’s resolution:
+					SetWindowPos(
+						_Hwnd,
+						HWND_TOP,
+						0,
+						0,
+						width,
+						height,
+						SWP_FRAMECHANGED | SWP_NOOWNERZORDER
+					);
+
+				}
+				else
+				{
+					LONG_PTR style = GetWindowLongPtr(_Hwnd, GWL_STYLE);
+					style |= WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+					SetWindowLongPtr(_Hwnd, GWL_STYLE, style);
+
+					::SetWindowPos(_Hwnd,
+						NULL,
+						x,
+						y,
+						rect.right - rect.left,
+						rect.bottom - rect.top,
+						0);
+				}
 			}
 		}
 	}
@@ -1551,13 +1587,19 @@ void DX8Wrapper::Begin_Scene(void)
 		0
 	);
 
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+
 	DX8WebBrowser::Update();
 }
 
 void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
-	DX8CALL(EndScene());
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+	D3DDevice->EndScene();
 
 	D3DDevice->StretchRect(
 		g_pRT_MSAA,     // Source
@@ -1579,6 +1621,8 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 		);
 		pBackBuffer->Release();
 	}
+
+
 
 	DX8WebBrowser::Render(0);
 
