@@ -1,4 +1,5 @@
 add_library(GameEngine STATIC
+    source/Console/Console.cpp
     Source/Common/Audio/AudioEventRTS.cpp
     Source/Common/Audio/AudioRequest.cpp
     Source/Common/Audio/GameAudio.cpp

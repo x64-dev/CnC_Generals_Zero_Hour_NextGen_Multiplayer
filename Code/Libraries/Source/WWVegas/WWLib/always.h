@@ -215,6 +215,7 @@ template <class T> T max(T a,T b)
 	}
 }
 
+bool IsWorldBuilder();
 
 /*
 **	This includes the minimum set of compiler defines and pragmas in order to bring the

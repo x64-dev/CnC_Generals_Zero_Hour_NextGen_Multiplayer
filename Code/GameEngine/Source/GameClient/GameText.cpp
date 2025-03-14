@@ -177,7 +177,7 @@ class GameTextManager : public GameTextInterface
 		NoString				*m_noStringList;
 		Int							m_useStringFile;
 		LanguageID			m_language;
-		UnicodeString		m_failed;
+		const wchar_t		*m_failed;
 
 		StringInfo			*m_mapStringInfo;
 		StringLookUp		*m_mapStringLUT;
@@ -1270,7 +1270,7 @@ UnicodeString GameTextManager::fetch( const Char *label, Bool *exists )
 	{
 		if( exists )
 			*exists = FALSE;
-		return m_failed;
+		return UnicodeString(m_failed);
 	}
 
 	StringLookUp *lookUp;

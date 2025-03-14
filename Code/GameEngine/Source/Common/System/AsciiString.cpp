@@ -131,9 +131,9 @@ void AsciiString::ensureUniqueBufferOfSize(int numCharsNeeded, Bool preserveData
 	{
 		// no buffer manhandling is needed (it's already large enough, and unique to us)
 		if (strToCopy)
-			strcpy_s(m_data->peek(), m_data->m_numCharsAllocated, strToCopy);
+			strcpy(m_data->peek(), strToCopy);
 		if (strToCat)
-			strcat_s(m_data->peek(), m_data->m_numCharsAllocated, strToCat);
+			strcat(m_data->peek(), strToCat);
 		return;
 	}
 

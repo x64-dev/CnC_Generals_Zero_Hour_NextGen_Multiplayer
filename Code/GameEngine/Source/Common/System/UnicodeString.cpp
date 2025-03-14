@@ -173,8 +173,7 @@ void UnicodeString::set(const WideChar* s, int len)
 	validate();
 	if (!m_data || s != peek())
 	{
-		if (len < 0)
-			len = s ? wcslen(s) : 0;
+		len = s ? wcslen(s) : 0;
 		if (len)
 		{
 			ensureUniqueBufferOfSize(len + 1, false, s, NULL);
@@ -192,8 +191,7 @@ void UnicodeString::set(const UnsignedShort* s1, int len) {
 	const WideChar* s = (const WideChar* )s1;
 	if (!m_data || s != peek())
 	{
-		if (len < 0)
-			len = s ? wcslen(s) : 0;
+		len = s ? wcslen(s) : 0;
 		if (len)
 		{
 			ensureUniqueBufferOfSize(len + 1, false, s, NULL);
