@@ -212,7 +212,7 @@ void Console::ExecCommand(const char* command_line)
 		}
 		else
 		{
-			AddLog("Unknown command: '%s'", command_line);
+			GetConsoleManager().ExecuteInput(command_line);
 		}
 	}
 

@@ -4533,3 +4533,38 @@ void GameLogic::loadPostProcess( void )
 }  // end loadPostProcess
 
 
+WWCONSOLE_COMMAND(map, "Opens a map")
+{
+	extern Bool IsConsoleActive;
+	if (args.size() <= 0)
+	{
+		DevConsole.AddLog("Usage: open <mapname> e.g. open Maps/USA01/USA01.map");
+		return;
+	}
+
+	if (!TheFileSystem->doesFileExist(args[0].c_str())) 
+	{
+		DevConsole.AddLog("Map file not found %s!", args[0].c_str());
+		return;
+	}
+
+	TheWritableGlobalData->m_mapName = AsciiString(args[0].c_str());
+	
+	IsConsoleActive = false;
+
+	if (TheGameLogic->isInGame())
+		TheGameLogic->clearGameData(FALSE);
+
+	if (TheShell->isShellActive() == FALSE)
+	{
+		destroyQuitMenu();
+	}
+	else
+	{
+		TheTransitionHandler->remove("MainMenuLoadReplayMenu");
+		TheTransitionHandler->remove("MainMenuLoadReplayMenuBack");		
+	}
+
+	TheGameLogic->prepareNewGame(GAME_SINGLE_PLAYER, DIFFICULTY_NORMAL, 0);
+	TheGameLogic->startNewGame(false);
+}

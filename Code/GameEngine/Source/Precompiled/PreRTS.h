@@ -136,4 +136,5 @@ class STLSpecialAlloc;
 #include "../../../gamerenderer/imgui/imgui_impl_dx9.h"
 #include "../Console/Cvar.h"
 #include "../Console/CvarManager.h"
+#include "../Console/ConsoleCommandManager.h"
 #include "../Console/Console.h"
