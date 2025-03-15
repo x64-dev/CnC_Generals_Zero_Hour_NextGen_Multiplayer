@@ -141,7 +141,7 @@ private:
 	// TODO_NGMP: Get this from title storage or session query instead
 	std::vector<NetworkRoom> m_vecRooms =
 	{
-		NetworkRoom(0, L"Room 1", "NETWORK_ROOM_0aaaa"),
+		NetworkRoom(0, L"Room 1", "NETWORK_ROOM_0"),
 		NetworkRoom(1, L"Room 2", "NETWORK_ROOM_1")
 	};
 

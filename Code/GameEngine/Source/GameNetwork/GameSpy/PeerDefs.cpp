@@ -818,7 +818,9 @@ Int GameSpyInfo::getPingValue( const AsciiString& otherPing )
 
 Bool PlayerInfo::isIgnored( void )
 {
-	return (m_profileID)?TheGameSpyInfo->isSavedIgnored(m_profileID):TheGameSpyInfo->isIgnored(m_name);
+	// TODO_NGMP
+	return false;
+	//return (m_profileID)?TheGameSpyInfo->isSavedIgnored(m_profileID):TheGameSpyInfo->isIgnored(m_name);
 }
 
 void GameSpyInfo::loadSavedIgnoreList( void )

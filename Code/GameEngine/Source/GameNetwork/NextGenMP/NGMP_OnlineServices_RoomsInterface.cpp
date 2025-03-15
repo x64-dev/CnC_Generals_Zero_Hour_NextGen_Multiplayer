@@ -182,39 +182,60 @@ void NGMP_OnlineServices_RoomsInterface::CreateRoom(int roomIndex)
 
 std::vector<NetworkRoomMember> NGMP_OnlineServices_RoomsInterface::GetMembersListForCurrentRoom()
 {
+	// TODO_NGMP: Cache this and respond to join/leave events instead
+	std::vector<NetworkRoomMember> vecMembers = std::vector<NetworkRoomMember>();
+
 	if (m_CurrentRoomID != -1)
 	{
-		// TODO_NGMP: Cache this and respond to join/leave events instead
-		std::vector<NetworkRoomMember> vecMembers = std::vector<NetworkRoomMember>();
+		NetworkLog("[NGMP] Refreshing network room roster");
+		EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+		NetworkRoom targetNetworkRoom = NGMP_OnlineServicesManager::GetInstance()->GetGroupRooms().at(m_CurrentRoomID);
 
-		EOS_LobbyDetails_GetMemberCountOptions memberCountOpts;
-		memberCountOpts.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERCOUNT_API_LATEST;
+		// get a handle to our lobby
+		EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+		opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+		opts.LobbyId = targetNetworkRoom.GetRoomInternalName().str();
+		opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
 
-		int numMembers = EOS_LobbyDetails_GetMemberCount(NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_currentRoomDetailsHandle, &memberCountOpts);
-		for (int i = 0; i < numMembers; ++i)
+		EOS_HLobbyDetails LobbyInstHandle;
+		EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+		if (getLobbyHandlResult == EOS_EResult::EOS_Success)
 		{
-			EOS_LobbyDetails_GetMemberByIndexOptions getMemberOpts;
-			getMemberOpts.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERBYINDEX_API_LATEST;
-			getMemberOpts.MemberIndex = i;
+			// get each member
+			EOS_LobbyDetails_GetMemberCountOptions optsMemberCount;
+			optsMemberCount.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERCOUNT_API_LATEST;
 
-			EOS_ProductUserId roomMemberEOSID = EOS_LobbyDetails_GetMemberByIndex(NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_currentRoomDetailsHandle, &getMemberOpts);
+			uint32_t numMembers = EOS_LobbyDetails_GetMemberCount(LobbyInstHandle, &optsMemberCount);
+			NetworkLog("[NGMP] Network room has %d members", numMembers);
 
-			char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
-			int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
-			EOS_EResult r = EOS_ProductUserId_ToString(roomMemberEOSID, szUserID, &len);
-			if (r != EOS_EResult::EOS_Success)
+			for (uint32_t memberIndex = 0; memberIndex < numMembers; ++memberIndex)
 			{
-				// TODO_NGMP: Error
-				NetworkLog("[NGMP] EOS error!\n");
-			}
-			NetworkRoomMember roomMember;
-			roomMember.m_strName = AsciiString(szUserID);
-		}
+				EOS_LobbyDetails_GetMemberByIndexOptions opts4;
+				opts4.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERBYINDEX_API_LATEST;
+				opts4.MemberIndex = memberIndex;
 
-		return vecMembers;
+				EOS_ProductUserId lobbyMember = EOS_LobbyDetails_GetMemberByIndex(LobbyInstHandle, &opts4);
+
+				char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
+				int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
+				EOS_EResult r = EOS_ProductUserId_ToString(lobbyMember, szUserID, &len);
+				if (r != EOS_EResult::EOS_Success)
+				{
+					// TODO_NGMP: Error
+					NetworkLog("[NGMP] EOS error!\n");
+				}
+
+				NetworkLog("[NGMP] Network room member %d is %s", memberIndex, szUserID);
+
+				NetworkRoomMember roomMember;
+				roomMember.m_strName = AsciiString(szUserID);
+				vecMembers.push_back(roomMember);
+			}
+		}
 	}
 
-	return std::vector<NetworkRoomMember>();
+	return vecMembers;
 }
 
 /*

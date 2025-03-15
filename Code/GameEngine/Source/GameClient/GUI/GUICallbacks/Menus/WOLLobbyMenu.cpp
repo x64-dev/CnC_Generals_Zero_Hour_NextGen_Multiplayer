@@ -233,6 +233,9 @@ static void playerTooltip(GameWindow *window,
 													WinInstanceData *instData,
 													UnsignedInt mouse)
 {
+	// TODO_NGMP: Support all of this again
+	return;
+
 	Int x, y, row, col;
 	x = LOLONGTOSHORT(mouse);
 	y = HILONGTOSHORT(mouse);
@@ -251,6 +254,7 @@ static void playerTooltip(GameWindow *window,
 
 	PlayerInfoMap::iterator it = TheGameSpyInfo->getPlayerInfoMap()->find(aName);
 	PlayerInfo *info = &(it->second);
+
 	Bool isLocalPlayer = (TheGameSpyInfo->getLocalName().compareNoCase(info->m_name) == 0);
 
 	if (col == 0)
@@ -474,7 +478,9 @@ static Int insertPlayerInListbox(const PlayerInfo& info, Color color)
 	}
 	*/
 
-	Bool isPreorder = TheGameSpyInfo->didPlayerPreorder(info.m_profileID);
+	// TODO_NGMP: Reimplement this, what were the pre-order bonuses?
+	Bool isPreorder = true;
+	//Bool isPreorder = TheGameSpyInfo->didPlayerPreorder(info.m_profileID);
 
 	const Image *preorderImg = TheMappedImageCollection->findImageByName("OfficersClubsmall");
 	Int w = (preorderImg)?preorderImg->getImageWidth():10;
@@ -495,6 +501,8 @@ static Int insertPlayerInListbox(const PlayerInfo& info, Color color)
 
 void PopulateLobbyPlayerListbox(void)
 {
+	GadgetListBoxReset(listboxLobbyPlayers);
+
 	for (NetworkRoomMember netRoomMember : NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom())
 	{
 		// TODO_NGMP: fill out more
