@@ -15,6 +15,11 @@
 - ImGui support
 - x64 support
 
+## Console Commands
+- map mapname.map -- opens a map 
+- disconnect -- disconnects from a game
+- spawn objectname -- spawns a object from a ini file. 
+
 ---
 
 ## Compiling with Visual Studio 2022
