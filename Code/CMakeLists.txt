@@ -29,6 +29,12 @@ set(ALSOFT_INSTALL_UTILS OFF)
 
 add_subdirectory(Libraries/OpenAL)
 
+set_target_properties(OpenAL PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../Run"
+
+    OUTPUT_NAME_DEBUG "OpenAL32_debug"
+)
+
 add_subdirectory(Libraries/Source/GameSpy)
  
 # Add the main executable; WIN32 for the Windows subsystem (no console).
