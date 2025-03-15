@@ -81,6 +81,9 @@
 #include "GameLogic/GhostObject.h"
 #include "GameLogic/Object.h"
 #include "GameLogic/ScriptEngine.h"		// For TheScriptEngine - jkmcd
+
+#include "../Console/Console.h"
+
 #ifdef _INTERNAL
 // for occasional debugging...
 //#pragma optimize("", off)
@@ -714,8 +717,7 @@ void GameClient::update( void )
 	}
 
 	{
-		extern Bool IsConsoleActive;
-		if (IsConsoleActive)
+		if (DevConsole.IsConsoleActive)
 		{
 			DevConsole.Draw(0.5f);
 		}

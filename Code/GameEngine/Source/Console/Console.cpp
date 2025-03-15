@@ -13,6 +13,7 @@ static const char* VERSION_STRING = "Command and Conquer Generals Next-Gen v0.06
 Console::Console()
 	: ScrollToBottom(false)
 	, HistoryPos(-1)
+	, IsConsoleActive(false)
 {
 	ClearLog();
 	AddLog("Welcome to the Quake-Style Console!");

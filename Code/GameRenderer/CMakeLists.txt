@@ -55,52 +55,14 @@ target_include_directories(GameRenderer PRIVATE
 )
 
 target_compile_definitions(GameRenderer PRIVATE
-    __PLACEMENT_VEC_NEW_INLINE
-    _LIB
-    _WINDOWS
+    ${GNG_COMPILE_DEFINITIONS}
     WIN32_LEAN_AND_MEAN
 )
 
-# == Release ==
-target_compile_definitions(GameRenderer PRIVATE
-    $<$<CONFIG:Release>:NDEBUG>
-    $<$<CONFIG:Release>:IG_DEBUG_STACKTRACE>
+target_compile_options(GameRenderer PRIVATE
+    ${GNG_COMPILE_OPTIONS}
 )
 
-# == Debug ==
-target_compile_definitions(GameRenderer PRIVATE
-    $<$<CONFIG:Debug>:_DEBUG>
+target_link_options(GameRenderer PRIVATE
+    ${GNG_LINK_OPTIONS}
 )
-
-# == Internal ==
-target_compile_definitions(GameRenderer PRIVATE
-    $<$<CONFIG:Internal>:NDEBUG>
-    $<$<CONFIG:Internal>:_INTERNAL>
-    $<$<CONFIG:Internal>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Internal>:_DISABLE_VECTOR_ANNOTATION>
-)
-
-if(MSVC)
-    target_compile_options(GameRenderer PRIVATE
-        # Common flags
-        /W3
-        /nologo
-
-        # Debug
-        $<$<CONFIG:Debug>:/MDd>
-        $<$<CONFIG:Debug>:/Zi>
-        $<$<CONFIG:Debug>:/Ob1>        # "Only Explicit"
-
-        # Release
-        $<$<CONFIG:Release>:/MD>
-        $<$<CONFIG:Release>:/Zi>
-        $<$<CONFIG:Release>:/O2>
-        $<$<CONFIG:Release>:/Ob2>      # "Any Suitable"
-
-        # Internal
-        $<$<CONFIG:Internal>:/MD>
-        $<$<CONFIG:Internal>:/Zi>
-        $<$<CONFIG:Internal>:/O2>
-        $<$<CONFIG:Internal>:/Ob1>     # "Only Explicit Inline"
-    )
-endif()

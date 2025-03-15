@@ -66,6 +66,7 @@
 //#include "GeneratedVersion.h"
 #include "Resource.h"
 
+#include "../GameEngine/Source/Console/Console.h"
 #include "../gamerenderer/imgui/imgui.h"
 #include "../gamerenderer/imgui/imgui_impl_win32.h"
 #include "../gamerenderer/imgui/imgui_impl_dx9.h"
@@ -80,7 +81,6 @@
 HINSTANCE ApplicationHInstance = NULL;  ///< our application instance
 HWND ApplicationHWnd = NULL;  ///< our application window handle
 Bool ApplicationIsWindowed = true;
-Bool IsConsoleActive = false;
 Win32Mouse *TheWin32Mouse= NULL;  ///< for the WndProc() only
 DWORD TheMessageTime = 0;	///< For getting the time that a message was posted from Windows.
 
@@ -502,7 +502,7 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				switch( key )
 				{
 					case 192:
-						IsConsoleActive = !IsConsoleActive;
+						DevConsole.IsConsoleActive = !DevConsole.IsConsoleActive;
 						break;
 
 					//---------------------------------------------------------------------
