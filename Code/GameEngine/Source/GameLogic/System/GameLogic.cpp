@@ -4532,6 +4532,49 @@ void GameLogic::loadPostProcess( void )
 
 }  // end loadPostProcess
 
+WWCONSOLE_COMMAND(spawn, "Spawns a object at the cursor position for the local player")
+{
+	if (!TheGameLogic->isInGame() || TheShell->isShellActive())
+	{
+		DevConsole.AddLog("You are not in a game!");
+		return;
+	}
+
+	if (args.size() <= 0)
+	{
+		DevConsole.AddLog("Usage: spawn <objname> e.g. spawn ChinaVehicleDozer");
+		return;
+	}
+
+	const MouseIO* mouseIO = TheMouse->getMouseStatus();
+	Coord3D pos;
+
+	TheTacticalView->screenToTerrain(&mouseIO->pos, &pos);	
+
+	AsciiString objName = args[0].c_str();
+	if (objName.isNotEmpty())
+	{
+		Coord3D objPos = pos;
+		FindPositionOptions options;
+		options.minRadius = 5;
+		options.maxRadius = 10;
+		ThePartitionManager->update();
+		Bool foundPos = ThePartitionManager->findPositionAround(&pos, &options, &objPos);
+		if (foundPos)
+		{
+			Player* pPlayer = ThePlayerList->getLocalPlayer();
+			Object *unit = placeObjectAtPosition(0, objName, objPos, pPlayer, NULL);
+			if (unit) {
+				pPlayer->onUnitCreated(NULL, unit);
+			}
+		}
+		else
+		{
+			DEBUG_LOG(("Could not find position\n"));
+		}
+	}
+}
+
 WWCONSOLE_COMMAND(disconnect, "Disconnects from a game and returns you to the main menu")
 {
 	if (!TheGameLogic->isInGame() || TheShell->isShellActive())
