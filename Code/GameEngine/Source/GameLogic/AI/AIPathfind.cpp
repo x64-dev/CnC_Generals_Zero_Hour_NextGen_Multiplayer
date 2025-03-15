@@ -4574,9 +4574,11 @@ Bool Pathfinder::checkForMovement(const Object *obj, TCheckMovementInfo &info)
 							if (!unit->getAIUpdateInterface()) {
 								return false; // can't path through not-idle units.
 							}
+#if 0
 							if (!unit->getAIUpdateInterface()->isIdle()) {
 								return false; // can't path through not-idle units.
 							}
+#endif
 							Bool found = false;
 							Int k;
 							for (k=0; k<numAlly; k++) {
