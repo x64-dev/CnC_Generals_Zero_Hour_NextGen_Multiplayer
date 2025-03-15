@@ -132,47 +132,18 @@ target_include_directories(WorldBuilder PRIVATE
 )
 
 target_compile_definitions(WorldBuilder PRIVATE
+  ${GNG_COMPILE_DEFINITIONS}
   _AFXDLL
   _MBCS
-  __PLACEMENT_VEC_NEW_INLINE
   WIN32
-  _WINDOWS
   EDITOR
   REGEX_MALLOC
   STDC_HEADERS
   WIN32_LEAN_AND_MEAN
-
-  # Debug
-  $<$<CONFIG:Debug>:_DEBUG>
-
-  # Internal
-  $<$<CONFIG:Internal>:
-    _DISABLE_STRING_ANNOTATION
-    _DISABLE_VECTOR_ANNOTATION
-    NDEBUG
-    _INTERNAL
-  >
-
-  # Release
-  $<$<CONFIG:Release>:
-    _DISABLE_STRING_ANNOTATION
-    _DISABLE_VECTOR_ANNOTATION
-    IG_DEBUG_STACKTRACE
-    NDEBUG
-    _RELEASE
-  >
 )
 
-# Typical MSVC flags for each config:
 target_compile_options(WorldBuilder PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-
-    $<$<CONFIG:Debug>:/Od /MDd /Zi /RTC1>
-
-    $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
-
-    $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
-  >
+    ${GNG_COMPILE_OPTIONS}
 )
 
 target_link_libraries(WorldBuilder PRIVATE
@@ -191,17 +162,11 @@ target_link_libraries(WorldBuilder PRIVATE
     imm32
     wininet
 
-    # External Dependencies
-    OpenAL::OpenAL
-
-    # GameSpy SDK
-    UniSpySDK
-
     GameEngine
 )
 
 target_link_options(WorldBuilder PRIVATE
-  /NODEFAULTLIB:libcd /DYNAMICBASE:NO /FORCE
+    ${GNG_LINK_OPTIONS}
 )
 
 target_link_directories(WorldBuilder PRIVATE
@@ -216,7 +181,7 @@ set_target_properties(WorldBuilder PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../../../run"
 
     # Each config has its own output name:
-    OUTPUT_NAME_DEBUG "WorldBuilder_debug"      # Debug
-    OUTPUT_NAME_INTERNAL "WorldBuilder_internal"   # Internal
-    OUTPUT_NAME_RELEASE "WorldBuilder"     # Release
+    OUTPUT_NAME_DEBUG "WorldBuilder_debug"
+    OUTPUT_NAME_INTERNAL "WorldBuilder_internal"
+    OUTPUT_NAME_RELEASE "WorldBuilder"
 )
