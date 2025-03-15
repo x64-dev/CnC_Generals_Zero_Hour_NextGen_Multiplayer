@@ -4606,7 +4606,6 @@ WWCONSOLE_COMMAND(disconnect, "Disconnects from a game and returns you to the ma
 
 WWCONSOLE_COMMAND(map, "Opens a map")
 {
-	extern Bool IsConsoleActive;
 	if (args.size() <= 0)
 	{
 		DevConsole.AddLog("Usage: open <mapname> e.g. open Maps/USA01/USA01.map");
@@ -4621,7 +4620,7 @@ WWCONSOLE_COMMAND(map, "Opens a map")
 
 	TheWritableGlobalData->m_mapName = AsciiString(args[0].c_str());
 	
-	IsConsoleActive = false;
+	DevConsole.IsConsoleActive = false;
 
 	if (TheGameLogic->isInGame())
 		TheGameLogic->clearGameData(FALSE);
