@@ -186,6 +186,11 @@ void NGMP_OnlineServicesManager::Tick()
 	{
 		EOS_Platform_Tick(m_EOSPlatformHandle);
 	}
+
+	if (m_pRoomInterface != nullptr)
+	{
+		m_pRoomInterface->Tick();
+	}
 }
 
 void NetworkLog(const char* fmt, ...)

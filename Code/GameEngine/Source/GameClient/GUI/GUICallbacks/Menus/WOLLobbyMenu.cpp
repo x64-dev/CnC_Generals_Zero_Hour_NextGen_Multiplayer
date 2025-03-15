@@ -733,7 +733,18 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	//GadgetListBoxSetItemData(listboxLobbyChat, (void*)-1, index);
 	
 	// TODO_NGMP: player list change callbacks
+	
+	// register for chat events
+	NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->RegisterForChatCallback([](UnicodeString strMessage)
+		{
+			GadgetListBoxAddEntryText(listboxLobbyChat, strMessage, GameMakeColor(255, 255, 255, 255), -1, -1);
+		});
 
+	// register for roster events
+	NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->RegisterForRosterNeedsRefreshCallback([]()
+		{
+			refreshPlayerList(true);
+		});
 
 	// attempt to join the first room
 	NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->JoinRoom(0, []()
