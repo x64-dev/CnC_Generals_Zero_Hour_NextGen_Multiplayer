@@ -238,6 +238,11 @@ std::vector<NetworkRoomMember> NGMP_OnlineServices_RoomsInterface::GetMembersLis
 	return vecMembers;
 }
 
+void NGMP_OnlineServices_RoomsInterface::SendChatMessageToCurrentRoom(UnicodeString& strChatMsg)
+{
+
+}
+
 /*
 void NGMP_OnlineServices_RoomsInterface::CreateLobby(UnicodeString strLobbyName)
 {

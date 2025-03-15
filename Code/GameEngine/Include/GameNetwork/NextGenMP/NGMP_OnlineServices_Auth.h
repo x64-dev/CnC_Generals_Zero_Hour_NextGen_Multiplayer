@@ -4,8 +4,6 @@ class NGMP_OnlineServices_AuthInterface
 {
 public:
 
-	void Auth();
-
 	AsciiString GetDisplayName()
 	{
 		return AsciiString(m_strDisplayName.c_str());
@@ -14,7 +12,7 @@ public:
 
 	EOS_ProductUserId GetEOSUser() const { return m_EOSUserID; }
 
-	void LoginToEpic();
+	void BeginLogin();
 
 	void OnEpicLoginComplete(EOS_ProductUserId userID);
 
@@ -22,6 +20,10 @@ public:
 	{
 		m_vecLogin_PendingCallbacks.push_back(callback);
 	}
+
+private:
+	void LoginAsSecondaryDevAccount();
+	void LoginToEpic(bool bUsingDevTool);
 
 private:
 	EOS_ProductUserId m_EOSUserID = nullptr;

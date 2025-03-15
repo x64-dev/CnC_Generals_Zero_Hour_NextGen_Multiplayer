@@ -243,8 +243,6 @@ static void updateNumPlayersOnline(void)
 	NGMP_OnlineServicesManager::GetInstance()->RegisterForNATTypeChanges([=](NGMP_ENATType previousNATType, NGMP_ENATType newNATType)
 		{
 			updateNumPlayersOnline(); // UI refresh
-			//UnicodeString headingStr;
-			//headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n\nYour NAT type is %hs", NGMP_OnlineServicesManager::GetInstance()->GetNATTypeString().str());
 		});
 
 	GameWindow *playersOnlineWindow = TheWindowManager->winGetWindowFromId(
@@ -293,7 +291,7 @@ static void updateNumPlayersOnline(void)
 				break;
 		}
 
-		headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n\n<hexcol>%hsYour NAT type is %hs", natTypeColor.str(), NGMP_OnlineServicesManager::GetInstance()->GetNATTypeString().str());
+		headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n\n<hexcol>%hsYour NAT type is %hs", natTypeColor.str(), natType == NGMP_ENATType::NAT_TYPE_UNDETERMINED ? "being determined" : NGMP_OnlineServicesManager::GetInstance()->GetNATTypeString().str());
 
 		while (headingStr.nextToken(&line, UnicodeString(L"\n")))
 		{

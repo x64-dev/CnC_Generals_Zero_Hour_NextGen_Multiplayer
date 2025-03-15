@@ -27,6 +27,9 @@ public:
 
 	EOS_HLobbyDetails m_currentRoomDetailsHandle = nullptr;
 
+	// Chat
+	void SendChatMessageToCurrentRoom(UnicodeString& strChatMsg);
+
 private:
 	int m_CurrentRoomID = -1;
 };

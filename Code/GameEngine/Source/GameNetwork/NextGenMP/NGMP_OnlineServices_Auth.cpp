@@ -1,23 +1,5 @@
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
-void NGMP_OnlineServices_AuthInterface::Auth()
-{
-	SteamNetworkingIdentity steamNetIdentity;
-	steamNetIdentity.SetSteamID(SteamUser()->GetSteamID());
-
-	bool bSteamOnline = SteamUser()->BLoggedOn();
-
-	HAuthTicket steamAuthTicket = SteamUser()->GetAuthTicketForWebApi("epiconlineservices");
-
-	if (steamAuthTicket == k_HAuthTicketInvalid || !bSteamOnline)
-	{
-		NetworkLog("[NGMP] SteamUser()->GetAuthSessionTicket returned invalid auth ticket.");
-		OnAuthSessionTicketResponse(nullptr);
-
-		// TODO_NGMP: Error out here, we're trying to play online while offline (or steam issues etc)
-	}
-}
-
 void NGMP_OnlineServices_AuthInterface::OnAuthSessionTicketResponse(GetTicketForWebApiResponse_t* pAuthSessionTicketResponse)
 {
 	if (pAuthSessionTicketResponse == nullptr)
@@ -34,7 +16,7 @@ void NGMP_OnlineServices_AuthInterface::OnAuthSessionTicketResponse(GetTicketFor
 			m_vecSteamAuthSessionTicket.resize(pAuthSessionTicketResponse->m_cubTicket);
 			memcpy(m_vecSteamAuthSessionTicket.data(), pAuthSessionTicketResponse->m_rgubTicket, pAuthSessionTicketResponse->m_cubTicket);
 
-			LoginToEpic();
+			LoginToEpic(false);
 		}
 		break;
 		case k_EResultNoConnection:
@@ -51,35 +33,101 @@ void NGMP_OnlineServices_AuthInterface::OnAuthSessionTicketResponse(GetTicketFor
 	}
 }
 
-void NGMP_OnlineServices_AuthInterface::LoginToEpic()
+void NGMP_OnlineServices_AuthInterface::BeginLogin()
 {
+	// if it's not the first instance of Generals... use the dev account
+	static HANDLE MPMutex = NULL;
+	MPMutex = CreateMutex(NULL, FALSE, "685EAFF2-3216-4265-FFFF-251C5F4B82F3");
+	if (GetLastError() == ERROR_ALREADY_EXISTS)
+	{
+		NetworkLog("[NGMP] Secondary instance detected... using dev account for testing purposes");
+		LoginAsSecondaryDevAccount();
+	}
+	else
+	{
+		LoginToEpic(false);
+	}
+}
+
+void NGMP_OnlineServices_AuthInterface::LoginAsSecondaryDevAccount()
+{
+	// create a device id (ok to call this multiple times)
+	EOS_HConnect ConnectHandle = EOS_Platform_GetConnectInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+	EOS_Connect_CreateDeviceIdOptions createDeviceIdOpts;
+	createDeviceIdOpts.ApiVersion = EOS_CONNECT_CREATEDEVICEID_API_LATEST;
+	createDeviceIdOpts.DeviceModel = "A developers PC";
+	EOS_Connect_CreateDeviceId(ConnectHandle, &createDeviceIdOpts, nullptr, [](const EOS_Connect_CreateDeviceIdCallbackInfo* Data)
+		{
+			NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->LoginToEpic(true);
+		});
+}
+
+void NGMP_OnlineServices_AuthInterface::LoginToEpic(bool bUsingDevAccount)
+{
+	// TODO_NGMP: Dont leak these
+	EOS_Connect_Credentials* creds = new EOS_Connect_Credentials();
+	EOS_Connect_UserLoginInfo* userlogininfo = new EOS_Connect_UserLoginInfo();
 	EOS_HConnect ConnectHandle = EOS_Platform_GetConnectInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
 
-	// parse the steam token
-	uint32 StringBufSize = (m_vecSteamAuthSessionTicket.size() * 2) + 1;
-	char* SteamAppTicketString = new char[StringBufSize];
-	uint32_t OutLen = StringBufSize;
-	EOS_EResult ConvResult = EOS_ByteArray_ToString(m_vecSteamAuthSessionTicket.data(), m_vecSteamAuthSessionTicket.size(), SteamAppTicketString, &OutLen);
+	creds->ApiVersion = EOS_CONNECT_CREDENTIALS_API_LATEST;
 
-	if (ConvResult != EOS_EResult::EOS_Success)
+	if (bUsingDevAccount)
 	{
-		// TODO_NGMP: What do we do if this fails?
+		creds->Token = nullptr;
+		creds->Type = EOS_EExternalCredentialType::EOS_ECT_DEVICEID_ACCESS_TOKEN;
+
+		userlogininfo->ApiVersion = EOS_CONNECT_USERLOGININFO_API_LATEST;
+		userlogininfo->DisplayName = "DevAccount";
+		userlogininfo->NsaIdToken = nullptr;
+	}
+	else
+	{
+		// do we need a steam token? request it and bail out. The steam token callback will re-call this function
+		if (m_vecSteamAuthSessionTicket.empty())
+		{
+			// Acquire steam token
+			SteamNetworkingIdentity steamNetIdentity;
+			steamNetIdentity.SetSteamID(SteamUser()->GetSteamID());
+
+			bool bSteamOnline = SteamUser()->BLoggedOn();
+
+			HAuthTicket steamAuthTicket = SteamUser()->GetAuthTicketForWebApi("epiconlineservices");
+
+			if (steamAuthTicket == k_HAuthTicketInvalid || !bSteamOnline)
+			{
+				NetworkLog("[NGMP] SteamUser()->GetAuthSessionTicket returned invalid auth ticket.");
+				OnAuthSessionTicketResponse(nullptr);
+
+				// TODO_NGMP: Error out here, we're trying to play online while offline (or steam issues etc)
+			}
+
+			return;
+		}
+
+		// parse the steam token
+		uint32 StringBufSize = (m_vecSteamAuthSessionTicket.size() * 2) + 1;
+		char* SteamAppTicketString = new char[StringBufSize];
+		uint32_t OutLen = StringBufSize;
+		EOS_EResult ConvResult = EOS_ByteArray_ToString(m_vecSteamAuthSessionTicket.data(), m_vecSteamAuthSessionTicket.size(), SteamAppTicketString, &OutLen);
+
+		if (ConvResult == EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: What do we do if this fails?
+			creds->Token = SteamAppTicketString;
+			creds->Type = EOS_EExternalCredentialType::EOS_ECT_STEAM_SESSION_TICKET;
+
+			SteamAppTicketString = nullptr;
+			delete[] SteamAppTicketString;
+			// done parsing steam token
+
+			// null here will set display name to the steam name
+			userlogininfo->ApiVersion = EOS_CONNECT_USERLOGININFO_API_LATEST;
+			userlogininfo->DisplayName = nullptr;
+			userlogininfo->NsaIdToken = nullptr;
+		}
 	}
 
-	EOS_Connect_Credentials* creds = new EOS_Connect_Credentials();
-	creds->ApiVersion = EOS_CONNECT_CREDENTIALS_API_LATEST;
-	creds->Token = SteamAppTicketString;
-	creds->Type = EOS_EExternalCredentialType::EOS_ECT_STEAM_SESSION_TICKET;
-
-	SteamAppTicketString = nullptr;
-	delete[] SteamAppTicketString;
-	// done parsing steam token
-
-	EOS_Connect_UserLoginInfo* userlogininfo = new EOS_Connect_UserLoginInfo();
-	userlogininfo->ApiVersion = EOS_CONNECT_USERLOGININFO_API_LATEST;
-	userlogininfo->DisplayName = nullptr;
-	userlogininfo->NsaIdToken = nullptr;
-
+	// now log into epic
 	EOS_Connect_LoginOptions loginOpts;
 	loginOpts.ApiVersion = EOS_CONNECT_LOGIN_API_LATEST;
 	loginOpts.Credentials = creds;
@@ -92,7 +140,11 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic()
 			NGMP_OnlineServices_AuthInterface* pAuthInterface = pOnlineServicesMgr->GetAuthInterface();
 			if (Data->ResultCode == EOS_EResult::EOS_Success)
 			{
-				NetworkLog("[NGMP] EOS Login worked");
+				// TODO_NGMP: implement a helper function to do this conversion
+				char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
+				int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
+				EOS_ProductUserId_ToString(Data->LocalUserId, szUserID, &len);
+				NetworkLog("[NGMP] EOS Login worked, local user EOS PUID is %s", szUserID);
 
 				pAuthInterface->OnEpicLoginComplete(Data->LocalUserId);
 			}

@@ -229,7 +229,7 @@ static void startOnline( void )
 	bool bQuickLogin = false;
 
 	NGMP_OnlineServicesManager::GetInstance()->Init();
-	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->Auth();
+	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->BeginLogin();
 
 	if (bQuickLogin)
 	{

@@ -6,6 +6,7 @@ NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager
 NGMP_OnlineServicesManager::NGMP_OnlineServicesManager()
 {
 	NetworkLog("[NGMP] Init");
+
 	m_pOnlineServicesManager = this;
 
 	m_pAuthInterface = new NGMP_OnlineServices_AuthInterface();

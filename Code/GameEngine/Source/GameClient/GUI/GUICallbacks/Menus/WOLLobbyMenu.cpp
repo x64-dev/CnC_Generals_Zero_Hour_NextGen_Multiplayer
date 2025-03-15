@@ -1953,7 +1953,9 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 					// Send the message
 					if (!handleLobbySlashCommands(txtInput))
 					{
-						TheGameSpyInfo->sendChat( txtInput, false, listboxLobbyPlayers );
+						NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->SendChatMessageToCurrentRoom(txtInput);
+						// TODO_NGMP: Support private message again
+						//TheGameSpyInfo->sendChat( txtInput, false, listboxLobbyPlayers );
 					}
 				}
 				break;
