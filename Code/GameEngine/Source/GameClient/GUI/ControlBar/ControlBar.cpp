@@ -1334,7 +1334,8 @@ void ControlBar::update( void )
 
 		Drawable *drawToEvaluateFor = NULL;
 		Bool multiSelect = FALSE;
-		if( TheInGameUI->getSelectCount() > 1 )
+		Int selectCount = TheInGameUI->getSelectCount();
+		if (selectCount > 1)
 		{
 			// Attempt to isolate a Drawable here to evaluate
 			// The need arises when selected is an AngryMob,
@@ -1343,10 +1344,12 @@ void ControlBar::update( void )
 			// so we must isolate and evaluate only the Nexus 
 			drawToEvaluateFor = TheGameClient->findDrawableByID( TheInGameUI->getSoloNexusSelectedDrawableID() ) ;
 			multiSelect = ( drawToEvaluateFor == NULL );
-
-		}  
-		else // get the first and only drawble in the selection list
+		}
+		else if (selectCount == 1) // get the first and only drawable in the selection list
+		{
 			drawToEvaluateFor = TheInGameUI->getAllSelectedDrawables()->front();
+		}
+
 		Object *obj = drawToEvaluateFor ? drawToEvaluateFor->getObject() : NULL;
 		setPortraitByObject( obj );
 		
