@@ -923,23 +923,6 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 			token = nextParam(NULL, "\" ");	   
 		}
 
-		if (argc>2 && strcmp(argv[1],"-DX")==0) {  
-			Int i;
-			DEBUG_LOG(("\n--- DX STACK DUMP\n"));
-			for (i=2; i<argc; i++) {
-				Int pc;
-				pc = 0;
-				sscanf(argv[i], "%x",  &pc);
-				char name[_MAX_PATH], file[_MAX_PATH];
-				unsigned int line;
-				unsigned int addr;
-				GetFunctionDetails((void*)pc, name, file, &line, &addr);
-				DEBUG_LOG(("0x%x - %s, %s, line %d address 0x%x\n", pc, name, file, line, addr));
-			}
-			DEBUG_LOG(("\n--- END OF DX STACK DUMP\n"));
-			return 0;
-		}
-
 		#ifdef _DEBUG
 			// Turn on Memory heap tracking
 			int tmpFlag = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG );

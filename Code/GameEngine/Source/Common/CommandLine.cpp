@@ -1203,18 +1203,18 @@ void parseCommandLine(int argc, char *argv[])
 	int arg=1, param;
 	Bool found;
 
-#ifdef DEBUG_LOGGING
-	DEBUG_LOG(("Command-line args:"));
-	int debugFlags = DebugGetFlags();
-	DebugSetFlags(debugFlags & ~DEBUG_FLAG_PREPEND_TIME); // turn off timestamps
-	for (arg=1; arg<argc; arg++)
-	{
-		DEBUG_LOG((" %s", argv[arg]));
-	}
-	DEBUG_LOG(("\n"));
-	DebugSetFlags(debugFlags); // turn timestamps back on iff they were on before
-	arg = 1;
-#endif // DEBUG_LOGGING
+//#ifdef DEBUG_LOGGING
+//	DEBUG_LOG(("Command-line args:"));
+//	int debugFlags = DebugGetFlags();
+//	DebugSetFlags(debugFlags & ~DEBUG_FLAG_PREPEND_TIME); // turn off timestamps
+//	for (arg=1; arg<argc; arg++)
+//	{
+//		DEBUG_LOG((" %s", argv[arg]));
+//	}
+//	DEBUG_LOG(("\n"));
+//	DebugSetFlags(debugFlags); // turn timestamps back on iff they were on before
+//	arg = 1;
+//#endif // DEBUG_LOGGING
 
 	while (arg<argc)
 	{
