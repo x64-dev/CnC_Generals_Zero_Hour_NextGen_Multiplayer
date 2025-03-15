@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../../GameRenderer/imgui/imgui.h"
+#include "../../../Source/Console/Console.h"
+
 #define ALLOW_MULTIPLE_INSTANCES 1
 
 #define ALLOW_NON_PROFILED_LOGIN 1

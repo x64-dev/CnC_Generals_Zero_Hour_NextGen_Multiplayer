@@ -37,7 +37,7 @@ void NGMP_OnlineServices_RoomsInterface::JoinRoom(int roomIndex, std::function<v
 			EOS_EResult result = EOS_LobbySearch_SetParameter(m_SearchHandle, &ParamOptions);
 			if (result != EOS_EResult::EOS_Success)
 			{
-				OutputDebugString("Failed to set search param");
+				NetworkLog("[NGMP] Failed to set search param");
 			}
 			*/
 		}
@@ -54,7 +54,7 @@ void NGMP_OnlineServices_RoomsInterface::JoinRoom(int roomIndex, std::function<v
 		EOS_EResult res = EOS_LobbySearch_SetLobbyId(m_SearchHandle, &lobbyIdOpts);
 		if (res != EOS_EResult::EOS_Success)
 		{
-			OutputDebugString("Failed to set name search param");
+			NetworkLog("[NGMP] Failed to set name search param");
 		}
 		
 		if (onStartCallback != nullptr)
@@ -104,11 +104,11 @@ void NGMP_OnlineServices_RoomsInterface::JoinRoom(int roomIndex, std::function<v
 							{
 								if (Data->ResultCode == EOS_EResult::EOS_Success)
 								{
-									OutputDebugString("Joined room!");
+									NetworkLog("[NGMP] Joined room!");
 								}
 								else
 								{
-									OutputDebugString("Failed to join room!");
+									NetworkLog("[NGMP] Failed to join room!");
 								}
 							});
 
@@ -125,7 +125,7 @@ void NGMP_OnlineServices_RoomsInterface::JoinRoom(int roomIndex, std::function<v
 				}
 				else
 				{
-					OutputDebugString("Failed to search for Lobbies!");
+					NetworkLog("[NGMP] Failed to search for Lobbies!");
 				}
 			});
 	}
@@ -157,15 +157,15 @@ void NGMP_OnlineServices_RoomsInterface::CreateRoom(int roomIndex)
 
 	EOS_Lobby_CreateLobby(lobbyHandle, createLobbyOpts, (void*)roomIndex, [](const EOS_Lobby_CreateLobbyCallbackInfo* Data)
 		{
-			int roomIndex = (int)Data->ClientData;
+			//int roomIndex = (int)Data->ClientData;
 
 			// TODO_NGMP: If we get a result saying it exists, just join it
 			if (Data->ResultCode == EOS_EResult::EOS_Success)
 			{
 				// TODO_NGMP: We need to search again to get lobby details handle... but we shouldnt just call join again, its hacky
-				NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->JoinRoom(roomIndex, nullptr, nullptr);
+				//NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->JoinRoom(roomIndex, nullptr, nullptr);
 
-				OutputDebugString("Lobby created!\n");
+				NetworkLog("[NGMP] Lobby created!\n");
 
 				if (NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_PendingRoomJoinCompleteCallback != nullptr)
 				{
@@ -175,7 +175,7 @@ void NGMP_OnlineServices_RoomsInterface::CreateRoom(int roomIndex)
 			}
 			else
 			{
-				OutputDebugString("Failed to create lobby!\n");
+				NetworkLog("[NGMP] Failed to create lobby!\n");
 			}
 		});
 }
@@ -205,7 +205,7 @@ std::vector<NetworkRoomMember> NGMP_OnlineServices_RoomsInterface::GetMembersLis
 			if (r != EOS_EResult::EOS_Success)
 			{
 				// TODO_NGMP: Error
-				OutputDebugString("EOS error!\n");
+				NetworkLog("[NGMP] EOS error!\n");
 			}
 			NetworkRoomMember roomMember;
 			roomMember.m_strName = AsciiString(szUserID);

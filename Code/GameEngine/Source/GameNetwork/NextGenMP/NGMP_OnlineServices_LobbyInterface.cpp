@@ -34,7 +34,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 			EOS_EResult result = EOS_LobbySearch_SetParameter(m_SearchHandle, &ParamOptions);
 			if (result != EOS_EResult::EOS_Success)
 			{
-				OutputDebugString("Failed to set search param");
+				NetworkLog("[NGMP] Failed to set search param");
 			}
 			*/
 		}
@@ -114,7 +114,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 							if (r != EOS_EResult::EOS_Success)
 							{
 								// TODO_NGMP: Error
-								OutputDebugString("EOS error!\n");
+								NetworkLog("[NGMP] EOS error!\n");
 							}
 
 							newEntry.strLobbyOwner = AsciiString(szUserID);
@@ -142,7 +142,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 				}
 				else
 				{
-					OutputDebugString("Failed to search for Lobbies!");
+					NetworkLog("[NGMP] Failed to search for Lobbies!");
 				}
 			});
 	}
@@ -176,7 +176,7 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 		{
 			if (Data->ResultCode == EOS_EResult::EOS_Success)
 			{
-				OutputDebugString("Lobby created!\n");
+				NetworkLog("[NGMP] Lobby created!\n");
 
 				// add version param
 				EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -191,7 +191,7 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 				// TODO_NGMP: Handle result properly
 				if (Result != EOS_EResult::EOS_Success)
 				{
-					OutputDebugString("Failed to set search param");
+					NetworkLog("[NGMP] Failed to set search param");
 				}
 
 				// VERSION
@@ -210,7 +210,7 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
 					if (AddResult != EOS_EResult::EOS_Success)
 					{
-						OutputDebugString("Failed to set lobby param");
+						NetworkLog("[NGMP] Failed to set lobby param");
 					}
 				}
 
@@ -233,7 +233,7 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
 					if (AddResult != EOS_EResult::EOS_Success)
 					{
-						OutputDebugString("Failed to set lobby param");
+						NetworkLog("[NGMP] Failed to set lobby param");
 					}
 				}
 
@@ -245,17 +245,17 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 					{
 						if (Data->ResultCode == EOS_EResult::EOS_Success)
 						{
-							OutputDebugString("Lobby Updated!\n");
+							NetworkLog("[NGMP] Lobby Updated!\n");
 						}
 						else
 						{
-							OutputDebugString("Lobby Update failed!\n");
+							NetworkLog("[NGMP] Lobby Update failed!\n");
 						}
 					});
 			}
 			else
 			{
-				OutputDebugString("Failed to create lobby!\n");
+				NetworkLog("[NGMP] Failed to create lobby!\n");
 			}
 
 			// TODO_NGMP: Impl

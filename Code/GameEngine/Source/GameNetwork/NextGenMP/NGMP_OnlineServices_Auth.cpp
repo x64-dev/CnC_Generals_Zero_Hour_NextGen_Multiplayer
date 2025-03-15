@@ -11,7 +11,7 @@ void NGMP_OnlineServices_AuthInterface::Auth()
 
 	if (steamAuthTicket == k_HAuthTicketInvalid || !bSteamOnline)
 	{
-		OutputDebugString("SteamUser()->GetAuthSessionTicket returned invalid auth ticket.");
+		NetworkLog("[NGMP] SteamUser()->GetAuthSessionTicket returned invalid auth ticket.");
 		OnAuthSessionTicketResponse(nullptr);
 
 		// TODO_NGMP: Error out here, we're trying to play online while offline (or steam issues etc)
@@ -38,14 +38,14 @@ void NGMP_OnlineServices_AuthInterface::OnAuthSessionTicketResponse(GetTicketFor
 		}
 		break;
 		case k_EResultNoConnection:
-			OutputDebugString("Calling RequestEncryptedAppTicket while not connected to steam results in this error.\n");
+			NetworkLog("[NGMP] Calling RequestEncryptedAppTicket while not connected to steam results in this error.\n");
 			break;
 		case k_EResultDuplicateRequest:
 			// TODO_NGMP: Dont fail here, just retry again in 10 sec?
-			OutputDebugString("Calling RequestEncryptedAppTicket while there is already a pending request results in this error.\n");
+			NetworkLog("[NGMP] Calling RequestEncryptedAppTicket while there is already a pending request results in this error.\n");
 			break;
 		case k_EResultLimitExceeded:
-			OutputDebugString("Calling RequestEncryptedAppTicket more than once per minute returns this error.\n");
+			NetworkLog("[NGMP] Calling RequestEncryptedAppTicket more than once per minute returns this error.\n");
 			break;
 		}
 	}
@@ -92,7 +92,7 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic()
 			NGMP_OnlineServices_AuthInterface* pAuthInterface = pOnlineServicesMgr->GetAuthInterface();
 			if (Data->ResultCode == EOS_EResult::EOS_Success)
 			{
-				OutputDebugString("EOS Login worked");
+				NetworkLog("[NGMP] EOS Login worked");
 
 				pAuthInterface->OnEpicLoginComplete(Data->LocalUserId);
 			}
@@ -114,7 +114,7 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic()
 					{
 						if (Data->ResultCode == EOS_EResult::EOS_Success)
 						{
-							OutputDebugString("Account Link Complete");
+							NetworkLog("[NGMP] Account Link Complete");
 
 							NGMP_OnlineServices_AuthInterface* pAuthInterface = (NGMP_OnlineServices_AuthInterface*)Data->ClientData;
 							pAuthInterface->OnEpicLoginComplete(Data->LocalUserId);
@@ -128,7 +128,7 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic()
 			}
 			else
 			{
-				OutputDebugString("EOS Login failed\n");
+				NetworkLog("[NGMP] EOS Login failed\n");
 			}
 
 		});
@@ -144,10 +144,10 @@ void NGMP_OnlineServices_AuthInterface::OnEpicLoginComplete(EOS_ProductUserId us
 	if (r != EOS_EResult::EOS_Success)
 	{
 		// TODO_NGMP: Error
-		OutputDebugString("EOS error!\n");
+		NetworkLog("[NGMP] EOS error!\n");
 	}
 
-	OutputDebugString("EOS Logged in!\n");
+	NetworkLog("[NGMP] EOS Logged in!\n");
 	m_strDisplayName = SteamFriends()->GetPersonaName();
 
 	EOS_HP2P P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -184,7 +184,7 @@ void NGMP_OnlineServices_AuthInterface::OnEpicLoginComplete(EOS_ProductUserId us
 			}
 			else
 			{
-				OutputDebugString("NAT Type Query Failed\n");
+				NetworkLog("[NGMP] NAT Type Query Failed\n");
 			}
 		});
 

@@ -45,3 +45,6 @@
 
 // Steam
 #include <steam_api.h>
+
+// Devconsole
+#include "../Console/Console.h"

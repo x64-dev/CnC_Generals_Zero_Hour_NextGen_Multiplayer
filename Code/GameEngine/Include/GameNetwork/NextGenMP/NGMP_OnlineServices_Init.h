@@ -11,6 +11,8 @@ class NGMP_OnlineServices_RoomsInterface;
 #pragma comment(lib, "steam_api64.lib")
 #pragma comment(lib, "sdkencryptedappticket64.lib")
 
+void NetworkLog(const char* fmt, ...);
+
 class NetworkRoom
 {
 public:

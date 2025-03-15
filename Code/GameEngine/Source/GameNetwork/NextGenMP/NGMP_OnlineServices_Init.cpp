@@ -5,7 +5,7 @@ NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager
 
 NGMP_OnlineServicesManager::NGMP_OnlineServicesManager()
 {
-	OutputDebugString("NGMP: Init");
+	NetworkLog("[NGMP] Init");
 	m_pOnlineServicesManager = this;
 
 	m_pAuthInterface = new NGMP_OnlineServices_AuthInterface();
@@ -24,7 +24,7 @@ void NGMP_OnlineServicesManager::Init()
 
 	if (!bSteamInit)
 	{
-		OutputDebugString("NGMP: Steam initialization failed");
+		DevConsole.AddLog("[NGMP] Steam initialization failed");
 	}
 
 	// Init EOS SDK
@@ -50,12 +50,11 @@ void NGMP_OnlineServicesManager::Init()
 		// LOGGING
 		EOS_EResult SetLogCallbackResult = EOS_Logging_SetCallback([](const EOS_LogMessage* Message)
 			{
-				OutputDebugString(Message->Message);
-				OutputDebugString("\n");
+				NetworkLog("[NGMP][EOS] %s", Message->Message);
 			});
 		if (SetLogCallbackResult != EOS_EResult::EOS_Success)
 		{
-			OutputDebugString("NGMP: Failed to set EOS log callback");
+			NetworkLog("[NGMP] Failed to set EOS log callback");
 		}
 		else
 		{
@@ -106,12 +105,12 @@ void NGMP_OnlineServicesManager::Init()
 		fileStream.open(szXAudioDir, std::fstream::in | std::fstream::binary);
 		if (!fileStream.good())
 		{
-			OutputDebugString("NGMP: FATAL ERROR: Failed to locate XAudio DLL");
+			NetworkLog("[NGMP] FATAL ERROR: Failed to locate XAudio DLL");
 			exit(1);
 		}
 		else
 		{
-			OutputDebugString("NGMP: XAudio DLL located successfully");
+			NetworkLog("[NGMP] XAudio DLL located successfully");
 		}
 
 
@@ -139,7 +138,7 @@ void NGMP_OnlineServicesManager::Init()
 		// TODO_NGMP: Handle error
 		if (Result != EOS_EResult::EOS_Success)
 		{
-			OutputDebugString("NGMP: EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer returned an error\n");
+			NetworkLog("[NGMP] EOS_IntegratedPlatform_CreateIntegratedPlatformOptionsContainer returned an error\n");
 		}
 
 		// Configure platform-specific options.
@@ -185,4 +184,19 @@ void NGMP_OnlineServicesManager::Tick()
 	{
 		EOS_Platform_Tick(m_EOSPlatformHandle);
 	}
+}
+
+void NetworkLog(const char* fmt, ...)
+{
+	char buffer[1024];
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(buffer, 1024, fmt, args);
+	buffer[1024 - 1] = 0;
+	va_end(args);
+
+	DevConsole.AddLog(buffer);
+
+	OutputDebugString(buffer);
+	OutputDebugString("\n");
 }
