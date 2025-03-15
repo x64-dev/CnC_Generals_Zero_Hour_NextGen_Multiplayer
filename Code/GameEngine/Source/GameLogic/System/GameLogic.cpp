@@ -4532,6 +4532,34 @@ void GameLogic::loadPostProcess( void )
 
 }  // end loadPostProcess
 
+WWCONSOLE_COMMAND(disconnect, "Disconnects from a game and returns you to the main menu")
+{
+	if (!TheGameLogic->isInGame() || TheShell->isShellActive())
+	{
+		DevConsole.AddLog("You are not in a game!");
+		return;
+	}
+
+	// destroy the quit menu
+	destroyQuitMenu();
+
+	// clear out all the game data
+	if (TheGameLogic->isInMultiplayerGame() && !TheGameLogic->isInSkirmishGame() && !TheGameInfo->isSandbox())
+	{
+		GameMessage* msg = TheMessageStream->appendMessage(GameMessage::MSG_SELF_DESTRUCT);
+		msg->appendBooleanArgument(TRUE);
+	}
+	/*GameMessage *msg =*/ TheMessageStream->appendMessage(GameMessage::MSG_CLEAR_GAME_DATA);
+	if (!TheGameLogic->isInMultiplayerGame())
+		TheGameLogic->setGamePaused(FALSE);
+	// TheGameLogic->clearGameData();
+	// display the menu on top of the shell stack
+  // TheShell->showShell();
+
+	// this will trigger an exit
+  // TheGameEngine->setQuitting( TRUE );
+	TheInGameUI->setClientQuiet(TRUE);
+}
 
 WWCONSOLE_COMMAND(map, "Opens a map")
 {
