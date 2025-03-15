@@ -14,7 +14,7 @@ wwCVar::wwCVar(const std::string& name,
 	, flags(flags)
 	, currentValue(defaultValue)
 {
-	cvarManager.RegisterCVar(this);
+	GetCVarManager().RegisterCVar(this);
 }
 
 const std::string& wwCVar::GetName() const {

@@ -46,7 +46,9 @@ public:
     // Returns true if the given flag is set
     bool IsFlagSet(unsigned int checkFlag) const;
 
+    void ResetChanged() { isChanged = false; }
 private:
+    bool isChanged = false;
     std::string  name;
     std::string  description;
     std::string  defaultValue;

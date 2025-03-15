@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include <iostream>
 
-wwCVarManager cvarManager;
-
 wwCVarManager::wwCVarManager() {
 
 }

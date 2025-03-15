@@ -46,4 +46,7 @@ private:
     std::unordered_map<std::string, wwCVar*> cvars;
 };
 
-extern wwCVarManager cvarManager;
+inline wwCVarManager& GetCVarManager() {
+	static wwCVarManager instance;  // Constructed on first call
+	return instance;
+}

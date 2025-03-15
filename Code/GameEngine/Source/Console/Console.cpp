@@ -197,13 +197,13 @@ void Console::ExecCommand(const char* command_line)
 		}
 
 		
-		wwCVar* cvar = cvarManager.FindCVar(command);
+		wwCVar* cvar = GetCVarManager().FindCVar(command);
 		if (cvar) {
 			// If there are no arguments, maybe just print the current value
 			// Or you can interpret an empty args as resetting or something else
 			if (!args.empty()) {
 				// Set the cvar to the argument's value
-				cvarManager.SetCVar(command, args);
+				GetCVarManager().SetCVar(command, args);
 				AddLog("setting '%s' to '%s'", command.c_str(), cvar->GetString().c_str());
 			}
 			else {
