@@ -8,6 +8,8 @@
 // standard libs
 #include <fstream>
 #include <vector>
+#include <map>
+#include <unordered_map>
 #include <functional>
 
 // ngmp defines

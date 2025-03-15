@@ -503,8 +503,10 @@ void PopulateLobbyPlayerListbox(void)
 {
 	GadgetListBoxReset(listboxLobbyPlayers);
 
-	for (NetworkRoomMember netRoomMember : NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom())
+	for (auto kvPair: NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom())
 	{
+		NetworkRoomMember& netRoomMember = kvPair.second;
+
 		// TODO_NGMP: fill out more
 		PlayerInfo pi;
 		pi.m_name = netRoomMember.m_strName;

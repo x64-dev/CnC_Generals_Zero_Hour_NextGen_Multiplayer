@@ -79,6 +79,8 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic(bool bUsingDevAccount)
 		userlogininfo->ApiVersion = EOS_CONNECT_USERLOGININFO_API_LATEST;
 		userlogininfo->DisplayName = "DevAccount";
 		userlogininfo->NsaIdToken = nullptr;
+
+		m_strDisplayName = "DevAccount";
 	}
 	else
 	{
@@ -119,6 +121,8 @@ void NGMP_OnlineServices_AuthInterface::LoginToEpic(bool bUsingDevAccount)
 			SteamAppTicketString = nullptr;
 			delete[] SteamAppTicketString;
 			// done parsing steam token
+
+			m_strDisplayName = SteamFriends()->GetPersonaName();
 
 			// null here will set display name to the steam name
 			userlogininfo->ApiVersion = EOS_CONNECT_USERLOGININFO_API_LATEST;
@@ -200,7 +204,6 @@ void NGMP_OnlineServices_AuthInterface::OnEpicLoginComplete(EOS_ProductUserId us
 	}
 
 	NetworkLog("[NGMP] EOS Logged in!\n");
-	m_strDisplayName = SteamFriends()->GetPersonaName();
 
 	EOS_HP2P P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
 
