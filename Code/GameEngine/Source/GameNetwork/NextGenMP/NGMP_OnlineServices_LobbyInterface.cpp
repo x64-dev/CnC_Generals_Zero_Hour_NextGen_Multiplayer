@@ -1,5 +1,42 @@
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
+UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyDisplayName()
+{
+	UnicodeString strDisplayName;
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// get a handle to our lobby
+	EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+	opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+	opts.LobbyId = m_strCurrentLobbyID.c_str();
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+
+	EOS_HLobbyDetails LobbyInstHandle;
+	EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+	if (getLobbyHandlResult == EOS_EResult::EOS_Success)
+	{
+		EOS_Lobby_Attribute* attr = nullptr;
+		EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+		copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+		copyAttrOpts.AttrKey = "NAME";
+		EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attr);
+		if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Validate type too, could cause a crash
+			strDisplayName.format(L"%hs", attr->Data->Value.AsUtf8);
+		}
+	}
+	
+	if (strDisplayName.isEmpty())
+	{
+		strDisplayName.format(L"%hs", m_strCurrentLobbyID);
+	}
+	
+
+	return strDisplayName;
+}
+
 void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback)
 {
 	m_PendingSearchLobbyCompleteCallback = onCompleteCallback;

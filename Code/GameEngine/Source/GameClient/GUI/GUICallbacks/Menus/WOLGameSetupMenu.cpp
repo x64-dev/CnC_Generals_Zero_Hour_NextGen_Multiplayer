@@ -1014,6 +1014,8 @@ void WOLDisplaySlotList( void )
 //-------------------------------------------------------------------------------------------------
 void InitWOLGameGadgets( void )
 {
+	ClearGSMessageBoxes();
+
 	// TODO_NGMP
 	//GameSpyStagingRoom *theGameInfo = TheGameSpyInfo->getCurrentStagingRoom();
 	pingImages[0] = TheMappedImageCollection->findImageByName("Ping03");
@@ -1057,9 +1059,7 @@ void InitWOLGameGadgets( void )
 	GameWindow *staticTextTitle = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, staticTextTitleID );
 	if (staticTextTitle)
 	{
-		// TODO_NGMP
-		GadgetStaticTextSetText(staticTextTitle, UnicodeString(L"TODO_NGMP"));
-		//GadgetStaticTextSetText(staticTextTitle, TheGameSpyGame->getGameName());
+		GadgetStaticTextSetText(staticTextTitle, NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentLobbyDisplayName());
 	}
 
 	// TODO_NGMP

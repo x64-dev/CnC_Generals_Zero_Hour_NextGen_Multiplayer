@@ -637,6 +637,8 @@ void PopulateLobbyPlayerListbox(void)
 
 void NGMP_WOLLobbyMenu_CreateLobbyCallback(bool bSuccess)
 {
+	// TODO_NGMP: Handle error case
+
 	buttonPushed = true;
 	nextScreen = "Menus/GameSpyGameOptionsMenu.wnd";
 	TheShell->pop();

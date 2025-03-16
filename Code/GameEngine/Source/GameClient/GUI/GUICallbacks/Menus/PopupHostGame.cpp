@@ -555,6 +555,9 @@ void createGame( void )
 
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
 	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName, md->m_displayName, md->m_numPlayers);
+
+	GSMessageBoxCancel(UnicodeString(L"Creating Lobby"), UnicodeString(L"Lobby Creation is in progress..."), nullptr);
+
 	return;
 
 	// TODO_NGMP: Everything using TheGameSpy%

@@ -24,6 +24,8 @@ public:
 	UnicodeString m_PendingCreation_InitialMap;
 	void CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize);
 
+	UnicodeString GetCurrentLobbyDisplayName();
+
 	void InvokeCreateLobbyCallback(bool bSuccess)
 	{
 		for (auto cb : m_vecCreateLobby_PendingCallbacks)
