@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{77C9A3D8-E54D-31CC-BA4B-957262C3AD3A}</ProjectGuid>
+    <ProjectGuid>{A82C01EA-7C0E-3890-B9ED-85603EAFE73F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -50,22 +50,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Generals\Code\GameEngine\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">GameEngine.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">GameEngineDebug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Internal\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\Generals\Code\GameEngine\Internal\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">GameEngine.dir\Internal\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">GameEngine</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Generals\Code\GameEngine\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GameEngine.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GameEngine</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -84,10 +84,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;BROWSER_DEBUG;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -100,7 +100,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -121,10 +121,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;NDEBUG;_INTERNAL;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;CMAKE_INTDIR=\"Internal\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -137,7 +137,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -159,10 +159,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;IG_DEBUG_STACKTRACE;_RELEASE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\Compression;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\GameSpy;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\DX90SDK\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\..\Libraries\Steamworks\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Include\Precompiled;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Generals\Code\GameEngine\..\Libraries\Include;E:\Generals\Code\GameEngine\..\Libraries\Source;E:\Generals\Code\GameEngine\..\Libraries\Source\Compression;E:\Generals\Code\GameEngine\..\Libraries\Source\GameSpy;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas;E:\Generals\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\Generals\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\Generals\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\Generals\Code\GameEngine\..\Libraries\Steamworks\Include;E:\Generals\Code\GameEngine\Include;E:\Generals\Code\GameEngine\Include\Precompiled;E:\Generals\Code\GameEngine\Source\Precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -174,11 +174,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\CMakeLists.txt">
+    <CustomBuild Include="E:\Generals\Code\GameEngine\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Generals/Code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Generals/Code -BE:/Generals/Code --check-stamp-file E:/Generals/Code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -187,11 +187,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Generals\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule E:/Generals/Code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Generals/Code -BE:/Generals/Code --check-stamp-file E:/Generals/Code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -200,11 +200,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\Generals\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Generals/Code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Generals/Code -BE:/Generals/Code --check-stamp-file E:/Generals/Code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -213,602 +213,602 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Generals\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\Console.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\AudioEventRTS.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\AudioRequest.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\GameAudio.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\GameMusic.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\GameSounds.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Bezier\BezFwdIterator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Bezier\BezierSegment.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\BitFlags.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\CommandLine.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\crc.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\CRCDebug.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\DamageFX.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Dict.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\DiscreteCircle.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\GameEngine.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\GameLOD.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\GameMain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\GlobalData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INI.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIAiData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIAnimation.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIAudioEventInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INICommandButton.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INICommandSet.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIControlBarScheme.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INICrate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIDamageFX.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIDrawGroupInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIGameData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIMapCache.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIMapData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIMappedImage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIMiscAudio.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIModel.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIMultiplayer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIObject.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIParticleSys.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INISpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INITerrain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INITerrainBridge.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INITerrainRoad.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIVideo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIWater.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIWeapon.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\INI\INIWebpageURL.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Language.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\MessageStream.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\MiniLog.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\MultiplayerSettings.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\NameKeyGenerator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\PartitionSolver.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\PerfTimer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RandomValue.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Recorder.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\ActionManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Energy.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Handicap.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\MissionStats.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Money.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Player.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\PlayerList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\PlayerTemplate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\ProductionPrerequisite.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\ResourceGatheringManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Science.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\ScoreKeeper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\SpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\Team.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\RTS\TunnelTracker.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\SkirmishBattleHonors.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\StateMachine.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\StatsCollector.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\ArchiveFile.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\ArchiveFileSystem.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\AsciiString.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\BuildAssistant.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\CDManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Compression.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\CopyProtection.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\CriticalSection.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\DataChunk.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Debug.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Directory.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\DisabledTypes.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\encrypt.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\File.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\FileSystem.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\FunctionLexicon.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\GameCommon.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\GameMemory.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\GameType.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Geometry.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\KindOf.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\List.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\LocalFile.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\LocalFileSystem.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\MemoryInit.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\QuickTrig.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\QuotedPrintable.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Radar.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\RAMFile.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\registry.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\SaveGame\GameState.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\SaveGame\GameStateMap.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Snapshot.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\StackDump.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\StreamingArchiveFile.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\String.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\SubsystemInterface.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Trig.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\UnicodeString.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Upgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\Xfer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\XferCRC.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\XferLoad.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\System\XferSave.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\TerrainTypes.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\DrawModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\Module.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\ModuleFactory.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\Thing.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\ThingFactory.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Thing\ThingTemplate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\UserPreferences.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\version.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Color.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Credits.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Display.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\DisplayString.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\DisplayStringManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Drawable.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Drawable\DrawableManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Drawable\Update\AnimatedParticleSysBoneClientUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Drawable\Update\BeaconClientUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Drawable\Update\SwayClientUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\DrawGroupInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Eva.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\FXList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GameClient.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GameClientDispatch.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GameText.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GlobalLanguage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GraphDraw.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\AnimateWindowManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBar.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarBeacon.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommand.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommandProcessing.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarMultiSelect.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarObserver.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarOCLTimer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarPrintPositions.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarResizer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarScheme.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarStructureInventory.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarUnderConstruction.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\DisconnectMenu\DisconnectMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\EstablishConnectionsMenu\EstablishConnectionsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetCheckBox.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetComboBox.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetHorizontalSlider.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetListBox.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetProgressBar.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetPushButton.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetRadioButton.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetStaticText.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTabControl.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTextEntry.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetVerticalSlider.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameFont.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindowGlobal.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindowManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindowManagerScript.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitions.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitionsStyles.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarCallback.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarPopupDescription.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Diplomacy.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ExtendedMessageBox.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\GeneralsExpPoints.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\IMECandidate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGameChat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGamePopupMessage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\CreditsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DifficultySelect.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DisconnectWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DownloadMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\EstablishConnectionsWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\GameInfoWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\KeyboardOptionsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanGameOptionsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanLobbyMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanMapSelectMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MainMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MapSelectMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\NetworkDirectConnect.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\OptionsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupCommunicator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupHostGame.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupJoinGame.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupLadderSelect.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupPlayerInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupReplay.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupSaveLoad.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\QuitMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ReplayMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ScoreScreen.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SinglePlayerMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishGameOptionsMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishMapSelectMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLBuddyOverlay.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLCustomScoreScreen.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLGameSetupMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLadderScreen.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLobbyMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLocaleSelectPopup.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLoginMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMapSelectMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMessageWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQMScoreScreen.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQuickMatchMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLStatusMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLWelcomeMenu.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\MessageBox.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ReplayControls.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\HeaderTemplate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\IMEManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\LoadScreen.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\ProcessAnimateWindow.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Shell\Shell.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\Shell\ShellMenuScheme.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\WindowLayout.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\WindowVideoManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\GUI\WinInstanceData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\InGameUI.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Input\Keyboard.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Input\Mouse.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\LanguageFilter.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Line2D.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MapUtil.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\CommandXlat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\GUICommandTranslator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\HintSpy.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\HotKey.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\LookAtXlat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\MetaEvent.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\PlaceEventTranslator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\SelectionXlat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\MessageStream\WindowXlat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\RadiusDecal.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\SelectionInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Statistics.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\Anim2D.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\CampaignManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\Debug Displayers\AudioDebugDisplay.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\DebugDisplay.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\Image.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\ParticleSys.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\System\RayEffect.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Terrain\TerrainRoads.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Terrain\TerrainVisual.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\VideoPlayer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\View.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameClient\Water.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AI.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIDock.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIGroup.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIGuard.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIPathfind.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIPlayer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AISkirmishPlayer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AIStates.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\AITNGuard.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\Squad.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\AI\TurretAI.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Map\PolygonTrigger.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Map\SidesList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Map\TerrainLogic.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Armor.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\AutoHealBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\BehaviorModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeScaffoldBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeTowerBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\DumbProjectileBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDamagedBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDeadBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\GenerateMinefieldBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\InstantDeathBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\JetSlowDeathBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\MinefieldBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\OverchargeBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\ParkingPlaceBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\PoisonedBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\POWTruckBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\PrisonBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaCenterBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaTowerBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\RebuildHoleBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\SlowDeathBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\SpawnBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\SupplyWarehouseCripplingBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Behavior\TechBuildingBehavior.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\ActiveBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\BodyModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\HighlanderBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\HiveStructureBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\ImmortalBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\InactiveBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Body\StructureBody.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CollideModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToCarBombCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToHijackedVehicleCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\CrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\HealCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\MoneyCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\SalvageCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ShroudCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\UnitCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\VeterancyCrateCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\FireWeaponCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Collide\SquishCollide.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\CaveContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\GarrisonContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\HealContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\MobNexusContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\OpenContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\OverlordContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\ParachuteContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\RailedTransportContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\TransportContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Contain\TunnelContain.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\CreateModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\GrantUpgradeCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\PreorderCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\SpecialPowerCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\SupplyCenterCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\SupplyWarehouseCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Create\VeterancyGainCreate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Damage\BoneFXDamage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Damage\DamageModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Damage\TransitionDamageFX.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Destroy\DestroyModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\CreateCrateDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\CreateObjectDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\CrushDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\DamDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\DestroyDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\DieModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\EjectPilotDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\FXListDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\KeepObjectDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\RebuildHoleExposeDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\SpecialPowerCompletionDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Die\UpgradeDie.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\ExperienceTracker.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\FiringTracker.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\GhostObject.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectDefectionHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectRepulsorHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectSMCHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectWeaponStatusHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Locomotor.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Object.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\ObjectCreationList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\ObjectTypes.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\PartitionManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SimpleObjectIterator.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\BaikonurLaunchPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashBountyPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashHackSpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CleanupAreaPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DefectorSpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DemoralizeSpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\OCLSpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialAbility.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialPowerModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpyVisionSpecialPower.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\AssaultTransportAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\ChinookAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeliverPayloadAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeployStyleAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DozerAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\HackInternetAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\JetAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\MissileAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\POWTruckAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailedTransportAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailroadGuideAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\SupplyTruckAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\TransportAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WanderAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WorkerAIUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AssistedTargetingUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AutoDepositUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\AutoFindHealingUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\BaseRenerateUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\BattlePlanUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\BoneFXUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\CheckpointUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\CleanupHazardUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\CommandButtonHuntUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DelayedWeaponSetUpgradeUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DeletionUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DemoTrapUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\DockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\PrisonDockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RailedTransportDockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RepairDockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyCenterDockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyWarehouseDockUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DynamicGeometryInfoUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\DynamicShroudClearingRangeUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\EMPUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\EnemyNearUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FireOCLAfterWeaponCooldownUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FireSpreadUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FirestormDynamicGeometryInfoUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FireWeaponUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FlammableUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\FloatUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\HeightDieUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\HelicopterSlowDeathUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\HijackerUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\HordeUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\LaserUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\LifetimeUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\MissileLauncherBuildingUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\MobMemberSlavedUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileSlowDeathUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\OCLUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ParticleUplinkCannonUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\PhysicsUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\PilotFindVehicleUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\PointDefenseLaserUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\PowerPlantUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\DefaultProductionExitUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\QueueProductionExitUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SpawnPointProductionExitUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SupplyCenterProductionExitUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProductionUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProjectileStreamUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ProneUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\RadarUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\RadiusDecalUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\SlavedUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\SpecialAbilityUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\SpyVisionUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\StealthDetectorUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\StealthUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\StickyBombUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\StructureCollapseUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\StructureToppleUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\TensileFormationUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\ToppleUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\UpdateModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Update\WaveGuideUpdate.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\ActiveShroudUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\ArmorUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\CommandSetUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\CostModifierUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\DelayedUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\ExperienceScalarUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\LocomotorSetUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\MaxHealthUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\ObjectCreationUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\PowerPlantUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\RadarUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\StatusBitsUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\StealthUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\SubObjectsUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\UnpauseSpecialPowerUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\UpgradeModule.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponBonusUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponSetUpgrade.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\Weapon.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\Object\WeaponSet.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptActions.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptConditions.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptEngine.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\ScriptEngine\Scripts.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\ScriptEngine\VictoryConditions.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\CaveSystem.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\CrateSystem.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\Damage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\GameLogic.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\GameLogicDispatch.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\RankInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_Helpers.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Init.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Auth.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_LobbyInterface.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_RoomsInterface.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_NetworkBitstream.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Connection.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\DownloadManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\FileTransfer.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\FirewallHelper.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\FrameData.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\FrameDataManager.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\FrameMetrics.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameMessageParser.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpyOverlay.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Chat.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\GSConfig.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\LadderDefs.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\LobbyUtils.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\MainMenuUtils.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\PeerDefs.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\StagingRoomGameInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\BuddyThread.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\GameResultsThread.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PeerThread.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PersistentStorageThread.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PingThread.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\ThreadUtils.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\GUIUtil.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\IPEnumeration.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\LANAPI.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\LANAPICallbacks.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\LANAPIhandlers.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\LANGameInfo.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NAT.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetCommandList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetCommandMsg.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetCommandRef.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetCommandWrapperList.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetMessageStream.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetPacket.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Network.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetworkUtil.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Transport.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\udp.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\User.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled\PreRTS.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\source\Console\Console.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Audio\AudioEventRTS.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Audio\AudioRequest.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Audio\GameAudio.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Audio\GameMusic.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Audio\GameSounds.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Bezier\BezFwdIterator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Bezier\BezierSegment.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\BitFlags.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\CommandLine.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\crc.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\CRCDebug.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\DamageFX.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Dict.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\DiscreteCircle.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\GameEngine.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\GameLOD.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\GameMain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\GlobalData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INI.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIAiData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIAnimation.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIAudioEventInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INICommandButton.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INICommandSet.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIControlBarScheme.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INICrate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIDamageFX.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIDrawGroupInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIGameData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIMapCache.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIMapData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIMappedImage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIMiscAudio.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIModel.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIMultiplayer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIObject.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIParticleSys.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INISpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INITerrain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INITerrainBridge.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INITerrainRoad.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIVideo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIWater.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIWeapon.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\INI\INIWebpageURL.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Language.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\MessageStream.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\MiniLog.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\MultiplayerSettings.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\NameKeyGenerator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\PartitionSolver.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\PerfTimer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RandomValue.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Recorder.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\ActionManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Energy.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Handicap.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\MissionStats.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Money.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Player.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\PlayerList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\PlayerTemplate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\ProductionPrerequisite.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\ResourceGatheringManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Science.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\ScoreKeeper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\SpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\Team.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\RTS\TunnelTracker.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\SkirmishBattleHonors.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\StateMachine.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\StatsCollector.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\ArchiveFile.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\ArchiveFileSystem.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\AsciiString.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\BuildAssistant.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\CDManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Compression.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\CopyProtection.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\CriticalSection.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\DataChunk.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Debug.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Directory.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\DisabledTypes.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\encrypt.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\File.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\FileSystem.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\FunctionLexicon.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\GameCommon.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\GameMemory.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\GameType.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Geometry.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\KindOf.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\List.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\LocalFile.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\LocalFileSystem.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\MemoryInit.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\QuickTrig.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\QuotedPrintable.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Radar.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\RAMFile.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\registry.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\SaveGame\GameState.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\SaveGame\GameStateMap.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Snapshot.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\StackDump.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\StreamingArchiveFile.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\String.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\SubsystemInterface.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Trig.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\UnicodeString.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Upgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\Xfer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\XferCRC.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\XferLoad.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\System\XferSave.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\TerrainTypes.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\DrawModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\Module.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\ModuleFactory.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\Thing.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\ThingFactory.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\Thing\ThingTemplate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\UserPreferences.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Common\version.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Color.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Credits.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Display.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\DisplayString.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\DisplayStringManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Drawable.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Drawable\DrawableManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Drawable\Update\AnimatedParticleSysBoneClientUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Drawable\Update\BeaconClientUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Drawable\Update\SwayClientUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\DrawGroupInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Eva.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\FXList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GameClient.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GameClientDispatch.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GameText.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GlobalLanguage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GraphDraw.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\AnimateWindowManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBar.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarBeacon.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommand.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommandProcessing.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarMultiSelect.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarObserver.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarOCLTimer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarPrintPositions.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarResizer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarScheme.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarStructureInventory.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarUnderConstruction.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\DisconnectMenu\DisconnectMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\EstablishConnectionsMenu\EstablishConnectionsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetCheckBox.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetComboBox.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetHorizontalSlider.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetListBox.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetProgressBar.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetPushButton.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetRadioButton.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetStaticText.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTabControl.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTextEntry.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetVerticalSlider.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameFont.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindowGlobal.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindowManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindowManagerScript.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitions.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitionsStyles.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarCallback.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarPopupDescription.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Diplomacy.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ExtendedMessageBox.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\GeneralsExpPoints.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\IMECandidate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGameChat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGamePopupMessage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\CreditsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DifficultySelect.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DisconnectWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DownloadMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\EstablishConnectionsWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\GameInfoWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\KeyboardOptionsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanGameOptionsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanLobbyMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanMapSelectMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MainMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MapSelectMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\NetworkDirectConnect.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\OptionsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupCommunicator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupHostGame.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupJoinGame.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupLadderSelect.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupPlayerInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupReplay.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupSaveLoad.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\QuitMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ReplayMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ScoreScreen.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SinglePlayerMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishGameOptionsMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishMapSelectMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLBuddyOverlay.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLCustomScoreScreen.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLGameSetupMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLadderScreen.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLobbyMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLocaleSelectPopup.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLoginMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMapSelectMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMessageWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQMScoreScreen.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQuickMatchMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLStatusMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLWelcomeMenu.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\MessageBox.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ReplayControls.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\HeaderTemplate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\IMEManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\LoadScreen.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\ProcessAnimateWindow.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Shell\Shell.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\Shell\ShellMenuScheme.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\WindowLayout.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\WindowVideoManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\GUI\WinInstanceData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\InGameUI.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Input\Keyboard.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Input\Mouse.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\LanguageFilter.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Line2D.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MapUtil.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\CommandXlat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\GUICommandTranslator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\HintSpy.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\HotKey.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\LookAtXlat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\MetaEvent.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\PlaceEventTranslator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\SelectionXlat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\MessageStream\WindowXlat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\RadiusDecal.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\SelectionInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Statistics.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\Anim2D.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\CampaignManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\Debug Displayers\AudioDebugDisplay.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\DebugDisplay.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\Image.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\ParticleSys.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\System\RayEffect.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Terrain\TerrainRoads.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Terrain\TerrainVisual.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\VideoPlayer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\View.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameClient\Water.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AI.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIDock.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIGroup.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIGuard.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIPathfind.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIPlayer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AISkirmishPlayer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AIStates.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\AITNGuard.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\Squad.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\AI\TurretAI.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Map\PolygonTrigger.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Map\SidesList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Map\TerrainLogic.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Armor.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\AutoHealBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\BehaviorModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeScaffoldBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeTowerBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\DumbProjectileBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDamagedBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDeadBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\GenerateMinefieldBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\InstantDeathBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\JetSlowDeathBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\MinefieldBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\OverchargeBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\ParkingPlaceBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\PoisonedBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\POWTruckBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\PrisonBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaCenterBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaTowerBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\RebuildHoleBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\SlowDeathBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\SpawnBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\SupplyWarehouseCripplingBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Behavior\TechBuildingBehavior.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\ActiveBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\BodyModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\HighlanderBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\HiveStructureBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\ImmortalBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\InactiveBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Body\StructureBody.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CollideModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToCarBombCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToHijackedVehicleCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\CrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\HealCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\MoneyCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\SalvageCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ShroudCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\UnitCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\VeterancyCrateCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\FireWeaponCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Collide\SquishCollide.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\CaveContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\GarrisonContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\HealContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\MobNexusContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\OpenContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\OverlordContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\ParachuteContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\RailedTransportContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\TransportContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Contain\TunnelContain.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\CreateModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\GrantUpgradeCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\PreorderCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\SpecialPowerCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\SupplyCenterCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\SupplyWarehouseCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Create\VeterancyGainCreate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Damage\BoneFXDamage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Damage\DamageModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Damage\TransitionDamageFX.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Destroy\DestroyModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\CreateCrateDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\CreateObjectDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\CrushDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\DamDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\DestroyDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\DieModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\EjectPilotDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\FXListDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\KeepObjectDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\RebuildHoleExposeDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\SpecialPowerCompletionDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Die\UpgradeDie.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\ExperienceTracker.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\FiringTracker.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\GhostObject.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectDefectionHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectRepulsorHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectSMCHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectWeaponStatusHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Locomotor.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Object.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\ObjectCreationList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\ObjectTypes.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\PartitionManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SimpleObjectIterator.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\BaikonurLaunchPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashBountyPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashHackSpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CleanupAreaPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DefectorSpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DemoralizeSpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\OCLSpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialAbility.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialPowerModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpyVisionSpecialPower.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\AssaultTransportAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\ChinookAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeliverPayloadAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeployStyleAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DozerAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\HackInternetAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\JetAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\MissileAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\POWTruckAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailedTransportAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailroadGuideAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\SupplyTruckAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\TransportAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WanderAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WorkerAIUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AssistedTargetingUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AutoDepositUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\AutoFindHealingUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\BaseRenerateUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\BattlePlanUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\BoneFXUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\CheckpointUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\CleanupHazardUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\CommandButtonHuntUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DelayedWeaponSetUpgradeUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DeletionUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DemoTrapUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\DockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\PrisonDockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RailedTransportDockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RepairDockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyCenterDockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyWarehouseDockUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DynamicGeometryInfoUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\DynamicShroudClearingRangeUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\EMPUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\EnemyNearUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FireOCLAfterWeaponCooldownUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FireSpreadUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FirestormDynamicGeometryInfoUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FireWeaponUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FlammableUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\FloatUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\HeightDieUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\HelicopterSlowDeathUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\HijackerUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\HordeUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\LaserUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\LifetimeUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\MissileLauncherBuildingUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\MobMemberSlavedUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileSlowDeathUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\OCLUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ParticleUplinkCannonUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\PhysicsUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\PilotFindVehicleUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\PointDefenseLaserUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\PowerPlantUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\DefaultProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\QueueProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SpawnPointProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SupplyCenterProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProductionUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProjectileStreamUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ProneUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\RadarUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\RadiusDecalUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\SlavedUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\SpecialAbilityUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\SpyVisionUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\StealthDetectorUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\StealthUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\StickyBombUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\StructureCollapseUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\StructureToppleUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\TensileFormationUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\ToppleUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\UpdateModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Update\WaveGuideUpdate.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\ActiveShroudUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\ArmorUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\CommandSetUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\CostModifierUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\DelayedUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\ExperienceScalarUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\LocomotorSetUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\MaxHealthUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\ObjectCreationUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\PowerPlantUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\RadarUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\StatusBitsUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\StealthUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\SubObjectsUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\UnpauseSpecialPowerUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\UpgradeModule.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponBonusUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponSetUpgrade.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\Weapon.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\Object\WeaponSet.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptActions.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptConditions.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptEngine.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\ScriptEngine\Scripts.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\ScriptEngine\VictoryConditions.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\CaveSystem.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\CrateSystem.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\Damage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\GameLogic.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\GameLogicDispatch.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameLogic\System\RankInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_Helpers.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Init.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Auth.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_LobbyInterface.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_RoomsInterface.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_NetworkBitstream.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\Connection.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\DownloadManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\FileTransfer.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\FirewallHelper.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\FrameData.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\FrameDataManager.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\FrameMetrics.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameMessageParser.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpyOverlay.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Chat.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\GSConfig.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\LadderDefs.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\LobbyUtils.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\MainMenuUtils.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\PeerDefs.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\StagingRoomGameInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\BuddyThread.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\GameResultsThread.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PeerThread.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PersistentStorageThread.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PingThread.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\ThreadUtils.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\GUIUtil.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\IPEnumeration.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\LANAPI.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\LANAPICallbacks.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\LANAPIhandlers.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\LANGameInfo.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NAT.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetCommandList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetCommandMsg.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetCommandRef.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetCommandWrapperList.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetMessageStream.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetPacket.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\Network.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\NetworkUtil.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\Transport.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\udp.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\User.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
+    <ClCompile Include="E:\Generals\Code\GameEngine\Source\Precompiled\PreRTS.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\ZERO_CHECK.vcxproj">
-      <Project>{0CA103F7-5616-3CCD-919F-918763DC9133}</Project>
+    <ProjectReference Include="E:\Generals\Code\ZERO_CHECK.vcxproj">
+      <Project>{AF7CD870-DCB2-3A15-9C4B-B0EF84FFEF7E}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\Compression\Compression.vcxproj">
-      <Project>{01EAA7D9-ADCD-3D85-90BD-03E8C038482D}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\Compression\Compression.vcxproj">
+      <Project>{9B752D19-E403-3735-A748-4C21D31FDBF3}</Project>
       <Name>Compression</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngineDevice\GameEngineDevice.vcxproj">
-      <Project>{6D303BDF-E9D1-3377-9C3A-8B885D8895C1}</Project>
+    <ProjectReference Include="E:\Generals\Code\GameEngineDevice\GameEngineDevice.vcxproj">
+      <Project>{22C6B8F4-C003-3B9F-AD49-AA0A4DB1C089}</Project>
       <Name>GameEngineDevice</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameRenderer\GameRenderer.vcxproj">
-      <Project>{EC271BC7-4FF8-3768-8870-C49A688D3269}</Project>
+    <ProjectReference Include="E:\Generals\Code\GameRenderer\GameRenderer.vcxproj">
+      <Project>{60025E81-9619-353C-B124-22F1ADFC9C22}</Project>
       <Name>GameRenderer</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\WWDebug\WWDebug.vcxproj">
-      <Project>{DE64F5F6-DBAF-3D34-9A2F-48D2832587DD}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\WWDebug\WWDebug.vcxproj">
+      <Project>{8B574F75-8B4F-30A0-866B-77A30257E689}</Project>
       <Name>WWDebug</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
-      <Project>{0254EF69-21C9-396E-A9D1-5E635FFD3C71}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
+      <Project>{E4D61A1D-D68C-3E7B-A743-18F75B90220B}</Project>
       <Name>WWDownload</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\ww3d2\ww3d2.vcxproj">
-      <Project>{7956F3A0-F9FF-340A-B3DC-FB768BEA1600}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\ww3d2\ww3d2.vcxproj">
+      <Project>{4DAB5481-8158-3D15-9300-F4F228AC6DE8}</Project>
       <Name>ww3d2</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\WWLib\wwlib.vcxproj">
-      <Project>{C042CC38-48D3-3A31-8A50-9143F48387FE}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\WWLib\wwlib.vcxproj">
+      <Project>{F0B82BE8-CE63-3099-9846-D83802BE6F80}</Project>
       <Name>wwlib</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
-      <Project>{F1A89042-07A7-335C-89AB-02FD49B10F0E}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
+      <Project>{720E2F59-721D-3AC6-9A20-FA690EAF382E}</Project>
       <Name>wwmath</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
-      <Project>{962F4176-A053-30C2-AB54-36E5DBD5F344}</Project>
+    <ProjectReference Include="E:\Generals\Code\Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
+      <Project>{B4E1FCC3-2449-3AFC-97B0-8316E40807C8}</Project>
       <Name>wwsaveload</Name>
     </ProjectReference>
   </ItemGroup>
