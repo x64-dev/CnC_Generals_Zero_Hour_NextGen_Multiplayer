@@ -1,4 +1,9 @@
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_Hello.h"
+#include "GameNetwork/NextGenMP/NGMP_NetworkPacket.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.h"
+#include "GameNetwork/NextGenMP/NGMP_NetworkBitstream.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.h"
 
 NGMP_OnlineServices_RoomsInterface::NGMP_OnlineServices_RoomsInterface()
 {
@@ -304,21 +309,7 @@ void NGMP_OnlineServices_RoomsInterface::SendChatMessageToCurrentRoom(UnicodeStr
 	AsciiString strChatMsg;
 	strChatMsg.translate(strChatMsgUnicode);
 
-	std::vector<uint8_t> vecBytes;
-
-	// packet id 
-	vecBytes.push_back(2);
-
-	uint8_t msgLen = strChatMsg.getLength();
-
-	// write len
-	vecBytes.push_back(msgLen);
-
-	// write str
-	for (int i = 0; i < msgLen; ++i)
-	{
-		vecBytes.push_back(strChatMsg.getCharAt(i));
-	}
+	NetRoom_ChatMessagePacket chatPacket(strChatMsg);
 
 	std::vector<EOS_ProductUserId> vecUsers;
 	for (auto kvPair : m_mapMembers)
@@ -326,7 +317,7 @@ void NGMP_OnlineServices_RoomsInterface::SendChatMessageToCurrentRoom(UnicodeStr
 		vecUsers.push_back(kvPair.first);
 	}
 
-	m_netRoomMesh.SendToMesh(vecBytes, vecUsers);
+	m_netRoomMesh.SendToMesh(chatPacket, vecUsers);
 }
 
 void NGMP_OnlineServices_RoomsInterface::ApplyLocalUserPropertiesToCurrentNetworkRoom()
@@ -390,29 +381,29 @@ void NGMP_OnlineServices_RoomsInterface::ApplyLocalUserPropertiesToCurrentNetwor
 
 void NGMP_OnlineServices_NetworkRoomMesh::SendHelloMsg(EOS_ProductUserId targetUser)
 {
-	std::vector<uint8_t> vecBytes;
-	vecBytes.push_back(0);
+	NetRoom_HelloPacket helloPacket;
 
 	std::vector<EOS_ProductUserId> vecUsers;
 	vecUsers.push_back(targetUser);
 
-	SendToMesh(vecBytes, vecUsers);
+	SendToMesh(helloPacket, vecUsers);
 }
 
 void NGMP_OnlineServices_NetworkRoomMesh::SendHelloAckMsg(EOS_ProductUserId targetUser)
 {
-	std::vector<uint8_t> vecBytes;
-	vecBytes.push_back(1);
+	NetRoom_HelloAckPacket helloAckPacket;
 
 	std::vector<EOS_ProductUserId> vecUsers;
 	vecUsers.push_back(targetUser);
 
-	SendToMesh(vecBytes, vecUsers);
+	SendToMesh(helloAckPacket, vecUsers);
 }
 
-void NGMP_OnlineServices_NetworkRoomMesh::SendToMesh(std::vector<uint8_t> vecPacketBytes, std::vector<EOS_ProductUserId> vecTargetUsers)
+void NGMP_OnlineServices_NetworkRoomMesh::SendToMesh(NetworkPacket& packet, std::vector<EOS_ProductUserId> vecTargetUsers)
 {
 	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	CBitStream* pBitStream = packet.Serialize();
 
 	for (EOS_ProductUserId targetUser : vecTargetUsers)
 	{
@@ -422,8 +413,8 @@ void NGMP_OnlineServices_NetworkRoomMesh::SendToMesh(std::vector<uint8_t> vecPac
 		sendPacketOptions.RemoteUserId = targetUser;
 		sendPacketOptions.SocketId = &m_SockID;
 		sendPacketOptions.Channel = 1;
-		sendPacketOptions.DataLengthBytes = (uint32_t)vecPacketBytes.size();
-		sendPacketOptions.Data = (void*)vecPacketBytes.data();
+		sendPacketOptions.DataLengthBytes = (uint32_t)pBitStream->GetNumBytesUsed();
+		sendPacketOptions.Data = (void*)pBitStream->GetRawBuffer();
 		sendPacketOptions.bAllowDelayedDelivery = true;
 		sendPacketOptions.Reliability = EOS_EPacketReliability::EOS_PR_ReliableOrdered;
 		sendPacketOptions.bDisableAutoAcceptConnection = false;
@@ -435,7 +426,7 @@ void NGMP_OnlineServices_NetworkRoomMesh::SendToMesh(std::vector<uint8_t> vecPac
 		char szEOSUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
 		int32_t outLenLocal = sizeof(szEOSUserID);
 		EOS_ProductUserId_ToString(targetUser, szEOSUserID, &outLenLocal);
-		NetworkLog("[NGMP]: Sending Packet with %d bytes to %s with result %d", vecPacketBytes.size(), szEOSUserID, result);
+		NetworkLog("[NGMP]: Sending Packet with %d bytes to %s with result %d", pBitStream->GetNumBytesUsed(), szEOSUserID, result);
 	}
 }
 
@@ -462,8 +453,7 @@ void NGMP_OnlineServices_NetworkRoomMesh::Tick()
 	uint32 numBytes = 0;
 	while (EOS_P2P_GetNextReceivedPacketSize(P2PHandle, &sizeOptions, &numBytes) == EOS_EResult::EOS_Success)
 	{
-		std::vector<uint8_t> vecBytes = std::vector<uint8_t>();
-		vecBytes.resize(numBytes);
+		CBitStream bitstream(numBytes);
 
 		EOS_P2P_ReceivePacketOptions options;
 		options.ApiVersion = EOS_P2P_RECEIVEPACKET_API_LATEST;
@@ -474,7 +464,7 @@ void NGMP_OnlineServices_NetworkRoomMesh::Tick()
 		EOS_ProductUserId outRemotePeerID = nullptr;
 		EOS_P2P_SocketId outSocketID;
 		uint8_t outChannel = 0;
-		EOS_EResult result = EOS_P2P_ReceivePacket(P2PHandle, &options, &outRemotePeerID, &outSocketID, &outChannel, (void*)vecBytes.data(), &numBytes);
+		EOS_EResult result = EOS_P2P_ReceivePacket(P2PHandle, &options, &outRemotePeerID, &outSocketID, &outChannel, (void*)bitstream.GetRawBuffer(), &numBytes);
 
 		if (result == EOS_EResult::EOS_Success)
 		{
@@ -484,31 +474,27 @@ void NGMP_OnlineServices_NetworkRoomMesh::Tick()
 			EOS_ProductUserId_ToString(outRemotePeerID, szEOSUserID, &outLenLocal);
 			NetworkLog("[NGMP]: Received %d bytes from user %s", numBytes, szEOSUserID);
 
-			uint8_t packetID = vecBytes.data()[0];
+			EPacketID packetID = bitstream.Read<EPacketID>();
 
-			if (packetID == 0) // hello
+			if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO)
 			{
+				NetRoom_HelloPacket helloPacket(bitstream);
+
 				NetworkLog("[NGMP]: Got hello from %s, sending ack", szEOSUserID);
 				SendHelloAckMsg(outRemotePeerID);
 			}
-			else if (packetID == 1) // hello ack
+			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO_ACK)
 			{
+				NetRoom_HelloAckPacket helloAckPacket(bitstream);
+
 				NetworkLog("[NGMP]: Received ack from %s, we're now connected", szEOSUserID);
 			}
-			else if (packetID == 2) // chat msg
+			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_CHAT_MSG)
 			{
-				// parse msg
+				NetRoom_ChatMessagePacket chatPacket(bitstream);
+
 				// TODO_NGMP: Support longer msgs
-				uint8_t msgLen = vecBytes.data()[1];
-
-				// TODO_NGMP: This is super ugly and hacky.
-				std::vector<char> vecMsg;
-				vecMsg.resize(msgLen + 1);
-
-				memset(vecMsg.data(), 0, vecMsg.size());
-				memcpy(vecMsg.data(), (vecBytes.data() + 2), msgLen);
-
-				NetworkLog("[NGMP]: Received chat message of len %d: %s", msgLen, vecMsg.data());
+				NetworkLog("[NGMP]: Received chat message of len %d: %s", chatPacket.GetMsg().length(), chatPacket.GetMsg().c_str());
 
 				// determine the username
 				std::map<EOS_ProductUserId, NetworkRoomMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom();
@@ -516,7 +502,7 @@ void NGMP_OnlineServices_NetworkRoomMesh::Tick()
 				if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
 				{
 					UnicodeString str;
-					str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), vecMsg.data());
+					str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
 					NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_OnChatCallback(str);
 				}
 				else

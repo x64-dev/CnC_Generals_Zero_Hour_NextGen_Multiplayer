@@ -28,7 +28,7 @@ public:
 
 	void SendHelloMsg(EOS_ProductUserId targetUser);
 	void SendHelloAckMsg(EOS_ProductUserId targetUser);
-	void SendToMesh(std::vector<uint8_t> vecPacketBytes, std::vector<EOS_ProductUserId> vecTargetUsers);
+	void SendToMesh(NetworkPacket& packet, std::vector<EOS_ProductUserId> vecTargetUsers);
 	void ConnectToMesh(const char* szRoomID);
 
 	void Tick();

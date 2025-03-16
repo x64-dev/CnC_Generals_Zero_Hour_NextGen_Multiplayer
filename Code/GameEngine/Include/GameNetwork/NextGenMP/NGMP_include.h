@@ -1,5 +1,7 @@
 #pragma once
 
+void NetworkLog(const char* fmt, ...);
+
 // common game engine includes
 #include "common/gsPlatformUtil.h"
 #include "Common/UnicodeString.h"
@@ -14,6 +16,8 @@
 
 // ngmp defines
 #include "GameNetwork/NextGenMP/NextGenMP_defines.h"
+#include "GameNetwork/NextGenMP/NGMP_NetworkPacket.h"
+#include "GameNetwork/NextGenMP/NGMP_NetworkBitstream.h"
 
 // EOS
 #include <eos_p2p_types.h>

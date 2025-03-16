@@ -71,19 +71,16 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;_DEBUG;BROWSER_DEBUG;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;BROWSER_DEBUG;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
@@ -110,15 +107,13 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;NDEBUG;_INTERNAL;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION;CMAKE_INTDIR="Internal"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -148,15 +143,13 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_LIB;Z_PREFIX;IG_DEBUG_STACKTRACE;_RELEASE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -719,10 +712,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\GameLogic.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\GameLogicDispatch.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameLogic\System\RankInfo.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_Helpers.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Init.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_Auth.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_LobbyInterface.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_OnlineServices_RoomsInterface.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_NetworkBitstream.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Connection.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />
