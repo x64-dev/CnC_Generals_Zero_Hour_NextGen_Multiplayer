@@ -116,9 +116,92 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 								// TODO_NGMP: Error
 								NetworkLog("[NGMP] EOS error!\n");
 							}
+							newEntry.strLobbyOwnerID = AsciiString(szUserID);
 
-							newEntry.strLobbyOwner = AsciiString(szUserID);
-							newEntry.strLobbyName = SessionInfo->LobbyId;
+							// display name
+							{
+								// TODO_NGMP: Handle missing lobby properties
+
+								EOS_Lobby_Attribute* attr = nullptr;
+								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+								copyAttrOpts.AttrKey = "NAME";
+								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
+								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+								{
+									// TODO_NGMP: Validate type too, could cause a crash
+									newEntry.strLobbyName = attr->Data->Value.AsUtf8;
+								}
+								else
+								{
+									// TODO_NGMP: Maybe dont return these until it resolves?
+									newEntry.strLobbyName = SessionInfo->LobbyId;
+								}
+							}
+							
+							// owner name
+							{
+								// TODO_NGMP: Handle missing lobby properties
+
+								EOS_Lobby_Attribute* attr = nullptr;
+								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+								copyAttrOpts.AttrKey = "OWNER_NAME";
+								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
+								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+								{
+									// TODO_NGMP: Validate type too, could cause a crash
+									newEntry.strLobbyOwnerName = attr->Data->Value.AsUtf8;
+								}
+								else
+								{
+									// TODO_NGMP: Maybe dont return these until it resolves?
+									newEntry.strLobbyOwnerName = newEntry.strLobbyOwnerID;
+								}
+							}
+
+							// map name
+							{
+								// TODO_NGMP: Handle missing lobby properties
+
+								EOS_Lobby_Attribute* attr = nullptr;
+								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+								copyAttrOpts.AttrKey = "MAP";
+								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
+								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+								{
+									// TODO_NGMP: Validate type too, could cause a crash
+									newEntry.strMapName = attr->Data->Value.AsUtf8;
+								}
+								else
+								{
+									// TODO_NGMP: Maybe dont return these until it resolves?
+									newEntry.strMapName = SessionInfo->LobbyId;
+								}
+							}
+
+							// NAT
+							{
+								// TODO_NGMP: Handle missing lobby properties
+
+								EOS_Lobby_Attribute* attr = nullptr;
+								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+								copyAttrOpts.AttrKey = "NAT";
+								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
+								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+								{
+									// TODO_NGMP: Validate type too, could cause a crash
+									newEntry.NATType = (NGMP_ENATType)attr->Data->Value.AsInt64;
+								}
+								else
+								{
+									// TODO_NGMP: Maybe dont return these until it resolves?
+									newEntry.NATType = NGMP_ENATType::NAT_TYPE_UNDETERMINED;
+								}
+							}
+							
 							newEntry.numMembers = SessionInfo->MaxMembers - SessionInfo->AvailableSlots;
 							newEntry.maxMembers = SessionInfo->MaxMembers;
 
@@ -148,9 +231,41 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 	}
 }
 
-void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
+bool NGMP_OnlineServices_LobbyInterface::IsHost()
+{
+	if (!m_strCurrentLobbyID.empty())
+	{
+		EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+		// Get handle to current lobby
+		EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+		opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+		opts.LobbyId = m_strCurrentLobbyID.c_str();
+		opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+		EOS_HLobbyDetails LobbyInstHandle = nullptr;
+		EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+		if (getLobbyHandlResult == EOS_EResult::EOS_Success && LobbyInstHandle != nullptr)
+		{
+			EOS_LobbyDetails_GetLobbyOwnerOptions getLobbyOwnerOpts;
+			getLobbyOwnerOpts.ApiVersion = EOS_LOBBYDETAILS_GETLOBBYOWNER_API_LATEST;
+
+			EOS_ProductUserId currentLobbyHost = EOS_LobbyDetails_GetLobbyOwner(LobbyInstHandle, &getLobbyOwnerOpts);
+			return currentLobbyHost == NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return false;
+}
+
+void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize)
 {
 	m_PendingCreation_LobbyName = strLobbyName;
+	m_PendingCreation_InitialMap = strInitialMap;
 
 	// TODO_NGMP: Correct values
 	EOS_HLobby lobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -158,10 +273,10 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 	EOS_Lobby_CreateLobbyOptions* createLobbyOpts = new EOS_Lobby_CreateLobbyOptions();
 	createLobbyOpts->ApiVersion = EOS_LOBBY_CREATELOBBY_API_LATEST;
 	createLobbyOpts->LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
-	createLobbyOpts->MaxLobbyMembers = 4;
+	createLobbyOpts->MaxLobbyMembers = initialMaxSize;
 	createLobbyOpts->PermissionLevel = EOS_ELobbyPermissionLevel::EOS_LPL_PUBLICADVERTISED;
 	createLobbyOpts->bPresenceEnabled = false;
-	createLobbyOpts->BucketId = "TODO_NGMP";
+	createLobbyOpts->BucketId = "CUSTOM_MATCH";
 	createLobbyOpts->bDisableHostMigration = true; // Generals doesnt support host migration during lobby... maybe we should fix that
 	createLobbyOpts->bEnableRTCRoom = false;
 	createLobbyOpts->LocalRTCOptions = nullptr;
@@ -176,7 +291,9 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 		{
 			if (Data->ResultCode == EOS_EResult::EOS_Success)
 			{
-				NetworkLog("[NGMP] Lobby created!\n");
+				NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->SetCurrentLobbyID(Data->LobbyId);
+				
+				NetworkLog("[NGMP] Lobby created with ID %s!\n", Data->LobbyId);
 
 				// add version param
 				EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -225,6 +342,71 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName)
 					AsciiString strLobbyName = AsciiString();
 					strLobbyName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_LobbyName);
 					AttributeData.Value.AsUtf8 = strLobbyName.str();
+
+					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
+					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+					AddAttributeModOptions.Attribute = &AttributeData;
+
+					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
+					if (AddResult != EOS_EResult::EOS_Success)
+					{
+						NetworkLog("[NGMP] Failed to set lobby param");
+					}
+				}
+
+				// OWNER NAME
+				{
+					EOS_LobbyModification_AddAttributeOptions AddAttributeModOptions;
+					EOS_Lobby_AttributeData AttributeData;
+					AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+					AttributeData.Key = "OWNER_NAME";
+					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
+
+					AttributeData.Value.AsUtf8 = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetDisplayName().str();
+
+					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
+					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+					AddAttributeModOptions.Attribute = &AttributeData;
+
+					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
+					if (AddResult != EOS_EResult::EOS_Success)
+					{
+						NetworkLog("[NGMP] Failed to set lobby param");
+					}
+				}
+
+				// MAP
+				{
+					EOS_LobbyModification_AddAttributeOptions AddAttributeModOptions;
+					EOS_Lobby_AttributeData AttributeData;
+					AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+					AttributeData.Key = "MAP";
+					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
+;
+					AsciiString strMapName = AsciiString();
+					strMapName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_InitialMap);
+					AttributeData.Value.AsUtf8 = strMapName.str();
+
+					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
+					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+					AddAttributeModOptions.Attribute = &AttributeData;
+
+					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
+					if (AddResult != EOS_EResult::EOS_Success)
+					{
+						NetworkLog("[NGMP] Failed to set lobby param");
+					}
+				}
+
+				// NAT TYPE
+				{
+					EOS_LobbyModification_AddAttributeOptions AddAttributeModOptions;
+					EOS_Lobby_AttributeData AttributeData;
+					AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+					AttributeData.Key = "NAT";
+					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_INT64;
+					;
+					AttributeData.Value.AsInt64 = NGMP_OnlineServicesManager::GetInstance()->GetNATType();
 
 					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
 					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;

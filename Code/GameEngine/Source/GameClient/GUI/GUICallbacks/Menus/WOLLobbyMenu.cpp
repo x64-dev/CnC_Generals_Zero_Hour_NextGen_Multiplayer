@@ -234,6 +234,7 @@ static void playerTooltip(GameWindow *window,
 													UnsignedInt mouse)
 {
 	// TODO_NGMP: Support all of this again
+	TheMouse->setCursorTooltip(UnicodeString(L"TODO_NGMP"), -1, NULL, 1.5f); // the text and width are the only params used.  the others are the default values.
 	return;
 
 	Int x, y, row, col;

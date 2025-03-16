@@ -537,11 +537,12 @@ static Int insertGame( GameWindow *win, NGMP_LobbyInfo& lobbyInfo, Bool showMap 
 		//gameColor = GameSpyColor[GSCOLOR_GAME_CRCMISMATCH];
 	}
 	UnicodeString gameName;
-	gameName.translate(lobbyInfo.strLobbyName);
+	gameName.format(L"%hs (%hs)", lobbyInfo.strLobbyName.str(), lobbyInfo.strLobbyOwnerName.str());
+
 	int numPlayers = lobbyInfo.numMembers;
 	int maxPlayers = lobbyInfo.maxMembers;
 
-	AsciiString lobbyMapName = AsciiString("Homeland Alliance");
+	AsciiString lobbyMapName = lobbyInfo.strMapName;
 	AsciiString ladder = AsciiString("TODO_NGMP");
 	USHORT ladderPort = 1;
 	int gameID = 0;

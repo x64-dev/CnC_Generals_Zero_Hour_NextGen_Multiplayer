@@ -63,6 +63,8 @@
 #include "GameNetwork/GUIUtil.h"
 #include "GameNetwork/GameSpy/GSConfig.h"
 
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+
 void WOLDisplaySlotList( void );
 
 #ifdef _INTERNAL
@@ -302,8 +304,9 @@ void WOLPositionStartSpots( void )
 	} else {
 		DEBUG_ASSERTCRASH(win != NULL, ("no map preview window"));
 
-		// TODO_NGMP
-		//positionStartSpots( TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition, win);
+		// TODO_NGMP: Correct map, not default
+		AsciiString map = getDefaultMap(true);
+		positionStartSpots( map, buttonMapStartPosition, win);
 	}
 }
 static void savePlayerInfo( void )
@@ -336,6 +339,9 @@ static void playerTooltip(GameWindow *window,
 													WinInstanceData *instData,
 													UnsignedInt mouse)
 {
+	// TODO_NGMP
+	return;
+
 	Int slotIdx = -1;
 	for (Int i=0; i<MAX_SLOTS; ++i)
 	{
@@ -908,24 +914,26 @@ static void StartPressed(void)
 //-------------------------------------------------------------------------------------------------
 void WOLDisplayGameOptions( void )
 {
-	// TODO_NGMP
-
-	/*
-	GameSpyStagingRoom *theGame = TheGameSpyInfo->getCurrentStagingRoom();
-	if (!parentWOLGameSetup || !theGame)
+	if (!parentWOLGameSetup)
 		return;
 
-	const GameSlot *localSlot = NULL;
-	if (theGame->getLocalSlotNum() >= 0)
-		localSlot = theGame->getConstSlot(theGame->getLocalSlotNum());
+	// TODO_NGMP: Use gameslots again
+	//const GameSlot *localSlot = NULL;
+	//if (theGame->getLocalSlotNum() >= 0)
+	//	localSlot = theGame->getConstSlot(theGame->getLocalSlotNum());
 
-	const MapMetaData *md = TheMapCache->findMap(TheGameSpyInfo->getCurrentStagingRoom()->getMap());
-	if (md && localSlot && localSlot->hasMap())
+	// TODO_NGMP: Correct map, not default
+	AsciiString map = getDefaultMap(true);
+	const MapMetaData *md = TheMapCache->findMap(map);
+	//if (md && localSlot && localSlot->hasMap()) // TODO_NGMP
+	if (md != nullptr)
 	{
 		GadgetStaticTextSetText(textEntryMapDisplay, md->m_displayName);
 	}
 	else
 	{
+		// TODO_NGMP
+		/*
 		AsciiString s = TheGameSpyInfo->getCurrentStagingRoom()->getMap();
 		if (s.reverseFind('\\'))
 		{
@@ -934,10 +942,12 @@ void WOLDisplayGameOptions( void )
 		UnicodeString mapDisplay;
 		mapDisplay.translate(s);
 		GadgetStaticTextSetText(textEntryMapDisplay, mapDisplay);
+		*/
 	}
 	WOLPositionStartSpots();
-	updateMapStartSpots(TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition);
-	*/
+
+	// TODO_NGMP
+	//updateMapStartSpots(TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition);
 }
 
 //  -----------------------------------------------------------------------------------------
@@ -1075,9 +1085,7 @@ void InitWOLGameGadgets( void )
 		staticTextPlayer[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, staticTextPlayerID[i] );
 		staticTextPlayer[i]->winSetTooltipFunc(playerTooltip);
 		
-		// TODO_NGMP
-		//if (TheGameSpyInfo->amIHost())
-		bool bIsHost = true;
+		bool bIsHost = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost();
 		if (bIsHost)
 			staticTextPlayer[i]->winHide(TRUE);
 
@@ -1263,7 +1271,7 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	//GameSpyGameSlot *hostSlot = game->getGameSpySlot(0);
 	//hostSlot->setAccept();
 
-	bool bIsHost = true;
+	bool bIsHost = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost();
 
 	if (bIsHost)
 	{

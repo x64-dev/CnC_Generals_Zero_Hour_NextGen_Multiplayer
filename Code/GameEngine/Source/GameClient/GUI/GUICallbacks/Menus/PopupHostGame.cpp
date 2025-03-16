@@ -72,6 +72,7 @@
 #include "Common/CustomMatchPreferences.h"
 #include "Common/LadderPreferences.h"
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include <GameClient/MapUtil.h>
 
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////
@@ -320,7 +321,7 @@ void PopupHostGameInit( WindowLayout *layout, void *userData )
 	textEntryGameName = TheWindowManager->winGetWindowFromId(parentPopup, textEntryGameNameID);
 	UnicodeString name;
 	//name.translate(TheGameSpyInfo->getLocalName());
-	name.translate("TODO_NGMP");
+	name.translate("Generals NextGen Multiplayer Lobby");
 	GadgetTextEntrySetText(textEntryGameName, name);
 
 	textEntryGameDescriptionID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:TextEntryGameDescription"));
@@ -548,8 +549,12 @@ WindowMsgHandledType PopupHostGameSystem( GameWindow *window, UnsignedInt msg, W
 
 void createGame( void )
 {
+	// TODO_NGMP: Support 'favorite map' again
+	AsciiString defaultMap = getDefaultMap(true);
+	const MapMetaData* md = TheMapCache->findMap(defaultMap);
+
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
-	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName);
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName, md->m_displayName, md->m_numPlayers);
 	return;
 
 	// TODO_NGMP: Everything using TheGameSpy%

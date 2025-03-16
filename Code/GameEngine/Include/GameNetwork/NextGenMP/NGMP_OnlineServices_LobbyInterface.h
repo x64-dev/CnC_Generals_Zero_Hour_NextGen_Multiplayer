@@ -5,7 +5,10 @@
 struct NGMP_LobbyInfo
 {
 	AsciiString strLobbyName;
-	AsciiString strLobbyOwner;
+	AsciiString strLobbyOwnerName;
+	AsciiString strLobbyOwnerID;
+	NGMP_ENATType NATType;
+	AsciiString strMapName;
 	int numMembers;
 	int maxMembers;
 };
@@ -18,7 +21,8 @@ public:
 	void SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback);
 
 	UnicodeString m_PendingCreation_LobbyName;
-	void CreateLobby(UnicodeString strLobbyName);
+	UnicodeString m_PendingCreation_InitialMap;
+	void CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize);
 
 	void InvokeCreateLobbyCallback(bool bSuccess)
 	{
@@ -35,6 +39,11 @@ public:
 		m_vecCreateLobby_PendingCallbacks.push_back(callback);
 	}
 
+	bool IsHost();
+	void SetCurrentLobbyID(const char* szLobbyID) { m_strCurrentLobbyID = std::string(szLobbyID); }
+
 private:
 	std::vector<std::function<void(bool)>> m_vecCreateLobby_PendingCallbacks = std::vector<std::function<void(bool)>>();
+
+	std::string m_strCurrentLobbyID = "";
 };
