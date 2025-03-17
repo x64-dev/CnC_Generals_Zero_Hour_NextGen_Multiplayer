@@ -83,6 +83,10 @@ add_library(wwlib STATIC
     # _mono.h
 )
 
+set_target_properties(wwlib PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(wwlib PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
 )

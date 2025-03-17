@@ -403,13 +403,12 @@ struct Coord3D
 						z == r.z);
 	}
 
-	Bool operator==( const Coord3D &r )
-	{
-		return (x == r.x &&
-						y == r.y &&
-						z == r.z);
-	}
 };
+
+constexpr bool operator==(const Coord3D& lhs, const Coord3D& rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+}
 
 struct ICoord3D 
 {

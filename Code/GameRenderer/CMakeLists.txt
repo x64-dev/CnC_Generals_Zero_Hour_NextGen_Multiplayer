@@ -37,6 +37,10 @@ add_library(GameRenderer STATIC
     ${GAMERENDERER_HEADERS}
 )
 
+set_target_properties(GameRenderer PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(GameRenderer PRIVATE
     .
     ../Libraries/DX90SDK/Include

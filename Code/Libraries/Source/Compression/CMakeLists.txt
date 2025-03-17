@@ -38,6 +38,10 @@ add_library(Compression STATIC
     CompressionManager.cpp
 )
 
+set_target_properties(Compression PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(Compression PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../include
 )

@@ -344,6 +344,9 @@ PrimitiveAnimationChannelClass<T>::Load_Variables (ChunkLoadClass &cload)
 template<class T> T
 LERPAnimationChannelClass<T>::Evaluate (float time)
 {
+	auto m_Data = this->m_Data;
+	auto m_LastIndex = this->m_LastIndex;
+
 	int key_count	= m_Data.Count ();
 	T value			= m_Data[key_count - 1].Get_Value ();
 
@@ -357,8 +360,8 @@ LERPAnimationChannelClass<T>::Evaluate (float time)
 			m_LastIndex = 0;
 		}
 
-		KeyClass *key1 = &m_Data[m_LastIndex];
-		KeyClass *key2 = &m_Data[key_count - 1];
+		auto *key1 = &m_Data[m_LastIndex];
+		auto *key2 = &m_Data[key_count - 1];
 
 		//
 		// Search, using last_key as our starting point

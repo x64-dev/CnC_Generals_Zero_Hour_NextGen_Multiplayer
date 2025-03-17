@@ -2598,7 +2598,7 @@ ChipsetType W3DShaderManager::getChipset( void )
 //=============================================================================
 /** Loads and creates a D3D pixel or vertex shader.*/
 //=============================================================================
-HRESULT W3DShaderManager::LoadAndCreateD3DShader(char* strFilePath, const D3DVERTEXELEMENT9* pDeclaration, DWORD Usage, Bool ShaderType, IDirect3DVertexShader9** pVertexShaderHandle, IDirect3DPixelShader9 **pPixelShaderHandle)
+HRESULT W3DShaderManager::LoadAndCreateD3DShader(const char* strFilePath, const D3DVERTEXELEMENT9* pDeclaration, DWORD Usage, Bool ShaderType, IDirect3DVertexShader9** pVertexShaderHandle, IDirect3DPixelShader9 **pPixelShaderHandle)
 {
 	HRESULT hr = S_OK;
 	LPD3DXBUFFER pShaderBuffer = NULL;

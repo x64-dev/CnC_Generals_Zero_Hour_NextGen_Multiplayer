@@ -49,12 +49,12 @@ public:
 	AsciiString address;
 	UnsignedShort port;
 	time_t lastPlayDate;
-
-	bool operator== (const LadderPref& other)
-	{
-		return ( address==other.address && port==other.port );
-	}
 };
+
+inline bool operator== (const LadderPref& lhs, const LadderPref& rhs)
+{
+	return lhs.address == rhs.address && lhs.port == rhs.port;
+}
 
 typedef std::map<time_t, LadderPref> LadderPrefMap;
 

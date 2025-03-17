@@ -486,6 +486,17 @@ template<class T>
 class DynamicVectorClass : public VectorClass<T>
 {
 	public:
+
+		using BASECLASS = VectorClass<T>;
+
+		using BASECLASS::Vector;
+		using BASECLASS::VectorMax;
+		using BASECLASS::IsValid;
+		using BASECLASS::IsAllocated;
+		using BASECLASS::VectorClassPad;
+		using BASECLASS::Length;
+
+	public:
 		DynamicVectorClass(unsigned size=0, T const * array=0);
 
 		// Stubbed equality operators so you can have dynamic vectors of dynamic vectors

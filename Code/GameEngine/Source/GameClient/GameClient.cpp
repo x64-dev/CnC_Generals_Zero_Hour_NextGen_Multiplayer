@@ -1116,7 +1116,7 @@ void GameClient::preloadAssets( TimeOfDay timeOfDay )
 	DEBUG_LOG(("Preloading memory dwAvailVirtual  %d --> %d : %d\n",
 		before.dwAvailVirtual, after.dwAvailVirtual, before.dwAvailVirtual - after.dwAvailVirtual));
 
-	char *textureNames[] = {
+	const char *textureNames[] = {
 		"ptspruce01.tga",
 		"exrktflame.tga",
 		"cvlimo3_d2.tga",

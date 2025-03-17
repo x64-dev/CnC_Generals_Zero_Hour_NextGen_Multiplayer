@@ -96,6 +96,10 @@ add_library(GameEngineDevice STATIC
     Source/Win32Device/GameClient/Win32Mouse.cpp
 )
 
+set_target_properties(GameEngineDevice PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(GameEngineDevice PRIVATE
     ../GameRenderer
     ../Libraries/OpenAL/include

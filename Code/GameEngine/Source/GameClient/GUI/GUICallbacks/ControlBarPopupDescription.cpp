@@ -255,7 +255,7 @@ void ControlBar::populateBuildTooltipLayout( const CommandButton *commandButton,
 
 	Player *player = ThePlayerList->getLocalPlayer();
 	UnicodeString name, cost, descrip;
-	UnicodeString requires = UnicodeString::TheEmptyString, requiresList;
+	UnicodeString requires_ = UnicodeString::TheEmptyString, requiresList;
 	Bool firstRequirement = true;
 	const ProductionPrerequisite *prereq;
 	Bool fireScienceButton = false;
@@ -405,17 +405,17 @@ void ControlBar::populateBuildTooltipLayout( const CommandButton *commandButton,
 					if (firstRequirement)
 						firstRequirement = false;
 					else
-						requires.concat(L", ");
+						requires_.concat(L", ");
 				}
-				requires.concat(requiresList);
+				requires_.concat(requiresList);
 			}
-			if( !requires.isEmpty() )
+			if( !requires_.isEmpty() )
 			{
 				UnicodeString requireFormat = TheGameText->fetch("CONTROLBAR:Requirements");
-				requires.format(requireFormat.str(), requires.str());
+				requires_.format(requireFormat.str(), requires_.str());
 				if(!descrip.isEmpty())
 					descrip.concat(L"\n");
-				descrip.concat(requires);
+				descrip.concat(requires_);
 
 			}
 		}
@@ -496,17 +496,17 @@ void ControlBar::populateBuildTooltipLayout( const CommandButton *commandButton,
 						if (firstRequirement)
 							firstRequirement = false;
 						else
-							requires.concat(L", ");
+							requires_.concat(L", ");
 					}
-					requires.concat(requiresList);
+					requires_.concat(requiresList);
 				}
-				if( !requires.isEmpty() )
+				if( !requires_.isEmpty() )
 				{
 					UnicodeString requireFormat = TheGameText->fetch("CONTROLBAR:Requirements");
-					requires.format(requireFormat.str(), requires.str());
+					requires_.format(requireFormat.str(), requires_.str());
 					if(!descrip.isEmpty())
 						descrip.concat(L"\n");
-					descrip.concat(requires);
+					descrip.concat(requires_);
 				}
 			}
 

@@ -83,7 +83,7 @@ static Bool useWebBrowserForTOS = FALSE;
 
 static Bool isShuttingDown = false;
 static Bool buttonPushed = false;
-static char *nextScreen = NULL;
+static const char *nextScreen = NULL;
 
 static const UnsignedInt loginTimeoutInMS = 10000;
 static UnsignedInt loginAttemptTime = 0;
@@ -117,13 +117,13 @@ static AsciiString obfuscate( AsciiString in )
 {
 	char *buf = NEW char[in.getLength() + 1];
 	strcpy(buf, in.str());
-	static const char *xor = "1337Munkee";
+	static const char *xor_ = "1337Munkee";
 	char *c = buf;
-	const char *c2 = xor;
+	const char *c2 = xor_;
 	while (*c)
 	{
 		if (!*c2)
-			c2 = xor;
+			c2 = xor_;
 		if (*c != *c2)
 			*c = *c++ ^ *c2++;
 		else
