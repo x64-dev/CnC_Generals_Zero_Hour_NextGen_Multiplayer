@@ -413,6 +413,10 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				if (TheWin32Mouse)
 					TheWin32Mouse->lostFocus(FALSE);
 
+				RECT rect;
+				GetClientRect(hWnd, &rect);
+				ClipCursor(&rect);
+
 				break;
 
 			}  // end set focus
@@ -420,6 +424,9 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 			//-------------------------------------------------------------------------
 			case WM_SIZE:
 				{
+					RECT rect;
+					GetClientRect(hWnd, &rect);
+					ClipCursor(&rect);
 					int width = LOWORD(lParam);
 					int height = HIWORD(lParam);
 					if (TheDisplay != nullptr && TheTacticalView != nullptr)
@@ -456,11 +463,15 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				if (TheGameEngine)
 					TheGameEngine->setIsActive(isWinMainActive);
 
-					if (isWinMainActive)
-					{	//restore mouse cursor to our custom version.
-						if (TheWin32Mouse)
-							TheWin32Mouse->setCursor(TheWin32Mouse->getMouseCursor());
-					}
+				RECT rect;
+				GetClientRect(hWnd, &rect);
+				ClipCursor(&rect);
+
+				if (isWinMainActive)
+				{	//restore mouse cursor to our custom version.
+					if (TheWin32Mouse)
+						TheWin32Mouse->setCursor(TheWin32Mouse->getMouseCursor());
+				}
 				}
 				return 0;
 			}
