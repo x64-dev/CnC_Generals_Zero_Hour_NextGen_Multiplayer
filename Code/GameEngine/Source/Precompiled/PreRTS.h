@@ -41,7 +41,6 @@ class STLSpecialAlloc;
 // PLEASE DO NOT ABUSE WINDOWS OR IT WILL BE REMOVED ENTIRELY. :-)
 //--------------------------------------------------------------------------------- System Includes 
 
-//#define __PLACEMENT_VEC_NEW_INLINE // jmarshall
 #include <string.h>
 #include <atlbase.h>
 #include <windows.h>
