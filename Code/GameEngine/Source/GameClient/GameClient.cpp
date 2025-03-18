@@ -94,6 +94,8 @@
 
 void DrawStatUnitOverlay();
 
+wwCVar com_showfps("com_showfps", "0", "Toggles FPS overlay", CVAR_BOOL);
+
 /// The GameClient singleton instance
 GameClient *TheGameClient = NULL;
 
@@ -719,7 +721,10 @@ void GameClient::update( void )
 	}
 
 	{
-		DrawStatUnitOverlay();
+		if (com_showfps.GetBool())
+		{
+			DrawStatUnitOverlay();
+		}
 
 		if (DevConsole.IsConsoleActive)
 		{

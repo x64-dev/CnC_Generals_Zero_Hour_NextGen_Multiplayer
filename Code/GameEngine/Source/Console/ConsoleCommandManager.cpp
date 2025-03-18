@@ -8,6 +8,10 @@ WWCONSOLE_COMMAND(TestCommand, "Tests the commandManager system") {
 	DevConsole.AddLog("The Test command is working");
 }
 
+WWCONSOLE_COMMAND(Quit, "Quits the game") {
+	ExitProcess(0);
+}
+
 static bool CaseInsensitiveEqual(const std::string& a, const std::string& b)
 {
 	// Quick length check:
