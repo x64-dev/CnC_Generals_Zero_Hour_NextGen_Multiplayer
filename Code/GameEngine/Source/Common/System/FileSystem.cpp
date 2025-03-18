@@ -176,6 +176,12 @@ File*		FileSystem::openFile( const Char *filename, Int access )
 	USE_PERF_TIMER(FileSystem)
 	File *file = NULL;
 
+	if ( filename == AsciiString::TheEmptyString )
+	{
+		// DEBUG_LOG(("FileSystem::openFile() - Empty filename\n"));
+		return NULL; // no need to bother loading an empty filename
+	}
+
 	if ( TheLocalFileSystem != NULL )
 	{
 		file = TheLocalFileSystem->openFile( filename, access );
@@ -184,6 +190,11 @@ File*		FileSystem::openFile( const Char *filename, Int access )
 	if ( (TheArchiveFileSystem != NULL) && (file == NULL) )
 	{
 		file = TheArchiveFileSystem->openFile( filename );
+	}
+
+	if ( file == NULL )
+	{
+		DEBUG_LOG(("FileSystem::openFile() - Unable to open file '%s'\n", filename));
 	}
 
 	return file;
