@@ -245,8 +245,6 @@ public:
 	AIDebugOptions m_debugAI;			///< Used to display AI debug information
 	Bool m_debugAIObstacles;			///< Used to display AI obstacle debug information
 	Bool m_showObjectHealth;			///< debug display object health
-	Bool m_scriptDebug;						///< Should we attempt to load the script debugger window (.DLL)
-	Bool m_particleEdit;					///< Should we attempt to load the particle editor (.DLL)
 	Bool m_displayDebug;					///< Used to display display debug info
 	Bool m_winCursors;						///< Should we force use of windows cursors?
 	Bool m_constantDebugUpdate;		///< should we update the debug stats constantly, vs every 2 seconds?

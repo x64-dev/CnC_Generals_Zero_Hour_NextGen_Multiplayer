@@ -21,6 +21,8 @@
 -- com_showfps 0/1 - toggles showfps screen
 
 ## Console Commands
+- debugwindow -- opens script debug window
+- particleeditor -- opens the particle editor
 - map mapname.map -- opens a map 
 - disconnect -- disconnects from a game
 - spawn objectname -- spawns a object from a ini file. 

@@ -590,28 +590,6 @@ Int parseMunkee(char *args[], int)
 }
 #endif // defined(_DEBUG) || defined(_INTERNAL)
 
-Int parseScriptDebug(char *args[], int)
-{
-	if (TheWritableGlobalData)
-	{
-		TheWritableGlobalData->m_scriptDebug = TRUE;
-		TheWritableGlobalData->m_winCursors = TRUE;
-	}
-	return 1;
-}
-
-Int parseParticleEdit(char *args[], int)
-{
-	if (TheWritableGlobalData)
-	{
-		TheWritableGlobalData->m_particleEdit = TRUE;
-		TheWritableGlobalData->m_winCursors = TRUE;
-		TheWritableGlobalData->m_windowed = TRUE;
-	}
-	return 1;
-}
-
-
 Int parseBuildMapCache(char *args[], int)
 {
 	if (TheWritableGlobalData)
@@ -1100,8 +1078,6 @@ static CommandLineParam params[] =
 	{ "-yres", parseYRes },
 	{ "-fullscreen", parseNoWin },
 	{ "-fullVersion", parseFullVersion },
-	{	"-particleEdit", parseParticleEdit },
-	{ "-scriptDebug", parseScriptDebug },
 	{ "-playStats", parsePlayStats },
 	{ "-mod", parseMod },
 #if !defined(_PLAYTEST) || (defined(_DEBUG) || defined(_INTERNAL))
