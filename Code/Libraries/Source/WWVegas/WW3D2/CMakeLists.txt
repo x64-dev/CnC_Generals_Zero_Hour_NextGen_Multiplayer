@@ -124,6 +124,10 @@ add_library(ww3d2 STATIC
     # ${RESOURCES}  # If you want them in the project
 )
 
+set_target_properties(ww3d2 PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(ww3d2 PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../../GameRenderer"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
@@ -143,18 +147,10 @@ target_link_libraries(ww3d2 PRIVATE
 )
 
 target_compile_definitions(ww3d2 PRIVATE
+    ${GNG_COMPILE_DEFINITIONS}
     WINDOWS_IGNORE_PACKING_MISMATCH
-    __PLACEMENT_VEC_NEW_INLINE
-    WINVER=0x400
-    _WINDOWS
-    WIN32_LEAN_AND_MEAN
+    WIN32_LEAN_AND_MEAN # Exclude some headers to speed up the build process
 
-    # Debug
-    $<$<CONFIG:Debug>:_DEBUG>
-    # Release
-    $<$<CONFIG:Release>:NDEBUG;WIN32;IG_DEBUG_STACKTRACE>
-    # Internal
-    $<$<CONFIG:Internal>:NDEBUG;_INTERNAL;_DISABLE_STRING_ANNOTATION;_DISABLE_VECTOR_ANNOTATION>
     # Profile
     $<$<CONFIG:Profile>:NDEBUG;WWDEBUG;WIN32>
     # DebugE
@@ -163,19 +159,10 @@ target_compile_definitions(ww3d2 PRIVATE
     $<$<CONFIG:ProfileE>:NDEBUG;WWDEBUG;WIN32;PARAM_EDITING_ON>
 )
 
-#
-# -- 8. (Optional) Extra MSVC compiler flags to match your .vcxproj settings:
-#    e.g., /O2 (MaxSpeed), /Ob2 (inline expansions), /GF (string pooling), /Gy, etc.
-#    You can replicate them with target_compile_options, e.g.:
-#
-# if(MSVC)
-#   target_compile_options(ww3d2 PRIVATE
-#       $<$<CONFIG:Debug>:/O2 /Ob2 /GF /Gy>
-#       $<$<CONFIG:Release>:/O2 /Ob2 /GF /Gy>
-#       $<$<CONFIG:Internal>:/O2 /Ob1 /GF /Gy>
-#       $<$<CONFIG:Profile>:/O2 /Ob2 /GF /Gy>
-#       $<$<CONFIG:DebugE>:/Od>
-#       $<$<CONFIG:ProfileE>:/O2 /Ob1 /GF /Gy>
-#       # etc...
-#   )
-# endif()
+target_compile_options(ww3d2 PRIVATE
+    ${GNG_COMPILE_OPTIONS}
+)
+
+target_link_options(ww3d2 PRIVATE
+    ${GNG_LINK_OPTIONS}
+)

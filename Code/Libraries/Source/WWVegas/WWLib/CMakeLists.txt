@@ -83,32 +83,19 @@ add_library(wwlib STATIC
     # _mono.h
 )
 
+set_target_properties(wwlib PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(wwlib PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"
 )
 
 target_compile_definitions(wwlib PRIVATE
-    __PLACEMENT_VEC_NEW_INLINE
-    WINVER=0x400
-    _WINDOWS
+    ${GNG_COMPILE_DEFINITIONS}
     WIN32_LEAN_AND_MEAN
     REGEX_MALLOC
     STDC_HEADERS
-
-    # Debug:
-    $<$<CONFIG:Debug>:_DEBUG>
-
-    # Release:
-    $<$<CONFIG:Release>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Release>:_DISABLE_VECTOR_ANNOTATION>
-    $<$<CONFIG:Release>:NDEBUG>
-    $<$<CONFIG:Release>:IG_DEBUG_STACKTRACE>
-
-    # Internal:
-    $<$<CONFIG:Internal>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Internal>:_DISABLE_VECTOR_ANNOTATION>
-    $<$<CONFIG:Internal>:NDEBUG>
-    $<$<CONFIG:Internal>:_INTERNAL>
 
     # Profile:
     $<$<CONFIG:Profile>:NDEBUG>
@@ -116,3 +103,10 @@ target_compile_definitions(wwlib PRIVATE
     $<$<CONFIG:Profile>:WIN32>
 )
 
+target_compile_options(wwlib PRIVATE
+    ${GNG_COMPILE_OPTIONS}
+)
+
+target_link_options(wwlib PRIVATE
+    ${GNG_LINK_OPTIONS}
+)

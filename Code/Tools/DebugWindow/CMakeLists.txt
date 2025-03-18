@@ -1,3 +1,7 @@
+cmake_minimum_required(VERSION 3.10)  # or higher as needed
+project(DebugWindowExample)
+
+# Create the shared library.
 add_library(DebugWindow SHARED
     DebugWindow.cpp
     DebugWindowDialog.cpp
@@ -6,50 +10,29 @@ add_library(DebugWindow SHARED
     StdAfx.cpp           # Creates the PCH
 )
 
-#------------------------------------------------------------------------------
-# 1) MFC usage in a static library => we set MFC_FLAG=1
-#------------------------------------------------------------------------------
-set_property(TARGET DebugWindow PROPERTY MFC_FLAG 1)
+set_property(TARGET DebugWindow PROPERTY MFC_FLAG 2)
 
+# Precompile headers.
 target_precompile_headers(DebugWindow PRIVATE
-    $<$<COMPILE_LANGUAGE:CXX>:stdafx.h>
+    stdafx.h
 )
 
-#------------------------------------------------------------------------------
-# 3) We are using MFC statically, but the runtime library is also static
-#    (/MTd for Debug, /MT for Release). We also see "MultiByte" => define _MBCS.
-#------------------------------------------------------------------------------
+# Apply your pre-defined compile definitions, options, and link options.
 target_compile_definitions(DebugWindow PRIVATE
-  _MBCS
-  WIN32
-  _WINDOWS
-  _USRDLL
-
-  $<$<CONFIG:Debug>:_DEBUG>
-
-  $<$<CONFIG:Release>:NDEBUG>
+    ${GNG_COMPILE_DEFINITIONS}
 )
-
 target_compile_options(DebugWindow PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    # Debug
-    $<$<CONFIG:Debug>:
-      /Od           # Disabled optimization
-      /MTd          # Static runtime, debug
-      /Zi           # Debug info
-    >
-    # Release
-    $<$<CONFIG:Release>:
-      /O2           # MaxSpeed optimization
-      /Ob1          # "OnlyExplicitInline"
-      /MT           # Static runtime
-      /GF /Gy       # (Optional) string pooling & function-level linking
-    >
-  >
+    ${GNG_COMPILE_OPTIONS}
+)
+target_link_options(DebugWindow PRIVATE
+    ${GNG_LINK_OPTIONS}
 )
 
-target_link_options(DebugWindow PRIVATE
-  /SUBSYSTEM:WINDOWS
-  /DYNAMICBASE:NO
-  /MAP
+target_compile_options(DebugWindow PRIVATE /MT)
+
+# Place the DLL (and import library) under ..\..\run\
+# Note: On Windows, .dll is treated as "RUNTIME" output, .lib as "LIBRARY".
+set_target_properties(DebugWindow PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../../../run/"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../../../run/"
 )

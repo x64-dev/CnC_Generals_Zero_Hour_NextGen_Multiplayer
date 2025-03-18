@@ -428,38 +428,25 @@ ScriptEngine::~ScriptEngine()
 	reset(); // just in case.
 }  // end ~ScriptEngine
 
-//-------------------------------------------------------------------------------------------------
-/** Init */
-//-------------------------------------------------------------------------------------------------
-void ScriptEngine::init( void )
+WWCONSOLE_COMMAND(DebugWindow, "Opens the Debug Window")
 {
-	if (TheGlobalData->m_windowed)
-		if (TheGlobalData->m_scriptDebug) {
-#ifdef _WIN64
-			st_DebugDLL = LoadLibrary("DebugWindow_x64.dll");
-#else
-			st_DebugDLL = LoadLibrary("DebugWindow.dll");
-#endif
-		} else {
-			st_DebugDLL = NULL;
-		}
-		
-		if (TheGlobalData->m_particleEdit) {
-#ifdef _WIN64
-			st_ParticleDLL = LoadLibrary("ParticleEditor_x64.dll");
-#else
-			st_ParticleDLL = LoadLibrary("ParticleEditor.dll");
-#endif
-		} else {
-			st_ParticleDLL = NULL;
-		}
+	if (st_DebugDLL) {
+		return;
+	}
 
-		if (st_DebugDLL) {
-			FARPROC proc = GetProcAddress(st_DebugDLL, "CreateDebugDialog");
-			if (proc) {
-				proc();
-			}
+	st_DebugDLL = LoadLibrary("DebugWindow.dll");
+
+	if (st_DebugDLL) {
+		FARPROC proc = GetProcAddress(st_DebugDLL, "CreateDebugDialog");
+		if (proc) {
+			proc();
 		}
+	}
+}
+
+WWCONSOLE_COMMAND(ParticleEditor, "Opens the Particle Window")
+{
+	st_ParticleDLL = LoadLibrary("ParticleEditor.dll");
 
 	if (st_ParticleDLL) {
 		FARPROC proc = GetProcAddress(st_ParticleDLL, "CreateParticleSystemDialog");
@@ -467,6 +454,14 @@ void ScriptEngine::init( void )
 			proc();
 		}
 	}
+}
+
+//-------------------------------------------------------------------------------------------------
+/** Init */
+//-------------------------------------------------------------------------------------------------
+void ScriptEngine::init( void )
+{
+
 
 #ifdef DO_VTUNE_STUFF
 	_initVTune();

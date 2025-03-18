@@ -263,7 +263,7 @@ void setupGameStart(AsciiString mapName, GameDifficulty diff)
 	TheCampaignManager->setGameDifficulty(diff);
 	TheWritableGlobalData->m_pendingFile = mapName;
 	TheShell->reverseAnimatewindow();
-	TheTransitionHandler->setGroup("FadeWholeScreen");
+	//TheTransitionHandler->setGroup("FadeWholeScreen");
 }
 
 void prepareCampaignGame(GameDifficulty diff)

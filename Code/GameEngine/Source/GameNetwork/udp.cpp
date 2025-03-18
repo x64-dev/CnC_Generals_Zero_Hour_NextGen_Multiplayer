@@ -43,8 +43,6 @@
 
 //-------------------------------------------------------------------------
 
-#if defined(_DEBUG) || defined(_INTERNAL)
-
 #define CASE(x) case (x): return #x;
 
 AsciiString GetWSAErrorString( Int error )
@@ -114,8 +112,6 @@ AsciiString GetWSAErrorString( Int error )
 }
 
 #undef CASE
-
-#endif // defined(_DEBUG) || defined(_INTERNAL)
 
 //-------------------------------------------------------------------------
 

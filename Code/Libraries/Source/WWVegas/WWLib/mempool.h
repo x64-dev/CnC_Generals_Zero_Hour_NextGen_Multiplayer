@@ -51,7 +51,7 @@
 #define MEMPOOL_H
 
 #include "bittype.h"
-#include "wwdebug.h"
+#include "../wwdebug/wwdebug.h"
 #include <stdlib.h>
 #include <stddef.h>
 

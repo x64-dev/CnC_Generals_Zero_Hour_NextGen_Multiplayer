@@ -491,6 +491,8 @@ bool DX8Wrapper::Create_Device(void)
 	D3DDevice->QueryInterface(IID_PPV_ARGS(&device9On12));
 	D3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, (DWORD)0.0f);
 
+	InitializeTimingQueries(D3DDevice);
+
 
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
@@ -1574,7 +1576,9 @@ void DX8_Assert()
 void DX8Wrapper::Begin_Scene(void)
 {
 	DX8_THREAD_ASSERT();
-	DX8CALL(BeginScene());
+
+	StartGpuFrameTimer();
+	DX8CALL(BeginScene());	
 
 	D3DDevice->SetRenderTarget(0, g_pRT_MSAA);
 	D3DDevice->SetDepthStencilSurface(g_pDS_MSAA);
@@ -1587,8 +1591,11 @@ void DX8Wrapper::Begin_Scene(void)
 		0
 	);
 
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
+	if (!IsWorldBuilder())
+	{
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+	}
 
 	DX8WebBrowser::Update();
 }
@@ -1596,8 +1603,12 @@ void DX8Wrapper::Begin_Scene(void)
 void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+	if (!IsWorldBuilder())
+	{
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}	
 
 	D3DDevice->EndScene();
 
@@ -1621,7 +1632,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 		);
 		pBackBuffer->Release();
 	}
-
+	
 
 
 	DX8WebBrowser::Render(0);
@@ -1629,6 +1640,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 	if (flip_frames) {
 		DX8_Assert();
 		HRESULT hr=DX8Wrapper::D3DDevice->Present(NULL, NULL, NULL, NULL);
+		EndGpuFrameTimer();
 		number_of_DX8_calls++;
 
 		if (SUCCEEDED(hr)) {

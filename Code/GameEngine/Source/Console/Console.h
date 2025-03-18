@@ -17,6 +17,8 @@ public:
 	// Clear the entire log buffer.
 	void ClearLog();
 
+	bool                     IsConsoleActive;
+
 private:
 	static int  TextEditCallbackStub(ImGuiInputTextCallbackData* data);
 	int         TextEditCallback(ImGuiInputTextCallbackData* data);

@@ -44,7 +44,7 @@
 
 #include "always.h"
 #include "listnode.h"
-#include "vector3.h"
+#include "../wwmath/vector3.h"
 
 class SceneClass;
 class CameraClass;

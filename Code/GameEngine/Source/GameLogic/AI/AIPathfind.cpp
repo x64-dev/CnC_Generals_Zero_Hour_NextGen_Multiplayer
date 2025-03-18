@@ -4574,9 +4574,11 @@ Bool Pathfinder::checkForMovement(const Object *obj, TCheckMovementInfo &info)
 							if (!unit->getAIUpdateInterface()) {
 								return false; // can't path through not-idle units.
 							}
+#if 0
 							if (!unit->getAIUpdateInterface()->isIdle()) {
 								return false; // can't path through not-idle units.
 							}
+#endif
 							Bool found = false;
 							Int k;
 							for (k=0; k<numAlly; k++) {
@@ -5998,7 +6000,7 @@ Path *Pathfinder::internalFindPath( Object *obj, const LocomotorSet& locomotorSe
 	worldToCell( to, &cell );
 
 	if (!checkDestination(obj, cell.x, cell.y, destinationLayer, radius, centerInCell)) {
-		return false;
+		return nullptr;
 	}
 	// determine start cell
 	ICoord2D startCellNdx;
@@ -9559,7 +9561,7 @@ if (g_UT_startTiming) return false;
 Path *Pathfinder::getMoveAwayFromPath(Object* obj, Object *otherObj,
 											Path *pathToAvoid, Object *otherObj2, Path *pathToAvoid2)
 {
-	if (m_isMapReady == false) return false; // Should always be ok.
+	if (m_isMapReady == false) return nullptr; // Should always be ok.
 #if defined _DEBUG || defined _INTERNAL
 	Int startTimeMS = ::GetTickCount();
 #endif
@@ -9591,9 +9593,9 @@ Path *Pathfinder::getMoveAwayFromPath(Object* obj, Object *otherObj,
 	worldToCell(&startPos, &startCellNdx);
 	PathfindCell *parentCell = getClippedCell( obj->getLayer(), obj->getPosition() ); 
 	if (parentCell == NULL)
-		return false;
+		return nullptr;
 	if (!obj->getAIUpdateInterface()) {
-		return false; // shouldn't happen, but can't move it without an ai.
+		return nullptr; // shouldn't happen, but can't move it without an ai.
 	}
 	const LocomotorSet& locomotorSet = obj->getAIUpdateInterface()->getLocomotorSet();
 
@@ -9614,7 +9616,7 @@ Path *Pathfinder::getMoveAwayFromPath(Object* obj, Object *otherObj,
 	}
 
 	if (!parentCell->allocateInfo(startCellNdx)) {
-		return false;
+		return nullptr;
 	}
 	parentCell->startPathfind(NULL);
 
@@ -9765,15 +9767,15 @@ Path *Pathfinder::patchPath( const Object *obj, const LocomotorSet& locomotorSet
 	//worldToCell(obj->getPosition(), &startCellNdx);
 	PathfindCell *parentCell = getClippedCell( obj->getLayer(), &currentPosition); 
 	if (parentCell == NULL)
-		return false;
+		return nullptr;
 	if (!obj->getAIUpdateInterface()) {
-		return false; // shouldn't happen, but can't move it without an ai.
+		return nullptr; // shouldn't happen, but can't move it without an ai.
 	}
 
 	m_isTunneling = false;
 	
 	if (!parentCell->allocateInfo(startCellNdx)) {
-		return false;
+		return nullptr;
 	}
 	parentCell->startPathfind( NULL);
 
@@ -9910,7 +9912,7 @@ Path *Pathfinder::patchPath( const Object *obj, const LocomotorSet& locomotorSet
 		candidateGoal->releaseInfo();
 	}
 	cleanOpenAndClosedLists();
-	return false;
+	return nullptr;
 }
 
 
@@ -9947,7 +9949,7 @@ Path *Pathfinder::findAttackPath( const Object *obj, const LocomotorSet& locomot
 			AS_INT(victimPos->x), AS_INT(victimPos->y), AS_INT(victimPos->z)));
 	}
 	*/
-	if (m_isMapReady == false) return false; // Should always be ok.
+	if (m_isMapReady == false) return nullptr; // Should always be ok.
 #if defined _DEBUG || defined _INTERNAL
 //	Int startTimeMS = ::GetTickCount();
 #endif
@@ -10032,14 +10034,14 @@ Path *Pathfinder::findAttackPath( const Object *obj, const LocomotorSet& locomot
 	worldToCell(&objPos, &startCellNdx);
 	PathfindCell *parentCell = getClippedCell( obj->getLayer(), &objPos ); 
 	if (parentCell == NULL)
-		return false;
+		return nullptr;
 	if (!obj->getAIUpdateInterface()) {
-		return false; // shouldn't happen, but can't move it without an ai.
+		return nullptr; // shouldn't happen, but can't move it without an ai.
 	}
 	const PathfindCell *startCell = parentCell;
 
 	if (!parentCell->allocateInfo(startCellNdx)) {
-		return false;
+		return nullptr;
 	}
 	parentCell->startPathfind(NULL);
 
@@ -10053,7 +10055,7 @@ Path *Pathfinder::findAttackPath( const Object *obj, const LocomotorSet& locomot
 		return NULL;
 
  	if (!goalCell->allocateInfo(victimCellNdx)) {
-		return false;
+		return nullptr;
 	}
 
 	// initialize "open" list to contain start cell
@@ -10208,7 +10210,7 @@ Path *Pathfinder::findAttackPath( const Object *obj, const LocomotorSet& locomot
 		goalCell->releaseInfo();
 	}
 	cleanOpenAndClosedLists();
-	return false;
+	return nullptr;
 }
 
 /** Find a short, valid path to a location that is safe from the repulsors.  */
@@ -10216,7 +10218,7 @@ Path *Pathfinder::findSafePath( const Object *obj, const LocomotorSet& locomotor
 		const Coord3D *from, const Coord3D* repulsorPos1, const Coord3D* repulsorPos2, Real repulsorRadius) 
 {
 	//CRCDEBUG_LOG(("Pathfinder::findSafePath()\n"));
-	if (m_isMapReady == false) return false; // Should always be ok.
+	if (m_isMapReady == false) return nullptr; // Should always be ok.
 #if defined _DEBUG || defined _INTERNAL
 //	Int startTimeMS = ::GetTickCount();
 #endif
@@ -10242,12 +10244,12 @@ Path *Pathfinder::findSafePath( const Object *obj, const LocomotorSet& locomotor
 	worldToCell(obj->getPosition(), &startCellNdx);
 	PathfindCell *parentCell = getClippedCell( obj->getLayer(), obj->getPosition() ); 
 	if (parentCell == NULL)
-		return false;
+		return nullptr;
 	if (!obj->getAIUpdateInterface()) {
-		return false; // shouldn't happen, but can't move it without an ai.
+		return nullptr; // shouldn't happen, but can't move it without an ai.
 	}
 	if (!parentCell->allocateInfo(startCellNdx)) {
-		return false;
+		return nullptr;
 	}
 	parentCell->startPathfind( NULL);
 
@@ -10366,7 +10368,7 @@ Path *Pathfinder::findSafePath( const Object *obj, const LocomotorSet& locomotor
 #endif
 	m_isTunneling = false;
 	cleanOpenAndClosedLists();
-	return false;
+	return nullptr;
 }
 
 //-----------------------------------------------------------------------------

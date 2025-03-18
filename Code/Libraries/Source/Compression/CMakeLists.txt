@@ -38,25 +38,22 @@ add_library(Compression STATIC
     CompressionManager.cpp
 )
 
+set_target_properties(Compression PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(Compression PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../include
 )
 
 target_compile_definitions(Compression PRIVATE
-  _CRT_SECURE_NO_WARNINGS
-
-  $<$<CONFIG:Internal>:_DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION>
+    ${GNG_COMPILE_DEFINITIONS}
 )
 
 target_compile_options(Compression PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    # Debug => /Od (Optimization=Disabled), /MDd (MultiThreadedDebugDLL)
-    $<$<CONFIG:Debug>:/Od /MDd /RTC1 /Zi>
+    ${GNG_COMPILE_OPTIONS}
+)
 
-    # Internal => /O2 (MaxSpeed), /Ob1 (OnlyExplicitInline), /MD, string pooling => /GF, function-level link => /Gy
-    $<$<CONFIG:Internal>:/O2 /Ob1 /MD /GF /Gy>
-
-    # Release => /O2 (MaxSpeed), /Ob2 (AnySuitable), /MD, string pooling => /GF, function-level link => /Gy
-    $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
-  >
+target_link_options(Compression PRIVATE
+    ${GNG_LINK_OPTIONS}
 )

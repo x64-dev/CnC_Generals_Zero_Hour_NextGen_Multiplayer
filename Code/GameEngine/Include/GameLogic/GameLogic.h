@@ -133,6 +133,7 @@ public:
 
 	Bool isInGameLogicUpdate( void ) const { return m_isInUpdate; }
 	UnsignedInt getFrame( void );										///< Returns the current simulation frame number
+	void setFrame(UnsignedInt frame);
 	UnsignedInt getCRC( Int mode = CRC_CACHED, AsciiString deepCRCFileName = AsciiString::TheEmptyString );		///< Returns the CRC
 
 	void setObjectIDCounter( ObjectID nextObjID ) { m_nextObjID = nextObjID; }
@@ -374,6 +375,7 @@ inline Real GameLogic::getWidth( void ) { return m_width; }
 inline void GameLogic::setHeight( Real height ) { m_height = height; }
 inline Real GameLogic::getHeight( void ) { return m_height; }
 inline UnsignedInt GameLogic::getFrame( void ) { return m_frame; }
+inline void GameLogic::setFrame(UnsignedInt frame) { m_frame = frame; }
 
 inline Bool GameLogic::isInGame( void ) { return !(m_gameMode == GAME_NONE); }
 inline void GameLogic::setGameMode( Int mode ) { m_gameMode = mode; }

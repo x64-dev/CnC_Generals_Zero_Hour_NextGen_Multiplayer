@@ -127,7 +127,11 @@ typedef TPoint2D<int> Point2D;
 */
 template<class T>
 class TPoint3D : public TPoint2D<T> {
+
 		typedef TPoint2D<T> BASECLASS;
+	public:
+		using BASECLASS::X;
+		using BASECLASS::Y;
 
 	public:
 		TPoint3D(void) {}		// Default constructor does nothing by design.

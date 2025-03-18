@@ -116,5 +116,6 @@ extern GameEngine *CreateGameEngine( void );
 
 /// The entry point for the game system
 extern void GameMain( int argc, char *argv[] );
+extern bool AllowMouseClip();
 
 #endif // _GAME_ENGINE_H_

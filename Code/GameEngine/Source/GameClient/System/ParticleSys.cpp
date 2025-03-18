@@ -311,7 +311,7 @@ Particle::Particle( ParticleSystem *system, const ParticleInfo *info )
 
 	m_lifetime = info->m_lifetime;
 	m_lifetimeLeft = info->m_lifetime;
-	m_createTimestamp = TheGameClient->getFrame();
+	m_createTimestamp = TheGameLogic->getFrame();
 	m_personality = 0;
 
 	m_size = info->m_size;
@@ -461,7 +461,7 @@ Bool Particle::update( void )
 
 	if (m_alphaTargetKey < MAX_KEYFRAMES && m_alphaKey[ m_alphaTargetKey ].frame)
 	{
-		if (TheGameClient->getFrame() - m_createTimestamp >= m_alphaKey[ m_alphaTargetKey ].frame)
+		if (TheGameLogic->getFrame() - m_createTimestamp >= m_alphaKey[ m_alphaTargetKey ].frame)
 		{
 			m_alpha = m_alphaKey[ m_alphaTargetKey ].value;
 			m_alphaTargetKey++;
@@ -486,7 +486,7 @@ Bool Particle::update( void )
 
 	if (m_colorTargetKey < MAX_KEYFRAMES && m_colorKey[ m_colorTargetKey ].frame)
 	{
-		if (TheGameClient->getFrame() - m_createTimestamp >= m_colorKey[ m_colorTargetKey ].frame)
+		if (TheGameLogic->getFrame() - m_createTimestamp >= m_colorKey[ m_colorTargetKey ].frame)
 		{
 			// can't set, because of colorscale
 			// m_color = m_colorKey[ m_colorTargetKey ].color;
@@ -1203,7 +1203,7 @@ ParticleSystem::ParticleSystem( const ParticleSystemTemplate *sysTemplate,
 
 	m_delayLeft = (UnsignedInt)sysTemplate->m_initialDelay.getValue();
 
-	m_startTimestamp = TheGameClient->getFrame();
+	m_startTimestamp = TheGameLogic->getFrame();
 	m_systemLifetimeLeft = sysTemplate->m_systemLifetime;
 	if (sysTemplate->m_systemLifetime)
 		m_isForever = false;
@@ -1967,7 +1967,7 @@ Bool ParticleSystem::update( Int localPlayerIndex  )
 		// system actually "starts" once initial delay is over
 		/// @todo reset start time when system is stopped/started
 		if (m_delayLeft == 0)
-			m_startTimestamp = TheGameClient->getFrame();
+			m_startTimestamp = TheGameLogic->getFrame();
 
 		return true;
 	}

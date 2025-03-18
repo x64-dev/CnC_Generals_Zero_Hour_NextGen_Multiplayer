@@ -1,8 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Internal|x64">
+      <Configuration>Internal</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
@@ -11,173 +18,272 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{ED91CF2D-FF0B-4568-8DC8-9911A75646DC}</ProjectGuid>
-    <Keyword>MFCProj</Keyword>
+    <ProjectGuid>{AF25E701-3776-3A20-8AF4-E5752DCAD4EF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ParticleEditor</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>17.0.35707.178</_ProjectFileVersion>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\run\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ParticleEditor.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ParticleEditor</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\run\Internal\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">ParticleEditor.dir\Internal\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">ParticleEditor</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\run\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ParticleEditor.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ParticleEditor</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Midl>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <TypeLibraryName>.\Release/ParticleEditor.tlb</TypeLibraryName>
-      <HeaderFileName>
-      </HeaderFileName>
-    </Midl>
-    <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>./include;./res;../../libraries/include;../../gameengine/include;../../gameenginedevice/include/;../../libraries/source/wwvegas;../../libraries/source/wwvegas/ww3d2;../../libraries/source/wwvegas/wwdebug;../../libraries/source/wwvegas/wwlib;../../libraries/source/wwvegas/wwmath;../../libraries/source/wwvegas/wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release/ParticleEditor_x64.pch</PrecompiledHeaderOutputFile>
-      <WarningLevel>Level3</WarningLevel>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-    </ResourceCompile>
-    <Link>
-      <OutputFile>../../../Run/ParticleEditor_x64.dll</OutputFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>.\ParticleEditor.def</ModuleDefinitionFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../../Run/ParticleEditor.pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>../../../Run/ParticleEditor.map</MapFileName>
-      <SubSystem>Windows</SubSystem>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
-      <ImportLibrary>.\Release/ParticleEditor.lib</ImportLibrary>
-    </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/ParticleEditor.bsc</OutputFile>
-    </Bscmake>
-  </ItemDefinitionGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Midl>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <TypeLibraryName>.\Debug/ParticleEditor.tlb</TypeLibraryName>
-      <HeaderFileName>
-      </HeaderFileName>
-    </Midl>
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>./include;./res;../../libraries/include;../../gameengine/include;../../gameenginedevice/include/;../../libraries/source/wwvegas;../../libraries/source/wwvegas/ww3d2;../../libraries/source/wwvegas/wwdebug;../../libraries/source/wwvegas/wwlib;../../libraries/source/wwvegas/wwmath;../../libraries/source/wwvegas/wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__PLACEMENT_VEC_NEW_INLINE;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug/ParticleEditor_x64.pch</PrecompiledHeaderOutputFile>
-      <WarningLevel>Level3</WarningLevel>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_MBCS;_USRDLL;_DEBUG;CMAKE_INTDIR="Debug";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;CMAKE_INTDIR=\"Debug\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
     <Link>
-      <OutputFile>../../../Run/ParticleEditorD_x64.dll</OutputFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>.\ParticleEditor.def</ModuleDefinitionFile>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>../../../Run/ParticleEditorD.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>../../../Run/ParticleEditorD.map</MapFileName>
-      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/Debug/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/run/Debug/ParticleEditor.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
-      <ImportLibrary>.\Debug/ParticleEditorD.lib</ImportLibrary>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <Bscmake>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/ParticleEditor.bsc</OutputFile>
-    </Bscmake>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization></Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_MBCS;_USRDLL;CMAKE_INTDIR="Internal";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_MBCS;_USRDLL;CMAKE_INTDIR=\"Internal\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/Internal/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/run/Internal/ParticleEditor.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_MBCS;_USRDLL;CMAKE_INTDIR="Release";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_MBCS;_USRDLL;CMAKE_INTDIR=\"Release\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\.\res;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/Release/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/run/Release/ParticleEditor.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CButtonShowColor.cpp" />
-    <ClCompile Include="CColorAlphaDialog.cpp" />
-    <ClCompile Include="CSwitchesDialog.cpp" />
-    <ClCompile Include="EmissionTypePanels.cpp" />
-    <ClCompile Include="MoreParmsDialog.cpp" />
-    <ClCompile Include="ParticleEditor.cpp" />
-    <ClCompile Include="ParticleEditorDialog.cpp" />
-    <ClCompile Include="ParticleTypePanels.cpp" />
-    <ClCompile Include="ShaderTypePanels.cpp" />
-    <ClCompile Include="StdAfx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="VelocityTypePanels.cpp" />
+    <CustomBuild Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code -BF:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code --check-stamp-file F:/GeneralsNextGenMP/CnC_Generals_Zero_Hour_NextGen_Multiplayer/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ParticleEditor.def" />
-    <None Include="res\ParticleEditor.rc2" />
+    <ResourceCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ParticleEditor.rc" />
+    <None Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ParticleEditor.def" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CButtonShowColor.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CColorAlphaDialog.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\CSwitchesDialog.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\EmissionTypePanels.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\MoreParmsDialog.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ParticleEditor.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ParticleEditorDialog.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ParticleTypePanels.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\ShaderTypePanels.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\StdAfx.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\Tools\ParticleEditor\VelocityTypePanels.cpp" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ResourceCompile Include="ParticleEditor.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CButtonShowColor.h" />
-    <ClInclude Include="CColorAlphaDialog.h" />
-    <ClInclude Include="CSwitchesDialog.h" />
-    <ClInclude Include="EmissionTypePanels.h" />
-    <ClInclude Include="ISwapablePanel.h" />
-    <ClInclude Include="MoreParmsDialog.h" />
-    <ClInclude Include="ParticleEditor.h" />
-    <ClInclude Include="ParticleEditorDialog.h" />
-    <ClInclude Include="ParticleEditorExport.h" />
-    <ClInclude Include="ParticleTypePanels.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ShaderTypePanels.h" />
-    <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="VelocityTypePanels.h" />
+    <ProjectReference Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\ZERO_CHECK.vcxproj">
+      <Project>{0CA103F7-5616-3CCD-919F-918763DC9133}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

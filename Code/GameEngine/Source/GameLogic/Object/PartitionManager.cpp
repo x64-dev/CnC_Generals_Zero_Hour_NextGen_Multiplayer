@@ -3923,6 +3923,16 @@ Bool PartitionManager::findPositionAround( const Coord3D *center,
 
 }  // end findPositionAround
 
+static void hLineAddLooker(Int x1, Int x2, Int y, void* playerIndex);
+static void hLineRemoveLooker(Int x1, Int x2, Int y, void* playerIndex);
+static void hLineAddShrouder(Int x1, Int x2, Int y, void* playerIndex);
+static void hLineRemoveShrouder(Int x1, Int x2, Int y, void* playerIndex);
+
+static void hLineAddThreat(Int x1, Int x2, Int y, void* threatValueParms);
+static void hLineRemoveThreat(Int x1, Int x2, Int y, void* threatValueParms);
+static void hLineAddValue(Int x1, Int x2, Int y, void* threatValueParms);
+static void hLineRemoveValue(Int x1, Int x2, Int y, void* threatValueParms);
+
 //-----------------------------------------------------------------------------
 // This is the main accessor of the shroud system.  At this level, allies are taken
 // into consideration as specified by the caller.  Look/Unlook are the ones sending Ally info, as that

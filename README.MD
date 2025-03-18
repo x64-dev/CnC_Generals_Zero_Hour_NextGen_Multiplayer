@@ -18,6 +18,8 @@ This fork is an effort to replace GameSpy with modern multiplayer game services 
 
 ## New Features
 - Quake style console(open/close via the ` key)
+- C++ 20 support(thanks Andrew-2E128!)
+- 30/60hz client/server framerate unlock and decoupling with new interpolation code for smoother gameplay at unlocked framerates. 
 - D3D12 support
 - MSAA 4x support
 - Widescreen support
@@ -25,6 +27,17 @@ This fork is an effort to replace GameSpy with modern multiplayer game services 
 - Memory crash fixes
 - ImGui support
 - x64 support
+
+## Cvars
+-- com_showfps 0/1 - toggles showfps screen
+
+## Console Commands
+- debugwindow -- opens script debug window
+- particleeditor -- opens the particle editor
+- map mapname.map -- opens a map 
+- disconnect -- disconnects from a game
+- spawn objectname -- spawns a object from a ini file. 
+- quit -- quits the game
 
 ---
 

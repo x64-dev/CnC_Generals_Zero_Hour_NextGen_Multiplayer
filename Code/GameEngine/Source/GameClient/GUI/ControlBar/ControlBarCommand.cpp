@@ -58,6 +58,7 @@
 #include "GameClient/GameWindow.h"
 #include "GameClient/GameWindowManager.h"
 #include "GameClient/GadgetPushButton.h"
+#include "GameClient/GameClient.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

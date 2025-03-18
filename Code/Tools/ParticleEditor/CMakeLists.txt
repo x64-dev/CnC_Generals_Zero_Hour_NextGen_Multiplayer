@@ -27,8 +27,9 @@ target_compile_definitions(ParticleEditor PRIVATE
     _MBCS
 )
 
-target_precompile_headers(ParticleEditor PRIVATE
-    $<$<COMPILE_LANGUAGE:CXX>:stdafx.h>
+set_target_properties(ParticleEditor PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../../../run/"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../../../run/"
 )
 
 target_compile_definitions(ParticleEditor PRIVATE

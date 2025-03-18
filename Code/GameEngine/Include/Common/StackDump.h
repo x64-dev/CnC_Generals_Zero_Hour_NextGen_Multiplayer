@@ -27,9 +27,9 @@
 #ifndef __STACKDUMP_H_
 #define __STACKDUMP_H_
 
-#ifndef IG_DEGBUG_STACKTRACE
+#undef IG_DEBUG_STACKTRACE
 #define IG_DEBUG_STACKTRACE	1
-#endif
+
 
 #if defined(_DEBUG) || defined(_INTERNAL) || defined(IG_DEBUG_STACKTRACE)
 

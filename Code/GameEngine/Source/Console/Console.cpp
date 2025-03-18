@@ -1,5 +1,9 @@
 #include "PreRTS.h"
 
+#include <iostream>
+#include <sstream>
+#include <string>
+
 Console DevConsole;
 ImFont* g_BigConsoleFont = nullptr;
 
@@ -9,6 +13,7 @@ static const char* VERSION_STRING = "Command and Conquer Generals Next-Gen v0.06
 Console::Console()
 	: ScrollToBottom(false)
 	, HistoryPos(-1)
+	, IsConsoleActive(false)
 {
 	ClearLog();
 	AddLog("Welcome to the Quake-Style Console!");
@@ -100,6 +105,8 @@ void Console::Draw(float openFraction)
 			| ImGuiInputTextFlags_CallbackCompletion,
 			&TextEditCallbackStub, (void*)this))
 		{
+			ImGui::SetKeyboardFocusHere(-1);
+
 			// If user pressed Enter:
 			char* s = InputBuf;
 			if (s[0] != '\0')
@@ -177,7 +184,37 @@ void Console::ExecCommand(const char* command_line)
 	}
 	else
 	{
-		AddLog("Unknown command: '%s'", command_line);
+		std::istringstream iss(command_line);
+		std::string command;
+		iss >> command; // read the first token
+
+		// Remainder of the line after the command is the argument
+		std::string args;
+		std::getline(iss, args);
+
+		// Trim leading space on args (optional)
+		if (!args.empty() && args.front() == ' ') {
+			args.erase(args.begin());
+		}
+
+		
+		wwCVar* cvar = GetCVarManager().FindCVar(command);
+		if (cvar) {
+			// If there are no arguments, maybe just print the current value
+			// Or you can interpret an empty args as resetting or something else
+			if (!args.empty()) {
+				// Set the cvar to the argument's value
+				GetCVarManager().SetCVar(command, args);
+				AddLog("setting '%s' to '%s'", command.c_str(), cvar->GetString().c_str());
+			}
+			else {
+				AddLog("%s = '%s'", command.c_str(), cvar->GetString().c_str());
+			}
+		}
+		else
+		{
+			GetConsoleManager().ExecuteInput(command_line);
+		}
 	}
 
 	ScrollToBottom = true;

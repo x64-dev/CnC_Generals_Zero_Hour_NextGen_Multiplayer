@@ -70,9 +70,8 @@ class AsciiString;
 
 // these are predicated on ALLOW_DEBUG_UTILS, not _DEBUG, and allow you to selectively disable
 // bits of the debug stuff for special builds.
-#if defined(ALLOW_DEBUG_UTILS) && !defined(DEBUG_LOGGING) && !defined(DISABLE_DEBUG_LOGGING)
-	#define DEBUG_LOGGING 1
-#endif
+#define DEBUG_LOGGING 1
+
 #if defined(ALLOW_DEBUG_UTILS) && !defined(DEBUG_CRASHING) && !defined(DISABLE_DEBUG_CRASHING)
 	#define DEBUG_CRASHING 1
 #endif

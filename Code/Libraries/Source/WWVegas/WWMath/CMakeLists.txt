@@ -43,6 +43,10 @@ add_library(wwmath STATIC
     # wwmathids.h
 )
 
+set_target_properties(wwmath PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(wwmath PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
@@ -58,29 +62,23 @@ target_link_libraries(wwmath PRIVATE
 )
 
 target_compile_definitions(wwmath PRIVATE
-    WINVER=0x400
-    _WINDOWS
+    ${GNG_COMPILE_DEFINITIONS}
     WIN32_LEAN_AND_MEAN
 
     # Debug:
     $<$<CONFIG:Debug>:G_CODE_BASE>
     $<$<CONFIG:Debug>:DIRECTX>
-    $<$<CONFIG:Debug>:_DEBUG>
-
-    # Internal:
-    $<$<CONFIG:Internal>:NDEBUG>
-    $<$<CONFIG:Internal>:_INTERNAL>
-    $<$<CONFIG:Internal>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Internal>:_DISABLE_VECTOR_ANNOTATION>
 
     # Profile:
     $<$<CONFIG:Profile>:NDEBUG>
     $<$<CONFIG:Profile>:WWDEBUG>
     $<$<CONFIG:Profile>:WIN32>
-
-    # Release:
-    $<$<CONFIG:Release>:NDEBUG>
-    $<$<CONFIG:Release>:WIN32>
-    $<$<CONFIG:Release>:IG_DEBUG_STACKTRACE>
 )
 
+target_compile_options(wwmath PRIVATE
+    ${GNG_COMPILE_OPTIONS}
+)
+
+target_link_options(wwmath PRIVATE
+    ${GNG_LINK_OPTIONS}
+)

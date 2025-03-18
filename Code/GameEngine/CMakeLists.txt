@@ -1,5 +1,8 @@
 add_library(GameEngine STATIC
     source/Console/Console.cpp
+    source/Console/Cvar.cpp
+    source/Console/CvarManager.cpp
+    source/Console/ConsoleCommandManager.cpp
     Source/Common/Audio/AudioEventRTS.cpp
     Source/Common/Audio/AudioRequest.cpp
     Source/Common/Audio/GameAudio.cpp
@@ -547,7 +550,11 @@ add_library(GameEngine STATIC
     Source/GameNetwork/User.cpp
     Source/GameNetwork/WOLBrowser/WebBrowser.cpp
     Source/Precompiled/PreRTS.cpp
-)
+ "Source/Console/CvarManager.h" "Source/Console/CvarManager.cpp")
+
+ set_target_properties(GameEngine PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
 
 target_include_directories(GameEngine PRIVATE
     ../Libraries/Include
@@ -575,44 +582,21 @@ target_link_libraries(GameEngine PRIVATE
     wwlib
     WWDownload
     Compression
+
+    UniSpySDK
 )
 
 target_compile_definitions(GameEngine PRIVATE
-  _CRT_SECURE_NO_WARNINGS
-  _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
-  _LIB
-  _WINDOWS
-  Z_PREFIX
-
-  $<$<CONFIG:Debug>:
-    _DEBUG
-    BROWSER_DEBUG
-    _DISABLE_STRING_ANNOTATION
-    _DISABLE_VECTOR_ANNOTATION
-  >
-
-  $<$<CONFIG:Internal>:
-    NDEBUG
-    _INTERNAL
-    _DISABLE_STRING_ANNOTATION
-    _DISABLE_VECTOR_ANNOTATION
-  >
-
-  $<$<CONFIG:Release>:
-    IG_DEBUG_STACKTRACE
-    NDEBUG
-    _RELEASE
-    WIN32
-  >
+    ${GNG_COMPILE_DEFINITIONS}
 )
 
-if (MSVC)
-    target_compile_options(GameEngine PRIVATE
-        $<$<CONFIG:Debug>:/Od /MDd /Zi>
-        $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
-        $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
-    )
-endif()
+target_compile_options(GameEngine PRIVATE
+    ${GNG_COMPILE_OPTIONS}
+)
+
+target_link_options(GameEngine PRIVATE
+    ${GNG_LINK_OPTIONS}
+)
 
 #
 # 4) Precompiled header usage
@@ -634,7 +618,7 @@ endif()
 
 # DO NOT TOUCH THIS, CODE RELAYS ON IT BEING LIKE THIS
 set_target_properties(GameEngine PROPERTIES
-  OUTPUT_NAME_DEBUG      "GameEngineDebug"
-  OUTPUT_NAME_Internal   "GameEngineInternal"
-  OUTPUT_NAME_Release    "GameEngine"
+    OUTPUT_NAME_DEBUG      "GameEngineDebug"
+    OUTPUT_NAME_INTERNAL   "GameEngineInternal"
+    OUTPUT_NAME_RELEASE    "GameEngine"
 )

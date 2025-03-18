@@ -8,8 +8,8 @@
 
 #undef stopAudioEvent
 
-#define NUM_POOLED_SOURCES2D 16
-#define NUM_POOLED_SOURCES3D 64
+#define NUM_POOLED_SOURCES2D 32
+#define NUM_POOLED_SOURCES3D 128
 
 enum OpenALPlayingAudioType
 {

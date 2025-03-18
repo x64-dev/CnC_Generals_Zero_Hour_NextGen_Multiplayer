@@ -271,7 +271,7 @@ inline Bool isCommonMaintainFrameFlagSet(Int a, Int b)
 // Note: these values are saved in save files, so you MUST NOT REMOVE OR CHANGE
 // existing values!
 //
-static char *TerrainDecalTextureName[TERRAIN_DECAL_MAX-1]=
+static const char *TerrainDecalTextureName[TERRAIN_DECAL_MAX-1]=
 {
 #ifdef ALLOW_DEMORALIZE
 	"DM_RING",//demoralized
@@ -2055,6 +2055,7 @@ void W3DModelDraw::doDrawModule(const Matrix3D* transformMtx)
 	if (m_renderObject)
 	{
 		Matrix3D mtx = *transformMtx;
+
 		adjustTransformMtx(mtx);
 		m_renderObject->Set_Transform(mtx);
 	}
@@ -2062,7 +2063,6 @@ void W3DModelDraw::doDrawModule(const Matrix3D* transformMtx)
 	handleClientTurretPositioning();
 	recalcBonesForClientParticleSystems();
 	handleClientRecoil();
-
 }
 
 //-------------------------------------------------------------------------------------------------

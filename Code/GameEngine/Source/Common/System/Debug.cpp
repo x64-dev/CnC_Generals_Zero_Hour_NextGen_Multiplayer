@@ -64,7 +64,7 @@
 extern bool DX8Wrapper_IsWindowed;
 extern HWND ApplicationHWnd;
 
-extern char *gAppPrefix; /// So WB can have a different log file name.
+extern const char *gAppPrefix; /// So WB can have a different log file name.
 
 #ifdef _INTERNAL
 // this should ALWAYS be present
@@ -220,22 +220,23 @@ static const char *prepBuffer(const char* format, char *buffer)
 static void doLogOutput(const char *buffer)
 {
 	DevConsole.AddLog(buffer);
+	::OutputDebugString(buffer);
 
 	// log message to file
-	if (theDebugFlags & DEBUG_FLAG_LOG_TO_FILE)
-	{
-		if (theLogFile)
-		{
-			fprintf(theLogFile, "%s", buffer);	// note, no \n (should be there already)
-			fflush(theLogFile);
-		}
-	}
-
-	// log message to dev studio output window
-	if (theDebugFlags & DEBUG_FLAG_LOG_TO_CONSOLE)
-	{
-		::OutputDebugString(buffer);
-	}
+	//if (theDebugFlags & DEBUG_FLAG_LOG_TO_FILE)
+	//{
+	//	if (theLogFile)
+	//	{
+	//		fprintf(theLogFile, "%s", buffer);	// note, no \n (should be there already)
+	//		fflush(theLogFile);
+	//	}
+	//}
+	//
+	//// log message to dev studio output window
+	//if (theDebugFlags & DEBUG_FLAG_LOG_TO_CONSOLE)
+	//{
+	//	::OutputDebugString(buffer);
+	//}
 }
 #endif
 

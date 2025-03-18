@@ -590,28 +590,6 @@ Int parseMunkee(char *args[], int)
 }
 #endif // defined(_DEBUG) || defined(_INTERNAL)
 
-Int parseScriptDebug(char *args[], int)
-{
-	if (TheWritableGlobalData)
-	{
-		TheWritableGlobalData->m_scriptDebug = TRUE;
-		TheWritableGlobalData->m_winCursors = TRUE;
-	}
-	return 1;
-}
-
-Int parseParticleEdit(char *args[], int)
-{
-	if (TheWritableGlobalData)
-	{
-		TheWritableGlobalData->m_particleEdit = TRUE;
-		TheWritableGlobalData->m_winCursors = TRUE;
-		TheWritableGlobalData->m_windowed = TRUE;
-	}
-	return 1;
-}
-
-
 Int parseBuildMapCache(char *args[], int)
 {
 	if (TheWritableGlobalData)
@@ -1100,8 +1078,6 @@ static CommandLineParam params[] =
 	{ "-yres", parseYRes },
 	{ "-fullscreen", parseNoWin },
 	{ "-fullVersion", parseFullVersion },
-	{	"-particleEdit", parseParticleEdit },
-	{ "-scriptDebug", parseScriptDebug },
 	{ "-playStats", parsePlayStats },
 	{ "-mod", parseMod },
 #if !defined(_PLAYTEST) || (defined(_DEBUG) || defined(_INTERNAL))
@@ -1203,18 +1179,18 @@ void parseCommandLine(int argc, char *argv[])
 	int arg=1, param;
 	Bool found;
 
-#ifdef DEBUG_LOGGING
-	DEBUG_LOG(("Command-line args:"));
-	int debugFlags = DebugGetFlags();
-	DebugSetFlags(debugFlags & ~DEBUG_FLAG_PREPEND_TIME); // turn off timestamps
-	for (arg=1; arg<argc; arg++)
-	{
-		DEBUG_LOG((" %s", argv[arg]));
-	}
-	DEBUG_LOG(("\n"));
-	DebugSetFlags(debugFlags); // turn timestamps back on iff they were on before
-	arg = 1;
-#endif // DEBUG_LOGGING
+//#ifdef DEBUG_LOGGING
+//	DEBUG_LOG(("Command-line args:"));
+//	int debugFlags = DebugGetFlags();
+//	DebugSetFlags(debugFlags & ~DEBUG_FLAG_PREPEND_TIME); // turn off timestamps
+//	for (arg=1; arg<argc; arg++)
+//	{
+//		DEBUG_LOG((" %s", argv[arg]));
+//	}
+//	DEBUG_LOG(("\n"));
+//	DebugSetFlags(debugFlags); // turn timestamps back on iff they were on before
+//	arg = 1;
+//#endif // DEBUG_LOGGING
 
 	while (arg<argc)
 	{

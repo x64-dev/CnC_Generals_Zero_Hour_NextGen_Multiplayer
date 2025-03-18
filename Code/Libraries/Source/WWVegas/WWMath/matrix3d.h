@@ -376,6 +376,34 @@ public:
 	static const Matrix3D		RotateZ90;
 	static const Matrix3D		RotateZ180;
 	static const Matrix3D		RotateZ270;
+// jmarshall
+	WWINLINE friend Vector4 operator*(const Matrix3D& M, const Vector4& v)
+	{
+		Vector4 result;
+
+		// Dot each Row with the input vector.
+		result.X = M.Row[0].X * v.X
+			+ M.Row[0].Y * v.Y
+			+ M.Row[0].Z * v.Z
+			+ M.Row[0].W * v.W;
+
+		result.Y = M.Row[1].X * v.X
+			+ M.Row[1].Y * v.Y
+			+ M.Row[1].Z * v.Z
+			+ M.Row[1].W * v.W;
+
+		result.Z = M.Row[2].X * v.X
+			+ M.Row[2].Y * v.Y
+			+ M.Row[2].Z * v.Z
+			+ M.Row[2].W * v.W;
+
+		// Matrix3D is effectively 3 x 4, so there's no 4th row.
+		// We usually preserve the incoming W for standard homogeneous transforms.
+		result.W = v.W;
+
+		return result;
+	}
+// jmarshall end
 
 protected:
 

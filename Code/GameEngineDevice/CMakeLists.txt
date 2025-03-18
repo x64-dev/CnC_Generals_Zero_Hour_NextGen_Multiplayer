@@ -96,9 +96,10 @@ add_library(GameEngineDevice STATIC
     Source/Win32Device/GameClient/Win32Mouse.cpp
 )
 
-#------------------------------------------------------------------------------
-# Include paths
-#------------------------------------------------------------------------------
+set_target_properties(GameEngineDevice PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(GameEngineDevice PRIVATE
     ../GameRenderer
     ../Libraries/OpenAL/include
@@ -119,45 +120,17 @@ target_include_directories(GameEngineDevice PRIVATE
 
 target_link_libraries(GameEngineDevice PRIVATE
     ww3d2
+    OpenAL
 )
 
-#------------------------------------------------------------------------------
-# Preprocessor definitions by configuration:
-#------------------------------------------------------------------------------
 target_compile_definitions(GameEngineDevice PRIVATE
-  __PLACEMENT_VEC_NEW_INLINE
-  _LIB
-  _WINDOWS
-
-  $<$<CONFIG:Debug>:_DEBUG>
-
-  $<$<CONFIG:Internal>:
-    NDEBUG
-    _INTERNAL
-    _DISABLE_STRING_ANNOTATION
-    _DISABLE_VECTOR_ANNOTATION
-  >
-
-  $<$<CONFIG:Release>:
-    IG_DEBUG_STACKTRACE
-    WIN32
-    NDEBUG
-    _RELEASE
-  >
+    ${GNG_COMPILE_DEFINITIONS}
 )
 
-#------------------------------------------------------------------------------
-# Compiler and runtime library flags (typical MSVC settings):
-#------------------------------------------------------------------------------
 target_compile_options(GameEngineDevice PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    # Debug
-    $<$<CONFIG:Debug>:/Od /MDd /Zi /RTC1>
+    ${GNG_COMPILE_OPTIONS}
+)
 
-    # Internal
-    $<$<CONFIG:Internal>:/O2 /Ob1 /MD /Zi /GF /Gy>
-
-    # Release
-    $<$<CONFIG:Release>:/O2 /Ob2 /MD /GF /Gy>
-  >
+target_link_options(GameEngineDevice PRIVATE
+    ${GNG_LINK_OPTIONS}
 )

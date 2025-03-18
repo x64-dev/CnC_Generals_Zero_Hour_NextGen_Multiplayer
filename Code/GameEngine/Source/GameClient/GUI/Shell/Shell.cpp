@@ -175,44 +175,27 @@ void Shell::reset( void )
 //-------------------------------------------------------------------------------------------------
 void Shell::update( void )
 {
-	static Int lastUpdate = timeGetTime();
-	static const Int shellUpdateDelay = 30;  // try to update 30 frames a second
-	Int now = timeGetTime();
-	
-	//
-	// we keep the shell updates fixed in time so that we can write consitent animation
-	// speeds during the screen update functions
-	//
-	if( now - lastUpdate >= ((1000.0f / shellUpdateDelay ) - 1) )
+	// run the updates for every window layout on the stack
+	for (Int i = m_screenCount - 1; i >= 0; i--)
 	{
 
-		// run the updates for every window layout on the stack
-		for( Int i = m_screenCount - 1; i >= 0; i-- )
-		{
+		DEBUG_ASSERTCRASH(m_screenStack[i], ("Top of shell stack is NULL!\n"));
+		m_screenStack[i]->runUpdate(NULL);
 
-			DEBUG_ASSERTCRASH( m_screenStack[ i ], ("Top of shell stack is NULL!\n") );
-			m_screenStack[ i ]->runUpdate( NULL );
+	}  // end for i
+	if (TheGlobalData->m_shellMapOn && m_shellMapOn && m_background)
+	{
 
-		}  // end for i
-		if(TheGlobalData->m_shellMapOn && m_shellMapOn &&m_background)
-		{
-			
-			m_background->destroyWindows();
-			m_background->deleteInstance();
-			m_background = NULL;
-			
-		}
-		
-		// Update the animate window manager
-		m_animateWindowManager->update();
+		m_background->destroyWindows();
+		m_background->deleteInstance();
+		m_background = NULL;
 
-		m_schemeManager->update();
+	}
 
-		// mark last time we ran the updates
-		lastUpdate = now;
+	// Update the animate window manager
+	m_animateWindowManager->update();
 
-	}  // end if
-
+	m_schemeManager->update();
 }  // end update
 
 //-------------------------------------------------------------------------------------------------

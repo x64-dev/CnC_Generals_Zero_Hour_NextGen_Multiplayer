@@ -1769,15 +1769,35 @@ Bool W3DView::worldToScreen( const Coord3D *w, ICoord2D *s )
 //-------------------------------------------------------------------------------------------------
 void W3DView::screenToWorld( const ICoord2D *s, Coord3D *w )
 {
-
 	// sanity
 	if( s == NULL || w == NULL )
 		return;
 
-	if( m_3DCamera )
+	if( !m_3DCamera )
 	{
-		DEBUG_CRASH(("implement me"));
-	}  // end if
+		return;
+	}
+
+	Matrix4 projectionMatrix = m_3DCamera->Get_Projection_Matrix();
+	Matrix4 inverseProjectionMatrix = projectionMatrix.Inverse();
+
+	Matrix3D viewMatrix = m_3DCamera->Get_View_Matrix();
+	Matrix3D inverseViewMatrix;
+	viewMatrix.Get_Inverse(inverseViewMatrix);
+
+	float nx =  ( 2.0f * s->x ) / getWidth() - 1.0f;
+	float ny = -( 2.0f * s->y ) / getHeight() + 1.0f;
+	float nz = 0.5f;  // e.g., between [0..1] for near/far planes
+	
+	Vector4 clip(nx, ny, nz, 1.0f);
+	Vector4 eye = inverseProjectionMatrix * clip; 
+	// eye now in eye space, so eye.w should still be != 0
+	eye /= eye.W;
+	Vector4 world4 = inverseViewMatrix * eye;
+	world4 /= world4.W;
+	w->x = world4.X;
+	w->y = world4.Y;
+	w->z = world4.Z;
 
 }  // end screenToWorld
 

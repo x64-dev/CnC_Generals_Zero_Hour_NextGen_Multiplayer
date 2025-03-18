@@ -4,10 +4,119 @@ project(RTS LANGUAGES C CXX)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Internal;Release" CACHE STRING "Configs" FORCE)
 
+################################################################################
+# SETUP
+################################################################################
+
+
+set(GNG_GLOBAL_PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
+##### AUTOMATED #####
+
+set(GNG_COMPILE_OPTIONS "")
+set(GNG_LINK_OPTIONS "")
+set(GNG_COMPILE_DEFINITIONS "")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(GNG_DEBUG TRUE)
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Internal")
+    set(GNG_INTERNAL TRUE)
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(GNG_RELEASE TRUE)
+endif()
+
+##### Compiler & Linker Settings #####
+
+# Microsoft Visual C/C++ Compiler
+if(MSVC)
+
+    ##### Common #####
+
+    set(GNG_COMPILE_OPTIONS
+        /nologo # Hide compiler copyright notice
+        /W1     # Warnings level 1 (TODO Increase it as we fix such warnnings)
+    )
+    set(GNG_LINK_OPTIONS
+        /NOLOGO # Hide linker copyright notice
+    )
+    set(GNG_COMPILE_DEFINITIONS
+        _WINDOWS
+        WINVER=0x0A00              # Windows 10 is the minimum as we use DX12
+        _WIN32_WINNT=0x0A00        # Windows 10 is the minimum as we use DX12
+
+        _CRT_SECURE_NO_WARNINGS
+        _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+    )
+
+    ##### Debug #####
+
+    if(GNG_DEBUG)
+        list(APPEND GNG_COMPILE_OPTIONS
+            /Od   # Disable optimizations
+            /MDd  # MultiThreaded Debug DLL Runtime
+            /Zi   # Generate Debug Database (.pdb)
+            /RTC1 # Runtime Error Checking
+        )
+        list(APPEND GNG_LINK_OPTIONS
+            /DEBUG
+        )
+        list(APPEND GNG_COMPILE_DEFINITIONS
+            _DEBUG
+        )
+
+    ##### Internal #####
+
+    elseif(GNG_INTERNAL)
+        list(APPEND GNG_COMPILE_OPTIONS
+            /O2 # Favor speed over size
+            /MD # MultiThreaded DLL Runtime
+            /Zi # Generate Debug Database (.pdb)
+            /Gy # Enable Function level linking
+        )
+        list(APPEND GNG_LINK_OPTIONS
+            /DEBUG
+        )
+        list(APPEND GNG_COMPILE_DEFINITIONS
+            _INTERNAL
+            NDEBUG
+        )
+
+    ##### Release #####
+
+    elseif(GNG_RELEASE)
+        list(APPEND GNG_COMPILE_OPTIONS
+            /O2 # Favor speed over size
+            /MD # MultiThreaded DLL Runtime
+            /Gy # Enable Function level linking
+        )
+        list(APPEND GNG_LINK_OPTIONS
+
+        )
+        list(APPEND GNG_COMPILE_DEFINITIONS
+            _RELEASE
+            NDEBUG
+            IG_DEBUG_STACKTRACE
+            WIN32
+        )
+    endif()
+endif()
+
+################################################################################
+
 add_subdirectory(GameEngine)
 add_subdirectory(GameEngineDevice)
 add_subdirectory(GameRenderer)
 add_subdirectory(Tools/WorldBuilder)
+add_subdirectory(Tools/DebugWindow)
+add_subdirectory(Tools/ParticleEditor)
 add_subdirectory(Libraries/Source/Compression)
 add_subdirectory(Libraries/Source/WWVegas/ww3d2)
 add_subdirectory(Libraries/Source/WWVegas/WWDebug)
@@ -27,7 +136,16 @@ set(ALSOFT_INSTALL_AMBDEC_PRESETS OFF)
 set(ALSOFT_INSTALL_EXAMPLES OFF)
 set(ALSOFT_INSTALL_UTILS OFF)
 
+# Save off the current build type
+set(_OLD_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
+
+# Force subdirectory to Release
+set(CMAKE_BUILD_TYPE "Release")
+
 add_subdirectory(Libraries/OpenAL)
+
+# Restore previous build type
+set(CMAKE_BUILD_TYPE "${_OLD_BUILD_TYPE}")
 
 add_subdirectory(Libraries/Source/GameSpy)
  
@@ -45,6 +163,10 @@ add_executable(RTS WIN32
     # Main/WinMain.h
     # etc.
 )
+
+set_target_properties(RTS PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
 
 set_target_properties(RTS PROPERTIES
     # Put all .exe files in a folder called "Run"
@@ -77,46 +199,16 @@ target_include_directories(RTS PRIVATE
 )
 
 target_compile_definitions(RTS PRIVATE
-    __PLACEMENT_VEC_NEW_INLINE
-    _WINDOWS
-
-    # Debug
-    $<$<CONFIG:Debug>:_DEBUG>
-    $<$<CONFIG:Debug>:BROWSER_DEBUG>
-
-    # Release
-    $<$<CONFIG:Release>:_RELEASE>
-    $<$<CONFIG:Release>:NDEBUG>
-    $<$<CONFIG:Release>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Release>:_DISABLE_VECTOR_ANNOTATION>
-    $<$<CONFIG:Release>:IG_DEBUG_STACKTRACE>
-    $<$<CONFIG:Release>:WIN32>
-
-    # Internal
-    $<$<CONFIG:Internal>:_INTERNAL>
-    $<$<CONFIG:Internal>:NDEBUG>
-    $<$<CONFIG:Internal>:_DISABLE_STRING_ANNOTATION>
-    $<$<CONFIG:Internal>:_DISABLE_VECTOR_ANNOTATION>
+    ${GNG_COMPILE_DEFINITIONS}
 )
 
-if(MSVC)
-    target_compile_options(RTS PRIVATE
-        # Debug config: no optimization, debug runtime
-        $<$<CONFIG:Debug>:/Od>
-        $<$<CONFIG:Debug>:/MDd>
+target_compile_options(RTS PRIVATE
+    ${GNG_COMPILE_OPTIONS}
+)
 
-        # Release config: optimize, release runtime
-        $<$<CONFIG:Release>:/O2>
-        $<$<CONFIG:Release>:/MD>
-
-        # Internal config: often “RelWithDebInfo”-style
-        $<$<CONFIG:Internal>:/O2>
-        $<$<CONFIG:Internal>:/MD>
-
-        # Common warnings level
-        /W3
-    )
-endif()
+target_link_options(RTS PRIVATE
+    ${GNG_LINK_OPTIONS}
+)
 
 target_link_libraries(RTS PRIVATE
     # Common Windows libs
@@ -141,13 +233,8 @@ target_link_libraries(RTS PRIVATE
     wsock32
     imm32
     wininet
-
-    # External Dependencies
-    OpenAL::OpenAL
-
-    # GameSpy SDK
-    UniSpySDK
-
+    DebugWindow
+    ParticleEditor
     GameEngine
 )
 

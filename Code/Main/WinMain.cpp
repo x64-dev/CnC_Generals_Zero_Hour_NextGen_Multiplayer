@@ -66,6 +66,7 @@
 //#include "GeneratedVersion.h"
 #include "Resource.h"
 
+#include "../GameEngine/Source/Console/Console.h"
 #include "../gamerenderer/imgui/imgui.h"
 #include "../gamerenderer/imgui/imgui_impl_win32.h"
 #include "../gamerenderer/imgui/imgui_impl_dx9.h"
@@ -80,13 +81,12 @@
 HINSTANCE ApplicationHInstance = NULL;  ///< our application instance
 HWND ApplicationHWnd = NULL;  ///< our application window handle
 Bool ApplicationIsWindowed = true;
-Bool IsConsoleActive = false;
 Win32Mouse *TheWin32Mouse= NULL;  ///< for the WndProc() only
 DWORD TheMessageTime = 0;	///< For getting the time that a message was posted from Windows.
 
 const Char *g_strFile = "data\\Generals.str";
 const Char *g_csfFile = "data\\%s\\Generals.csf";
-char *gAppPrefix = ""; /// So WB can have a different debug log file name.
+const char *gAppPrefix = ""; /// So WB can have a different debug log file name.
 
 static HANDLE GeneralsMutex = NULL;
 #define GENERALS_GUID "685EAFF2-3216-4265-B047-251C5F4B82F3"
@@ -103,6 +103,12 @@ static HBITMAP gLoadScreenBitmap = NULL;
 
 bool IsWorldBuilder() {
 	return false;
+}
+
+void RestoreMouseClip() {
+	RECT rect;
+	GetClientRect(ApplicationHWnd, &rect);
+	ClipCursor(&rect);
 }
 
 //#define DEBUG_WINDOWS_MESSAGES
@@ -413,6 +419,13 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				if (TheWin32Mouse)
 					TheWin32Mouse->lostFocus(FALSE);
 
+				if (AllowMouseClip())
+				{
+					RECT rect;
+					GetClientRect(hWnd, &rect);
+					ClipCursor(&rect);
+				}
+
 				break;
 
 			}  // end set focus
@@ -420,6 +433,13 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 			//-------------------------------------------------------------------------
 			case WM_SIZE:
 				{
+					if(AllowMouseClip())
+					{
+						RECT rect;
+						GetClientRect(hWnd, &rect);
+						ClipCursor(&rect);
+					}
+					
 					int width = LOWORD(lParam);
 					int height = HIWORD(lParam);
 					if (TheDisplay != nullptr && TheTacticalView != nullptr)
@@ -456,11 +476,18 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				if (TheGameEngine)
 					TheGameEngine->setIsActive(isWinMainActive);
 
-					if (isWinMainActive)
-					{	//restore mouse cursor to our custom version.
-						if (TheWin32Mouse)
-							TheWin32Mouse->setCursor(TheWin32Mouse->getMouseCursor());
-					}
+				if (AllowMouseClip())
+				{
+					RECT rect;
+					GetClientRect(hWnd, &rect);
+					ClipCursor(&rect);
+				}
+
+				if (isWinMainActive)
+				{	//restore mouse cursor to our custom version.
+					if (TheWin32Mouse)
+						TheWin32Mouse->setCursor(TheWin32Mouse->getMouseCursor());
+				}
 				}
 				return 0;
 			}
@@ -502,7 +529,7 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message,
 				switch( key )
 				{
 					case 192:
-						IsConsoleActive = !IsConsoleActive;
+						DevConsole.IsConsoleActive = !DevConsole.IsConsoleActive;
 						break;
 
 					//---------------------------------------------------------------------
@@ -810,7 +837,7 @@ static char* strtrim(char* buffer)
 	return buffer;
 }
 
-char *nextParam(char *newSource, char *seps)
+char *nextParam(char *newSource, const char *seps)
 {
 	static char *source = NULL;
 	if (newSource)
@@ -921,23 +948,6 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 			if (stricmp(token,"-win")==0)
 				ApplicationIsWindowed=true;
 			token = nextParam(NULL, "\" ");	   
-		}
-
-		if (argc>2 && strcmp(argv[1],"-DX")==0) {  
-			Int i;
-			DEBUG_LOG(("\n--- DX STACK DUMP\n"));
-			for (i=2; i<argc; i++) {
-				Int pc;
-				pc = 0;
-				sscanf(argv[i], "%x",  &pc);
-				char name[_MAX_PATH], file[_MAX_PATH];
-				unsigned int line;
-				unsigned int addr;
-				GetFunctionDetails((void*)pc, name, file, &line, &addr);
-				DEBUG_LOG(("0x%x - %s, %s, line %d address 0x%x\n", pc, name, file, line, addr));
-			}
-			DEBUG_LOG(("\n--- END OF DX STACK DUMP\n"));
-			return 0;
 		}
 
 		#ifdef _DEBUG
