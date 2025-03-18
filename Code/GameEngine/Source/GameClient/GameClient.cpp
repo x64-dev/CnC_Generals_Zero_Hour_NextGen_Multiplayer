@@ -92,6 +92,8 @@
 
 #define DRAWABLE_HASH_SIZE	8192
 
+void DrawStatUnitOverlay();
+
 /// The GameClient singleton instance
 GameClient *TheGameClient = NULL;
 
@@ -717,6 +719,8 @@ void GameClient::update( void )
 	}
 
 	{
+		DrawStatUnitOverlay();
+
 		if (DevConsole.IsConsoleActive)
 		{
 			DevConsole.Draw(0.5f);

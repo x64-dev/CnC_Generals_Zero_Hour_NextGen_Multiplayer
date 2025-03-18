@@ -177,6 +177,12 @@ extern CComModule _Module;
 //-------------------------------------------------------------------------------------------------
 static void updateTGAtoDDS();
 
+void StartServerCpuFrameTimer();
+void EndServerCpuFrameTimer();
+
+void StartClientCpuFrameTimer();
+void EndClientCpuFrameTimer();
+
 Int GameEngine::getFramesPerSecondLimit( void )
 {
 	return m_maxFPS;
@@ -603,6 +609,8 @@ void GameEngine::update( void )
 
 				if (elapsedMsClient >= clientlimit)
 				{
+					StartClientCpuFrameTimer();
+
 					static auto lastTimeClientActual = std::chrono::high_resolution_clock::now();
 					float clientDeltaTime = std::chrono::duration<float>(now - lastTimeClientActual).count();
 					WW3D::Set_DeltaTime(clientDeltaTime * 30);
@@ -614,16 +622,18 @@ void GameEngine::update( void )
 					TheGameClient->UPDATE();
 
 					TheMessageStream->propagateMessages();
-				}
-				
-				if (elapsedMsServer >= limit)
-				{
+
 					// update the shell
 					TheShell->UPDATE();
 
 					// update the in game UI 
 					TheInGameUI->UPDATE();
 
+					EndClientCpuFrameTimer();
+				}
+				
+				if (elapsedMsServer >= limit)
+				{
 					if (TheNetwork != NULL)
 					{
 						TheNetwork->UPDATE();
@@ -639,7 +649,9 @@ void GameEngine::update( void )
 			{
 				if (elapsedMsServer >= limit)
 				{
+					StartServerCpuFrameTimer();
 					TheGameLogic->UPDATE();
+					EndServerCpuFrameTimer();
 				}
 			}
 

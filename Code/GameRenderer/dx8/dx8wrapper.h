@@ -570,10 +570,12 @@ public:
 	static HRESULT SetPixelShader(IDirect3DPixelShader9* pShader) {
 		return D3DDevice->SetPixelShader(pShader);
 	}
+	
 protected:
 	static int numDeviceVertexShaders;
 	static DeviceVertexShader deviceVertexShaders[256];
 
+	static void InitializeTimingQueries(IDirect3DDevice9* device);
 
 	static bool	Create_Device(void);
 	static void Release_Device(void);
@@ -1217,5 +1219,7 @@ WWINLINE RenderStateStruct& RenderStateStruct::operator= (const RenderStateStruc
 	return *this;
 }
 
+void StartGpuFrameTimer();
+void EndGpuFrameTimer();
 
 #endif

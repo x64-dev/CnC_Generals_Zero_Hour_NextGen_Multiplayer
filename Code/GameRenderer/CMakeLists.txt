@@ -15,6 +15,7 @@ set(GAMERENDERER_SOURCES
     dx8/dx8vertexbuffer.cpp
     dx8/dx8webbrowser.cpp
     dx8/dx8wrapper.cpp
+    dx8/dx8timer.cpp
 )
 
 set(GAMERENDERER_HEADERS
