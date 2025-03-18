@@ -75,8 +75,8 @@ protected:
 	static TGlobalTextureClass m_globalTextureClasses[NUM_TEXTURE_CLASSES];
 
 protected:
-	static void loadBitmap(char *path, const char *uiName);
-	static void loadDirectoryOfImages(char *path);
+	static void loadBitmap(const char *path, const char *uiName);
+	static void loadDirectoryOfImages(const char *path);
 	static void loadImagesFromTerrainType( TerrainType *terrain );
 	static void loadBaseImages(void);
 	Int allocateTiles(Int textureClass);

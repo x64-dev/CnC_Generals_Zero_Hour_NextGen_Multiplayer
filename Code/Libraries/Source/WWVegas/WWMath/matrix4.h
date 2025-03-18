@@ -92,7 +92,7 @@ public:
 	** distance from the camera to the z clipping planes.  See implementations for more info.
 	*/
 	WWINLINE void		Init_Ortho(float left,float right,float bottom,float top,float znear,float zfar);
-	WWINLINE void Matrix4::Init_PerspectiveProjection
+	WWINLINE void Init_PerspectiveProjection
 	(
 		float left,
 		float right,

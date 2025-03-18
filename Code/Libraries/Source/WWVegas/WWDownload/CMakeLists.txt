@@ -10,6 +10,10 @@ add_library(WWDownload STATIC
     # ...
 )
 
+set_target_properties(WWDownload PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(WWDownload PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/.."
 )

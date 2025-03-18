@@ -19,6 +19,10 @@ add_library(wwsaveload STATIC
     # ...
 )
 
+set_target_properties(wwsaveload PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(wwsaveload PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwdebug"

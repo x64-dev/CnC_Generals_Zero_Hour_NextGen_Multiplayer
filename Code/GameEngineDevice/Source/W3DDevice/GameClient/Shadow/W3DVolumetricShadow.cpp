@@ -272,8 +272,8 @@ class W3DShadowGeometryMesh
 	friend class W3DVolumetricShadow;
 	
 public:
-	W3DShadowGeometryMesh::W3DShadowGeometryMesh( void );
-	W3DShadowGeometryMesh::~W3DShadowGeometryMesh( void );
+	W3DShadowGeometryMesh( void );
+	~W3DShadowGeometryMesh( void );
 
 	/// @todo: Cache/Store face normals someplace so they are not recomputed when lights move.
 	Vector3 *GetPolygonNormal (long dwPolyNormId, Vector3 *pvNorm)
@@ -1292,7 +1292,8 @@ void W3DVolumetricShadow::RenderMeshVolume(Int meshIndex, Int lightIndex, const 
 	Matrix4 mWorld(*meshXform);
 
 	///@todo: W3D always does transpose on all of matrix sets.  Slow???  Better to hack view matrix.
-	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&mWorld.Transpose());
+	const Matrix4 temp_matrix = mWorld.Transpose();
+	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&temp_matrix);
 	
 	W3DBufferManager::W3DVertexBufferSlot *vbSlot=m_shadowVolumeVB[lightIndex][ meshIndex ];
 	if (!vbSlot)
@@ -1400,7 +1401,8 @@ void W3DVolumetricShadow::RenderDynamicMeshVolume(Int meshIndex, Int lightIndex,
 	
 	Matrix4 mWorld(*meshXform);
 
-	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&mWorld.Transpose());
+	const Matrix4 temp_matrix = mWorld.Transpose();
+	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&temp_matrix);
 
 	if (shadowVertexBufferD3D != lastActiveVertexBuffer)
 	{
@@ -1550,7 +1552,8 @@ void W3DVolumetricShadow::RenderMeshVolumeBounds(Int meshIndex, Int lightIndex, 
 	//todo: replace this with mesh transform
 	Matrix4 mWorld(1);	//identity since boxes are pre-transformed to world space.
 
-	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&mWorld.Transpose());
+	const Matrix4 temp_matrix = mWorld.Transpose();
+	DX8Wrapper::SetTransform(D3DTS_WORLD,(_D3DMATRIX *)&temp_matrix);
 	
 	DX8Wrapper::SetStreamSource(0,shadowVertexBufferD3D,0,sizeof(SHADOW_DYNAMIC_VOLUME_VERTEX));
 	DX8Wrapper::SetFVF(SHADOW_DYNAMIC_VOLUME_FVF);

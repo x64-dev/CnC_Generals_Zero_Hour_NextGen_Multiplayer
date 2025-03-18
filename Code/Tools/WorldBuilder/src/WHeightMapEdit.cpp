@@ -340,7 +340,7 @@ Bool WorldHeightMapEdit::remapTextures(void)
 }
 
 /// Load a tga bitmap into a set of tiles.
-void WorldHeightMapEdit::loadBitmap(char *path, const char *uiName)
+void WorldHeightMapEdit::loadBitmap(const char *path, const char *uiName)
 {
 	CachedFileInputStream stream;
 	if (!stream.open(AsciiString(path))) 
@@ -411,7 +411,7 @@ void WorldHeightMapEdit::loadBaseImages(void)
 }
 
 /// Loads all the images in a directory (including subdirectories)
-void WorldHeightMapEdit::loadDirectoryOfImages(char *pFilePath) 
+void WorldHeightMapEdit::loadDirectoryOfImages(const char *pFilePath)
 {
 	char				dirBuf[_MAX_PATH];
 	char				findBuf[_MAX_PATH];

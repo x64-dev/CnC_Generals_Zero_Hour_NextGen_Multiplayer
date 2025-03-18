@@ -543,6 +543,10 @@ add_library(GameEngine STATIC
     Source/Precompiled/PreRTS.cpp
  "Source/Console/CvarManager.h" "Source/Console/CvarManager.cpp")
 
+ set_target_properties(GameEngine PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(GameEngine PRIVATE
     ../Libraries/Include
     ../Libraries/Source

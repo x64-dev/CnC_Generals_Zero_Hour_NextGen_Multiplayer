@@ -43,6 +43,10 @@ add_library(wwmath STATIC
     # wwmathids.h
 )
 
+set_target_properties(wwmath PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(wwmath PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"

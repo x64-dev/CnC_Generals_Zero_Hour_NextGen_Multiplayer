@@ -16,6 +16,10 @@ add_library(WWDebug STATIC
     ${HEADERS}
 )
 
+set_target_properties(WWDebug PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(WWDebug PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../wwlib"
 )

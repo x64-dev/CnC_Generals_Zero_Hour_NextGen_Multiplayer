@@ -228,6 +228,10 @@ class TTimerClass : public BasicTimerClass<T> {
 		// Queries whether the timer is currently active.
 		bool Is_Active(void) const;
 
+	protected:
+		using BasicTimerClass<T>::Timer;
+		using BasicTimerClass<T>::Started;
+
 	private:
 		int Accumulated;				//	Total accumulated ticks.
 };
@@ -452,6 +456,10 @@ class CDTimerClass : public BasicTimerClass<T> {
 
 		// Queries whether the timer is currently active.
 		bool Is_Active(void) const;
+
+	protected:
+		using BasicTimerClass<T>::Timer;
+		using BasicTimerClass<T>::Started;
 
 	private:
 		int DelayTime;			// Ticks remaining before countdown timer expires.

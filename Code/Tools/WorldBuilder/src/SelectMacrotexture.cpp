@@ -114,7 +114,7 @@ BOOL SelectMacrotexture::OnInitDialog()
 			ins.hInsertAfter = TVI_SORT;
 			ins.item.mask = TVIF_PARAM|TVIF_TEXT;
 			ins.item.lParam = -1;
-			ins.item.pszText = DEFAULT;
+			ins.item.pszText = const_cast<char*>(DEFAULT); // FIXME THIS IS UNDEFINED BEHAVIOR
 			ins.item.cchTextMax = strlen(DEFAULT);				
 			child = m_textureTreeView.InsertItem(&ins);
 

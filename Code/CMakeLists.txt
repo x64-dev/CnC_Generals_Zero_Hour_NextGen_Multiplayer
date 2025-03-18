@@ -8,6 +8,13 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Internal;Release" CACHE STRING "Configs" FO
 # SETUP
 ################################################################################
 
+
+set(GNG_GLOBAL_PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
 ##### AUTOMATED #####
 
 set(GNG_COMPILE_OPTIONS "")
@@ -151,6 +158,10 @@ add_executable(RTS WIN32
     # Main/WinMain.h
     # etc.
 )
+
+set_target_properties(RTS PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
 
 set_target_properties(RTS PROPERTIES
     # Put all .exe files in a folder called "Run"

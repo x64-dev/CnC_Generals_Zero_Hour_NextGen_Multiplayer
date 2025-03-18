@@ -124,6 +124,10 @@ add_library(ww3d2 STATIC
     # ${RESOURCES}  # If you want them in the project
 )
 
+set_target_properties(ww3d2 PROPERTIES
+    ${GNG_GLOBAL_PROPERTIES}
+ )
+
 target_include_directories(ww3d2 PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../../GameRenderer"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../DX90SDK/Include"

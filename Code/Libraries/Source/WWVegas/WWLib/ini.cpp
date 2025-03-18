@@ -419,7 +419,11 @@ int INIClass::Load(Straw & ffile)
 
 				strtrim(divider);
 				if (!strlen(divider))
-					divider = " ";
+					//divider = " ";
+				{
+					divider[0] = ' ';
+					divider[1] = '\0';
+				}
 
 				if (Put_String(section, buffer, divider) == false) {
 					return(false);
@@ -480,7 +484,11 @@ int INIClass::Load(Straw & ffile)
 
 				strtrim(divider);
 				if (!strlen(divider))
-					divider = " ";
+					//divider = " ";
+				{
+					divider[0] = ' ';
+					divider[1] = '\0';
+				}
 
 
 				INIEntry * entryptr = W3DNEW INIEntry(strdup(buffer), strdup(divider));
