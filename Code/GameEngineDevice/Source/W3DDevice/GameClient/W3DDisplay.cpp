@@ -1737,20 +1737,6 @@ AGAIN:
 
 
 	do {
-		
-		{
-			if(TheGlobalData->m_loadScreenRender != TRUE)
-			{
-			
-				// limit the framerate
-				while(TheGlobalData->m_useFpsLimit && (now - prevTime) < minTime-1)
-				{
-					now = timeGetTime();
-				}
-				prevTime = now;
-			}
-		}
-
 		// update all views of the world - recomputes data which will affect drawing
 		{	//Checking if we have the device before updating views because the heightmap crashes otherwise while
 			//trying to refresh the visible terrain geometry.

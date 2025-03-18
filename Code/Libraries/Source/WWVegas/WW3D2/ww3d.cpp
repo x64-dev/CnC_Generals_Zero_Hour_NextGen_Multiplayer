@@ -160,6 +160,7 @@ const char* DAZZLE_INI_FILENAME="DAZZLE.INI";
 ***********************************************************************************/
 
 unsigned int											WW3D::SyncTime = 0;
+float													WW3D::DeltaTime = 0.0f;
 unsigned int											WW3D::PreviousSyncTime = 0;
 bool														WW3D::IsSortingEnabled = true;
 

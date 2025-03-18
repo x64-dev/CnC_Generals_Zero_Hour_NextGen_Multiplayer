@@ -2055,6 +2055,7 @@ void W3DModelDraw::doDrawModule(const Matrix3D* transformMtx)
 	if (m_renderObject)
 	{
 		Matrix3D mtx = *transformMtx;
+
 		adjustTransformMtx(mtx);
 		m_renderObject->Set_Transform(mtx);
 	}
@@ -2062,7 +2063,6 @@ void W3DModelDraw::doDrawModule(const Matrix3D* transformMtx)
 	handleClientTurretPositioning();
 	recalcBonesForClientParticleSystems();
 	handleClientRecoil();
-
 }
 
 //-------------------------------------------------------------------------------------------------

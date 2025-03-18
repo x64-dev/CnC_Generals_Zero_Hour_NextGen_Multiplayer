@@ -590,7 +590,7 @@ void ParticleEmitterClass::Create_New_Particles(const Quaternion & curr_quat, co
 	} else {
 		InheritedWorldSpaceEmitterVel.Set(0.0, 0.0, 0.0);
 	}
-	
+
    for (; EmitRemain > EmitRate;) {
 		
 		// Calculate the new remainder.

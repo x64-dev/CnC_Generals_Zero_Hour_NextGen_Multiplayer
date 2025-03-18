@@ -618,6 +618,10 @@ private:
 	Real m_decalOpacityFadeRate;
 	Real m_decalOpacity;
 
+
+	Matrix3D m_previousTransform;
+	bool m_hasPreviousTransform = false;
+
 	Object *m_object;						///< object (if any) that this drawable represents
 	Particle *m_particle;				///< particle (if any) that this Drawable is associated with
 		

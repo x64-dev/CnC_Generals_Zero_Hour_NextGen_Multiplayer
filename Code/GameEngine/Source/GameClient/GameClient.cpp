@@ -698,7 +698,7 @@ void GameClient::update( void )
 #endif
 
 	// update all particle systems
-	if( !freezeTime )
+	if( !freezeTime)
 	{
 		// update particle systems
 		TheParticleSystemManager->setLocalPlayerIndex(localPlayerIndex);
@@ -737,16 +737,6 @@ void GameClient::update( void )
 	{
 		// let display string factory handle its update
 		TheDisplayStringManager->update();
-	}
-
-	{
-		// update the shell
-		TheShell->UPDATE();
-	}
-
-	{
-		// update the in game UI 
-		TheInGameUI->UPDATE();
 	}
 }  // end update
 

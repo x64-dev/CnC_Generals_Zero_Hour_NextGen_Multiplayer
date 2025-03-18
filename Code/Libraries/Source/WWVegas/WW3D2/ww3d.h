@@ -43,7 +43,7 @@
 #define WW3D_H
 
 #include "always.h"
-#include "vector3.h"
+#include "../wwmath/vector3.h"
 #include "layer.h"
 #include "w3derr.h"
 #include "robjlist.h"
@@ -167,6 +167,8 @@ public:
 	** will control things like animated uv-offset mappers and render object animations.
 	*/
 	static void					Sync( unsigned int sync_time );
+	static float				Get_DeltaTime(void) { return DeltaTime; }
+	static void					Set_DeltaTime(float dt) { DeltaTime = dt; }
 	static unsigned int		Get_Sync_Time(void) { return SyncTime; }
    static unsigned int     Get_Frame_Time(void) { return SyncTime - PreviousSyncTime; }
    static unsigned int     Get_Frame_Count(void) { return FrameCount; }
@@ -315,6 +317,8 @@ private:
    // application at the start of every frame. Note that wraparound cases
    // etc. need to be considered.
 	static unsigned int				SyncTime;
+
+	static float					DeltaTime;
 
    // The previously set absolute sync time - this is used to get the interval between
    // the most recently set sync time and the previous one. Assuming the

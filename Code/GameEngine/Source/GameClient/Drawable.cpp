@@ -447,9 +447,9 @@ Drawable::Drawable( const ThingTemplate *thingTemplate, DrawableStatus statusBit
 			const ModuleData* newModData = cuMI.getNthData(modIdx);
 
 	/// @todo srj -- this is evil, we shouldn't look at the module name directly!
-			if (thingTemplate->isKindOf(KINDOF_SHRUBBERY) && 
-					!TheGlobalData->m_useTreeSway &&
-					cuMI.getNthName(modIdx).compareNoCase("SwayClientUpdate") == 0)
+			if (thingTemplate->isKindOf(KINDOF_SHRUBBERY) &&
+				!TheGlobalData->m_useTreeSway &&
+				cuMI.getNthName(modIdx).compareNoCase("SwayClientUpdate") == 0)
 				continue;
 
 			*m++ = TheModuleFactory->newModule(this, cuMI.getNthName(modIdx), newModData, MODULETYPE_CLIENT_UPDATE);
@@ -1772,6 +1772,9 @@ void Drawable::calcPhysicsXformTreads( const Locomotor *locomotor, PhysicsXformI
 //-------------------------------------------------------------------------------------------------
 void Drawable::calcPhysicsXformWheels( const Locomotor *locomotor, PhysicsXformInfo& info )
 {
+// jmarshall 120 fps TODO
+	return;
+// jmarshall end
 	if (m_locoInfo == NULL)
 		m_locoInfo = newInstance(DrawableLocoInfo);
 
@@ -2226,11 +2229,32 @@ void Drawable::draw( View *view )
 	}
 
 	applyPhysicsXform(&transformMtx);
+// jmarshall
+	if (!m_hasPreviousTransform)
+	{
+		m_previousTransform = transformMtx;
+		m_hasPreviousTransform = true;
+	}
+
+	Matrix3D lerpedTransformatrix;
+	Matrix3D currentTransformMatrix = transformMtx;
+
+	Matrix3D::Lerp(m_previousTransform, currentTransformMatrix, 0.5f, lerpedTransformatrix);
 
 	for (DrawModule** dm = getDrawModules(); *dm; ++dm)
 	{
-		(*dm)->doDrawModule(&transformMtx);
+		if (TheTacticalView->getCameraLockDrawable() == this)
+		{
+			(*dm)->doDrawModule(&currentTransformMatrix);
+		}
+		else
+		{
+			(*dm)->doDrawModule(&lerpedTransformatrix);
+		}
 	}
+
+	m_previousTransform = lerpedTransformatrix;
+// jmarshall end
 }
 
 // ------------------------------------------------------------------------------------------------

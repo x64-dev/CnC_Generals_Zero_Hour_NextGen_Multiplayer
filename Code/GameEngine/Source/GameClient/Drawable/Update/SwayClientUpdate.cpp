@@ -42,6 +42,7 @@
 #include "GameLogic/Object.h"
 #include "GameLogic/ScriptEngine.h"
 #include "GameLogic/GameLogic.h"
+#include "WW3D2/ww3d.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -119,13 +120,13 @@ void SwayClientUpdate::clientUpdate( void )
 			return;
 	}
 
-	m_curValue += m_curDelta;
+	m_curValue += m_curDelta * WW3D::Get_DeltaTime();
 	if (m_curValue > 2*PI) 
 		m_curValue -= 2*PI;
 	Real cosine = Cos(m_curValue);
 
 	Real targetAngle = cosine * m_curAngleLimit + m_leanAngle;
-	Real deltaAngle = targetAngle - m_curAngle;
+	Real deltaAngle = (targetAngle - m_curAngle);
 
 	Matrix3D xfrm = *draw->getInstanceMatrix();
 	xfrm.In_Place_Pre_Rotate_X(-deltaAngle * info.m_directionVec.x);
