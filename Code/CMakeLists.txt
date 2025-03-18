@@ -41,7 +41,6 @@ if(MSVC)
         /NOLOGO # Hide linker copyright notice
     )
     set(GNG_COMPILE_DEFINITIONS
-        __PLACEMENT_VEC_NEW_INLINE # Hack for placement new overides (will be removed)
         _WINDOWS
         WINVER=0x0A00              # Windows 10 is the minimum as we use DX12
         _WIN32_WINNT=0x0A00        # Windows 10 is the minimum as we use DX12
