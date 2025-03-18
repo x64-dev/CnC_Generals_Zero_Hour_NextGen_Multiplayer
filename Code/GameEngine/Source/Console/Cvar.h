@@ -46,13 +46,23 @@ public:
     // Returns true if the given flag is set
     bool IsFlagSet(unsigned int checkFlag) const;
 
+	bool IsChanged() { return isChanged; }
     void ResetChanged() { isChanged = false; }
+private:
+	// Internal parse helpers
+	static bool StringToBool(const std::string& s);
+	static int  StringToInt(const std::string& s);
+	static float StringToFloat(const std::string& s);
 private:
     bool isChanged = false;
     std::string  name;
     std::string  description;
     std::string  defaultValue;
     unsigned int flags;
+
     std::string  currentValue;
+	bool  boolValue = false;
+	int   intValue = 0;
+	float floatValue = 0.0f;
 };
 

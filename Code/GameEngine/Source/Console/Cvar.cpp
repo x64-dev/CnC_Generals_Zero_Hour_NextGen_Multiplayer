@@ -14,6 +14,17 @@ wwCVar::wwCVar(const std::string& name,
 	, flags(flags)
 	, currentValue(defaultValue)
 {
+	// Parse defaultValue once at construction
+	if (IsFlagSet(CVAR_BOOL)) {
+		boolValue = StringToBool(defaultValue);
+	}
+	if (IsFlagSet(CVAR_INT)) {
+		intValue = StringToInt(defaultValue);
+	}
+	if (IsFlagSet(CVAR_FLOAT)) {
+		floatValue = StringToFloat(defaultValue);
+	}
+
 	GetCVarManager().RegisterCVar(this);
 }
 
@@ -34,30 +45,32 @@ const std::string& wwCVar::GetString() const {
 }
 
 bool wwCVar::GetBool() const {
-	// If flagged as bool, interpret "0" / "false" as false; else true
-	// Otherwise, fallback to a simple "0"/"false" check as well
-	if (flags & CVAR_BOOL) {
-		return (currentValue != "0" && currentValue != "false");
-	}
-	// fallback
-	return (currentValue != "0" && currentValue != "false");
+	return boolValue;
 }
 
 int wwCVar::GetInt() const {
-	// If flagged as int, parse as int
-	// fallback is also stoi, but you could throw or handle differently
-	return std::stoi(currentValue);
+	return intValue;
 }
 
 float wwCVar::GetFloat() const {
-	// If flagged as float, parse as float
-	// fallback is also stof
-	return std::stof(currentValue);
+	return floatValue;
 }
 
 void wwCVar::SetString(const std::string& newValue) {
 	// Optionally, you could clamp or validate values here before setting
 	currentValue = newValue;
+	// Re-parse as needed based on flags
+	if (IsFlagSet(CVAR_BOOL)) {
+		boolValue = StringToBool(newValue);
+	}
+	if (IsFlagSet(CVAR_INT)) {
+		intValue = StringToInt(newValue);
+	}
+	if (IsFlagSet(CVAR_FLOAT)) {
+		floatValue = StringToFloat(newValue);
+	}
+
+	isChanged = true;
 }
 
 void wwCVar::Reset() {
@@ -66,4 +79,32 @@ void wwCVar::Reset() {
 
 bool wwCVar::IsFlagSet(unsigned int checkFlag) const {
 	return (flags & checkFlag) != 0;
+}
+
+
+// Helper for string -> bool. You can tailor the exact conditions:
+bool wwCVar::StringToBool(const std::string& s)
+{
+	// A simple case-insensitive convert. You might want to add more checks or rules.
+	std::string lower;
+	lower.resize(s.size());
+	std::transform(s.begin(), s.end(), lower.begin(),
+		[](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+	if (lower == "1" || lower == "true" || lower == "yes" || lower == "on")
+		return true;
+	return false;
+}
+
+// Helper for string -> int
+int wwCVar::StringToInt(const std::string& s)
+{
+	// Use std::stoi and handle errors if you want
+	return std::stoi(s);
+}
+
+// Helper for string -> float
+float wwCVar::StringToFloat(const std::string& s)
+{
+	// Use std::stof and handle errors if you want
+	return std::stof(s);
 }
