@@ -117,6 +117,8 @@
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
 #endif
 
+wwCVar com_clientMaxMs("com_clientMaxMs", "16", "Max default client FPS", CVAR_INT);
+
 //-------------------------------------------------------------------------------------------------
 
 #ifdef DEBUG_CRC
@@ -581,7 +583,7 @@ void GameEngine::update( void )
 //	m_maxFPS = 60;
 	extern INT TheW3DFrameLengthInMsec;
 	DWORD limit = (1000.0f / m_maxFPS) - 1;
-	DWORD clientlimit = 16;	
+	DWORD clientlimit = com_clientMaxMs.GetInt();
 
 	if (limit < clientlimit)
 		clientlimit = limit;
