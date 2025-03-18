@@ -676,6 +676,10 @@ void GameEngine::update( void )
 extern bool DX8Wrapper_IsWindowed;
 extern HWND ApplicationHWnd;
 
+bool AllowMouseClip() {
+	return !DX8Wrapper_IsWindowed && !DevConsole.IsConsoleActive;
+}
+
 /** -----------------------------------------------------------------------------------------------
  * The "main loop" of the game engine. It will not return until the game exits. 
  */

@@ -93,6 +93,7 @@
 #define DRAWABLE_HASH_SIZE	8192
 
 void DrawStatUnitOverlay();
+void RestoreMouseClip();
 
 wwCVar com_showfps("com_showfps", "0", "Toggles FPS overlay", CVAR_BOOL);
 
@@ -728,7 +729,12 @@ void GameClient::update( void )
 
 		if (DevConsole.IsConsoleActive)
 		{
+			ClipCursor(NULL);
 			DevConsole.Draw(0.5f);
+		}
+		else if(AllowMouseClip())
+		{
+			RestoreMouseClip();
 		}
 	}
 
