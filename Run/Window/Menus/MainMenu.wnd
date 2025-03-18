@@ -52,6 +52,53 @@ WINDOW
   CHILD
   WINDOW
     WINDOWTYPE = USER;
+    SCREENRECT = UPPERLEFT: 0 0,
+                 BOTTOMRIGHT: 800 600,
+                 CREATIONRESOLUTION: 800 600;
+    NAME = "MainMenu.wnd:MainMenuRuler";
+    STATUS = ENABLED+IMAGE;
+    STYLE = USER;
+    SYSTEMCALLBACK = "[None]";
+    INPUTCALLBACK = "[None]";
+    TOOLTIPCALLBACK = "[None]";
+    DRAWCALLBACK = "[None]";
+    FONT = NAME: "Times New Roman", SIZE: 14, BOLD: 0;
+    HEADERTEMPLATE = "[NONE]";
+    TOOLTIPDELAY = -1;
+    TEXTCOLOR = ENABLED:  255 255 255 0, ENABLEDBORDER:  255 255 255 0,
+                DISABLED: 255 255 255 0, DISABLEDBORDER: 255 255 255 0,
+                HILITE:   255 255 255 0, HILITEBORDER:   255 255 255 0;
+    ENABLEDDRAWDATA = IMAGE: MainMenuRuler, COLOR: 0 0 0 255, BORDERCOLOR: 0 0 0 255,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                      IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0;
+    DISABLEDDRAWDATA = IMAGE: NoImage, COLOR: 64 64 64 255, BORDERCOLOR: 254 254 254 255,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                       IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0;
+    HILITEDRAWDATA = IMAGE: NoImage, COLOR: 128 128 255 255, BORDERCOLOR: 254 254 254 255,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0,
+                     IMAGE: NoImage, COLOR: 255 255 255 0, BORDERCOLOR: 255 255 255 0;
+  END
+  CHILD
+  WINDOW
+    WINDOWTYPE = USER;
     SCREENRECT = UPPERLEFT: 532 108,
                  BOTTOMRIGHT: 756 320,
                  CREATIONRESOLUTION: 800 600;
@@ -154,7 +201,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Back";
@@ -202,7 +249,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:HardCaps";
@@ -250,7 +297,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:MediumDifficultyCaps";
@@ -298,7 +345,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:EasyCaps";
@@ -346,7 +393,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Arial", SIZE: 19, BOLD: 0;
+        FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
         HEADERTEMPLATE = "MinorTitle";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:SelectDifficulty";
@@ -491,7 +538,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Back";
@@ -539,7 +586,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Network";
@@ -587,7 +634,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:GeneralsOnline";
@@ -731,7 +778,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Back";
@@ -779,7 +826,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:MainMenuLoadReplay";
@@ -827,7 +874,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:MainMenuLoadGame";
@@ -971,7 +1018,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Back";
@@ -1019,7 +1066,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:CustomMission";
@@ -1067,7 +1114,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Skirmish";
@@ -1115,7 +1162,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPTEXT = "TOOLTIP:Campaign1";
         TOOLTIPDELAY = -1;
@@ -1164,7 +1211,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPTEXT = "TOOLTIP:Campaign2";
         TOOLTIPDELAY = -1;
@@ -1213,7 +1260,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPTEXT = "TOOLTIP:Campaign3";
         TOOLTIPDELAY = -1;
@@ -1262,7 +1309,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:TRAINING";
@@ -1453,7 +1500,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Exit";
@@ -1501,7 +1548,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Credits";
@@ -1549,7 +1596,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Options";
@@ -1597,7 +1644,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:ReplayMenu";
@@ -1645,7 +1692,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:Multiplayer";
@@ -1693,7 +1740,7 @@ WINDOW
         INPUTCALLBACK = "[None]";
         TOOLTIPCALLBACK = "[None]";
         DRAWCALLBACK = "[None]";
-        FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+        FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
         HEADERTEMPLATE = "MainButton";
         TOOLTIPDELAY = -1;
         TEXT = "GUI:SinglePlayer";
@@ -1839,7 +1886,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:RecentSave";
@@ -1877,8 +1924,8 @@ WINDOW
   CHILD
   WINDOW
     WINDOWTYPE = USER;
-    SCREENRECT = UPPERLEFT: 88 104,
-                 BOTTOMRIGHT: 476 492,
+    SCREENRECT = UPPERLEFT: 88 108,
+                 BOTTOMRIGHT: 476 496,
                  CREATIONRESOLUTION: 800 600;
     NAME = "MainMenu.wnd:WinGrowMarker";
     STATUS = ENABLED+HIDDEN+IMAGE;
@@ -2639,7 +2686,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:LoadGame";
@@ -2687,7 +2734,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:RecentSave";
@@ -2735,7 +2782,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:LoadGame";
@@ -2783,7 +2830,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:RecentSave";
@@ -2831,7 +2878,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Arial", SIZE: 14, BOLD: 0;
+    FONT = NAME: "Arial", SIZE: 10, BOLD: 0;
     HEADERTEMPLATE = "ButtonSmall";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:LoadGame";
@@ -2927,7 +2974,7 @@ WINDOW
     INPUTCALLBACK = "[None]";
     TOOLTIPCALLBACK = "[None]";
     DRAWCALLBACK = "[None]";
-    FONT = NAME: "Generals", SIZE: 21, BOLD: 0;
+    FONT = NAME: "Generals", SIZE: 15, BOLD: 0;
     HEADERTEMPLATE = "MainButton";
     TOOLTIPDELAY = -1;
     TEXT = "GUI:GetUpdate";
