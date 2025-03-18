@@ -597,7 +597,7 @@ void GameEngine::update( void )
 		static auto lastTimeServer = std::chrono::high_resolution_clock::now();
 		static auto lastTimeClient = std::chrono::high_resolution_clock::now();
 
-		// Grab the current time
+		// Grab the current time		
 		auto now = std::chrono::high_resolution_clock::now();
 
 		// Compute how many milliseconds have elapsed since last call
@@ -614,12 +614,15 @@ void GameEngine::update( void )
 
 				if (elapsedMsClient >= clientlimit)
 				{
-					StartClientCpuFrameTimer();
+					StartClientCpuFrameTimer();					
 
-					static auto lastTimeClientActual = std::chrono::high_resolution_clock::now();
-					float clientDeltaTime = std::chrono::duration<float>(now - lastTimeClientActual).count();
+					// Get the elapsed duration in milliseconds as a float:
+					float elapsedMs = std::chrono::duration<float, std::milli>(now - lastTimeClient).count();
+
+					// Convert ms → seconds:
+					float clientDeltaTime = elapsedMs / 1000.0f; 
+
 					WW3D::Set_DeltaTime(clientDeltaTime * 30);
-					lastTimeClientActual = now;
 					lastTimeClient = now;
 					TheGameClient->setFrame(m_clientFrame);
 					m_clientFrame++;

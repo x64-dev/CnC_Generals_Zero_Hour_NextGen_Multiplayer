@@ -60,6 +60,7 @@
 #include "GameClient/GameWindowTransitions.h"
 #include "GameClient/GameWindow.h"
 #include "GameClient/GameWindowManager.h"
+#include "ww3d2/ww3d.h"
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------
@@ -263,7 +264,7 @@ void TransitionGroup::init( void )
 
 void TransitionGroup::update( void )
 {
-	m_currentFrame += m_directionMultiplier; // we go forward or backwards depending.
+	m_currentFrame += m_directionMultiplier * WW3D::Get_DeltaTime(); // we go forward or backwards depending.
 	TransitionWindowList::iterator it = m_transitionWindowList.begin();
 	while (it != m_transitionWindowList.end())
 	{
