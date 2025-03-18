@@ -134,13 +134,16 @@ set(ALSOFT_INSTALL_AMBDEC_PRESETS OFF)
 set(ALSOFT_INSTALL_EXAMPLES OFF)
 set(ALSOFT_INSTALL_UTILS OFF)
 
+# Save off the current build type
+set(_OLD_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
+
+# Force subdirectory to Release
+set(CMAKE_BUILD_TYPE "Release")
+
 add_subdirectory(Libraries/OpenAL)
 
-set_target_properties(OpenAL PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../Run"
-
-    OUTPUT_NAME_DEBUG "OpenAL32_debug"
-)
+# Restore previous build type
+set(CMAKE_BUILD_TYPE "${_OLD_BUILD_TYPE}")
 
 add_subdirectory(Libraries/Source/GameSpy)
  
