@@ -7,6 +7,8 @@
 
 ## New Features
 - Quake style console(open/close via the ` key)
+- C++ 20 support(thanks Andrew-2E128!)
+- 30/60hz client/server framerate unlock and decoupling with new interpolation code for smoother gameplay at unlocked framerates. 
 - D3D12 support
 - MSAA 4x support
 - Widescreen support
