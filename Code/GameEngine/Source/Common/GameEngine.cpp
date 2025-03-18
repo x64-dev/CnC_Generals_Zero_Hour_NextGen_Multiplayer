@@ -583,6 +583,9 @@ void GameEngine::update( void )
 	DWORD limit = (1000.0f / m_maxFPS) - 1;
 	DWORD clientlimit = 16;	
 
+	if (limit < clientlimit)
+		clientlimit = limit;
+
 	// Lock to slower framerate for cinematics. 
 	//bool inCinematic = limit > 33;
 	TheW3DFrameLengthInMsec = clientlimit;
