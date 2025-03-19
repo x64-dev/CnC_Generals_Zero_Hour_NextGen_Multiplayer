@@ -22,6 +22,8 @@ public:
 
 	void Tick();
 
+	ENetworkMeshType GetMeshType() const { return m_meshType; }
+
 private:
 	EOS_P2P_SocketId m_SockID;
 

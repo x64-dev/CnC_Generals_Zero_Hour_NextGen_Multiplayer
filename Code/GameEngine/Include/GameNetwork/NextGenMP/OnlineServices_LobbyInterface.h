@@ -3,10 +3,9 @@
 #include "NGMP_include.h"
 #include "OnlineServices_RoomsInterface.h"
 
-struct LobbyMember
+class LobbyMember : public NetworkMemberBase
 {
-	AsciiString m_strName = "NO_NAME";
-	ENetworkConnectionState m_connectionState = ENetworkConnectionState::NOT_CONNECTED;
+	
 };
 
 struct NGMP_LobbyInfo

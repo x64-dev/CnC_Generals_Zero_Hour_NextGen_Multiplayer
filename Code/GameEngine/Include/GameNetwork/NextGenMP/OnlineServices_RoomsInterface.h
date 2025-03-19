@@ -9,10 +9,9 @@ struct NGMP_RoomInfo
 	int maxMembers;
 };
 
-struct NetworkRoomMember
+class NetworkRoomMember : public NetworkMemberBase
 {
-	AsciiString m_strName = "NO_NAME";
-	ENetworkConnectionState m_connectionState = ENetworkConnectionState::NOT_CONNECTED;
+
 };
 
 class NGMP_OnlineServices_RoomsInterface
