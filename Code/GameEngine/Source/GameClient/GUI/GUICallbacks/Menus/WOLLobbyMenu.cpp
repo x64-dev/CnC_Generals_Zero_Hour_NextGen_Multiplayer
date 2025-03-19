@@ -515,15 +515,15 @@ void PopulateLobbyPlayerListbox(void)
 		// NGMP: Color by connection state
 
 		Color connectionStateColor = GameSpyColor[GSCOLOR_PLAYER_NORMAL];
-		if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::NOT_CONNECTED)
+		if (netRoomMember.m_connectionState == ENetworkConnectionState::NOT_CONNECTED)
 		{
 			connectionStateColor = GameMakeColor(255, 0, 0, 255);
 		}
-		else if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::CONNECTED_DIRECT)
+		else if (netRoomMember.m_connectionState == ENetworkConnectionState::CONNECTED_DIRECT)
 		{
 			connectionStateColor = GameMakeColor(0, 255, 0, 255);
 		}
-		else if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::CONNECTED_RELAYED)
+		else if (netRoomMember.m_connectionState == ENetworkConnectionState::CONNECTED_RELAYED)
 		{
 			connectionStateColor = GameMakeColor(255, 253, 85, 255);
 		}

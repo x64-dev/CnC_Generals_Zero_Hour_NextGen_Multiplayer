@@ -1,4 +1,4 @@
-#include "GameNetwork/NextGenMP/NGMP_NetworkBitstream.h"
+#include "GameNetwork/NextGenMP/NetworkBitstream.h"
 
 CBitStream::CBitStream(EPacketID packetID)
 {

@@ -61,8 +61,7 @@
 #include "GameNetwork/GameSpy/GSConfig.h"
 
 #include "Common/STLTypedefs.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_LobbyInterface.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

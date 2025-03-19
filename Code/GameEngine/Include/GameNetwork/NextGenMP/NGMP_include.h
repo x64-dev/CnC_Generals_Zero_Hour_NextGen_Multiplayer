@@ -16,10 +16,12 @@ void NetworkLog(const char* fmt, ...);
 
 // ngmp defines
 #include "GameNetwork/NextGenMP/NextGenMP_defines.h"
-#include "GameNetwork/NextGenMP/NGMP_NetworkPacket.h"
-#include "GameNetwork/NextGenMP/NGMP_NetworkBitstream.h"
+#include "GameNetwork/NextGenMP/NetworkPacket.h"
+#include "GameNetwork/NextGenMP/NetworkBitstream.h"
+#include "GameNetwork/NextGenMP/NGMP_types.h"
 
 // EOS
+#include <eos_common.h>
 #include <eos_p2p_types.h>
 #include <eos_auth_types.h>
 #include <eos_connect_types.h>
@@ -27,6 +29,7 @@ void NetworkLog(const char* fmt, ...);
 #include <eos_connect.h>
 #include <eos_sdk.h>
 #include <eos_p2p.h>
+#include <eos_p2p_types.h>
 #include <eos_types.h>
 #include <eos_sessions.h>
 #include <eos_lobby.h>
@@ -47,7 +50,6 @@ void NetworkLog(const char* fmt, ...);
 #include <eos_reports.h>
 #include <Windows/eos_windows.h>
 #include <eos_integratedplatform_types.h>
-#include <eos_common.h>
 
 // Steam
 #include <steam_api.h>

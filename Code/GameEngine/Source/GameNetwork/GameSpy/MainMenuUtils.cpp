@@ -55,8 +55,7 @@
 #include "WWDownload/URLBuilder.h"
 
 // NGMP
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Init.h"
-#include "GameNetwork/NextGenMP/NGMP_OnlineServices_Auth.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

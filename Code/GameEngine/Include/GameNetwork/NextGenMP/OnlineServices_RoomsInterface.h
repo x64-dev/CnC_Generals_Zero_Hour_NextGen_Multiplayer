@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NGMP_include.h"
+#include "NetworkMesh.h"
 
 struct NGMP_RoomInfo
 {
@@ -8,43 +9,10 @@ struct NGMP_RoomInfo
 	int maxMembers;
 };
 
-enum ENetworkRoomMemberConnectionState
-{
-	NOT_CONNECTED,
-	CONNECTED_DIRECT,
-	CONNECTED_RELAYED
-};
-
 struct NetworkRoomMember
 {
 	AsciiString m_strName = "NO_NAME";
-	ENetworkRoomMemberConnectionState m_connectionState = ENetworkRoomMemberConnectionState::NOT_CONNECTED;
-};
-
-class NGMP_OnlineServices_NetworkRoomMesh
-{
-public:
-	NGMP_OnlineServices_NetworkRoomMesh()
-	{
-
-	}
-
-	~NGMP_OnlineServices_NetworkRoomMesh()
-	{
-
-	}
-
-	void SendHelloMsg(EOS_ProductUserId targetUser);
-	void SendHelloAckMsg(EOS_ProductUserId targetUser);
-	void SendToMesh(NetworkPacket& packet, std::vector<EOS_ProductUserId> vecTargetUsers);
-	void ConnectToMesh(const char* szRoomID);
-
-	void Tick();
-
-private:
-	EOS_P2P_SocketId m_SockID;
-
-	// TODO_NGMP: Everywhere we use notifications, we should check if after creating it it is invalid, if so, error
+	ENetworkConnectionState m_connectionState = ENetworkConnectionState::NOT_CONNECTED;
 };
 
 class NGMP_OnlineServices_RoomsInterface
@@ -102,7 +70,10 @@ public:
 
 	void Tick()
 	{
-		m_netRoomMesh.Tick();
+		if (m_pNetRoomMesh != nullptr)
+		{
+			m_pNetRoomMesh->Tick();
+		}
 	}
 
 private:
@@ -110,7 +81,9 @@ private:
 
 private:
 	int m_CurrentRoomID = -1;
-	NGMP_OnlineServices_NetworkRoomMesh m_netRoomMesh;
+	
+	// TODO_NGMP: cleanup
+	NetworkMesh* m_pNetRoomMesh = nullptr;
 
 	std::map<EOS_ProductUserId, NetworkRoomMember> m_mapMembers = std::map<EOS_ProductUserId, NetworkRoomMember>();
 };

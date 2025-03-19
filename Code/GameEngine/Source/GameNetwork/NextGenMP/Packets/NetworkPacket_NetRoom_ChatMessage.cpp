@@ -1,4 +1,4 @@
-#include "GameNetwork/NextGenMP/NGMP_NetworkPacket.h"
+#include "GameNetwork/NextGenMP/NetworkPacket.h"
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.h"
 
 NetRoom_ChatMessagePacket::NetRoom_ChatMessagePacket(AsciiString& strMessage) : NetworkPacket(EPacketReliability::PACKET_RELIABILITY_RELIABLE_ORDERED)

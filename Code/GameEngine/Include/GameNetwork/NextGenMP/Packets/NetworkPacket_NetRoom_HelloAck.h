@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameNetwork/NextGenMP/NGMP_NetworkPacket.h"
+#include "GameNetwork/NextGenMP/NetworkPacket.h"
 
 class NetRoom_HelloAckPacket : public NetworkPacket
 {

@@ -1,38 +1,12 @@
 #pragma once
 
 #include "NGMP_include.h"
-#include "NGMP_OnlineServices_RoomsInterface.h"
+#include "OnlineServices_RoomsInterface.h"
 
 struct LobbyMember
 {
 	AsciiString m_strName = "NO_NAME";
-	ENetworkRoomMemberConnectionState m_connectionState = ENetworkRoomMemberConnectionState::NOT_CONNECTED;
-};
-
-class NGMP_OnlineServices_LobbyMesh
-{
-public:
-	NGMP_OnlineServices_LobbyMesh()
-	{
-
-	}
-
-	~NGMP_OnlineServices_LobbyMesh()
-	{
-
-	}
-
-	void SendHelloMsg(EOS_ProductUserId targetUser);
-	void SendHelloAckMsg(EOS_ProductUserId targetUser);
-	void SendToMesh(NetworkPacket& packet, std::vector<EOS_ProductUserId> vecTargetUsers);
-	void ConnectToMesh(const char* szRoomID);
-
-	void Tick();
-
-private:
-	EOS_P2P_SocketId m_SockID;
-
-	// TODO_NGMP: Everywhere we use notifications, we should check if after creating it it is invalid, if so, error
+	ENetworkConnectionState m_connectionState = ENetworkConnectionState::NOT_CONNECTED;
 };
 
 struct NGMP_LobbyInfo
@@ -84,7 +58,10 @@ public:
 
 	void Tick()
 	{
-		m_lobbyMesh.Tick();
+		if (m_pLobbyMesh != nullptr)
+		{
+			m_pLobbyMesh->Tick();
+		}
 	}
 
 	LobbyMember* GetRoomMemberFromID(EOS_ProductUserId puid)
@@ -135,7 +112,8 @@ private:
 
 	std::string m_strCurrentLobbyID = "";
 
-	NGMP_OnlineServices_LobbyMesh m_lobbyMesh;
+	// TODO_NGMP: cleanup
+	NetworkMesh* m_pLobbyMesh = nullptr;
 
 	std::map<EOS_ProductUserId, LobbyMember> m_mapMembers = std::map<EOS_ProductUserId, LobbyMember>();
 };

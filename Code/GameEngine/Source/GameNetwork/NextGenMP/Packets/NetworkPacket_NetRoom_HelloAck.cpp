@@ -1,5 +1,5 @@
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.h"
-#include "GameNetwork/NextGenMP/NGMP_NetworkBitstream.h"
+#include "GameNetwork/NextGenMP/NetworkBitstream.h"
 
 NetRoom_HelloAckPacket::NetRoom_HelloAckPacket() : NetworkPacket(EPacketReliability::PACKET_RELIABILITY_RELIABLE_ORDERED)
 {
