@@ -609,13 +609,6 @@ void GameEngine::update( void )
 		auto elapsedMsClient = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastTimeClient).count();
 		
 
-			// NGMP
-			if (g_pOnlineServicesMgr == nullptr)
-			{
-				g_pOnlineServicesMgr = new NGMP_OnlineServicesManager();
-			}
-			NGMP_OnlineServicesManager::GetInstance()->Tick();
-
 		{
 			{
 				VERIFY_CRC
@@ -644,6 +637,13 @@ void GameEngine::update( void )
 
 					// update the shell
 					TheShell->UPDATE();
+
+					// NGMP
+					if (g_pOnlineServicesMgr == nullptr)
+					{
+						g_pOnlineServicesMgr = new NGMP_OnlineServicesManager();
+					}
+					NGMP_OnlineServicesManager::GetInstance()->Tick();
 
 					// update the in game UI 
 					TheInGameUI->UPDATE();

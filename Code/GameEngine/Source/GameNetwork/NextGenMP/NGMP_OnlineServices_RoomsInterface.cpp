@@ -450,7 +450,7 @@ void NGMP_OnlineServices_NetworkRoomMesh::Tick()
 	sizeOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
 	sizeOptions.RequestedChannel = &channelToUse; // room mesh channels
 
-	uint32 numBytes = 0;
+	uint32_t numBytes = 0;
 	while (EOS_P2P_GetNextReceivedPacketSize(P2PHandle, &sizeOptions, &numBytes) == EOS_EResult::EOS_Success)
 	{
 		CBitStream bitstream(numBytes);
