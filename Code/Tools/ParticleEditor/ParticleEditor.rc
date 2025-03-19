@@ -113,7 +113,7 @@ STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP |
 EXSTYLE WS_EX_NOPARENTNOTIFY | WS_EX_CONTROLPARENT
 CAPTION "Particle Editor"
 MENU IDR_FileMenu
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 9, "Segoe UI", 0, 0, 0x1
 BEGIN
     COMBOBOX        IDC_PSEd_ParticleSystem,38,19,137,419,CBS_DROPDOWN | 
                     CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
@@ -199,7 +199,7 @@ IDD_PSEd_EditColorAndAlpha DIALOGEX 0, 0, 199, 186
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 EXSTYLE WS_EX_CONTROLPARENT
 CAPTION "Color and Alpha"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 9, "Segoe UI", 0, 0, 0x1
 BEGIN
     LTEXT           "1",IDC_STATIC,16,30,8,8
     LTEXT           "2",IDC_STATIC,16,45,8,8
@@ -267,7 +267,7 @@ END
 
 IDD_PSEd_EmissionPanelLine DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Emission Line Properties",IDC_EmissionProperties,0,0,
                     185,54
@@ -286,7 +286,7 @@ END
 
 IDD_PSEd_EmissionPanelSphere DIALOG DISCARDABLE  0, 0, 185, 54
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Emission Sphere Properties",IDC_EmissionProperties,0,0,
                     185,54
@@ -296,7 +296,7 @@ END
 
 IDD_PSEd_EmissionPanelBox DIALOG DISCARDABLE  0, 0, 185, 54
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Emission Box Properties",IDC_EmissionProperties,0,0,185,
                     54
@@ -311,7 +311,7 @@ END
 
 IDD_PSEd_EmissionPanelCylinder DIALOG DISCARDABLE  0, 0, 186, 54
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Emission Cylinder Properties",IDC_EmissionProperties,0,
                     0,185,54
@@ -323,7 +323,7 @@ END
 
 IDD_PSEd_EmissionPanelPoint DIALOG DISCARDABLE  0, 0, 185, 54
 STYLE WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Emission Point Properties",IDC_EmissionProperties,0,0,
                     185,54
@@ -332,7 +332,7 @@ END
 
 IDD_PSEd_VelocityPanelOrtho DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Ortho Velocity Properties",IDC_VelocityProperties,0,0,
                     185,54
@@ -353,7 +353,7 @@ END
 
 IDD_PSEd_VelocityPanelSphere DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Spherical Velocity Properties",IDC_VelocityProperties,0,
                     0,185,54
@@ -366,7 +366,7 @@ END
 
 IDD_PSEd_VelocityPanelHemisphere DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Hemispherical Velocity Properties",
                     IDC_VelocityProperties,0,0,185,54
@@ -379,7 +379,7 @@ END
 
 IDD_PSEd_VelocityPanelCylinder DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Cylindrical Velocity Properties",IDC_VelocityProperties,
                     0,0,185,54
@@ -395,7 +395,7 @@ END
 
 IDD_PSEd_VelocityPanelOutward DIALOG DISCARDABLE  0, 0, 186, 55
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Outward Velocity Properties",IDC_VelocityProperties,0,0,
                     185,54
@@ -411,7 +411,7 @@ END
 
 IDD_PSEd_ParticlePanelDrawable DIALOG DISCARDABLE  0, 0, 186, 39
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     COMBOBOX        IDC_PSEd_ParticleTypeDrawable,44,14,130,409,CBS_DROPDOWN | 
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
@@ -421,7 +421,7 @@ END
 
 IDD_PSEd_ParticlePanelParticle DIALOG DISCARDABLE  0, 0, 186, 39
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     COMBOBOX        IDC_PSEd_ParticleTypeParticle,44,14,130,409,
                     CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
@@ -433,7 +433,7 @@ IDD_PSEd_EditMoreParms DIALOGEX 0, 0, 265, 204
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 EXSTYLE WS_EX_NOPARENTNOTIFY | WS_EX_CONTROLPARENT
 CAPTION "More Parameters"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 9, "Segoe UI", 0, 0, 0x1
 BEGIN
     EDITTEXT        IDC_PSEd_SizeMin,5,92,26,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_PSEd_SizeMax,33,92,26,12,ES_AUTOHSCROLL
@@ -530,7 +530,7 @@ END
 IDD_PSEd_EditSwitchesDialog DIALOG DISCARDABLE  0, 0, 191, 102
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 CAPTION "Emission Switches"
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     CONTROL         "One Shot Emitter",IDC_PSEd_OneShot,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,12,27,166,10
@@ -548,7 +548,7 @@ END
 
 IDD_PSEd_ParticlePanelStreak DIALOG DISCARDABLE  0, 0, 185, 39
 STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 9, "Segoe UI"
 BEGIN
     GROUPBOX        "Streak Particle Parameters",IDC_STATIC,0,0,185,39
     COMBOBOX        IDC_PSEd_ParticleTypeParticle,44,14,130,409,
