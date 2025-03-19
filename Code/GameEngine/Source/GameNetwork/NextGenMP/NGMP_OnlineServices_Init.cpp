@@ -191,4 +191,9 @@ void NGMP_OnlineServicesManager::Tick()
 	{
 		m_pRoomInterface->Tick();
 	}
+
+	if (m_pLobbyInterface != nullptr)
+	{
+		m_pLobbyInterface->Tick();
+	}
 }

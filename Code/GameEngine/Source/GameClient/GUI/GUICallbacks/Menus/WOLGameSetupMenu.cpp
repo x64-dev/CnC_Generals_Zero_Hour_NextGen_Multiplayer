@@ -1071,6 +1071,8 @@ void InitWOLGameGadgets( void )
 	}
 	*/
 
+	std::map<EOS_ProductUserId, LobbyMember>& lobbyRoster = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+
 	for (Int i = 0; i < MAX_SLOTS; i++)
 	{
 		AsciiString tmpString;
@@ -1092,9 +1094,10 @@ void InitWOLGameGadgets( void )
 		if(i==0 && bIsHost)
 		{
 			UnicodeString uName;
-			// TODO_NGMP
-			//uName.translate(TheGameSpyInfo->getLocalName());
-			uName.translate("TODO_NGMP");
+
+			auto& plrElement = *std::next(lobbyRoster.begin(), i);
+
+			uName.translate(plrElement.second.m_strName);
 			GadgetComboBoxAddEntry(comboBoxPlayer[i],uName,GameSpyColor[GSCOLOR_PLAYER_OWNER]);
 			GadgetComboBoxSetSelectedPos(comboBoxPlayer[0],0);
 		}
@@ -1207,6 +1210,18 @@ Bool initialAcceptEnable = FALSE;
 //-------------------------------------------------------------------------------------------------
 void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 {
+	// register for chat events
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForChatCallback([](UnicodeString strMessage)
+		{
+			GadgetListBoxAddEntryText(listboxGameSetupChat, strMessage, GameMakeColor(255, 255, 255, 255), -1, -1);
+		});
+
+	// register for roster events
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForRosterNeedsRefreshCallback([]()
+		{
+			// TODO_NGMP
+		});
+
 	// TODO_NGMP
 	/*
 	if (TheGameSpyGame && TheGameSpyGame->isGameInProgress())
@@ -2729,7 +2744,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 					{
 						if (!handleGameSetupSlashCommands(txtInput))
 						{
-							TheGameSpyInfo->sendChat(txtInput, false, NULL);
+							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->SendChatMessageToCurrentLobby(txtInput);
 						}
 					}
 

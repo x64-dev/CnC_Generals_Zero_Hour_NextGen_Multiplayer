@@ -1,4 +1,7 @@
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_Hello.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.h"
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.h"
 
 UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyDisplayName()
 {
@@ -35,6 +38,48 @@ UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyDisplayName()
 	
 
 	return strDisplayName;
+}
+
+void NGMP_OnlineServices_LobbyInterface::SendChatMessageToCurrentLobby(UnicodeString& strChatMsgUnicode)
+{
+	// TODO_NGMP: Support unicode again
+	AsciiString strChatMsg;
+	strChatMsg.translate(strChatMsgUnicode);
+
+	NetRoom_ChatMessagePacket chatPacket(strChatMsg);
+
+	std::vector<EOS_ProductUserId> vecUsers;
+	for (auto kvPair : m_mapMembers)
+	{
+		vecUsers.push_back(kvPair.first);
+	}
+
+	m_lobbyMesh.SendToMesh(chatPacket, vecUsers);
+}
+
+NGMP_OnlineServices_LobbyInterface::NGMP_OnlineServices_LobbyInterface()
+{
+	// Register for EOS callbacks, we will handle them internally and pass them onto the game as necessary
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// player joined/left etc
+	EOS_Lobby_AddNotifyLobbyMemberStatusReceivedOptions lobbyStatusRecievedOpts;
+	lobbyStatusRecievedOpts.ApiVersion = EOS_LOBBY_ADDNOTIFYLOBBYMEMBERSTATUSRECEIVED_API_LATEST;
+	EOS_NotificationId notID1 = EOS_Lobby_AddNotifyLobbyMemberStatusReceived(LobbyHandle, &lobbyStatusRecievedOpts, nullptr, [](const EOS_Lobby_LobbyMemberStatusReceivedCallbackInfo* Data)
+		{
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->UpdateRoomDataCache();
+		});
+
+	// player data changed
+	EOS_Lobby_AddNotifyLobbyMemberUpdateReceivedOptions lobbyMemberUpdateRecievedOpts;
+	lobbyMemberUpdateRecievedOpts.ApiVersion = EOS_LOBBY_ADDNOTIFYLOBBYMEMBERUPDATERECEIVED_API_LATEST;
+	EOS_NotificationId notID2 = EOS_Lobby_AddNotifyLobbyMemberUpdateReceived(LobbyHandle, &lobbyMemberUpdateRecievedOpts, nullptr, [](const EOS_Lobby_LobbyMemberUpdateReceivedCallbackInfo* Data)
+		{
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->UpdateRoomDataCache();
+		});
+
+	notID1 = notID1;
+	notID2 = notID2;
 }
 
 void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback)
@@ -299,6 +344,142 @@ bool NGMP_OnlineServices_LobbyInterface::IsHost()
 	return false;
 }
 
+void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetworkRoom()
+{
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	EOS_Lobby_UpdateLobbyModificationOptions ModifyOptions = {};
+	ModifyOptions.ApiVersion = EOS_LOBBY_UPDATELOBBYMODIFICATION_API_LATEST;
+	ModifyOptions.LobbyId = m_strCurrentLobbyID.c_str();
+	ModifyOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+	EOS_HLobbyModification LobbyModification = nullptr;
+	EOS_EResult Result = EOS_Lobby_UpdateLobbyModification(LobbyHandle, &ModifyOptions, &LobbyModification);
+	if (Result != EOS_EResult::EOS_Success)
+	{
+		// TODO_NGMP: Error
+		NetworkLog("[NGMP] Failed to EOS_Lobby_UpdateLobbyModification!\n");
+	}
+
+	EOS_Lobby_AttributeData AttributeData;
+	AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+	AttributeData.Key = "DISPLAY_NAME";
+	AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
+	AttributeData.Value.AsUtf8 = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetDisplayName().str();
+
+	EOS_LobbyModification_AddMemberAttributeOptions addMemberAttrOpts;
+	addMemberAttrOpts.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;
+	addMemberAttrOpts.Attribute = &AttributeData;
+	addMemberAttrOpts.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+	EOS_EResult r = EOS_LobbyModification_AddMemberAttribute(LobbyModification, &addMemberAttrOpts);
+	if (r != EOS_EResult::EOS_Success)
+	{
+		// TODO_NGMP: Error
+		NetworkLog("[NGMP] Failed to set our local user properties in net room!\n");
+	}
+
+	// now update lobby
+	EOS_Lobby_UpdateLobbyOptions UpdateOptions = {};
+	UpdateOptions.ApiVersion = EOS_LOBBY_UPDATELOBBY_API_LATEST;
+	UpdateOptions.LobbyModificationHandle = LobbyModification;
+	EOS_Lobby_UpdateLobby(LobbyHandle, &UpdateOptions, nullptr, [](const EOS_Lobby_UpdateLobbyCallbackInfo* Data)
+		{
+			if (Data->ResultCode == EOS_EResult::EOS_Success)
+			{
+				NetworkLog("[NGMP] Lobby Updated!\n");
+			}
+			else
+			{
+				NetworkLog("[NGMP] Lobby Update failed!\n");
+			}
+		});
+
+	// join the network mesh too
+	m_lobbyMesh.ConnectToMesh(m_strCurrentLobbyID.c_str());
+
+	if (m_RosterNeedsRefreshCallback != nullptr)
+	{
+		m_RosterNeedsRefreshCallback();
+	}
+}
+
+void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
+{
+	// process users
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+	
+	// get a handle to our lobby
+	EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+	opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+	opts.LobbyId = m_strCurrentLobbyID.c_str();
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+
+	EOS_HLobbyDetails LobbyInstHandle;
+	EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+	if (getLobbyHandlResult == EOS_EResult::EOS_Success)
+	{
+		// get each member
+		EOS_LobbyDetails_GetMemberCountOptions optsMemberCount;
+		optsMemberCount.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERCOUNT_API_LATEST;
+
+		uint32_t numMembers = EOS_LobbyDetails_GetMemberCount(LobbyInstHandle, &optsMemberCount);
+		NetworkLog("[NGMP] Network room has %d members", numMembers);
+
+		for (uint32_t memberIndex = 0; memberIndex < numMembers; ++memberIndex)
+		{
+			EOS_LobbyDetails_GetMemberByIndexOptions opts4;
+			opts4.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERBYINDEX_API_LATEST;
+			opts4.MemberIndex = memberIndex;
+			EOS_ProductUserId lobbyMember = EOS_LobbyDetails_GetMemberByIndex(LobbyInstHandle, &opts4);
+
+			char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
+			int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
+			EOS_EResult r = EOS_ProductUserId_ToString(lobbyMember, szUserID, &len);
+			if (r != EOS_EResult::EOS_Success)
+			{
+				// TODO_NGMP: Error
+				NetworkLog("[NGMP] EOS error!\n");
+			}
+
+			NetworkLog("[NGMP] Network room member %d is %s", memberIndex, szUserID);
+
+			// does the user already exist? if not, register the user
+			if (m_mapMembers.find(lobbyMember) == m_mapMembers.end())
+			{
+				m_mapMembers.emplace(lobbyMember, LobbyMember());
+
+				// new member, send them a hello!
+				// TODO_NGMP: More robust impl
+				m_lobbyMesh.SendHelloMsg(lobbyMember);
+			}
+
+			// read member data we care about
+			EOS_Lobby_Attribute* attrDisplayName = nullptr;
+			EOS_LobbyDetails_CopyMemberAttributeByKeyOptions copyAttrOpts;
+			copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+			copyAttrOpts.AttrKey = "DISPLAY_NAME";
+			copyAttrOpts.TargetUserId = lobbyMember;
+			EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyMemberAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attrDisplayName);
+			if (rCopyMemberAttr != EOS_EResult::EOS_Success)
+			{
+				// Handle gracefully and fall back to stringified version of user id
+				m_mapMembers[lobbyMember].m_strName = AsciiString(szUserID);
+				NetworkLog("[NGMP] Couldn't read display name\n");
+			}
+			else
+			{
+				m_mapMembers[lobbyMember].m_strName = attrDisplayName->Data->Value.AsUtf8;
+			}
+
+		}
+	}
+
+	if (m_RosterNeedsRefreshCallback != nullptr)
+	{
+		m_RosterNeedsRefreshCallback();
+	}
+}
+
 void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize)
 {
 	m_PendingCreation_LobbyName = strLobbyName;
@@ -479,5 +660,180 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 
 			// TODO_NGMP: Impl
 			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->InvokeCreateLobbyCallback(Data->ResultCode == EOS_EResult::EOS_Success);
+
+			// Set our properties
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ResetCachedRoomData();
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
 		});
+}
+
+void NGMP_OnlineServices_LobbyMesh::SendHelloMsg(EOS_ProductUserId targetUser)
+{
+	NetRoom_HelloPacket helloPacket;
+
+	std::vector<EOS_ProductUserId> vecUsers;
+	vecUsers.push_back(targetUser);
+
+	SendToMesh(helloPacket, vecUsers);
+}
+
+void NGMP_OnlineServices_LobbyMesh::SendHelloAckMsg(EOS_ProductUserId targetUser)
+{
+	NetRoom_HelloAckPacket helloAckPacket;
+
+	std::vector<EOS_ProductUserId> vecUsers;
+	vecUsers.push_back(targetUser);
+
+	SendToMesh(helloAckPacket, vecUsers);
+}
+
+void NGMP_OnlineServices_LobbyMesh::SendToMesh(NetworkPacket& packet, std::vector<EOS_ProductUserId> vecTargetUsers)
+{
+	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	CBitStream* pBitStream = packet.Serialize();
+
+	for (EOS_ProductUserId targetUser : vecTargetUsers)
+	{
+		EOS_P2P_SendPacketOptions sendPacketOptions;
+		sendPacketOptions.ApiVersion = EOS_P2P_SENDPACKET_API_LATEST;
+		sendPacketOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+		sendPacketOptions.RemoteUserId = targetUser;
+		sendPacketOptions.SocketId = &m_SockID;
+		sendPacketOptions.Channel = 2;
+		sendPacketOptions.DataLengthBytes = (uint32_t)pBitStream->GetNumBytesUsed();
+		sendPacketOptions.Data = (void*)pBitStream->GetRawBuffer();
+		sendPacketOptions.bAllowDelayedDelivery = true;
+		sendPacketOptions.Reliability = EOS_EPacketReliability::EOS_PR_ReliableOrdered;
+		sendPacketOptions.bDisableAutoAcceptConnection = false;
+
+		// TODO_NGMP: Support more packet types obviously
+
+		EOS_EResult result = EOS_P2P_SendPacket(P2PHandle, &sendPacketOptions);
+
+		char szEOSUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
+		int32_t outLenLocal = sizeof(szEOSUserID);
+		EOS_ProductUserId_ToString(targetUser, szEOSUserID, &outLenLocal);
+		NetworkLog("[NGMP]: Sending Packet with %d bytes to %s with result %d", pBitStream->GetNumBytesUsed(), szEOSUserID, result);
+	}
+}
+
+void NGMP_OnlineServices_LobbyMesh::ConnectToMesh(const char* szRoomID)
+{
+	m_SockID.ApiVersion = EOS_P2P_SOCKETID_API_LATEST;
+	strcpy(m_SockID.SocketName, szRoomID);
+
+	// TODO_NGMP: Dont automatically accept connections that aren't in the room roster, security
+
+	// connection created callback
+	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// TODO_NGMP: This is specific to socket ID, unregister it when we leave or join another room
+	EOS_P2P_AddNotifyPeerConnectionEstablishedOptions opts;
+	opts.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONESTABLISHED_API_LATEST;
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+	opts.SocketId = &m_SockID;
+	EOS_P2P_AddNotifyPeerConnectionEstablished(P2PHandle, &opts, nullptr, [](const EOS_P2P_OnPeerConnectionEstablishedInfo* Data)
+		{
+			LobbyMember* pMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromID(Data->RemoteUserId);
+
+			if (pMember != nullptr)
+			{
+				// TODO_NGMP: Handle reconnection
+				if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_NoConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::NOT_CONNECTED;
+				}
+				else if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_DirectConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::CONNECTED_DIRECT;
+				}
+				else if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_RelayedConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::CONNECTED_RELAYED;
+				}
+			}
+
+			// invoke a roster change so the UI updates
+			if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_RosterNeedsRefreshCallback != nullptr)
+			{
+				NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_RosterNeedsRefreshCallback();
+			}
+		});
+}
+
+void NGMP_OnlineServices_LobbyMesh::Tick()
+{
+	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	uint8_t channelToUse = (uint8_t)2;
+
+	// recv
+	EOS_P2P_GetNextReceivedPacketSizeOptions sizeOptions;
+	sizeOptions.ApiVersion = EOS_P2P_GETNEXTRECEIVEDPACKETSIZE_API_LATEST;
+	sizeOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+	sizeOptions.RequestedChannel = &channelToUse; // room mesh channels
+
+	uint32_t numBytes = 0;
+	while (EOS_P2P_GetNextReceivedPacketSize(P2PHandle, &sizeOptions, &numBytes) == EOS_EResult::EOS_Success)
+	{
+		CBitStream bitstream(numBytes);
+
+		EOS_P2P_ReceivePacketOptions options;
+		options.ApiVersion = EOS_P2P_RECEIVEPACKET_API_LATEST;
+		options.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+		options.MaxDataSizeBytes = numBytes;
+		options.RequestedChannel = &channelToUse; // room mesh channels
+
+		EOS_ProductUserId outRemotePeerID = nullptr;
+		EOS_P2P_SocketId outSocketID;
+		uint8_t outChannel = 0;
+		EOS_EResult result = EOS_P2P_ReceivePacket(P2PHandle, &options, &outRemotePeerID, &outSocketID, &outChannel, (void*)bitstream.GetRawBuffer(), &numBytes);
+
+		if (result == EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Reject any packets from members not in the room? or mesh
+			char szEOSUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
+			int32_t outLenLocal = sizeof(szEOSUserID);
+			EOS_ProductUserId_ToString(outRemotePeerID, szEOSUserID, &outLenLocal);
+			NetworkLog("[NGMP]: Received %d bytes from user %s", numBytes, szEOSUserID);
+
+			EPacketID packetID = bitstream.Read<EPacketID>();
+
+			if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO)
+			{
+				NetRoom_HelloPacket helloPacket(bitstream);
+
+				NetworkLog("[NGMP]: Got hello from %s, sending ack", szEOSUserID);
+				SendHelloAckMsg(outRemotePeerID);
+			}
+			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO_ACK)
+			{
+				NetRoom_HelloAckPacket helloAckPacket(bitstream);
+
+				NetworkLog("[NGMP]: Received ack from %s, we're now connected", szEOSUserID);
+			}
+			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_CHAT_MSG)
+			{
+				NetRoom_ChatMessagePacket chatPacket(bitstream);
+
+				// TODO_NGMP: Support longer msgs
+				NetworkLog("[NGMP]: Received chat message of len %d: %s", chatPacket.GetMsg().length(), chatPacket.GetMsg().c_str());
+
+				// determine the username
+				std::map<EOS_ProductUserId, LobbyMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+
+				if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
+				{
+					UnicodeString str;
+					str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
+					NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_OnChatCallback(str);
+				}
+				else
+				{
+					// TODO_NGMP: Error, user sending us messages isnt in the room
+				}
+			}
+		}
+	}
 }
