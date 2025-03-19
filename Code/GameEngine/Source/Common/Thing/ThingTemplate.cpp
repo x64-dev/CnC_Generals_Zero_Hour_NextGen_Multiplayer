@@ -1076,7 +1076,7 @@ void ThingTemplate::validate()
 }
 
 ShadowType ThingTemplate::getShadowType() const { 
-	return SHADOW_VOLUME; 
+	return (ShadowType)m_shadowType;
 }
 
 //-------------------------------------------------------------------------------------------------
