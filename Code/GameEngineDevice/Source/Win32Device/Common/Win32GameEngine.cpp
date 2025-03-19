@@ -101,30 +101,13 @@ void Win32GameEngine::update( void )
 void Win32GameEngine::serviceWindowsOS( void )
 {
 	MSG msg;
-  Int returnValue;
 
 	//
 	// see if we have any messages to process, a NULL window handle tells the
 	// OS to look at the main window associated with the calling thread, us!
 	//
-	while( PeekMessage( &msg, NULL, 0, 0, PM_NOREMOVE ) )
+	while( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
 	{
-
-		// get the message
-		returnValue = GetMessage( &msg, NULL, 0, 0 );
-
-		// this is one possible way to check for quitting conditions as a message
-		// of WM_QUIT will cause GetMessage() to return 0
-/*
-		if( returnValue == 0 )
-		{
-
-			setQuitting( true );
-			break;
-
-		}
-*/
-
 		TheMessageTime = msg.time;
 		// translate and dispatch the message
 		TranslateMessage( &msg );

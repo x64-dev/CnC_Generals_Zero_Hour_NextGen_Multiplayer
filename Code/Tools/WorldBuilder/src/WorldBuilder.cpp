@@ -477,7 +477,7 @@ BOOL CWorldBuilderApp::InitInstance()
 	CString openDir = this->GetProfileString(APP_SECTION, OPEN_FILE_DIR);
 	m_currentDirectory = openDir;
 
-	m_pMainWnd->ShowWindow(SW_MAXIMIZE);
+	//m_pMainWnd->ShowWindow(SW_MAXIMIZE);
 
 	return TRUE;
 }
