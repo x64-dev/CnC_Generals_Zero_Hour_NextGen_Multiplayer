@@ -777,6 +777,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled\PreRTS.cpp" />
     <ClInclude Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Console\CvarManager.h" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Console\CvarManager.cpp">
+      <ObjectFileName>$(IntDir)/Source/Console/CvarManager.cpp.obj</ObjectFileName>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
