@@ -22,5 +22,5 @@
 
 #include "stdafx.h"
 
-
-
+void RestoreMouseClip() {
+}

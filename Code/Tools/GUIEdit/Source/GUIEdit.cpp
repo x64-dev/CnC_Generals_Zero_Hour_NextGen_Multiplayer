@@ -109,6 +109,11 @@
 // PUBLIC DATA ////////////////////////////////////////////////////////////////
 GUIEdit *TheEditor = NULL;
 
+#pragma comment(lib, "dxerr.lib")
+void RestoreMouseClip() {}
+bool IsWorldBuilder() { return true; }
+const char* gAppPrefix = "gui_";
+
 // PRIVATE PROTOTYPES /////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -4684,4 +4689,3 @@ void GUIEdit::setShowSeeThruOutlines( Bool show )
 		CheckMenuItem( GetMenu( m_appHWnd ), MENU_SHOW_SEE_THRU_OUTLINES, MF_UNCHECKED );
 
 }  // end setShowSeeThruOutlines
-

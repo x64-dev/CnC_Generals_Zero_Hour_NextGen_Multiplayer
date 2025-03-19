@@ -1,39 +1,27 @@
-cmake_minimum_required(VERSION 3.20)
-
-#------------------------------------------------------------------------------
-# Project name: "GUIEdit" from the .vcxproj
-#------------------------------------------------------------------------------
-project(GUIEdit LANGUAGES CXX)
-
-#------------------------------------------------------------------------------
-# The .vcxproj has 3 configurations: Debug, Internal, Release
-#------------------------------------------------------------------------------
-set(CMAKE_CONFIGURATION_TYPES Debug Internal Release CACHE STRING "Configs" FORCE)
-
 #------------------------------------------------------------------------------
 # 1) Create an executable target for "GUIEdit"
 #   We'll list the .cpp sources from <ItemGroup><ClCompile>, plus the .rc file for resources.
 #------------------------------------------------------------------------------
-add_executable(GUIEdit
+add_executable(GUIEdit WIN32
     # Resource
     Resource/GUIEdit.rc
 
     # Main .cpp files from "Source\Dialog Procedures" etc.
-    Source/Dialog Procedures/CallbackEditor.cpp
-    Source/Dialog Procedures/CheckBoxProperties.cpp
-    Source/Dialog Procedures/ColorDialog.cpp
-    Source/Dialog Procedures/ComboBoxProperties.cpp
-    Source/Dialog Procedures/GenericProperties.cpp
-    Source/Dialog Procedures/GridSettings.cpp
-    Source/Dialog Procedures/ListboxProperties.cpp
-    Source/Dialog Procedures/NewLayoutDialog.cpp
-    Source/Dialog Procedures/ProgressBarProperties.cpp
-    Source/Dialog Procedures/PushButtonProperties.cpp
-    Source/Dialog Procedures/RadioButtonProperties.cpp
-    Source/Dialog Procedures/SliderProperties.cpp
-    Source/Dialog Procedures/StaticTextProperties.cpp
-    Source/Dialog Procedures/TabControlProperties.cpp
-    Source/Dialog Procedures/TextEntryProperties.cpp
+    "Source/Dialog Procedures/CallbackEditor.cpp"
+    "Source/Dialog Procedures/CheckBoxProperties.cpp"
+    "Source/Dialog Procedures/ColorDialog.cpp"
+    "Source/Dialog Procedures/ComboBoxProperties.cpp"
+    "Source/Dialog Procedures/GenericProperties.cpp"
+    "Source/Dialog Procedures/GridSettings.cpp"
+    "Source/Dialog Procedures/ListboxProperties.cpp"
+    "Source/Dialog Procedures/NewLayoutDialog.cpp"
+    "Source/Dialog Procedures/ProgressBarProperties.cpp"
+    "Source/Dialog Procedures/PushButtonProperties.cpp"
+    "Source/Dialog Procedures/RadioButtonProperties.cpp"
+    "Source/Dialog Procedures/SliderProperties.cpp"
+    "Source/Dialog Procedures/StaticTextProperties.cpp"
+    "Source/Dialog Procedures/TabControlProperties.cpp"
+    "Source/Dialog Procedures/TextEntryProperties.cpp"
     Source/EditWindow.cpp
     Source/GUIEdit.cpp
     Source/GUIEditDisplay.cpp
@@ -91,6 +79,20 @@ target_include_directories(GUIEdit PRIVATE
   >
 )
 
+set_target_properties(GUIEdit PROPERTIES
+    # Put all .exe files in a folder called "Run"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../run"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/../../../run"
+    RUNTIME_OUTPUT_DIRECTORY_INTERNAL "${CMAKE_CURRENT_SOURCE_DIR}/../../../run"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../../../run"
+
+    # Each config has its own output name:
+    OUTPUT_NAME_DEBUG "GUIEdit_debug"
+    OUTPUT_NAME_INTERNAL "GUIEdit_internal"
+    OUTPUT_NAME_RELEASE "GUIEdit"
+)
+
+
 #------------------------------------------------------------------------------
 # 3) Preprocessor definitions
 #   Debug => WIN32, _DEBUG, _WINDOWS
@@ -101,29 +103,6 @@ target_compile_definitions(GUIEdit PRIVATE
   $<$<CONFIG:Debug>:WIN32 _DEBUG _WINDOWS>
   $<$<CONFIG:Internal>:WIN32 NDEBUG _WINDOWS _INTERNAL>
   $<$<CONFIG:Release>:_WINDOWS WIN32 NDEBUG _RELEASE>
-)
-
-#------------------------------------------------------------------------------
-# 4) Compiler flags
-#   - Debug => <Optimization>Disabled => /Od, <RuntimeLibrary>MultiThreadedDebugDLL => /MDd
-#             BasicRuntimeChecks=EnableFastChecks => /RTC1, 
-#             <WarningLevel>Level3 => /W3, <TreatWarningAsError>true => /WX
-#   - Internal => <Optimization>MaxSpeed => /O2, InlineFunctionExpansion=OnlyExplicitInline => /Ob1
-#                 <RuntimeLibrary>MultiThreadedDLL => /MD, /W3, /WX
-#   - Release => <Optimization>MaxSpeed => /O2, InlineFunctionExpansion=AnySuitable => /Ob2
-#                <RuntimeLibrary>MultiThreadedDLL => /MD, /W3, /WX
-#------------------------------------------------------------------------------
-target_compile_options(GUIEdit PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    # Debug
-    $<$<CONFIG:Debug>:/Od /MDd /RTC1 /W3 /WX /Zi>
-
-    # Internal => /O2 /Ob1 /MD /W3 /WX
-    $<$<CONFIG:Internal>:/O2 /Ob1 /MD /W3 /WX /GF /Gy>
-
-    # Release => /O2 /Ob2 /MD /W3 /WX
-    $<$<CONFIG:Release>:/O2 /Ob2 /MD /W3 /WX /GF /Gy>
-  >
 )
 
 #------------------------------------------------------------------------------
@@ -202,21 +181,13 @@ set(GAMESPY_DEBUG_LIBS
 )
 
 target_link_libraries(GUIEdit PRIVATE
-  # Debug
-  $<$<CONFIG:Debug>:
-    BenchmarkD.lib
-    WW3D2Debug.lib
-    WWDebugDebug.lib
-    WWUtilDebug.lib
-    WWLibDebug.lib
-    WWMathDebug.lib
-    GameEngineDebug.lib
-    GameEngineDeviceDebug.lib
+    GameEngine
+    GameEngineDevice
     wsock32.lib
     dxguid.lib
     dinput8.lib
-    d3dx8.lib
-    d3d8.lib
+    d3dx9.lib
+    d3d9.lib
     odbc32.lib
     odbccp32.lib
     vfw32.lib
@@ -224,60 +195,13 @@ target_link_libraries(GUIEdit PRIVATE
     dsound.lib
     comctl32.lib
     imm32.lib
-
-    # The GameSpy debug libs from the final <ItemGroup>
     ${GAMESPY_DEBUG_LIBS}
-  >
-
-  # Internal
-  $<$<CONFIG:Internal>:
-    Benchmark.lib
-    WW3D2Internal.lib
-    WWDebugInternal.lib
-    WWLibInternal.lib
-    WWUtilInternal.lib
-    WWMathInternal.lib
-    GameEngineInternal.lib
-    GameEngineDeviceInternal.lib
-    wsock32.lib
-    dxguid.lib
-    dinput8.lib
-    d3dx8.lib
-    d3d8.lib
-    odbc32.lib
-    odbccp32.lib
-    vfw32.lib
-    winmm.lib
-    dsound.lib
-    comctl32.lib
-    imm32.lib
-    wininet.lib
-  >
-
-  # Release
-  $<$<CONFIG:Release>:
-    Benchmark.lib
-    WW3D2.lib
-    WWDebug.lib
-    WWLib.lib
-    WWUtil.lib
-    WWMath.lib
-    GameEngine.lib
-    GameEngineDevice.lib
-    wsock32.lib
-    dxguid.lib
-    dinput8.lib
-    d3dx8.lib
-    d3d8.lib
-    odbc32.lib
-    odbccp32.lib
-    vfw32.lib
-    winmm.lib
-    dsound.lib
-    comctl32.lib
-    imm32.lib
-  >
 )
+
+target_link_directories(GUIEdit PRIVATE
+    ../../Libraries/DX90SDK/Lib/x64
+)
+
 
 #------------------------------------------------------------------------------
 # 7) Linker settings
