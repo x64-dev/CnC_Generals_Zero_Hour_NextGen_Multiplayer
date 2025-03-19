@@ -10,11 +10,6 @@ NGMP_OnlineServicesManager::NGMP_OnlineServicesManager()
 	m_pOnlineServicesManager = this;
 }
 
-void NGMP_OnlineServicesManager::SendNetworkRoomChat(UnicodeString msg)
-{
-
-}
-
 void NGMP_OnlineServicesManager::Init()
 {
 	bool bSteamInit = SteamAPI_Init();
