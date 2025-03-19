@@ -550,7 +550,7 @@ add_library(GameEngine STATIC
     Source/GameNetwork/User.cpp
     Source/GameNetwork/WOLBrowser/WebBrowser.cpp
     Source/Precompiled/PreRTS.cpp
- "Source/Console/CvarManager.h" "Source/Console/CvarManager.cpp")
+ "Source/Console/CvarManager.h")
 
  set_target_properties(GameEngine PROPERTIES
     ${GNG_GLOBAL_PROPERTIES}

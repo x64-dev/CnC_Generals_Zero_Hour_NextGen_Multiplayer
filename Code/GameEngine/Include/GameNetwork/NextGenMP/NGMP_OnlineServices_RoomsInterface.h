@@ -8,9 +8,17 @@ struct NGMP_RoomInfo
 	int maxMembers;
 };
 
+enum ENetworkRoomMemberConnectionState
+{
+	NOT_CONNECTED,
+	CONNECTED_DIRECT,
+	CONNECTED_RELAYED
+};
+
 struct NetworkRoomMember
 {
-	AsciiString m_strName;
+	AsciiString m_strName = "NO_NAME";
+	ENetworkRoomMemberConnectionState m_connectionState = ENetworkRoomMemberConnectionState::NOT_CONNECTED;
 };
 
 class NGMP_OnlineServices_NetworkRoomMesh
@@ -63,7 +71,15 @@ public:
 		m_RosterNeedsRefreshCallback = cb;
 	}
 
-	
+	NetworkRoomMember* GetRoomMemberFromID(EOS_ProductUserId puid)
+	{
+		if (m_mapMembers.contains(puid))
+		{
+			return &m_mapMembers[puid];
+		}
+
+		return nullptr;
+	}
 
 	void CreateRoom(int roomIndex);
 

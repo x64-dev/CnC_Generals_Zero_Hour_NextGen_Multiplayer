@@ -225,9 +225,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\Console.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\Cvar.cpp" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\CvarManager.cpp">
-      <ObjectFileName>$(IntDir)/source/Console/CvarManager.cpp.obj</ObjectFileName>
-    </ClCompile>
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\CvarManager.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\source\Console\ConsoleCommandManager.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\AudioEventRTS.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Common\Audio\AudioRequest.cpp" />
@@ -777,9 +775,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Precompiled\PreRTS.cpp" />
     <ClInclude Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Console\CvarManager.h" />
-    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\Console\CvarManager.cpp">
-      <ObjectFileName>$(IntDir)/Source/Console/CvarManager.cpp.obj</ObjectFileName>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

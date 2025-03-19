@@ -436,6 +436,42 @@ void NGMP_OnlineServices_NetworkRoomMesh::ConnectToMesh(const char* szRoomID)
 	strcpy(m_SockID.SocketName, szRoomID);
 
 	// TODO_NGMP: Dont automatically accept connections that aren't in the room roster, security
+
+	// connection created callback
+	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// TODO_NGMP: This is specific to socket ID, unregister it when we leave or join another room
+	EOS_P2P_AddNotifyPeerConnectionEstablishedOptions opts;
+	opts.ApiVersion = EOS_P2P_ADDNOTIFYPEERCONNECTIONESTABLISHED_API_LATEST;
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+	opts.SocketId = &m_SockID;
+	EOS_P2P_AddNotifyPeerConnectionEstablished(P2PHandle, &opts, nullptr, [](const EOS_P2P_OnPeerConnectionEstablishedInfo* Data)
+		{
+			NetworkRoomMember* pMember = NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetRoomMemberFromID(Data->RemoteUserId);
+
+			if (pMember != nullptr)
+			{
+				// TODO_NGMP: Handle reconnection
+				if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_NoConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::NOT_CONNECTED;
+				}
+				else if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_DirectConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::CONNECTED_DIRECT;
+				}
+				else if (Data->NetworkType == EOS_ENetworkConnectionType::EOS_NCT_RelayedConnection)
+				{
+					pMember->m_connectionState = ENetworkRoomMemberConnectionState::CONNECTED_RELAYED;
+				}
+			}
+
+			// invoke a roster change so the UI updates
+			if (NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_RosterNeedsRefreshCallback != nullptr)
+			{
+				NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_RosterNeedsRefreshCallback();
+			}
+		});
 }
 
 void NGMP_OnlineServices_NetworkRoomMesh::Tick()

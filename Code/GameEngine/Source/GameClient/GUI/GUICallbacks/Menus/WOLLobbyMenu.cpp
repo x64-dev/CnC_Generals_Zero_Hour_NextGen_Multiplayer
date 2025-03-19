@@ -511,7 +511,27 @@ void PopulateLobbyPlayerListbox(void)
 		// TODO_NGMP: fill out more
 		PlayerInfo pi;
 		pi.m_name = netRoomMember.m_strName;
-		insertPlayerInListbox(pi, pi.isIgnored() ? GameSpyColor[GSCOLOR_PLAYER_IGNORED] : GameSpyColor[GSCOLOR_PLAYER_NORMAL]);
+
+		// NGMP: Color by connection state
+
+		Color connectionStateColor = GameSpyColor[GSCOLOR_PLAYER_NORMAL];
+		if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::NOT_CONNECTED)
+		{
+			connectionStateColor = GameMakeColor(255, 0, 0, 255);
+		}
+		else if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::CONNECTED_DIRECT)
+		{
+			connectionStateColor = GameMakeColor(0, 255, 0, 255);
+		}
+		else if (netRoomMember.m_connectionState == ENetworkRoomMemberConnectionState::CONNECTED_RELAYED)
+		{
+			connectionStateColor = GameMakeColor(255, 253, 85, 255);
+		}
+
+		insertPlayerInListbox(pi, connectionStateColor);
+
+		// TODO_NGMP: Support ignored again
+		//insertPlayerInListbox(pi, pi.isIgnored() ? GameSpyColor[GSCOLOR_PLAYER_IGNORED] : GameSpyColor[GSCOLOR_PLAYER_NORMAL]);
 	}
 
 	return;
