@@ -1075,6 +1075,10 @@ void ThingTemplate::validate()
 #endif
 }
 
+ShadowType ThingTemplate::getShadowType() const { 
+	return (ShadowType)m_shadowType;
+}
+
 //-------------------------------------------------------------------------------------------------
 // copy the guts of that into this, but preserve this' name, id, and list-links.
 void ThingTemplate::copyFrom(const ThingTemplate* that)

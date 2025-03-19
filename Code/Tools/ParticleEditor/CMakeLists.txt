@@ -21,7 +21,7 @@ add_library(ParticleEditor SHARED
 # 2) MFC usage = Static => set MFC_FLAG=1
 #   Also define _MBCS for MultiByte char set usage.
 #------------------------------------------------------------------------------
-set_property(TARGET ParticleEditor PROPERTY MFC_FLAG 1)
+set_property(TARGET ParticleEditor PROPERTY MFC_FLAG 2)
 
 target_compile_definitions(ParticleEditor PRIVATE
     _MBCS
@@ -36,18 +36,9 @@ target_compile_definitions(ParticleEditor PRIVATE
   WIN32
   _WINDOWS
   _USRDLL
+  _AFXDLL 
   $<$<CONFIG:Debug>:_DEBUG>
   $<$<CONFIG:Release>:NDEBUG>
-)
-
-target_compile_options(ParticleEditor PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:
-    # Debug => /Od /MTd 
-    $<$<CONFIG:Debug>:/Od /MTd /RTC1 /Zi>
-
-    # Release => /O2 /Ob2 /MT
-    $<$<CONFIG:Release>:/O2 /Ob2 /MT /GF /Gy>
-  >
 )
 
 target_include_directories(ParticleEditor PRIVATE

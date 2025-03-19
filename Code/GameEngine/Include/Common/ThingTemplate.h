@@ -432,7 +432,7 @@ public:
 	// This function is only for use by the AIUpdateModuleData::parseLocomotorSet function.
 	AIUpdateModuleData *friend_getAIModuleInfo(void);
 
-	ShadowType getShadowType() const { return (ShadowType)m_shadowType; }
+	ShadowType getShadowType() const;
 	Real getShadowSizeX() const { return m_shadowSizeX; }
 	Real getShadowSizeY() const { return m_shadowSizeY; }
 	Real getShadowOffsetX() const { return m_shadowOffsetX; }

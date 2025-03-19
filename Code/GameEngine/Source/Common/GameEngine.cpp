@@ -624,9 +624,13 @@ void GameEngine::update( void )
 					float elapsedMs = std::chrono::duration<float, std::milli>(now - lastTimeClient).count();
 
 					// Convert ms → seconds:
-					float clientDeltaTime = elapsedMs / 1000.0f; 
+					float clientDeltaTime = (elapsedMs / 1000.0f) * 30.0f; 
 
-					WW3D::Set_DeltaTime(clientDeltaTime * 30);
+					if (clientDeltaTime > 1.0f) {
+						clientDeltaTime = 1.0f;
+					}
+
+					WW3D::Set_DeltaTime(clientDeltaTime);
 					lastTimeClient = now;
 					TheGameClient->setFrame(m_clientFrame);
 					m_clientFrame++;
