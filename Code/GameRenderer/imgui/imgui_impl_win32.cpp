@@ -782,8 +782,8 @@ IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandlerEx(HWND hwnd, UINT msg, WPA
         return 0;
     case WM_SETCURSOR:
         // This is required to restore cursor when transitioning from e.g resize borders to client area.
-        if (LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor(io, bd->LastMouseCursor))
-            return 1;
+        //if (LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor(io, bd->LastMouseCursor))
+        //    return 1;
         return 0;
     case WM_DEVICECHANGE:
 #ifndef IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
