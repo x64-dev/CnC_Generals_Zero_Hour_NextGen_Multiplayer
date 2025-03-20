@@ -2186,7 +2186,8 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	WW3DFormat format, 
 	TextureClass::MipCountType mip_level_count,
 	D3DPOOL pool,
-	bool rendertarget)
+	bool rendertarget,
+	bool iscompressed)
 {
 	DX8_THREAD_ASSERT();
 	DX8_Assert();
@@ -2231,12 +2232,17 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 
 	// Don't allow any errors in non-render target
 	// texture creation.
+	DWORD usage = D3DUSAGE_DYNAMIC;
+	if (iscompressed) {
+		usage = 0;
+		pool = D3DPOOL_SYSTEMMEM;
+	}
 
 	HRESULT hr = DX8Wrapper::DX8Wrapper::D3DDevice->CreateTexture(
 		width,
 		height,
 		mip_level_count,     // Equivalent to the D3DX "MIPLevels" parameter
-		D3DUSAGE_DYNAMIC,  
+		usage,
 		WW3DFormat_To_D3DFormat(format),
 		pool,
 		&texture,

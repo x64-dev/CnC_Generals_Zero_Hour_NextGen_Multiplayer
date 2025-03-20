@@ -1076,7 +1076,7 @@ void TextureLoadTaskClass::Begin_Texture_Load()
 				}
 				if (mip_level_count>max_mip_level_count) mip_level_count=max_mip_level_count;
 
-				D3DTexture=DX8Wrapper::_Create_DX8_Texture(Width,Height,Format,(TextureClass::MipCountType)mip_level_count);
+				D3DTexture=DX8Wrapper::_Create_DX8_Texture(Width,Height,Format,(TextureClass::MipCountType)mip_level_count, D3DPOOL_MANAGED, false, true);
 				MipLevelCount=mip_level_count;
 				//Texture->MipLevelCount);
 				loaded=true;
