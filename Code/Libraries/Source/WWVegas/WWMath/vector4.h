@@ -359,6 +359,10 @@ WWINLINE void Swap(Vector4 & a,Vector4 & b)
  * HISTORY:                                                                                    * 
  *   01/14/1999 NH  : Created.                                                                 * 
  *=============================================================================================*/
+WWINLINE float Lerp(const float& a, const float& b, float alpha) {
+	return (a + (b - a) * alpha);
+}
+
 WWINLINE Vector4 Lerp(const Vector4 & a, const Vector4 & b, float alpha)
 {
    return Vector4(
