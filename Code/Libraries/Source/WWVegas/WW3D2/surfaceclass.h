@@ -139,8 +139,14 @@ class SurfaceClass : public W3DMPO, public RefCountClass
 		bool Is_Monochrome(void);
 
 		WW3DFormat Get_Surface_Format() const { return SurfaceFormat; }
+		
+		void Lock();
+
+		void UnLock();
 
 	private:
+		bool isLocked = false;
+		D3DLOCKED_RECT lockRect = {};
 
 		// Direct3D surface object
 		IDirect3DSurface8 *D3DSurface;
