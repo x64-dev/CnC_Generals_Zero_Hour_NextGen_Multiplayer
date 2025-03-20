@@ -484,7 +484,7 @@ void LoadFontCombo( HWND comboBox, GameFont *currFont )
 		index = SendMessage( comboBox, CB_ADDSTRING, 0, (LPARAM)buffer );
 
 		// attach pointer to font at combo index
-		SendMessage( comboBox, CB_SETITEMDATA, index, (DWORD)font );
+		SendMessage( comboBox, CB_SETITEMDATA, index, (INT_PTR)font );
 
 	}  // end for font
 
