@@ -1083,8 +1083,8 @@ Real Path::computeFlightDistToGoal( const Coord3D *pos, Coord3D& goalPos )
 }
 //-----------------------------------------------------------------------------------
 
-enum { PATHFIND_CELLS_PER_FRAME=5000}; // Number of cells we will search pathfinding per frame.
-enum {CELL_INFOS_TO_ALLOCATE = 30000};
+enum { PATHFIND_CELLS_PER_FRAME=50000}; // Number of cells we will search pathfinding per frame.
+enum {CELL_INFOS_TO_ALLOCATE = 3000000};
 PathfindCellInfo *PathfindCellInfo::s_infoArray = NULL;
 PathfindCellInfo *PathfindCellInfo::s_firstFree = NULL;						
 /**
@@ -6131,7 +6131,13 @@ Path *Pathfinder::internalFindPath( Object *obj, const LocomotorSet& locomotorSe
 			parentCell->releaseInfo();
 			cleanOpenAndClosedLists();
 			return path;
-		}	
+		}
+
+		if (cellCount > 30000)
+		{
+			DEBUG_LOG(("Pathfind failed: cell count exceeded 30000\n"));
+			break;
+		}
 
 		// put parent cell onto closed list - its evaluation is finished
 		m_closedList = parentCell->putOnClosedList( m_closedList );

@@ -69,7 +69,7 @@ protected:
 	static Int							m_numDebugIcons;
 
 protected:
-	enum {MAX_ICONS = 100000};
+	enum {MAX_ICONS = 500000};
 	void allocateIconsArray(void);
 	void compressIconsArray(void);
 
