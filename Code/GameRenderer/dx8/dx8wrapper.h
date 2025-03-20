@@ -353,7 +353,8 @@ public:
 			CONST RECT* pSourceRectsArray,
 			UINT cRects,
 			IDirect3DSurface8* pDestinationSurface,
-			CONST POINT* pDestPointsArray
+			CONST POINT* pDestPointsArray,
+			bool forceManagedAccess = false
 	);
 
 	static void _Update_Texture(TextureClass *system, TextureClass *video);

@@ -2336,7 +2336,8 @@ void DX8Wrapper::_Copy_DX8_Rects(
   CONST RECT* pSourceRectsArray,
   UINT cRects,
   IDirect3DSurface8* pDestinationSurface,
-  CONST POINT* pDestPointsArray
+  CONST POINT* pDestPointsArray,
+  bool forceManagedAccess
 )
 {
 	D3DSURFACE_DESC SourceDesc, DestinationDesc;
@@ -2376,7 +2377,7 @@ void DX8Wrapper::_Copy_DX8_Rects(
 			destRect.bottom = destPoint.y + (sourceRect.bottom - sourceRect.top);
 		}
 
-		if (SourceDesc.Pool == D3DPOOL_MANAGED || DestinationDesc.Pool == D3DPOOL_DEFAULT)
+		if (SourceDesc.Pool == D3DPOOL_MANAGED || (DestinationDesc.Pool != D3DPOOL_DEFAULT || forceManagedAccess))
 		{
 			HRESULT res;
 			DX8_ErrorCode(res = D3DXLoadSurfaceFromSurface(pDestinationSurface, nullptr, &destRect,

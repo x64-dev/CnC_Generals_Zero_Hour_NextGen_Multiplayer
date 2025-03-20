@@ -628,7 +628,7 @@ HRESULT WaterRenderObjClass::generateVertexBuffer( Int sizeX, Int sizeY, Int ver
 
 	if (doStatic)
 	{	//change settings for a static vertex buffer
-		pool = D3DPOOL_MANAGED;
+		//pool = D3DPOOL_MANAGED;
 		usage = D3DUSAGE_WRITEONLY;
 		fvf=0;// DX8 Docs confusing on this. Say no FVF for vertex shaders. Else DX8_FVF_XYZDUV1;
 		m_numVertices=sizeX*sizeY;
@@ -708,7 +708,7 @@ HRESULT WaterRenderObjClass::generateIndexBuffer(Int sizeX, Int sizeY)
 		(m_numIndices+2)*sizeof(WORD), 
 		D3DUSAGE_WRITEONLY, 
 		D3DFMT_INDEX16, 
-		D3DPOOL_MANAGED, 
+		D3DPOOL_DEFAULT,
 		&m_indexBufferD3D,
 		NULL
 	)))
