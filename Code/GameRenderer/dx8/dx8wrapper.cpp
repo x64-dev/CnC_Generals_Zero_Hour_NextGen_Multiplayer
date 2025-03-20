@@ -206,6 +206,10 @@ extern "C" {
 	IDirect3D9* WINAPI Direct3DCreate9On12(UINT SDKVersion, D3D9ON12_ARGS* pOverrideList, UINT NumOverrideEntries) {
 		return RunD3D9Proc<decltype(Direct3DCreate9On12)>("Direct3DCreate9On12", SDKVersion, pOverrideList, NumOverrideEntries);
 	}
+
+	HRESULT WINAPI Direct3DCreate9On12Ex(UINT SDKVersion, D3D9ON12_ARGS* pOverrideList, UINT NumOverrideEntries, IDirect3D9Ex** ppOutputInterface) {
+		return RunD3D9Proc<decltype(Direct3DCreate9On12Ex)>("Direct3DCreate9On12Ex", SDKVersion, pOverrideList, NumOverrideEntries, ppOutputInterface);
+	}
 };
 
 /***********************************************************************************
@@ -279,7 +283,9 @@ bool DX8Wrapper::Init(void * hwnd)
 	d3d9On12Args.ppD3D12Queues[0] = D3D12Renderer->graphics_queue->dx_queue; // pointer to our queue
 	d3d9On12Args.NumQueues = 1;
 	d3d9On12Args.NodeMask = 0; // Single-GPU scenario
-	D3DInterface = Direct3DCreate9On12(D3D_SDK_VERSION, &d3d9On12Args, 1);
+	//D3DInterface = Direct3DCreate9On12(D3D_SDK_VERSION, &d3d9On12Args, 1);
+	
+	Direct3DCreate9On12Ex(D3D_SDK_VERSION, &d3d9On12Args, 1, &D3DInterface);
 // jmarshall end
 	
 	IsInitted = true;	
@@ -475,12 +481,13 @@ bool DX8Wrapper::Create_Device(void)
 	if (DX8Wrapper_PreserveFPU)
 		vertex_processing_type |= D3DCREATE_FPU_PRESERVE;
 
-	HRESULT hr = D3DInterface->CreateDevice(
+	HRESULT hr = D3DInterface->CreateDeviceEx(
 		CurRenderDevice,
 		WW3D_DEVTYPE,
 		_Hwnd,
 		vertex_processing_type,
 		&_PresentParameters,
+		nullptr,
 		&D3DDevice);
 		
 	if(FAILED(hr))
@@ -2185,6 +2192,8 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	DX8_Assert();
 	IDirect3DTexture8 *texture = NULL;
 
+	pool = D3DPOOL_DEFAULT; 
+
 	// Paletted textures not supported!
 	WWASSERT(format!=D3DFMT_P8);
 
@@ -2222,15 +2231,19 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 
 	// Don't allow any errors in non-render target
 	// texture creation.
-	DX8_ErrorCode(D3DXCreateTexture(
-		DX8Wrapper::DX8Wrapper::D3DDevice, 
-		width, 
+
+	HRESULT hr = DX8Wrapper::DX8Wrapper::D3DDevice->CreateTexture(
+		width,
 		height,
-		mip_level_count,
-		0, 
+		mip_level_count,     // Equivalent to the D3DX "MIPLevels" parameter
+		D3DUSAGE_DYNAMIC,  
 		WW3DFormat_To_D3DFormat(format),
-		pool, 
-		&texture));
+		pool,
+		&texture,
+		nullptr              // pSharedHandle is usually nullptr unless you need shared resources
+	);
+
+	DX8_ErrorCode(hr);
 
 //	unsigned reduction=WW3D::Get_Texture_Reduction();
 //	unsigned level_count=texture->GetLevelCount();

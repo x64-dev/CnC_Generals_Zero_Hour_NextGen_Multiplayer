@@ -1391,7 +1391,7 @@ GameWindow *GameWindow::winPointInChild( Int x, Int y, Bool ignoreEnableCheck, B
 		origin = child->m_region.lo;
 		parent = child->winGetParent();
 
-		while( parent ) 
+		while (parent)
 		{
 
 			origin.x += parent->m_region.lo.x;

@@ -296,7 +296,7 @@ DX8IndexBufferClass::DX8IndexBufferClass(unsigned short index_count_,UsageType u
 		sizeof(WORD)*index_count,
 		usage_flags,
 		D3DFMT_INDEX16,
-		(usage&USAGE_DYNAMIC) ? D3DPOOL_DEFAULT : D3DPOOL_MANAGED,
+		D3DPOOL_DEFAULT,
 		&index_buffer,
 		NULL));
 }

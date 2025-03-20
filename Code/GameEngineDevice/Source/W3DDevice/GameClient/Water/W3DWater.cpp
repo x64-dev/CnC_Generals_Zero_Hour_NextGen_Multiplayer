@@ -535,7 +535,7 @@ __declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(LPDIREC
     DWORD dwDstPitch = (DWORD)d3dlr.Pitch;
     BYTE* pDst       = (BYTE*)d3dlr.pBits;
 
-    for( DWORD y=0; y<d3dsd.Height; y++ )
+    for( DWORD y=0; y<d3dsd.Height-1; y++ )
     {
         BYTE* pDstT  = pDst;
         BYTE* pSrcB0 = (BYTE*)pSrc;
@@ -547,7 +547,7 @@ __declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(LPDIREC
         if( y == 0 )               // Don't go before first line
             pSrcB2 = pSrcB0;
 
-        for( DWORD x=0; x<d3dsd.Width; x++ )
+        for( DWORD x=0; x<d3dsd.Width - 1; x++ )
         {
             LONG v00 = 256-*(pSrcB0+0); // Get the current pixel
             LONG v01 = 256-*(pSrcB0+4); // and the pixel to the right

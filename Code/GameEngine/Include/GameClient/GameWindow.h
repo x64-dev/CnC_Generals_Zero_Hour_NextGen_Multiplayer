@@ -373,7 +373,7 @@ public:
 	void winSetEditData( GameWindowEditData *editData );
 	GameWindowEditData *winGetEditData( void );
 
-protected:
+public:
 
 	/// 'images' should be taken care of when we hide ourselves or are destroyed
 	void freeImages( void ) { }
