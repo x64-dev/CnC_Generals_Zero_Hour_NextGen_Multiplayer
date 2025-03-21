@@ -2830,7 +2830,7 @@ void W3DVolumetricShadow::constructVolumeVB( Vector3 *lightPosObject,Real shadow
 
 	DEBUG_ASSERTCRASH(vbSlot != NULL, ("Can't allocate vertex buffer slot for shadow volume"));
 
-	DEBUG_ASSERTCRASH(vbSlot->m_size >= vertexCount,("Overflowing Shadow Vertex Buffer Slot"));
+	DEBUG_ASSERTCRASH(vbSlot == NULL || vbSlot->m_size >= vertexCount,("Overflowing Shadow Vertex Buffer Slot"));
 
 	DEBUG_ASSERTCRASH(m_shadowVolume[ volumeIndex ][meshIndex]->GetNumPolygon() == 0,("Updating Existing Static Shadow Volume"));
 
@@ -2839,7 +2839,7 @@ void W3DVolumetricShadow::constructVolumeVB( Vector3 *lightPosObject,Real shadow
 
 	DEBUG_ASSERTCRASH(ibSlot != NULL, ("Can't allocate index buffer slot for shadow volume"));
 
-	DEBUG_ASSERTCRASH(ibSlot->m_size >= (polygonCount*3),("Overflowing Shadow Index Buffer Slot"));
+	DEBUG_ASSERTCRASH(ibSlot == NULL || ibSlot->m_size >= (polygonCount*3),("Overflowing Shadow Index Buffer Slot"));
 
 	if (!ibSlot || !vbSlot)
 	{	//could not allocate storage to hold buffers
