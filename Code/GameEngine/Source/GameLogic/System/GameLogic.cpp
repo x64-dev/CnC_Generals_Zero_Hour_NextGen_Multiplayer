@@ -121,6 +121,9 @@ FILE *g_UT_commaLog=NULL;
 #include "../../gameenginedevice/include/W3DDevice/GameClient/Module/W3DModelDraw.h"
 #endif
 
+#include "GameNetwork/NextGenMP/ngmp_include.h"
+#include "GameNetwork/NextGenMP/ngmp_interfaces.h"
+
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -1053,7 +1056,8 @@ void GameLogic::startNewGame( Bool saveGame )
 		else
 		{
 			DEBUG_LOG(("Starting gamespy game\n"));
-			TheGameInfo = game = TheGameSpyGame;	/// @todo: MDC add back in after demo
+			NGMPGame* NextGenMPGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+			TheGameInfo = game = NextGenMPGame;	/// @todo: MDC add back in after demo
 		}
 	}
 	else

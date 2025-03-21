@@ -8,6 +8,7 @@
 #include "GameNetwork/GameSpyOverlay.h"
 #include "Common/RandomValue.h"
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include "GameNetwork/NetworkInterface.h"
 
 NGMPGameSlot::NGMPGameSlot()
 {
@@ -38,6 +39,8 @@ NGMPGame::NGMPGame()
 	m_ladderIP.clear();
 	m_ladderPort = 0;
 
+	enterGame(); // this is done on join in the GS impl, and must be called before setMap
+
 	// NGMP: Store map
 	setMap(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentLobbyMapPath());
 
@@ -57,7 +60,7 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 		if (pLobbyMember != nullptr)
 		{
 			GameSlot* slot = getSlot(i);
-			((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, UnicodeString(L"TEST"), 0);
+			((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, UnicodeString(L"TODO_NGMP"), 0);
 		}
 
 		// dont need to handle else here, we set it up upon lobby creation
@@ -238,19 +241,19 @@ void NGMPGame::launchGame(void)
 	}
 
 	// TODO_NGMP: do we care? we are already connected
-	/*
+	
 	// Time to initialize TheNetwork for this game.
 	TheNetwork = NetworkInterface::createNetwork();
 	TheNetwork->init();
 
-	TheNetwork->setLocalAddress(getLocalIP(), (TheNAT) ? TheNAT->getSlotPort(getLocalSlotNum()) : 8888);
-	if (TheNAT)
-		TheNetwork->attachTransport(TheNAT->getTransport());
-	else
-		TheNetwork->initTransport();
+	// TODO_NGMP: Do we really care about these values anymore
+	TheNetwork->setLocalAddress(getLocalIP(), 8888);
+
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->InitGameTransport();
+	NextGenTransport* pTransport = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetGameTransport();
+	TheNetwork->attachTransport(pTransport);
 
 	TheNetwork->parseUserList(this);
-	*/
 
 	if (TheGameLogic->isInGame()) {
 		TheGameLogic->clearGameData();

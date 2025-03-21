@@ -503,6 +503,7 @@ add_library(GameEngine STATIC
     Source/GameNetwork/NextGenMP/OnlineServices_Auth.cpp
     Source/GameNetwork/NextGenMP/OnlineServices_LobbyInterface.cpp
     Source/GameNetwork/NextGenMP/OnlineServices_RoomsInterface.cpp
+    Source/GameNetwork/NextGenMP/NextGenTransport.cpp
     Source/GameNetwork/NextGenMP/NetworkBitstream.cpp
     Source/GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_Hello.cpp
     Source/GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.cpp
@@ -549,6 +550,7 @@ add_library(GameEngine STATIC
     Source/GameNetwork/Network.cpp
     Source/GameNetwork/NetworkUtil.cpp
     Source/GameNetwork/Transport.cpp
+    Source/GameNetwork/UDPTransport.cpp
     Source/GameNetwork/udp.cpp
     Source/GameNetwork/User.cpp
     Source/GameNetwork/WOLBrowser/WebBrowser.cpp

@@ -727,6 +727,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_Auth.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_LobbyInterface.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_RoomsInterface.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NextGenTransport.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\NetworkBitstream.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
@@ -773,6 +774,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Network.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NetworkUtil.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Transport.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\UDPTransport.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\udp.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\User.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />

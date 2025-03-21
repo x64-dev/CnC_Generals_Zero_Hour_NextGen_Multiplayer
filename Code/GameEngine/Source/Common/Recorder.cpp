@@ -45,6 +45,9 @@
 #include "Common/CRCDebug.h"
 #include "Common/Version.h"
 
+#include "GameNetwork/NextGenMP/ngmp_include.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+
 #ifdef _INTERNAL
 // for occasional debugging...
 //#pragma optimize("", off)
@@ -621,8 +624,11 @@ void RecorderClass::startRecording(GameDifficulty diff, Int originalGameMode, In
 		}
 		else
 		{
-			theSlotList = GameInfoToAsciiString(TheGameSpyGame);
-			localIndex = TheGameSpyGame->getLocalSlotNum();
+			NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+
+			theSlotList = GameInfoToAsciiString(game);
+
+			localIndex = game->getLocalSlotNum();
 		}
 	}
 	else

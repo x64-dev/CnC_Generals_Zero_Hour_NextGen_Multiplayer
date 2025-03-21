@@ -30,6 +30,24 @@ public:
 	std::function<void(std::vector<NGMP_LobbyInfo>)> m_PendingSearchLobbyCompleteCallback = nullptr;
 	void SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback);
 
+	NextGenTransport* m_transport = nullptr;
+	void InitGameTransport()
+	{
+		if (m_transport != nullptr)
+		{
+			delete m_transport;
+			m_transport = nullptr;
+		}
+		m_transport = new NextGenTransport;
+		m_transport->reset();
+		m_transport->init(0, 0); // we dont care about ip/port anymore
+	}
+
+	NextGenTransport* GetGameTransport()
+	{
+		return m_transport;
+	}
+
 	// TODO_NGMP: We dont join right now (other than host)
 
 	UnicodeString m_PendingCreation_LobbyName;

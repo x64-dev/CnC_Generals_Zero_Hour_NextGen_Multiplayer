@@ -90,7 +90,7 @@ LANAPI::LANAPI( void ) : m_transport(NULL)
 	m_directConnectRemoteIP = 0;
 	m_actionTimeout = 5000; // ms
 	m_lastUpdate = 0;
-	m_transport = new Transport;
+	m_transport = new UDPTransport;
 	m_isActive = TRUE;
 }
 

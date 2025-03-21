@@ -34,7 +34,7 @@
 
 #include "GameNetwork/Connection.h"
 #include "GameNetwork/NetCommandList.h"
-#include "GameNetwork/Transport.h"
+#include "GameNetwork/UDPTransport.h"
 #include "GameNetwork/FrameDataManager.h"
 #include "GameNetwork/FrameMetrics.h"
 #include "GameNetwork/NetworkDefs.h"
@@ -80,6 +80,7 @@ public:
 //	void createConnections(UnsignedInt numberOfPlayers, UnsignedInt localSlot);
 	void setLocalAddress(UnsignedInt ip, UnsignedInt port);
 	void initTransport();
+	void initNextGenTransport();
 	void processFrameTick(UnsignedInt frame);
 	void handleLocalPlayerLeaving(UnsignedInt frame);
 
