@@ -21,6 +21,8 @@ void NetworkLog(const char* fmt, ...);
 #include "GameNetwork/NextGenMP/NGMP_types.h"
 #include "GameNetwork/NextGenMP/NGMPGame.h"
 
+#include "GameNetwork/NextGenMP/Packets/NetworkPacket_Lobby_StartGame.h"
+
 // EOS
 #include <eos_common.h>
 #include <eos_p2p_types.h>

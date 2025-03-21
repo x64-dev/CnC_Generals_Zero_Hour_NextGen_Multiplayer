@@ -139,6 +139,20 @@ public:
 		}
 	}
 
+	void SendToMesh(NetworkPacket& packet)
+	{
+		std::vector<EOS_ProductUserId> vecUsers;
+		for (auto kvPair : m_mapMembers)
+		{
+			vecUsers.push_back(kvPair.first);
+		}
+
+		if (m_pLobbyMesh != nullptr)
+		{
+			m_pLobbyMesh->SendToMesh(packet, vecUsers);
+		}
+	}
+
 private:
 	std::vector<std::function<void(bool)>> m_vecCreateLobby_PendingCallbacks = std::vector<std::function<void(bool)>>();
 

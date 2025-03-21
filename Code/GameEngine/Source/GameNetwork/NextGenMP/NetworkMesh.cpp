@@ -164,61 +164,73 @@ void NetworkMesh::Tick()
 
 			EPacketID packetID = bitstream.Read<EPacketID>();
 
-			if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO)
+			// Game Mesh / Lobby packets only
+			if (m_meshType == ENetworkMeshType::GAME_LOBBY)
 			{
-				NetRoom_HelloPacket helloPacket(bitstream);
-
-				NetworkLog("[NGMP]: Got hello from %s, sending ack", szEOSUserID);
-				SendHelloAckMsg(outRemotePeerID);
-			}
-			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO_ACK)
-			{
-				NetRoom_HelloAckPacket helloAckPacket(bitstream);
-
-				NetworkLog("[NGMP]: Received ack from %s, we're now connected", szEOSUserID);
-			}
-			else if (packetID == EPacketID::PACKET_ID_NET_ROOM_CHAT_MSG)
-			{
-				NetRoom_ChatMessagePacket chatPacket(bitstream);
-
-				// TODO_NGMP: Support longer msgs
-				NetworkLog("[NGMP]: Received chat message of len %d: %s", chatPacket.GetMsg().length(), chatPacket.GetMsg().c_str());
-
-				// determine the username
-				// TODO_NGMP: Use inheritence
-
-				if (m_meshType == ENetworkMeshType::NETWORK_ROOM)
+				if (packetID == EPacketID::PACKET_ID_LOBBY_START_GAME)
 				{
-					std::map<EOS_ProductUserId, NetworkRoomMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom();
+					// TODO_NGMP: Ignore if not host sending
+					NetworkLog("[NGMP]: Got start game packet from %s", szEOSUserID);
+				}
+			}
+			else if (m_meshType == ENetworkMeshType::NETWORK_ROOM || m_meshType == ENetworkMeshType::GAME_LOBBY)// NetRoom AND Game Mesh / Lobby packets
+			{
+				if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO)
+				{
+					NetRoom_HelloPacket helloPacket(bitstream);
 
-					if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
+					NetworkLog("[NGMP]: Got hello from %s, sending ack", szEOSUserID);
+					SendHelloAckMsg(outRemotePeerID);
+				}
+				else if (packetID == EPacketID::PACKET_ID_NET_ROOM_HELLO_ACK)
+				{
+					NetRoom_HelloAckPacket helloAckPacket(bitstream);
+
+					NetworkLog("[NGMP]: Received ack from %s, we're now connected", szEOSUserID);
+				}
+				else if (packetID == EPacketID::PACKET_ID_NET_ROOM_CHAT_MSG)
+				{
+					NetRoom_ChatMessagePacket chatPacket(bitstream);
+
+					// TODO_NGMP: Support longer msgs
+					NetworkLog("[NGMP]: Received chat message of len %d: %s", chatPacket.GetMsg().length(), chatPacket.GetMsg().c_str());
+
+					// determine the username
+					// TODO_NGMP: Use inheritence
+
+					if (m_meshType == ENetworkMeshType::NETWORK_ROOM)
 					{
-						UnicodeString str;
-						str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
-						NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_OnChatCallback(str);
+						std::map<EOS_ProductUserId, NetworkRoomMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->GetMembersListForCurrentRoom();
+
+						if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
+						{
+							UnicodeString str;
+							str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
+							NGMP_OnlineServicesManager::GetInstance()->GetRoomsInterface()->m_OnChatCallback(str);
+						}
+						else
+						{
+							// TODO_NGMP: Error, user sending us messages isnt in the room
+						}
 					}
-					else
+					else if (m_meshType == ENetworkMeshType::GAME_LOBBY)
 					{
-						// TODO_NGMP: Error, user sending us messages isnt in the room
+						std::map<EOS_ProductUserId, LobbyMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+
+						if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
+						{
+							UnicodeString str;
+							str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
+							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_OnChatCallback(str);
+						}
+						else
+						{
+							// TODO_NGMP: Error, user sending us messages isnt in the room
+						}
 					}
 				}
-				else if (m_meshType == ENetworkMeshType::GAME_LOBBY)
-				{
-					std::map<EOS_ProductUserId, LobbyMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
-
-					if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
-					{
-						UnicodeString str;
-						str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
-						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_OnChatCallback(str);
-					}
-					else
-					{
-						// TODO_NGMP: Error, user sending us messages isnt in the room
-					}
-				}
-				
 			}
+			
 		}
 	}
 }

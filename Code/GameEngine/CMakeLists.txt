@@ -507,6 +507,7 @@ add_library(GameEngine STATIC
     Source/GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_Hello.cpp
     Source/GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.cpp
     Source/GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.cpp
+    Source/GameNetwork/NextGenMP/Packets/NetworkPacket_Lobby_StartGamePacket.cpp
     Source/GameNetwork/Connection.cpp
     Source/GameNetwork/ConnectionManager.cpp
     Source/GameNetwork/DisconnectManager.cpp

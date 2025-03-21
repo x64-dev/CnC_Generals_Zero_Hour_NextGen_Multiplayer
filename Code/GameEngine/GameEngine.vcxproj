@@ -731,6 +731,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
+    <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_Lobby_StartGamePacket.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\Connection.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
     <ClCompile Include="F:\GeneralsNextGenMP\CnC_Generals_Zero_Hour_NextGen_Multiplayer\Code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />

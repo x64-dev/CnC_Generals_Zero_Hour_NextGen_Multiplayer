@@ -94,7 +94,8 @@ void slotListDebugLog(const char *fmt, ...)
 	{
 		UnicodeString msg;
 		msg.translate(buf);
-		TheGameSpyInfo->addText(msg, GameSpyColor[GSCOLOR_DEFAULT], NULL);
+		// TODO_NGMP: Impl again
+		//GadgetListBoxAddEntryText(listboxGameSetupChat, msg, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 	}
 }
 #define SLOTLIST_DEBUG_LOG(x) slotListDebugLog x
@@ -800,7 +801,7 @@ static void StartPressed(void)
 			{
 				UnicodeString msg;
 				msg.format(TheGameText->fetch("GUI:PlayerNoMap"), myGame->getSlot(i)->getName().str(), mapDisplayName.str());
-				////TheGameSpyInfo->addText(msg, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+				GadgetListBoxAddEntryText(listboxGameSetupChat, msg, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 				allHaveMap = FALSE;
 			}
 		}
@@ -820,7 +821,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:TooManyPlayers"), (md)?md->m_numPlayers:0);
-			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		}
 		return;
 	}
@@ -831,7 +832,7 @@ static void StartPressed(void)
 		if (myGame->amIHost())
 		{
 			UnicodeString text = TheGameText->fetch("GUI:NeedHumanPlayers");
-			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		}
 		return;
 	}
@@ -843,7 +844,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:NeedMorePlayers"),playerCount);
-			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		}
 		return;
 	}
@@ -872,7 +873,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:NeedMoreTeams"));
-			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		}
 		return;
 	}
@@ -881,16 +882,20 @@ static void StartPressed(void)
 	{
 		UnicodeString text;
 		text.format(TheGameText->fetch("GUI:SandboxMode"));
-		////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+		GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 	}
 
 	if(isReady)
 	{
-		PeerRequest req;
-		req.peerRequestType = PeerRequest::PEERREQUEST_STARTGAME;
-		TheGameSpyPeerMessageQueue->addRequest(req);
+		//PeerRequest req;
+		//req.peerRequestType = PeerRequest::PEERREQUEST_STARTGAME;
+		//TheGameSpyPeerMessageQueue->addRequest(req);
 
-		SendStatsToOtherPlayers(myGame);
+		Lobby_StartGamePacket startGamePacket;
+		NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->SendToMesh(startGamePacket);
+
+		// TODO_NGMP
+		//SendStatsToOtherPlayers(myGame);
 
 		// we've started, there's no going back
 		// i.e. disable the back button.
@@ -905,7 +910,8 @@ static void StartPressed(void)
 	}
 	else if (allHaveMap)
 	{
-		////TheGameSpyInfo->addText(TheGameText->fetch("GUI:NotifiedStartIntent"), GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+
+		GadgetListBoxAddEntryText(listboxGameSetupChat, TheGameText->fetch("GUI:NotifiedStartIntent"), GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		PeerRequest req;
 		req.peerRequestType = PeerRequest::PEERREQUEST_UTMROOM;
 		req.UTM.isStagingRoom = TRUE;
@@ -1450,7 +1456,7 @@ static void shutdownComplete( WindowLayout *layout )
 //-------------------------------------------------------------------------------------------------
 void WOLGameSetupMenuShutdown( WindowLayout *layout, void *userData )
 {
-	TheGameSpyInfo->unregisterTextWindow(listboxGameSetupChat);
+	//TheGameSpyInfo->unregisterTextWindow(listboxGameSetupChat);
 
 	if( WOLMapSelectLayout )
 	{
@@ -1641,7 +1647,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 			case PeerResponse::PEERRESPONSE_FAILEDTOHOST:
 				{
 					// oops - we've not heard from the qr server.  bail.
-					TheGameSpyInfo->addText(TheGameText->fetch("GUI:GSFailedToHost"), GameSpyColor[GSCOLOR_DEFAULT], NULL);
+					GadgetListBoxAddEntryText(listboxGameSetupChat, TheGameText->fetch("GUI:GSFailedToHost"), GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 				}
 				break;
 			case PeerResponse::PEERRESPONSE_GAMESTART:
@@ -2013,7 +2019,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 											text.format(TheGameText->fetch("GUI:LocalPlayerNoMapWillTransfer"), mapDisplayName.str());
 										else
 											text.format(TheGameText->fetch("GUI:LocalPlayerNoMap"), mapDisplayName.str());
-										TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+										GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 									}
 								}
 								if (!initialAcceptEnable)
@@ -2049,7 +2055,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 							GameSlot *slot = game->getSlot(slotNum);
 							if (slot && (slot->isAccepted() == false))
 							{
-								TheGameSpyInfo->addText(TheGameText->fetch("GUI:HostWantsToStart"), GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+								GadgetListBoxAddEntryText(listboxGameSetupChat, TheGameText->fetch("GUI:HostWantsToStart"), GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 							}
 						}
 					}
@@ -2163,7 +2169,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 										text.format(TheGameText->fetch("GUI:PlayerNoMapWillTransfer"), game->getSlot(slotNum)->getName().str(), mapDisplayName.str());
 									else
 										text.format(TheGameText->fetch("GUI:PlayerNoMap"), game->getSlot(slotNum)->getName().str(), mapDisplayName.str());
-									TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+									GadgetListBoxAddEntryText(listboxGameSetupChat, text, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 								}
 								WOLDisplaySlotList();
 							}
@@ -2409,7 +2415,7 @@ Bool handleGameSetupSlashCommands(UnicodeString uText)
 	{
 		UnicodeString s;
 		s.format(L"Hosting qr2:%d thread:%d", getQR2HostingStatus(), isThreadHosting);
-		TheGameSpyInfo->addText(s, GameSpyColor[GSCOLOR_DEFAULT], NULL);
+		GadgetListBoxAddEntryText(listboxGameSetupChat, s, GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		return TRUE; // was a slash command
 	}
 	else if (token == "me" && uText.getLength()>4)
@@ -2421,7 +2427,7 @@ Bool handleGameSetupSlashCommands(UnicodeString uText)
 	else if (token == "slots")
 	{
 		g_debugSlots = !g_debugSlots;
-		TheGameSpyInfo->addText(UnicodeString(L"Toggled SlotList debug"), GameSpyColor[GSCOLOR_DEFAULT], NULL);
+		GadgetListBoxAddEntryText(listboxGameSetupChat, UnicodeString(L"Toggled SlotList debug"), GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		return TRUE; // was a slash command
 	}
 	else if (token == "discon")
