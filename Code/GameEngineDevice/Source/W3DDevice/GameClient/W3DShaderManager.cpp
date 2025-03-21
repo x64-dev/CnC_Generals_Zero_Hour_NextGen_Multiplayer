@@ -109,7 +109,7 @@ Int W3DShaderManager::m_currentShaderPass;
 
 Bool W3DShaderManager::m_renderingToTexture = false;
 IDirect3DSurface8 *W3DShaderManager::m_oldRenderSurface=NULL;	///<previous render target
-IDirect3DTexture8 *W3DShaderManager::m_renderTexture=NULL;		///<texture into which rendering will be redirected.
+wwDeviceTexture *W3DShaderManager::m_renderTexture=NULL;		///<texture into which rendering will be redirected.
 IDirect3DSurface8 *W3DShaderManager::m_newRenderSurface=NULL;	///<new render target inside m_renderTexture
 IDirect3DSurface8 *W3DShaderManager::m_oldDepthSurface=NULL;	///<previous depth buffer surface
 /*===========================================================================================*/
@@ -190,7 +190,7 @@ Bool ScreenBWFilter::preRender(Bool &skipRender, CustomScenePassModes &scenePass
 
 Bool ScreenBWFilter::postRender(enum FilterModes mode, Coord2D &scrollDelta,Bool &doExtraRender)
 {
-	IDirect3DTexture8 * tex =	W3DShaderManager::endRenderToTexture();
+	wwDeviceTexture * tex =	W3DShaderManager::endRenderToTexture();
 	DEBUG_ASSERTCRASH(tex, ("Require rendered texture."));
 	if (!tex) return false;
 	if (!set(mode)) return false;
@@ -378,7 +378,7 @@ Bool ScreenBWFilterDOT3::preRender(Bool &skipRender, CustomScenePassModes &scene
 
 Bool ScreenBWFilterDOT3::postRender(enum FilterModes mode, Coord2D &scrollDelta,Bool &doExtraRender)
 {
-	IDirect3DTexture8 * tex =	W3DShaderManager::endRenderToTexture();
+	wwDeviceTexture * tex =	W3DShaderManager::endRenderToTexture();
 	DEBUG_ASSERTCRASH(tex, ("Require rendered texture."));
 	if (!tex) return false;
 	if (!set(mode)) return false;
@@ -625,7 +625,7 @@ Bool ScreenCrossFadeFilter::preRender(Bool &skipRender, CustomScenePassModes &sc
 
 Bool ScreenCrossFadeFilter::postRender(enum FilterModes mode, Coord2D &scrollDelta,Bool &doExtraRender)
 {
-	IDirect3DTexture8 * tex;
+	wwDeviceTexture * tex;
 
 	if (m_skipRender)
 	{
@@ -805,7 +805,7 @@ Bool ScreenMotionBlurFilter::preRender(Bool &skipRender, CustomScenePassModes &s
 
 Bool ScreenMotionBlurFilter::postRender(enum FilterModes mode, Coord2D &scrollDelta,Bool &doExtraRender)
 {
-	IDirect3DTexture8 * tex =	W3DShaderManager::endRenderToTexture();
+	wwDeviceTexture * tex =	W3DShaderManager::endRenderToTexture();
 	DEBUG_ASSERTCRASH(tex, ("Require rendered texture."));
 	if (!tex) return false;
 	if (!set(mode)) return false;
@@ -1752,9 +1752,9 @@ Int TerrainShaderPixelShader::init( void )
 
 Int TerrainShaderPixelShader::set(Int pass)
 {
-	IDirect3DTexture9* albedoTexture = W3DShaderManager::getShaderTexture(0)->Peek_DX8_Texture();
-	IDirect3DTexture9* layerTexture = W3DShaderManager::getShaderTexture(1)->Peek_DX8_Texture();
-	IDirect3DTexture9* lightTexture = W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture();
+	wwDeviceTexture* albedoTexture = W3DShaderManager::getShaderTexture(0)->Peek_DX8_Texture();
+	wwDeviceTexture* layerTexture = W3DShaderManager::getShaderTexture(1)->Peek_DX8_Texture();
+	wwDeviceTexture* lightTexture = W3DShaderManager::getShaderTexture(2)->Peek_DX8_Texture();
 	
 	DX8Wrapper::SetVertexShader(m_terrainVertexShader);
 
@@ -2547,7 +2547,7 @@ void W3DShaderManager::startRenderToTexture(void)
 /** Ends rendering to a texture.
  */
 //=============================================================================
-IDirect3DTexture8 *W3DShaderManager::endRenderToTexture(void)
+wwDeviceTexture *W3DShaderManager::endRenderToTexture(void)
 {	
 	DEBUG_ASSERTCRASH(m_renderingToTexture, ("Not rendering to texture."));
 	if (!m_renderingToTexture) return NULL;
@@ -2574,7 +2574,7 @@ IDirect3DTexture8 *W3DShaderManager::endRenderToTexture(void)
 /**Returns texture containing the image that was last rendered using any of the effects requiring render target
 textures.  Used mostly for cross-fading effects that need an unmodified version of the view before the effect
 was applied.  NOTE: This texture does not survive device reset.. so quit effect on reset!*/
-IDirect3DTexture8 *W3DShaderManager::getRenderTexture(void)
+wwDeviceTexture *W3DShaderManager::getRenderTexture(void)
 {
 	return m_renderTexture;
 }

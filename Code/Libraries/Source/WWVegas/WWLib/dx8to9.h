@@ -10,7 +10,6 @@
 #define IDirect3DDevice8           IDirect3DDevice9Ex
 #define IDirect3DResource8         IDirect3DResource9
 #define IDirect3DBaseTexture8      IDirect3DBaseTexture9
-#define IDirect3DTexture8          IDirect3DTexture9
 #define IDirect3DCubeTexture8      IDirect3DCubeTexture9
 #define IDirect3DVolumeTexture8    IDirect3DVolumeTexture9
 #define IDirect3DVertexBuffer8     IDirect3DVertexBuffer9

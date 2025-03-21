@@ -111,7 +111,7 @@ tr_renderer* DX8Wrapper::D3D12Renderer;
 bool								DX8Wrapper::world_identity;
 unsigned							DX8Wrapper::RenderStates[256];
 unsigned							DX8Wrapper::TextureStageStates[MAX_TEXTURE_STAGES][32];
-IDirect3DBaseTexture8 *		DX8Wrapper::Textures[MAX_TEXTURE_STAGES];
+wwDeviceTexture*		DX8Wrapper::Textures[MAX_TEXTURE_STAGES];
 RenderStateStruct				DX8Wrapper::render_state;
 unsigned							DX8Wrapper::render_state_changed;
 
@@ -2180,7 +2180,7 @@ void DX8Wrapper::Apply_Render_State_Changes()
 	render_state_changed&=((unsigned)WORLD_IDENTITY|(unsigned)VIEW_IDENTITY);
 }
 
-IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
+wwDeviceTexture * DX8Wrapper::_Create_DX8_Texture(
 	unsigned int width, 
 	unsigned int height,
 	WW3DFormat format, 
@@ -2191,7 +2191,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 {
 	DX8_THREAD_ASSERT();
 	DX8_Assert();
-	IDirect3DTexture8 *texture = NULL;
+	wwDeviceTexture *texture = NULL;
 
 	pool = D3DPOOL_DEFAULT; 
 
@@ -2204,15 +2204,16 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	// Render target may return NOTAVAILABLE, in
 	// which case we return NULL.
 	if (rendertarget) {
-		unsigned ret=D3DXCreateTexture(
-			DX8Wrapper::DX8Wrapper::D3DDevice, 
-			width, 
+		HRESULT ret = DX8Wrapper::CreateTexture(
+			width,
 			height,
 			mip_level_count,
-			D3DUSAGE_RENDERTARGET, 
+			D3DUSAGE_RENDERTARGET,
 			WW3DFormat_To_D3DFormat(format),
-			pool, 
-			&texture);
+			pool,
+			&texture,
+			nullptr // pSharedHandle (must be NULL unless you're doing something special)
+		);
 
 		if (ret==D3DERR_NOTAVAILABLE) {
 			Non_Fatal_Log_DX8_ErrorCode(ret,__FILE__,__LINE__);
@@ -2238,7 +2239,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 		pool = D3DPOOL_SYSTEMMEM;
 	}
 
-	HRESULT hr = DX8Wrapper::DX8Wrapper::D3DDevice->CreateTexture(
+	HRESULT hr = DX8Wrapper::CreateTexture(
 		width,
 		height,
 		mip_level_count,     // Equivalent to the D3DX "MIPLevels" parameter
@@ -2259,13 +2260,26 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 	return texture;
 }
 
-IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
+HRESULT DX8Wrapper::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, wwDeviceTexture** ppTexture, HANDLE* pSharedHandle) {
+	IDirect3DTexture9* textureHandle;
+
+	HRESULT hr = D3DDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &textureHandle, pSharedHandle);
+
+	if (hr != S_OK)
+		return hr;
+
+	*ppTexture = new wwDeviceTexture(textureHandle);
+
+	return S_OK;
+}
+
+wwDeviceTexture * DX8Wrapper::_Create_DX8_Texture(
 	IDirect3DSurface8 *surface,
 	TextureClass::MipCountType mip_level_count)
 {
 	DX8_THREAD_ASSERT();
 	DX8_Assert();
-	IDirect3DTexture8 *texture = NULL;
+	wwDeviceTexture *texture = NULL;
 
 	D3DSURFACE_DESC surface_desc;
 	::ZeroMemory(&surface_desc, sizeof(D3DSURFACE_DESC));
@@ -2284,7 +2298,7 @@ IDirect3DTexture8 * DX8Wrapper::_Create_DX8_Texture(
 
 	// Create mipmaps if needed
 	if (mip_level_count!=TextureClass::MIP_LEVELS_1) {
-		DX8_ErrorCode(D3DXFilterTexture(texture, NULL, 0, D3DX_FILTER_BOX));
+		DX8_ErrorCode(D3DXFilterTexture(texture->GetWrappedTexture(), NULL, 0, D3DX_FILTER_BOX));
 	}
 
 	return texture;
@@ -2391,7 +2405,7 @@ void DX8Wrapper::_Copy_DX8_Rects(
 				D3DX_FILTER_NONE, 0));
 			if (SUCCEEDED(res))
 			{
-				IDirect3DTexture8* pTexture = nullptr;
+				IDirect3DTexture9* pTexture = nullptr;
 				if (SUCCEEDED(pDestinationSurface->GetContainer(IID_IDirect3DBaseTexture9, (void**)&pTexture)) && pTexture)
 				{
 					pTexture->AddDirtyRect(&destRect);
@@ -2443,7 +2457,7 @@ void DX8Wrapper::_Update_Texture(TextureClass *system, TextureClass *video)
 	WWASSERT(video);
 	WWASSERT(system->Pool==TextureClass::POOL_SYSTEMMEM);
 	WWASSERT(video->Pool==TextureClass::POOL_DEFAULT);
-	DX8CALL(UpdateTexture(system->D3DTexture,video->D3DTexture));
+	DX8CALL(UpdateTexture(system->D3DTexture->GetWrappedTexture(),video->D3DTexture->GetWrappedTexture()));
 }
 
 void DX8Wrapper::Compute_Caps(D3DFORMAT display_format,D3DFORMAT depth_stencil_format)
@@ -2452,6 +2466,41 @@ void DX8Wrapper::Compute_Caps(D3DFORMAT display_format,D3DFORMAT depth_stencil_f
 	DX8_Assert();
 	DX8Caps::Compute_Caps(display_format,depth_stencil_format,D3DDevice);	
 }
+
+HRESULT DX8Wrapper::SetTexture(DWORD Stage, wwDeviceTexture* pTexture) {
+	if (pTexture == NULL)
+		return D3DDevice->SetTexture(Stage, NULL);
+
+	return D3DDevice->SetTexture(Stage, pTexture->GetWrappedTexture());
+}
+
+void DX8Wrapper::Set_DX8_Texture(unsigned int stage, wwDeviceTexture* texture)
+{
+	if (stage >= MAX_TEXTURE_STAGES)
+	{
+		DX8CALL(SetTexture(stage, texture->GetWrappedTexture()));
+		return;
+	}
+
+	if (Textures[stage] == texture) return;
+
+	SNAPSHOT_SAY(("DX8 - SetTexture(%x) \n", texture));
+
+	if (Textures[stage]) Textures[stage]->Release();
+	Textures[stage] = texture;
+	if (Textures[stage]) Textures[stage]->AddRef();
+
+	if (texture)
+	{
+		DX8CALL(SetTexture(stage, texture->GetWrappedTexture()));
+	}
+	else
+	{
+		DX8CALL(SetTexture(stage, NULL));
+	}
+	DX8_RECORD_TEXTURE_CHANGE();
+}
+
 
 void DX8Wrapper::Set_Light(unsigned index,const LightClass &light)
 {

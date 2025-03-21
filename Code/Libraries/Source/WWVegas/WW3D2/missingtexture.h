@@ -25,7 +25,7 @@
 
 #include "always.h"
 
-struct IDirect3DTexture8;
+struct wwDeviceTexture;
 struct IDirect3DSurface8;
 
 class MissingTexture
@@ -34,7 +34,7 @@ public:
 	static void _Init();
 	static void _Deinit();
 
-	static IDirect3DTexture8* _Get_Missing_Texture();		// Return a reference to missing texture
+	static wwDeviceTexture* _Get_Missing_Texture();		// Return a reference to missing texture
 	static IDirect3DSurface8* _Create_Missing_Surface();	// Create new surface which contain missing texture image
 };
 
