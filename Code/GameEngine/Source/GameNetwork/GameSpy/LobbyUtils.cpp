@@ -541,7 +541,7 @@ static Int insertGame( GameWindow *win, NGMP_LobbyInfo& lobbyInfo, Bool showMap 
 	int numPlayers = lobbyInfo.numMembers;
 	int maxPlayers = lobbyInfo.maxMembers;
 
-	AsciiString lobbyMapName = lobbyInfo.strMapName;
+	AsciiString lobbyMapName = lobbyInfo.strMapDisplayName;
 	AsciiString ladder = AsciiString("TODO_NGMP");
 	USHORT ladderPort = 1;
 	int gameID = 0;

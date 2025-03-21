@@ -64,6 +64,7 @@
 #include "GameNetwork/GameSpy/GSConfig.h"
 
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+NGMPGame* TheNGMPGame = NULL;
 
 void WOLDisplaySlotList( void );
 
@@ -246,7 +247,9 @@ void PopBackToLobby( void )
 
 	if (TheGameSpyInfo) // this can be blown away by a disconnect on the map transfer screen
 	{
-		TheGameSpyInfo->getCurrentStagingRoom()->reset();
+		NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+
+		game->reset();
 		TheGameSpyInfo->leaveStagingRoom();
 		//TheGameSpyInfo->joinBestGroupRoom();
 	}
@@ -311,21 +314,21 @@ void WOLPositionStartSpots( void )
 }
 static void savePlayerInfo( void )
 {
-	if (TheGameSpyGame)
+	if (TheNGMPGame)
 	{
-		Int slotNum = TheGameSpyGame->getLocalSlotNum();
+		Int slotNum = TheNGMPGame->getLocalSlotNum();
 		if (slotNum >= 0)
 		{
-			GameSpyGameSlot *slot = TheGameSpyGame->getGameSpySlot(slotNum);
+			NGMPGameSlot *slot = TheNGMPGame->getGameSpySlot(slotNum);
 			if (slot)
 			{
 				// save off some prefs
 				CustomMatchPreferences pref;
 				pref.setPreferredColor(slot->getColor());
 				pref.setPreferredFaction(slot->getPlayerTemplate());
-				if (TheGameSpyGame->amIHost())
+				if (TheNGMPGame->amIHost())
 				{
-					pref.setPreferredMap(TheGameSpyGame->getMap());
+					pref.setPreferredMap(TheNGMPGame->getMap());
 				}
 				pref.write();
 			}
@@ -357,14 +360,14 @@ static void playerTooltip(GameWindow *window,
 		return;
 	}
 
-	GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	if (!game)
 	{
 		TheMouse->setCursorTooltip( UnicodeString::TheEmptyString, -1, NULL, 1.5f );
 		return;
 	}
 
-	GameSpyGameSlot *slot = game->getGameSpySlot(slotIdx);
+	NGMPGameSlot *slot = game->getGameSpySlot(slotIdx);
 	if (!slot || !slot->isHuman())
 	{
 		TheMouse->setCursorTooltip( UnicodeString::TheEmptyString, -1, NULL, 1.5f );
@@ -537,7 +540,7 @@ static void handleColorSelection(int index)
 	GadgetComboBoxGetSelectedPos(combo, &selIndex);
 	color = (Int)GadgetComboBoxGetItemData(combo, selIndex);
 
-	GameInfo *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 
 	if (myGame)
 	{
@@ -599,7 +602,7 @@ static void handlePlayerTemplateSelection(int index)
 	Int playerTemplate, selIndex;
 	GadgetComboBoxGetSelectedPos(combo, &selIndex);
 	playerTemplate = (Int)GadgetComboBoxGetItemData(combo, selIndex);
-	GameInfo *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 
 	if (myGame)
 	{
@@ -654,11 +657,11 @@ static void handlePlayerTemplateSelection(int index)
 
 static void handleStartPositionSelection(Int player, int startPos)
 {
-	GameSpyStagingRoom *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	
 	if (myGame)
 	{
-		GameSpyGameSlot * slot = myGame->getGameSpySlot(player);
+		NGMPGameSlot * slot = myGame->getGameSpySlot(player);
 		if (!slot)
 			return;
 
@@ -724,7 +727,8 @@ static void handleTeamSelection(int index)
 	Int team, selIndex;
 	GadgetComboBoxGetSelectedPos(combo, &selIndex);
 	team = (Int)GadgetComboBoxGetItemData(combo, selIndex);
-	GameInfo *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+
+	NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 
 	if (myGame)
 	{
@@ -766,7 +770,8 @@ static void StartPressed(void)
 	Bool allHaveMap = TRUE;
 	Int playerCount = 0;
 	Int humanCount = 0;
-	GameSpyStagingRoom *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+
+	NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	if (!myGame)
 		return;
 
@@ -786,14 +791,16 @@ static void StartPressed(void)
 	}
 	for( int i = 0; i < MAX_SLOTS; i++ )
 	{
-		if ((myGame->getSlot(i)->isAccepted() == FALSE) && (myGame->getSlot(i)->isHuman() == TRUE))
+		bool bIsAccepted = myGame->getSlot(i)->isAccepted();
+		bool bIsHuman = myGame->getSlot(i)->isHuman();
+		if ((bIsAccepted == FALSE) && (bIsHuman == TRUE))
 		{
 			isReady = FALSE;
 			if (!myGame->getSlot(i)->hasMap() && !willTransfer)
 			{
 				UnicodeString msg;
 				msg.format(TheGameText->fetch("GUI:PlayerNoMap"), myGame->getSlot(i)->getName().str(), mapDisplayName.str());
-				TheGameSpyInfo->addText(msg, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+				////TheGameSpyInfo->addText(msg, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 				allHaveMap = FALSE;
 			}
 		}
@@ -813,7 +820,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:TooManyPlayers"), (md)?md->m_numPlayers:0);
-			TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 		}
 		return;
 	}
@@ -824,7 +831,7 @@ static void StartPressed(void)
 		if (myGame->amIHost())
 		{
 			UnicodeString text = TheGameText->fetch("GUI:NeedHumanPlayers");
-			TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 		}
 		return;
 	}
@@ -836,7 +843,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:NeedMorePlayers"),playerCount);
-			TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 		}
 		return;
 	}
@@ -865,7 +872,7 @@ static void StartPressed(void)
 		{
 			UnicodeString text;
 			text.format(TheGameText->fetch("LAN:NeedMoreTeams"));
-			TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+			////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 		}
 		return;
 	}
@@ -874,7 +881,7 @@ static void StartPressed(void)
 	{
 		UnicodeString text;
 		text.format(TheGameText->fetch("GUI:SandboxMode"));
-		TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+		////TheGameSpyInfo->addText(text, GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 	}
 
 	if(isReady)
@@ -893,12 +900,12 @@ static void StartPressed(void)
 			buttonBuddy->winEnable(FALSE);
 		GameSpyCloseOverlay(GSOVERLAY_BUDDY);
 
-		*TheGameSpyGame = *myGame;
-		TheGameSpyGame->startGame(0);
+		*TheNGMPGame = *myGame;
+		TheNGMPGame->startGame(0);
 	}
 	else if (allHaveMap)
 	{
-		TheGameSpyInfo->addText(TheGameText->fetch("GUI:NotifiedStartIntent"), GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
+		////TheGameSpyInfo->addText(TheGameText->fetch("GUI:NotifiedStartIntent"), GameSpyColor[GSCOLOR_DEFAULT], listboxGameSetupChat);
 		PeerRequest req;
 		req.peerRequestType = PeerRequest::PEERREQUEST_UTMROOM;
 		req.UTM.isStagingRoom = TRUE;
@@ -960,7 +967,7 @@ void WOLDisplaySlotList( void )
 	if (!parentWOLGameSetup || !TheGameSpyInfo->getCurrentStagingRoom())
 		return;
 
-	GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	if (!game->isInGame())
 		return;
 
@@ -973,7 +980,7 @@ void WOLDisplaySlotList( void )
 
 	for (Int i=0; i<MAX_SLOTS; ++i)
 	{
-		GameSpyGameSlot *slot = game->getGameSpySlot(i);
+		NGMPGameSlot *slot = game->getGameSpySlot(i);
 		if (slot && slot->isHuman())
 		{
 			if (i == game->getLocalSlotNum())
@@ -1224,9 +1231,9 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 
 	// TODO_NGMP
 	/*
-	if (TheGameSpyGame && TheGameSpyGame->isGameInProgress())
+	if (TheNGMPGame && TheNGMPGame->isGameInProgress())
 	{
-		TheGameSpyGame->setGameInProgress(FALSE);
+		TheNGMPGame->setGameInProgress(FALSE);
 
 		// check if we were disconnected
 		Int disconReason;
@@ -1282,9 +1289,9 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	TheMapCache->updateCache();
 
 	// TODO_NGMP
-	//GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
-	//GameSpyGameSlot *hostSlot = game->getGameSpySlot(0);
-	//hostSlot->setAccept();
+	NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+	NGMPGameSlot* hostSlot = game->getGameSpySlot(0);
+	hostSlot->setAccept();
 
 	bool bIsHost = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost();
 
@@ -1294,22 +1301,24 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 		/*
 		OptionPreferences natPref;
 		CustomMatchPreferences customPref;
-		hostSlot->setColor( customPref.getPreferredColor() );
-		hostSlot->setPlayerTemplate( customPref.getPreferredFaction() );
-		hostSlot->setNATBehavior((FirewallHelperClass::FirewallBehaviorType)natPref.getFirewallBehavior());
-		hostSlot->setPingString(TheGameSpyInfo->getPingString());
 		game->setMap(customPref.getPreferredMap());
 		*/
 
-		// TODO_NGMP
-		/*
+		// TODO_NGMP: Preferred color & factionsupport
+		hostSlot->setColor(0);
+		hostSlot->setPlayerTemplate(PLAYERTEMPLATE_RANDOM);
+		//hostSlot->setNATBehavior((FirewallHelperClass::FirewallBehaviorType)natPref.getFirewallBehavior());
+		hostSlot->setPingString("TODO_NGMP");
+
 		for (Int i=1; i<MAX_SLOTS; ++i)
 		{
-			GameSpyGameSlot *slot = game->getGameSpySlot(i);
+			NGMPGameSlot *slot = game->getGameSpySlot(i);
 			slot->setState( SLOT_OPEN );
 		}
 
-		AsciiString lowerMap = customPref.getPreferredMap();
+		// TODO_NGMP: preferred map support
+		AsciiString lowerMap = getDefaultMap(true);
+		//AsciiString lowerMap = customPref.getPreferredMap();
 		lowerMap.toLower();
 		std::map<AsciiString, MapMetaData>::iterator it = TheMapCache->find(lowerMap);
 		if (it != TheMapCache->end())
@@ -1320,7 +1329,6 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 
 			game->adjustSlotsForMap(); // BGC- adjust the slots for the new map.
 		}
-		*/
 
 
 		WOLDisplaySlotList();
@@ -1428,7 +1436,7 @@ static void shutdownComplete( WindowLayout *layout )
 	/*
 	if (launchGameNext)
 	{
-		TheGameSpyGame->launchGame();
+		TheNGMPGame->launchGame();
 		TheGameSpyInfo->leaveStagingRoom();
 	}
 	*/
@@ -1513,7 +1521,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 		HandleBuddyResponses();
 		HandlePersistentStorageResponses();
 
-		if (TheGameSpyGame && TheGameSpyGame->isGameInProgress())
+		if (TheNGMPGame && TheNGMPGame->isGameInProgress())
 		{
 			if (TheGameSpyInfo->isDisconnectedAfterGameStart(NULL))
 			{
@@ -1555,7 +1563,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 		}
 
 		Bool isHosting = TheGameSpyInfo->amIHost(); // only while in game setup screen
-		isHosting = isHosting || (TheGameSpyGame && TheGameSpyGame->isInGame() && TheGameSpyGame->amIHost()); // while in game
+		isHosting = isHosting || (TheNGMPGame && TheNGMPGame->isInGame() && TheNGMPGame->amIHost()); // while in game
 		if (!isHosting && !lastSlotlistTime && timeGetTime() > enterTime + 10000)
 		{
 			// don't do this if we're disconnected
@@ -1564,8 +1572,8 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 				// haven't seen ourselves
 				buttonPushed = true;
 				DEBUG_LOG(("Haven't seen ourselves in slotlist\n"));
-				if (TheGameSpyGame)
-					TheGameSpyGame->reset();
+				if (TheNGMPGame)
+					TheNGMPGame->reset();
 				TheGameSpyInfo->leaveStagingRoom();
 				//TheGameSpyInfo->joinBestGroupRoom();
 				GSMessageBoxOk(TheGameText->fetch("GUI:HostLeftTitle"), TheGameText->fetch("GUI:HostLeft"));
@@ -1581,7 +1589,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 			{
 				//launchGameNext = TRUE;
 				//TheShell->pop();
-				TheGameSpyGame->launchGame();
+				TheNGMPGame->launchGame();
 				if (TheGameSpyInfo) // this can be blown away by a disconnect on the map transfer screen
 					TheGameSpyInfo->leaveStagingRoom();
 				return;
@@ -1595,7 +1603,8 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 				delete TheNAT;
 				TheNAT = NULL;
 
-				TheGameSpyInfo->getCurrentStagingRoom()->reset();
+				NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+				myGame->reset();
 				TheGameSpyInfo->leaveStagingRoom();
 				//TheGameSpyInfo->joinBestGroupRoom();
 				GSMessageBoxOk(TheGameText->fetch("GUI:Error"), TheGameText->fetch("GUI:NATNegotiationFailed"));
@@ -1638,14 +1647,14 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 			case PeerResponse::PEERRESPONSE_GAMESTART:
 				{
 					sawImportantMessage = TRUE;
-					GameSpyStagingRoom *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+					NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 					if (!myGame || !myGame->isInGame())
 						break;
 
-					if (!TheGameSpyGame)
+					if (!TheNGMPGame)
 						break;
 
-					SendStatsToOtherPlayers(TheGameSpyGame);
+					SendStatsToOtherPlayers(TheNGMPGame);
 
 					// we've started, there's no going back
 					// i.e. disable the back button.
@@ -1655,8 +1664,8 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 						buttonBuddy->winEnable(FALSE);
 					GameSpyCloseOverlay(GSOVERLAY_BUDDY);
 
-					*TheGameSpyGame = *myGame;
-					TheGameSpyGame->startGame(0);
+					*TheNGMPGame = *myGame;
+					TheNGMPGame->startGame(0);
 				}
 				break;
 			case PeerResponse::PEERRESPONSE_PLAYERCHANGEDFLAGS:
@@ -1700,7 +1709,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 					}
 
 					// check if we have room for the dude
-					GameInfo *game = TheGameSpyInfo->getCurrentStagingRoom();
+					NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 					if (TheGameSpyInfo->amIHost() && game)
 					{
 						if (TheNAT)
@@ -1786,7 +1795,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 					fillPlayerInfo(&resp, &p);
 					TheGameSpyInfo->playerLeftGroupRoom(resp.nick.c_str());
 
-					if (TheGameSpyGame && TheGameSpyGame->isGameInProgress())
+					if (TheNGMPGame && TheNGMPGame->isGameInProgress())
 					{
 						break;
 					}
@@ -1794,7 +1803,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 					if (TheNAT == NULL) // don't update slot list if we're trying to start a game
 					{
 
-						GameInfo *game = TheGameSpyInfo->getCurrentStagingRoom();
+						NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 						if (game && TheGameSpyInfo->amIHost())
 						{
 							Int idx = game->getSlotNum(resp.nick.c_str());
@@ -1816,7 +1825,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 							{
 								// host left
 								buttonPushed = true;
-								TheGameSpyInfo->getCurrentStagingRoom()->reset();
+								game->reset();
 								TheGameSpyInfo->leaveStagingRoom();
 								//TheGameSpyInfo->joinBestGroupRoom();
 								GSMessageBoxOk(TheGameText->fetch("GUI:HostLeftTitle"), TheGameText->fetch("GUI:HostLeft"));
@@ -1863,7 +1872,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 					if (!strcmp(resp.command.c_str(), "SL"))
 					{
 						// slotlist
-						GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+						NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 						Bool isValidSlotList = game && game->getSlot(0) && game->getSlot(0)->isPlayer( resp.nick.c_str() ) && !TheGameSpyInfo->amIHost();
 						if (!isValidSlotList)
 						{
@@ -1954,7 +1963,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 									SLOTLIST_DEBUG_LOG(("Not in game; players are:\n"));
 									for (Int i=0; i<MAX_SLOTS; ++i)
 									{
-										const GameSpyGameSlot *slot = game->getGameSpySlot(i);
+										const NGMPGameSlot *slot = game->getGameSpySlot(i);
 										if (slot && slot->isHuman())
 										{
 											UnicodeString munkee;
@@ -1974,7 +1983,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 								if ( (oldMapCRC ^ newMapCRC) || (!wasInGame && isInGame) )
 								{
 									// it changed.  send it
-									UnicodeString hostName = TheGameSpyInfo->getCurrentStagingRoom()->getSlot(0)->getName();
+									UnicodeString hostName = game->getSlot(0)->getName();
 									AsciiString asciiName;
 									asciiName.translate(hostName);
 									PeerRequest req;
@@ -2020,7 +2029,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 									// can't see ourselves
 									buttonPushed = true;
 									DEBUG_LOG(("Can't see ourselves in slotlist %s\n", options.str()));
-									TheGameSpyInfo->getCurrentStagingRoom()->reset();
+									game->reset();
 									TheGameSpyInfo->leaveStagingRoom();
 									//TheGameSpyInfo->joinBestGroupRoom();
 									GSMessageBoxOk(TheGameText->fetch("GUI:GSErrorTitle"), TheGameText->fetch("GUI:GSKicked"));
@@ -2033,7 +2042,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 					else if (!strcmp(resp.command.c_str(), "HWS"))
 					{
 						// host wants to start
-						GameInfo *game = TheGameSpyInfo->getCurrentStagingRoom();
+						NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 						if (game && game->isInGame() && game->getSlot(0) && game->getSlot(0)->isPlayer( resp.nick.c_str() ))
 						{
 							Int slotNum = game->getLocalSlotNum();
@@ -2058,7 +2067,8 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 							AsciiString token;
 							for (Int i=0; i<MAX_SLOTS; ++i)
 							{
-								GameSpyGameSlot *slot = TheGameSpyInfo->getCurrentStagingRoom()->getGameSpySlot(i);
+								NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+								NGMPGameSlot *slot = game->getGameSpySlot(i);
 								if (pings.nextToken(&token, ","))
 								{
 									token.trim();
@@ -2084,7 +2094,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 							TheGameSpyPSMessageQueue->trackPlayerStats(stats);
 						break;
 					}
-					GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+					NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 					if (game)
 					{
 						Int slotNum = game->getSlotNum(resp.nick.c_str());
@@ -2100,7 +2110,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 							{
 								// oops - we've been kicked.  bail.
 								buttonPushed = true;
-								TheGameSpyInfo->getCurrentStagingRoom()->reset();
+								game->reset();
 								TheGameSpyInfo->leaveStagingRoom();
 								//TheGameSpyInfo->joinBestGroupRoom();
 								UnicodeString message = TheGameText->fetch("GUI:GSKicked");
@@ -2170,7 +2180,7 @@ void WOLGameSetupMenuUpdate( WindowLayout * layout, void *userData)
 								UnsignedInt uVal = atoi(options.str()+1);
 								DEBUG_LOG(("GameOpt request: key=%s, val=%s from player %d\n", key.str(), options.str()+1, slotNum));
 
-								GameSpyGameSlot *slot = game->getGameSpySlot(slotNum);
+								NGMPGameSlot *slot = game->getGameSpySlot(slotNum);
 								if (!slot)
 									break;
 
@@ -2428,12 +2438,12 @@ Bool handleGameSetupSlashCommands(UnicodeString uText)
 
 static Int getNextSelectablePlayer(Int start)
 {
-	GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	if (!game->amIHost())
 		return -1;
 	for (Int j=start; j<MAX_SLOTS; ++j)
 	{
-		GameSpyGameSlot *slot = game->getGameSpySlot(j);
+		NGMPGameSlot *slot = game->getGameSpySlot(j);
 		if (slot && slot->getStartPos() == -1 &&
 			( (j==game->getLocalSlotNum() && game->getConstSlot(j)->getPlayerTemplate()!=PLAYERTEMPLATE_OBSERVER)
 			|| slot->isAI()))
@@ -2499,7 +2509,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 					break;
 				GameWindow *control = (GameWindow *)mData1;
 				Int controlID = control->winGetWindowId();
-				GameSpyStagingRoom *myGame = TheGameSpyInfo->getCurrentStagingRoom();
+				NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 				for (Int i = 0; i < MAX_SLOTS; i++)
 				{
 					if (controlID == comboBoxColorID[i])
@@ -2579,7 +2589,8 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 						WOLMapSelectLayout = NULL;
 					}
 
-					TheGameSpyInfo->getCurrentStagingRoom()->reset();
+					NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+					game->reset();
 					//peerLeaveRoom(TheGameSpyChat->getPeer(), StagingRoom, NULL);
 					TheGameSpyInfo->leaveStagingRoom();
 					buttonPushed = true;
@@ -2616,19 +2627,22 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 				else if ( controlID == buttonStartID )
 				{
 					savePlayerInfo();
-					if (TheGameSpyInfo->amIHost())
+					
+					bool bIsHost = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost();
+					if (bIsHost)
 					{
 						StartPressed();
 					}
 					else
 					{
 						//I'm the Client... send an accept message to the host.
-						GameSlot *localSlot = TheGameSpyInfo->getCurrentStagingRoom()->getSlot(TheGameSpyInfo->getCurrentStagingRoom()->getLocalSlotNum());
+						NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+						GameSlot *localSlot = game->getSlot(game->getLocalSlotNum());
 						if (localSlot)
 						{
 							localSlot->setAccept();
 						}
-						UnicodeString hostName = TheGameSpyInfo->getCurrentStagingRoom()->getSlot(0)->getName();
+						UnicodeString hostName = game->getSlot(0)->getName();
 						AsciiString asciiName;
 						asciiName.translate(hostName);
 						PeerRequest req;
@@ -2648,11 +2662,11 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 					{
 						if (controlID == buttonMapStartPositionID[i])
 						{
-							GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+							NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 							Int playerIdxInPos = -1;
 							for (Int j=0; j<MAX_SLOTS; ++j)
 							{
-								GameSpyGameSlot *slot = game->getGameSpySlot(j);
+								NGMPGameSlot *slot = game->getGameSpySlot(j);
 								if (slot && slot->getStartPos() == i)
 								{
 									playerIdxInPos = j;
@@ -2661,7 +2675,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 							}
 							if (playerIdxInPos >= 0)
 							{
-								GameSpyGameSlot *slot = game->getGameSpySlot(playerIdxInPos);
+								NGMPGameSlot *slot = game->getGameSpySlot(playerIdxInPos);
 								if (playerIdxInPos == game->getLocalSlotNum() || (game->amIHost() && slot && slot->isAI()))
 								{
 									// it's one of my type.  Try to change it.
@@ -2700,11 +2714,11 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 				{
 					if (controlID == buttonMapStartPositionID[i])
 					{
-						GameSpyStagingRoom *game = TheGameSpyInfo->getCurrentStagingRoom();
+						NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 						Int playerIdxInPos = -1;
 						for (Int j=0; j<MAX_SLOTS; ++j)
 						{
-							GameSpyGameSlot *slot = game->getGameSpySlot(j);
+							NGMPGameSlot *slot = game->getGameSpySlot(j);
 							if (slot && slot->getStartPos() == i)
 							{
 								playerIdxInPos = j;
@@ -2713,7 +2727,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 						}
 						if (playerIdxInPos >= 0)
 						{
-							GameSpyGameSlot *slot = game->getGameSpySlot(playerIdxInPos);
+							NGMPGameSlot *slot = game->getGameSpySlot(playerIdxInPos);
 							if (playerIdxInPos == game->getLocalSlotNum() || (game->amIHost() && slot && slot->isAI()))
 							{
 								// it's one of my type.  Remove it.

@@ -3,6 +3,8 @@
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.h"
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.h"
 
+extern NGMPGame* TheNGMPGame;
+
 UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyDisplayName()
 {
 	UnicodeString strDisplayName;
@@ -38,6 +40,79 @@ UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyDisplayName()
 	
 
 	return strDisplayName;
+}
+
+UnicodeString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyMapDisplayName()
+{
+	UnicodeString strDisplayName;
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// get a handle to our lobby
+	EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+	opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+	opts.LobbyId = m_strCurrentLobbyID.c_str();
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+
+	EOS_HLobbyDetails LobbyInstHandle;
+	EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+	if (getLobbyHandlResult == EOS_EResult::EOS_Success)
+	{
+		EOS_Lobby_Attribute* attr = nullptr;
+		EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+		copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+		copyAttrOpts.AttrKey = "MAP_NAME";
+		EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attr);
+		if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Validate type too, could cause a crash
+			strDisplayName.format(L"%hs", attr->Data->Value.AsUtf8);
+		}
+	}
+
+	if (strDisplayName.isEmpty())
+	{
+		strDisplayName.format(L"%hs", m_strCurrentLobbyID);
+	}
+
+
+	return strDisplayName;
+}
+
+AsciiString NGMP_OnlineServices_LobbyInterface::GetCurrentLobbyMapPath()
+{
+	AsciiString strPath;
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+	// get a handle to our lobby
+	EOS_Lobby_CopyLobbyDetailsHandleOptions opts;
+	opts.ApiVersion = EOS_LOBBY_COPYLOBBYDETAILSHANDLE_API_LATEST;
+	opts.LobbyId = m_strCurrentLobbyID.c_str();
+	opts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+
+	EOS_HLobbyDetails LobbyInstHandle;
+	EOS_EResult getLobbyHandlResult = EOS_Lobby_CopyLobbyDetailsHandle(LobbyHandle, &opts, &LobbyInstHandle);
+
+	if (getLobbyHandlResult == EOS_EResult::EOS_Success)
+	{
+		EOS_Lobby_Attribute* attr = nullptr;
+		EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+		copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+		copyAttrOpts.AttrKey = "MAP_PATH";
+		EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attr);
+		if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Validate type too, could cause a crash
+			strPath = attr->Data->Value.AsUtf8;
+		}
+	}
+
+	if (strPath.isEmpty())
+	{
+		strPath = m_strCurrentLobbyID.c_str();
+	}
+
+	return strPath;
 }
 
 void NGMP_OnlineServices_LobbyInterface::SendChatMessageToCurrentLobby(UnicodeString& strChatMsgUnicode)
@@ -252,17 +327,38 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 								EOS_Lobby_Attribute* attr = nullptr;
 								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
 								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "MAP";
+								copyAttrOpts.AttrKey = "MAP_NAME";
 								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
 								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
 								{
 									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.strMapName = attr->Data->Value.AsUtf8;
+									newEntry.strMapDisplayName = attr->Data->Value.AsUtf8;
 								}
 								else
 								{
 									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.strMapName = SessionInfo->LobbyId;
+									newEntry.strMapDisplayName = SessionInfo->LobbyId;
+								}
+							}
+
+							// map path
+							{
+								// TODO_NGMP: Handle missing lobby properties
+
+								EOS_Lobby_Attribute* attr = nullptr;
+								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
+								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+								copyAttrOpts.AttrKey = "MAP_PATH";
+								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
+								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
+								{
+									// TODO_NGMP: Validate type too, could cause a crash
+									newEntry.strMapPath = attr->Data->Value.AsUtf8;
+								}
+								else
+								{
+									// TODO_NGMP: Maybe dont return these until it resolves?
+									newEntry.strMapPath = SessionInfo->LobbyId;
 								}
 							}
 
@@ -482,12 +578,19 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 	{
 		m_RosterNeedsRefreshCallback();
 	}
+
+	// inform game instance too
+	if (TheNGMPGame != nullptr)
+	{
+		TheNGMPGame->UpdateSlotsFromCurrentLobby();
+	}
 }
 
-void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize)
+void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMapName, AsciiString strInitialMapPath, int initialMaxSize)
 {
 	m_PendingCreation_LobbyName = strLobbyName;
-	m_PendingCreation_InitialMap = strInitialMap;
+	m_PendingCreation_InitialMapDisplayName = strInitialMapName;
+	m_PendingCreation_InitialMapPath = strInitialMapPath;
 
 	// TODO_NGMP: Correct values
 	EOS_HLobby lobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -561,9 +664,9 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 					AttributeData.Key = "NAME";
 					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
 
-					AsciiString strLobbyName = AsciiString();
-					strLobbyName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_LobbyName);
-					AttributeData.Value.AsUtf8 = strLobbyName.str();
+					AsciiString strName = AsciiString();
+					strName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_LobbyName);
+					AttributeData.Value.AsUtf8 = strName.str();
 
 					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
 					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
@@ -597,17 +700,39 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 					}
 				}
 
-				// MAP
+				// MAP NAME
 				{
 					EOS_LobbyModification_AddAttributeOptions AddAttributeModOptions;
 					EOS_Lobby_AttributeData AttributeData;
 					AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
-					AttributeData.Key = "MAP";
+					AttributeData.Key = "MAP_NAME";
 					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
 ;
 					AsciiString strMapName = AsciiString();
-					strMapName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_InitialMap);
+					strMapName.translate(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_InitialMapDisplayName);
 					AttributeData.Value.AsUtf8 = strMapName.str();
+
+					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
+					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+					AddAttributeModOptions.Attribute = &AttributeData;
+
+					EOS_EResult AddResult = EOS_LobbyModification_AddAttribute(LobbyModification, &AddAttributeModOptions);
+					if (AddResult != EOS_EResult::EOS_Success)
+					{
+						NetworkLog("[NGMP] Failed to set lobby param");
+					}
+				}
+
+				// MAP PATH
+				{
+					EOS_LobbyModification_AddAttributeOptions AddAttributeModOptions;
+					EOS_Lobby_AttributeData AttributeData;
+					AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+					AttributeData.Key = "MAP_PATH";
+					AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
+					
+					AsciiString strMapPath = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingCreation_InitialMapPath;
+					AttributeData.Value.AsUtf8 = strMapPath.str();
 
 					AddAttributeModOptions.ApiVersion = EOS_LOBBYMODIFICATION_ADDATTRIBUTE_API_LATEST;
 					AddAttributeModOptions.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
@@ -656,6 +781,8 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 							NetworkLog("[NGMP] Lobby Update failed!\n");
 						}
 					});
+
+				NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->OnJoinedOrCreatedLobby();
 			}
 			else
 			{
@@ -669,4 +796,17 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ResetCachedRoomData();
 			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
 		});
+}
+
+void NGMP_OnlineServices_LobbyInterface::OnJoinedOrCreatedLobby()
+{
+	// TODO_NGMP: Cleanup game + dont store 2 ptrs
+	m_pGameInst = new NGMPGame();
+	TheNGMPGame = m_pGameInst;
+
+	// inform game instance too
+	if (TheNGMPGame != nullptr)
+	{
+		TheNGMPGame->UpdateSlotsFromCurrentLobby();
+	}
 }

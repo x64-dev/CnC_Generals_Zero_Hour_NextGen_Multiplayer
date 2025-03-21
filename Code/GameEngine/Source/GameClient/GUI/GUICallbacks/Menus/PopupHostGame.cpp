@@ -554,7 +554,7 @@ void createGame( void )
 	const MapMetaData* md = TheMapCache->findMap(defaultMap);
 
 	UnicodeString gameName = GadgetTextEntryGetText(textEntryGameName);
-	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName, md->m_displayName, md->m_numPlayers);
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->CreateLobby(gameName, md->m_displayName, md->m_fileName, md->m_numPlayers);
 
 	GSMessageBoxCancel(UnicodeString(L"Creating Lobby"), UnicodeString(L"Lobby Creation is in progress..."), nullptr);
 

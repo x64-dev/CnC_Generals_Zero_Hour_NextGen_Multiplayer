@@ -2,10 +2,11 @@
 
 #include "NGMP_include.h"
 #include "OnlineServices_RoomsInterface.h"
+#include "../GameInfo.h"
 
 class LobbyMember : public NetworkMemberBase
 {
-	
+
 };
 
 struct NGMP_LobbyInfo
@@ -14,7 +15,8 @@ struct NGMP_LobbyInfo
 	AsciiString strLobbyOwnerName;
 	AsciiString strLobbyOwnerID;
 	NGMP_ENATType NATType;
-	AsciiString strMapName;
+	AsciiString strMapDisplayName;
+	AsciiString strMapPath;
 	int numMembers;
 	int maxMembers;
 };
@@ -31,10 +33,15 @@ public:
 	// TODO_NGMP: We dont join right now (other than host)
 
 	UnicodeString m_PendingCreation_LobbyName;
-	UnicodeString m_PendingCreation_InitialMap;
-	void CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMap, int initialMaxSize);
+	UnicodeString m_PendingCreation_InitialMapDisplayName;
+	AsciiString m_PendingCreation_InitialMapPath;
+	void CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMapName, AsciiString strInitialMapPath, int initialMaxSize);
+
+	void OnJoinedOrCreatedLobby();
 
 	UnicodeString GetCurrentLobbyDisplayName();
+	UnicodeString GetCurrentLobbyMapDisplayName();
+	AsciiString GetCurrentLobbyMapPath();
 
 	void SendChatMessageToCurrentLobby(UnicodeString& strChatMsgUnicode);
 
@@ -46,6 +53,11 @@ public:
 			cb(bSuccess);
 		}
 		m_vecCreateLobby_PendingCallbacks.clear();
+	}
+
+	NGMPGame* GetCurrentGame()
+	{
+		return m_pGameInst;
 	}
 
 	// lobby roster
@@ -63,6 +75,26 @@ public:
 		}
 	}
 
+	LobbyMember* GetRoomMemberFromIndex(int index)
+	{
+		// TODO_NGMP: Optimize data structure
+		if (index < m_mapMembers.size())
+		{
+			int i = 0;
+			for (auto kvPair : m_mapMembers)
+			{
+				if (i == index)
+				{
+					return &kvPair.second;
+				}
+
+				++i;
+			}
+		}
+
+		return nullptr;
+	}
+
 	LobbyMember* GetRoomMemberFromID(EOS_ProductUserId puid)
 	{
 		if (m_mapMembers.contains(puid))
@@ -72,6 +104,7 @@ public:
 
 		return nullptr;
 	}
+
 	std::map<EOS_ProductUserId, LobbyMember>& GetMembersListForCurrentRoom()
 	{
 		NetworkLog("[NGMP] Refreshing network room roster");
@@ -113,6 +146,8 @@ private:
 
 	// TODO_NGMP: cleanup
 	NetworkMesh* m_pLobbyMesh = nullptr;
+
+	NGMPGame* m_pGameInst = nullptr;
 
 	std::map<EOS_ProductUserId, LobbyMember> m_mapMembers = std::map<EOS_ProductUserId, LobbyMember>();
 };
