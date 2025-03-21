@@ -111,7 +111,7 @@ static PoolSizeRec sizes[] =
 	{ "Upgrade", 16, 16 },
 	{ "UpgradeTemplate", 128, 16 },
 	{ "Anim2D", 32, 32 },
-	{ "CommandButton", 300, 16 },
+	{ "CommandButton", 304, 16 },
 	{ "CommandSet", 256, 16 },
 	{ "DisplayString", 32, 32 },
 	{ "WebBrowserURL", 16, 16 },
@@ -582,7 +582,7 @@ static PoolSizeRec sizes[] =
 	{ "DrawableLocoInfo", 128, 32 },
 	{ "W3DPrototypeClass", 2048, 32 },
 	{ "EnumeratedIP", 32, 32 },
-	{ "WaterTransparencySetting", 4, 4 },
+	{ "WaterTransparencySetting", 8, 8 },
 	
 
 	// W3D pools!
