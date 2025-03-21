@@ -6,12 +6,15 @@
 #define D3DXFX_LARGEADDRESS_HANDLE
 
 #include <d3d9.h>
+#include <d3d12.h>
+#include <assert.h>
 
 class wwDeviceTexture
 {
 public:
-	wwDeviceTexture(IDirect3DTexture9* pTexture)
-		: m_pTexture(pTexture)
+	wwDeviceTexture(IDirect3DTexture9* pTexture, ID3D12Resource* pResource12)
+		: m_pTexture(pTexture),
+		m_pResource12(pResource12)
 	{
 		if (m_pTexture)
 		{
@@ -36,6 +39,11 @@ public:
 		// If COM has fully released it (refCount == 0), delete ourselves
 		if (refCount == 0)
 		{
+			if (m_pResource12 != NULL)
+			{
+				m_pResource12->Release();
+			}
+
 			// Setting m_pTexture to nullptr here is optional safety
 			m_pTexture = nullptr;
 
@@ -56,6 +64,11 @@ public:
 	IDirect3DTexture9* GetWrappedTexture() const
 	{
 		return m_pTexture;
+	}
+
+	ID3D12Resource* GetWrappedTexture12() const
+	{
+		return m_pResource12;
 	}
 
 	//--------------------------------------------------------------------------
@@ -201,8 +214,10 @@ private:
 
 	// Underlying real texture pointer
 	IDirect3DTexture9* m_pTexture;
+	ID3D12Resource* m_pResource12;
 };
 
+#include "dx8/dx8rendertarget.h"
 #include "dx8/dx8wrapper.h"
 #include "dx8/dx8list.h"
 #include "dx8/dx8renderer.h"
