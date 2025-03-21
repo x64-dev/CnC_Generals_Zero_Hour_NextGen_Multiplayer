@@ -50,6 +50,7 @@
 // destructor
 
 #include "dx8texman.h"
+#include "../gamerenderer.h"
 
 DX8TextureTrackerList DX8TextureManagerClass::Managed_Textures;
 

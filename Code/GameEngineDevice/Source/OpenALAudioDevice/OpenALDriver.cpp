@@ -189,6 +189,9 @@ void OpenALAudioManager::releasePlayingAudio(OpenALPlayingAudio* release)
         // if you are reusing the same audio data. Adjust as needed.
         // if (release->buffer) alDeleteBuffers(1, &release->buffer);
 
+        if (release->m_cleanupAudioEventRTS) {
+            releaseAudioEventRTS(release->m_audioEventRTS);
+        }
         delete release;
     }
 }

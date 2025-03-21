@@ -419,7 +419,7 @@ RenderObjClass *	 WaterRenderObjClass::Clone(void) const
 /** Copies raw bits from pBumpSrc (a regular grayscale texture) into a D3D
 	*   bump-map format. */
 //-------------------------------------------------------------------------------------------------
-__declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(LPDIRECT3DTEXTURE8 *pTex, TextureClass *pBumpSource)
+__declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(wwDeviceTexture**pTex, TextureClass *pBumpSource)
 {
     SurfaceClass::SurfaceDescription    d3dsd;
 	SurfaceClass * surf;
@@ -535,7 +535,7 @@ __declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(LPDIREC
     DWORD dwDstPitch = (DWORD)d3dlr.Pitch;
     BYTE* pDst       = (BYTE*)d3dlr.pBits;
 
-    for( DWORD y=0; y<d3dsd.Height; y++ )
+    for( DWORD y=0; y<d3dsd.Height-1; y++ )
     {
         BYTE* pDstT  = pDst;
         BYTE* pSrcB0 = (BYTE*)pSrc;
@@ -547,7 +547,7 @@ __declspec(no_sanitize_address) HRESULT WaterRenderObjClass::initBumpMap(LPDIREC
         if( y == 0 )               // Don't go before first line
             pSrcB2 = pSrcB0;
 
-        for( DWORD x=0; x<d3dsd.Width; x++ )
+        for( DWORD x=0; x<d3dsd.Width - 1; x++ )
         {
             LONG v00 = 256-*(pSrcB0+0); // Get the current pixel
             LONG v01 = 256-*(pSrcB0+4); // and the pixel to the right
@@ -628,7 +628,7 @@ HRESULT WaterRenderObjClass::generateVertexBuffer( Int sizeX, Int sizeY, Int ver
 
 	if (doStatic)
 	{	//change settings for a static vertex buffer
-		pool = D3DPOOL_MANAGED;
+		//pool = D3DPOOL_MANAGED;
 		usage = D3DUSAGE_WRITEONLY;
 		fvf=0;// DX8 Docs confusing on this. Say no FVF for vertex shaders. Else DX8_FVF_XYZDUV1;
 		m_numVertices=sizeX*sizeY;
@@ -708,7 +708,7 @@ HRESULT WaterRenderObjClass::generateIndexBuffer(Int sizeX, Int sizeY)
 		(m_numIndices+2)*sizeof(WORD), 
 		D3DUSAGE_WRITEONLY, 
 		D3DFMT_INDEX16, 
-		D3DPOOL_MANAGED, 
+		D3DPOOL_DEFAULT,
 		&m_indexBufferD3D,
 		NULL
 	)))
@@ -1087,7 +1087,9 @@ Int WaterRenderObjClass::init(Real waterLevel, Real dx, Real dy, SceneClass *par
 	//For some reason setting a NULL texture does not result in 0xffffffff for pixel shaders so using explicit "white" texture.
 	m_whiteTexture=MSGNEW("TextureClass") TextureClass(1,1,WW3D_FORMAT_A4R4G4B4,TextureClass::MIP_LEVELS_1);
 	SurfaceClass *surface=m_whiteTexture->Get_Surface_Level();
+	surface->Lock();
 	surface->DrawPixel(0,0,0xffffffff);
+	surface->UnLock();
 	REF_PTR_RELEASE(surface);
 
 	m_waterNoiseTexture=WW3DAssetManager::Get_Instance()->Get_Texture("Noise0000.tga");

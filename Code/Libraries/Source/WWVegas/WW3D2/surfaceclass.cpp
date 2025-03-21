@@ -787,6 +787,19 @@ void SurfaceClass::Detach (void)
 	return ;
 }
 
+void SurfaceClass::Lock()
+{
+	::ZeroMemory(&lockRect, sizeof(D3DLOCKED_RECT));
+	DX8_ErrorCode(D3DSurface->LockRect(&lockRect, nullptr, 0));
+	isLocked = true;
+}
+
+void SurfaceClass::UnLock()
+{
+	DX8_ErrorCode(D3DSurface->UnlockRect());
+	::ZeroMemory(&lockRect, sizeof(D3DLOCKED_RECT));
+}
+
 
 /***********************************************************************************************
  * SurfaceClass::DrawPixel -- draws a pixel                                                    *
@@ -806,38 +819,28 @@ void SurfaceClass::DrawPixel(const unsigned int x,const unsigned int y, unsigned
 {
 	SurfaceDescription sd;
 	Get_Description(sd);
+	unsigned int size = PixelSize(sd);
 
-	unsigned int size=PixelSize(sd);
-
-	D3DLOCKED_RECT lock_rect;
-	::ZeroMemory(&lock_rect, sizeof(D3DLOCKED_RECT));
-	RECT rect;
-	::ZeroMemory(&rect, sizeof(RECT));
-
-	rect.bottom=y+1;
-	rect.top=y;
-	rect.left=x;
-	rect.right=x+1;
-
-	DX8_ErrorCode(D3DSurface->LockRect(&lock_rect,&rect,0));
-	unsigned char *cptr=(unsigned char*)lock_rect.pBits;
-	unsigned short *sptr=(unsigned short*)lock_rect.pBits;
-	unsigned int *lptr=(unsigned int*)lock_rect.pBits;
+	// Move to row 'p.y'
+	unsigned char* rowPtr =
+		static_cast<unsigned char*>(lockRect.pBits) + y * lockRect.Pitch;
 
 	switch (size)
 	{
 	case 1:
-		*cptr=(unsigned char) (color & 0xFF);
+		// 8-bit color
+		rowPtr[x] = static_cast<unsigned char>(color & 0xFF);
 		break;
 	case 2:
-		*sptr=(unsigned short) (color & 0xFFFF);
+		// 16-bit color
+		reinterpret_cast<unsigned short*>(rowPtr)[x] =
+			static_cast<unsigned short>(color & 0xFFFF);
 		break;
 	case 4:
-		*lptr=color;
+		// 32-bit color
+		reinterpret_cast<unsigned int*>(rowPtr)[x] = color;
 		break;
 	}
-
-	DX8_ErrorCode(D3DSurface->UnlockRect());
 }
 
 /***********************************************************************************************

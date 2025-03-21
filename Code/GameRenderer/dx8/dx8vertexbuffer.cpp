@@ -442,7 +442,7 @@ void DX8VertexBufferClass::Create_Vertex_Buffer(UsageType usage)
 		FVF_Info().Get_FVF_Size()*VertexCount,
 		usage_flags,
 		FVF_Info().Get_FVF(),
-		(usage&USAGE_DYNAMIC) ? D3DPOOL_DEFAULT : D3DPOOL_MANAGED,
+		D3DPOOL_DEFAULT,
 		&VertexBuffer,
 		NULL);
 	if (SUCCEEDED(ret)) {
@@ -465,7 +465,7 @@ void DX8VertexBufferClass::Create_Vertex_Buffer(UsageType usage)
 		FVF_Info().Get_FVF_Size()*VertexCount,
 		usage_flags,
 		FVF_Info().Get_FVF(),
-		(usage&USAGE_DYNAMIC) ? D3DPOOL_DEFAULT : D3DPOOL_MANAGED,
+		D3DPOOL_DEFAULT,
 		&VertexBuffer,
 		NULL);
 

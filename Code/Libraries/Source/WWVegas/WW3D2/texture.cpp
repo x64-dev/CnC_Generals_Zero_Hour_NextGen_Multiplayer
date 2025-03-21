@@ -125,7 +125,7 @@ static int Calculate_Texture_Memory_Usage(const TextureClass* texture,int red_fa
 	// Set performance statistics
 
 	int size=0;
-	IDirect3DTexture8* d3d_texture=const_cast<TextureClass*>(texture)->Peek_DX8_Texture();
+	wwDeviceTexture* d3d_texture=const_cast<TextureClass*>(texture)->Peek_DX8_Texture();
 	if (!d3d_texture) return 0;
 	for (unsigned i=red_factor;i<d3d_texture->GetLevelCount();++i) {
 		D3DSURFACE_DESC desc;
@@ -329,7 +329,7 @@ TextureClass::TextureClass(SurfaceClass *surface, MipCountType mip_level_count)
 
 // ----------------------------------------------------------------------------
 
-TextureClass::TextureClass(IDirect3DTexture8* d3d_texture)
+TextureClass::TextureClass(wwDeviceTexture* d3d_texture)
 	:
 	D3DTexture(d3d_texture),
 	texture_id(unused_texture_id++),
@@ -443,7 +443,7 @@ void TextureClass::Load_Locked_Surface()
 bool TextureClass::Is_Missing_Texture()
 {
 	bool flag = false;
-	IDirect3DTexture8 *missing_texture = MissingTexture::_Get_Missing_Texture();
+	wwDeviceTexture *missing_texture = MissingTexture::_Get_Missing_Texture();
 	
 	if(D3DTexture == missing_texture)
 		flag = true;

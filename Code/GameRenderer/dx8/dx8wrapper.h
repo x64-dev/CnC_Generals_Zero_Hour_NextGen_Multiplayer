@@ -189,7 +189,7 @@ class DX8Wrapper
 	friend class DX8Caps;
 	friend class DX8WebBrowser;
 	friend class WbView3d;
-	friend class Direct3D9on12Texture;
+	friend class wwRenderTarget;
 
 	enum ChangedStates {
 		WORLD_CHANGED	=	1<<0,
@@ -294,7 +294,7 @@ public:
 	static void Set_DX8_Render_State(D3DRENDERSTATETYPE state, unsigned value);
 	static void Set_DX8_Clip_Plane(DWORD Index, CONST float* pPlane);
 	static void Set_DX8_Texture_Stage_State(unsigned stage, D3DTEXTURESTAGESTATETYPE state, unsigned value);
-	static void Set_DX8_Texture(unsigned int stage, IDirect3DBaseTexture8* texture);
+	static void Set_DX8_Texture(unsigned int stage, wwDeviceTexture* texture);
 	static void Set_Light_Environment(LightEnvironmentClass* light_env);
 	static void Set_Fog(bool enable, const Vector3 &color, float start, float end);
 
@@ -334,14 +334,15 @@ public:
 	/*
 	** Resources
 	*/
-	static IDirect3DTexture8 * _Create_DX8_Texture(
+	static wwDeviceTexture * _Create_DX8_Texture(
 		unsigned int width, 
 		unsigned int height, 
 		WW3DFormat format, 
 		TextureClass::MipCountType mip_level_count,
 		D3DPOOL pool=D3DPOOL_MANAGED,
-		bool rendertarget=false);
-		static IDirect3DTexture8 * _Create_DX8_Texture(IDirect3DSurface8 *surface, TextureClass::MipCountType mip_level_count);
+		bool rendertarget=false,
+		bool iscompressed=false);
+		static wwDeviceTexture * _Create_DX8_Texture(IDirect3DSurface8 *surface, TextureClass::MipCountType mip_level_count);
 
 	static IDirect3DSurface8 * _Create_DX8_Surface(unsigned int width, unsigned int height, WW3DFormat format);
 	static IDirect3DSurface8 * _Create_DX8_Surface(const char *filename);
@@ -353,7 +354,8 @@ public:
 			CONST RECT* pSourceRectsArray,
 			UINT cRects,
 			IDirect3DSurface8* pDestinationSurface,
-			CONST POINT* pDestPointsArray
+			CONST POINT* pDestPointsArray,
+			bool forceManagedAccess = false
 	);
 
 	static void _Update_Texture(TextureClass *system, TextureClass *video);
@@ -433,9 +435,7 @@ public:
 	static WW3DFormat	getBackBufferFormat( void );
 	static bool			RecreateGBuffer(void);
 
-	static HRESULT SetTexture(DWORD Stage, IDirect3DBaseTexture8* pTexture) {
-		return D3DDevice->SetTexture(Stage, pTexture);
-	}
+	static HRESULT SetTexture(DWORD Stage, wwDeviceTexture* pTexture);
 
 	static HRESULT SetRenderState(D3DRENDERSTATETYPE State, DWORD Value) {
 		return D3DDevice->SetRenderState(State, Value);
@@ -500,9 +500,7 @@ public:
 		return D3DDevice->GetRenderTarget(RenderTargetIndex, ppRenderTarget);
 	}
 
-	static HRESULT CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, IDirect3DTexture9** ppTexture, HANDLE* pSharedHandle) {
-		return D3DDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, ppTexture, pSharedHandle);
-	}
+	static HRESULT CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, wwDeviceTexture** ppTexture, HANDLE* pSharedHandle);
 
 	static HRESULT GetDepthStencilSurface(IDirect3DSurface9** ppZStencilSurface) {
 		return D3DDevice->GetDepthStencilSurface(ppZStencilSurface);
@@ -658,7 +656,7 @@ protected:
 	static bool								world_identity;
 	static unsigned						RenderStates[256];
 	static unsigned						TextureStageStates[MAX_TEXTURE_STAGES][32];
-	static IDirect3DBaseTexture8 *	Textures[MAX_TEXTURE_STAGES];
+	static wwDeviceTexture*	Textures[MAX_TEXTURE_STAGES];
 
 	// These fog settings are constant for all objects in a given scene,
 	// unlike the matching renderstates which vary based on shader settings.
@@ -688,10 +686,7 @@ protected:
 
 	static IDirect3DDevice9On12*		device9On12;
 
-	// MSAA and frame g_buffer targets;
-	static LPDIRECT3DSURFACE9			g_pRT_MSAA; 
-	static LPDIRECT3DSURFACE9			g_pDS_MSAA;
-	static LPDIRECT3DSURFACE9			g_pRT_Resolved; 
+	static wwRenderTarget				*sceneRenderTarget;
 
 	friend void DX8_Assert();
 	friend class WW3D;
@@ -860,24 +855,6 @@ WWINLINE void DX8Wrapper::Set_DX8_Texture_Stage_State(unsigned stage, D3DTEXTURE
 	TextureStageStates[stage][(unsigned int)state]=value;
 	DX8CALL(SetTextureStageState( stage, state, value ));
 	DX8_RECORD_TEXTURE_STAGE_STATE_CHANGE();
-}
-
-WWINLINE void DX8Wrapper::Set_DX8_Texture(unsigned int stage, IDirect3DBaseTexture8* texture)
-{
-  	if (stage >= MAX_TEXTURE_STAGES)
-  	{	DX8CALL(SetTexture(stage, texture));
-  		return;
-  	}
-
-	if (Textures[stage]==texture) return;
-
-	SNAPSHOT_SAY(("DX8 - SetTexture(%x) \n",texture));
-
-	if (Textures[stage]) Textures[stage]->Release();
-	Textures[stage] = texture;
-	if (Textures[stage]) Textures[stage]->AddRef();
-	DX8CALL(SetTexture(stage, texture));
-	DX8_RECORD_TEXTURE_CHANGE();
 }
 
 WWINLINE Vector4 DX8Wrapper::Convert_Color(unsigned color)

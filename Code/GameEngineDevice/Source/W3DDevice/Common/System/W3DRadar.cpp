@@ -644,6 +644,7 @@ void W3DRadar::renderObjectList( const RadarObject *listHead, TextureClass *text
 		m_cachedHeroPosList.clear();
 	}
 
+	surface->Lock();
 	for( const RadarObject *rObj = listHead; rObj; rObj = rObj->friend_getNext() )
 	{
 
@@ -745,6 +746,7 @@ void W3DRadar::renderObjectList( const RadarObject *listHead, TextureClass *text
 			surface->DrawPixel( radarPoint.x, radarPoint.y, c );
 
 	}  // end for
+	surface->UnLock();
 	REF_PTR_RELEASE(surface);
 
 }  // end renderObjectList
@@ -1051,6 +1053,7 @@ void W3DRadar::buildTerrainTexture( TerrainLogic *terrain )
 	ICoord2D radarPoint;
 	Coord3D worldPoint;
 	Bridge *bridge;
+	surface->Lock();
 	for( y = 0; y < m_textureHeight; y++ )
 	{
 
@@ -1259,6 +1262,7 @@ void W3DRadar::buildTerrainTexture( TerrainLogic *terrain )
 		}  // end for x
 
 	}  // end for y
+	surface->UnLock();
 
 	// all done with the surface
 	REF_PTR_RELEASE(surface);
@@ -1340,6 +1344,7 @@ void W3DRadar::setShroudLevel(Int shroudX, Int shroudY, CellShroudStatus setting
 	else
 		alpha = 0;
 
+	surface->Lock();
 	for( Int y = radarMinY; y <= radarMaxY; y++ )
 	{
 		for( Int x = radarMinX; x <= radarMaxX; x++ )
@@ -1348,6 +1353,7 @@ void W3DRadar::setShroudLevel(Int shroudX, Int shroudY, CellShroudStatus setting
 				surface->DrawPixel( x, y, GameMakeColor( 0, 0, 0, alpha ) );
 		}
 	}
+	surface->UnLock();
 	REF_PTR_RELEASE(surface);
 }
 

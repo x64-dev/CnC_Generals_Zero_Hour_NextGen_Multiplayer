@@ -28,9 +28,9 @@ static unsigned missing_image_depth=24;
 extern unsigned int missing_image_palette[];
 extern unsigned int missing_image_pixels[];
 
-static IDirect3DTexture8 * _MissingTexture = NULL;
+static wwDeviceTexture * _MissingTexture = NULL;
 
-IDirect3DTexture8* MissingTexture::_Get_Missing_Texture()
+wwDeviceTexture* MissingTexture::_Get_Missing_Texture()
 {
 	WWASSERT(_MissingTexture);
 	_MissingTexture->AddRef();
@@ -62,7 +62,7 @@ void MissingTexture::_Init()
 {
 	WWASSERT(!_MissingTexture);
 
-	IDirect3DTexture8* tex=DX8Wrapper::_Create_DX8_Texture(
+	wwDeviceTexture* tex=DX8Wrapper::_Create_DX8_Texture(
 		missing_image_width,
 		missing_image_height,
 		WW3D_FORMAT_A8R8G8B8,

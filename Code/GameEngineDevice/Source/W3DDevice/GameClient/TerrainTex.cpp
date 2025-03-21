@@ -186,7 +186,7 @@ int TerrainTextureClass::update(WorldHeightMap *htMap)
 	}
 	surface_level->UnlockRect();
 	surface_level->Release();
-	DX8_ErrorCode(D3DXFilterTexture(D3DTexture, NULL, 0, D3DX_FILTER_BOX));	
+	DX8_ErrorCode(D3DXFilterTexture(D3DTexture->GetWrappedTexture(), NULL, 0, D3DX_FILTER_BOX));	
 	if (TheWritableGlobalData->m_textureReductionFactor) {
 		D3DTexture->SetLOD(TheWritableGlobalData->m_textureReductionFactor);
 	}
@@ -499,7 +499,7 @@ int TerrainTextureClass::update256(WorldHeightMap *htMap)
 	}
 	surface_level->UnlockRect();
 	surface_level->Release();
-	DX8_ErrorCode(D3DXFilterTexture(D3DTexture, NULL, 0, D3DX_FILTER_BOX));
+	DX8_ErrorCode(D3DXFilterTexture(D3DTexture->GetWrappedTexture(), NULL, 0, D3DX_FILTER_BOX));
 	// Note - normal width for the terrain texture is 1024.  We are at 256
 	// probably running on a voodoo.  The height we return is scaled up 
 	// to match the expected width of 1024.  jba.
@@ -912,7 +912,7 @@ int AlphaEdgeTextureClass::update(WorldHeightMap *htMap)
 	}
 	surface_level->UnlockRect();
 	surface_level->Release();
-	DX8_ErrorCode(D3DXFilterTexture(D3DTexture, NULL, 0, D3DX_FILTER_BOX));
+	DX8_ErrorCode(D3DXFilterTexture(D3DTexture->GetWrappedTexture(), NULL, 0, D3DX_FILTER_BOX));
 	return(surface_desc.Height);
 }
 
