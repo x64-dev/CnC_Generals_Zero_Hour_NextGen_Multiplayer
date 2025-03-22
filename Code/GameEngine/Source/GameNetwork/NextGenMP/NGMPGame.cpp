@@ -9,6 +9,7 @@
 #include "Common/RandomValue.h"
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 #include "GameNetwork/NetworkInterface.h"
+#include "Common/GlobalData.h"
 
 NGMPGameSlot::NGMPGameSlot()
 {
@@ -286,8 +287,7 @@ void NGMPGame::launchGame(void)
 	// shutdown the top, but do not pop it off the stack
 //		TheShell->hideShell();
 	// setup the Global Data with the Map and Seed
-	// TODO_NGMP
-	//TheWritableGlobalData->m_pendingFile = TheGameSpyGame->getMap();
+	TheWritableGlobalData->m_pendingFile = getMap();
 
 	// send a message to the logic for a new game
 	GameMessage* msg = TheMessageStream->appendMessage(GameMessage::MSG_NEW_GAME);
