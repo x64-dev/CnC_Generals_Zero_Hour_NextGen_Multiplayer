@@ -64,6 +64,7 @@
 #include <vector>
 
 const unsigned MAX_TEXTURE_STAGES=2;
+const unsigned MAX_TEXTURE_STAGESACTUAL=16;
 
 enum {
 	BUFFER_TYPE_DX8,
@@ -500,6 +501,17 @@ public:
 		return D3DDevice->GetRenderTarget(RenderTargetIndex, ppRenderTarget);
 	}
 
+	static HRESULT CreateTextureDDS(
+		const void* pDDSData,     // Pointer to the entire DDS file in memory
+		UINT                DDSDataSize,  // Size of that memory block (in bytes)
+		DWORD               Usage,        // e.g., 0 or D3DUSAGE_DYNAMIC, etc.
+		D3DPOOL             Pool,         // For 9Ex, typically D3DPOOL_DEFAULT
+		unsigned int					&Width,
+		unsigned int					&Height,
+		unsigned int					&MipLevels,
+		wwDeviceTexture** ppTexture     // [out] Receives the wrapped texture
+	);
+
 	static HRESULT CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, wwDeviceTexture** ppTexture, HANDLE* pSharedHandle);
 
 	static HRESULT GetDepthStencilSurface(IDirect3DSurface9** ppZStencilSurface) {
@@ -648,6 +660,7 @@ protected:
 	static int								BitDepth;
 	static int								TextureBitDepth;
 	static bool								IsWindowed;
+	static bool								IsUploadingTextureData;
 	static D3DFORMAT					DisplayFormat;
 	
 	static D3DMATRIX						old_world;
@@ -657,7 +670,7 @@ protected:
 	static bool								world_identity;
 	static unsigned						RenderStates[256];
 	static unsigned						TextureStageStates[MAX_TEXTURE_STAGES][32];
-	static wwDeviceTexture*	Textures[MAX_TEXTURE_STAGES];
+	static wwDeviceTexture*	Textures[MAX_TEXTURE_STAGESACTUAL];
 
 	// These fog settings are constant for all objects in a given scene,
 	// unlike the matching renderstates which vary based on shader settings.

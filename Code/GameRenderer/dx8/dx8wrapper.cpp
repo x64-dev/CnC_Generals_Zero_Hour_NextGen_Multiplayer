@@ -103,6 +103,7 @@ int								DX8Wrapper::BitDepth										= DEFAULT_BIT_DEPTH;
 int								DX8Wrapper::TextureBitDepth							= DEFAULT_TEXTURE_BIT_DEPTH;
 bool								DX8Wrapper::IsWindowed									= false;
 D3DFORMAT					DX8Wrapper::DisplayFormat	= D3DFMT_UNKNOWN;
+bool						DX8Wrapper::IsUploadingTextureData = false;
 
 D3DMATRIX						DX8Wrapper::old_world;
 D3DMATRIX						DX8Wrapper::old_view;
@@ -115,7 +116,7 @@ tr_cmd** DX8Wrapper::m_cmds;
 bool								DX8Wrapper::world_identity;
 unsigned							DX8Wrapper::RenderStates[256];
 unsigned							DX8Wrapper::TextureStageStates[MAX_TEXTURE_STAGES][32];
-wwDeviceTexture*		DX8Wrapper::Textures[MAX_TEXTURE_STAGES];
+wwDeviceTexture*					DX8Wrapper::Textures[MAX_TEXTURE_STAGESACTUAL];
 RenderStateStruct				DX8Wrapper::render_state;
 unsigned							DX8Wrapper::render_state_changed;
 
@@ -533,6 +534,9 @@ bool LoadD3D9on12AndGetCallback() {
 }
 
 void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* commandList) {	
+	if (IsUploadingTextureData)
+		return;
+
 	if (!IsWorldBuilder())
 	{
 		ImDrawData* drawData = ImGui::GetDrawData();
@@ -2380,6 +2384,72 @@ wwDeviceTexture * DX8Wrapper::_Create_DX8_Texture(
 	return texture;
 }
 
+HRESULT DX8Wrapper::CreateTextureDDS(
+	const void* pDDSData,     // Pointer to the entire DDS file in memory
+	UINT                DDSDataSize,  // Size of that memory block (in bytes)
+	DWORD               Usage,        // e.g., 0 or D3DUSAGE_DYNAMIC, etc.
+	D3DPOOL             Pool,         // For 9Ex, typically D3DPOOL_DEFAULT
+	unsigned int& Width,
+	unsigned int& Height,
+	unsigned int& MipLevels,
+	wwDeviceTexture** ppTexture     // [out] Receives the wrapped texture
+)
+{
+	if (!pDDSData || DDSDataSize == 0 || !ppTexture)
+		return E_INVALIDARG;
+
+	IDirect3DTexture9* pTexture9 = nullptr;
+	D3DXIMAGE_INFO info = {};
+	HRESULT hr = D3DXCreateTextureFromFileInMemoryEx(
+		D3DDevice,          // IDirect3DDevice9*
+		pDDSData,           // in-memory DDS file data
+		DDSDataSize,        // size of that data
+		D3DX_DEFAULT,       // use DDS dimensions
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,       // use DDS mip levels (or generate if needed)
+		Usage,              // usage flags
+		D3DFMT_UNKNOWN,     // let D3DX infer the format from DDS
+		Pool,               // likely D3DPOOL_DEFAULT for D3D9Ex
+		D3DX_DEFAULT,       // default filter
+		D3DX_DEFAULT,       // mip filter
+		0,                  // no colorkey
+		&info,            // optional D3DXIMAGE_INFO*
+		nullptr,            // optional PALETTEENTRY*
+		&pTexture9          // [out] the created texture
+	);
+
+	if (FAILED(hr))
+	{
+		// If we fail to load, bail out
+		return hr;
+	}
+
+	Width = info.Width;
+	Height = info.Height;
+	MipLevels = info.MipLevels;
+
+	ID3D12Resource* pResource12 = nullptr;
+	IsUploadingTextureData = true;
+	hr = DX8Wrapper::device9On12->UnwrapUnderlyingResource(
+		pTexture9,
+		D3D12Renderer->graphics_queue->dx_queue,
+		__uuidof(ID3D12Resource),
+		reinterpret_cast<void**>(&pResource12)
+	);
+	IsUploadingTextureData = false;
+	if (FAILED(hr))
+	{
+		// If unwrap fails, clean up
+		pTexture9->Release();
+		return hr;
+	}
+
+	*ppTexture = new wwDeviceTexture(pTexture9, pResource12);
+
+	// Success
+	return S_OK;
+}
+
 HRESULT DX8Wrapper::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, wwDeviceTexture** ppTexture, HANDLE* pSharedHandle) {
 	IDirect3DTexture9* textureHandle;
 
@@ -2389,13 +2459,14 @@ HRESULT DX8Wrapper::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Us
 		return hr;
 
 	ID3D12Resource* pResource12 = nullptr;
+	IsUploadingTextureData = true;
 	DX8Wrapper::device9On12->UnwrapUnderlyingResource(
 		textureHandle,
 		D3D12Renderer->graphics_queue->dx_queue, 
 		__uuidof(ID3D12Resource),
 		reinterpret_cast<void**>(&pResource12)
 	);
-
+	IsUploadingTextureData = false;
 	*ppTexture = new wwDeviceTexture(textureHandle, pResource12);
 
 	return S_OK;
@@ -2595,21 +2666,13 @@ void DX8Wrapper::Compute_Caps(D3DFORMAT display_format,D3DFORMAT depth_stencil_f
 	DX8Caps::Compute_Caps(display_format,depth_stencil_format,D3DDevice);	
 }
 
-HRESULT DX8Wrapper::SetTexture(DWORD Stage, wwDeviceTexture* pTexture) {
-	if (pTexture == NULL)
-		return D3DDevice->SetTexture(Stage, NULL);
-
-	return D3DDevice->SetTexture(Stage, pTexture->GetWrappedTexture());
+HRESULT DX8Wrapper::SetTexture(DWORD stage, wwDeviceTexture* texture) {
+	Set_DX8_Texture(stage, texture);
+	return S_OK;
 }
 
 void DX8Wrapper::Set_DX8_Texture(unsigned int stage, wwDeviceTexture* texture)
 {
-	if (stage >= MAX_TEXTURE_STAGES)
-	{
-		DX8CALL(SetTexture(stage, texture->GetWrappedTexture()));
-		return;
-	}
-
 	if (Textures[stage] == texture) return;
 
 	SNAPSHOT_SAY(("DX8 - SetTexture(%x) \n", texture));
