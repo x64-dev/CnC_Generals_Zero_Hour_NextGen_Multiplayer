@@ -16,3 +16,7 @@
 #define NGMP_EOS_DEPLOYMENT_ID "7e3a382c23a04467bd27ac5c8989cb6a"
 #define NGMP_EOS_CLIENT_ID "xyza7891dh9LSQusLBO2cNQrXu2O8MBH"
 #define NGMP_EOS_CLIENT_SECRET "84dDmfcg9YYtu7rvm9sPZbdSQeZfaUDlmOzsJ8P12bM"
+
+
+// TODO_NGMP: Investigate further and remove
+#define NGMP_HACK_USE_COUPLED_FRAME_LOGIC 1

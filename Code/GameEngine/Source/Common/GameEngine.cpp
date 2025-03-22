@@ -632,8 +632,11 @@ void GameEngine::update( void )
 
 					WW3D::Set_DeltaTime(clientDeltaTime);
 					lastTimeClient = now;
+
+#if !defined(NGMP_HACK_USE_COUPLED_FRAME_LOGIC)
 					TheGameClient->setFrame(m_clientFrame);
 					m_clientFrame++;
+#endif
 					TheW3DFrameLengthInMsec = clientlimit;
 					TheGameClient->UPDATE();
 
@@ -678,12 +681,14 @@ void GameEngine::update( void )
 				}
 			}
 
+#if !defined(NGMP_HACK_USE_COUPLED_FRAME_LOGIC)
 			if (elapsedMsServer >= limit)
 			{
 				lastTimeServer = now;
 				m_serverFrame++;
 				TheGameLogic->setFrame(m_serverFrame);
 			}
+#endif
 
 			
 		}
