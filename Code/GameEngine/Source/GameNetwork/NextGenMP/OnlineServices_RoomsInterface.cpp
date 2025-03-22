@@ -131,26 +131,6 @@ void NGMP_OnlineServices_RoomsInterface::JoinRoom(int roomIndex, std::function<v
 		FindOptions.ApiVersion = EOS_LOBBYSEARCH_FIND_API_LATEST;
 		FindOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
 
-		// bucket id param
-		{
-			/*
-			EOS_LobbySearch_SetParameterOptions ParamOptions = {};
-			EOS_Lobby_AttributeData AttributeData;
-			AttributeData.Key = "BUCKET";
-			AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
-			AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
-			AttributeData.Value.AsUtf8 = "TODO_NGMP"; // TODO_NGMP: Proper value
-			ParamOptions.ApiVersion = EOS_LOBBYSEARCH_SETPARAMETER_API_LATEST;
-			ParamOptions.ComparisonOp = EOS_EComparisonOp::EOS_CO_EQUAL;
-			ParamOptions.Parameter = &AttributeData;
-			EOS_EResult result = EOS_LobbySearch_SetParameter(m_SearchHandle, &ParamOptions);
-			if (result != EOS_EResult::EOS_Success)
-			{
-				NetworkLog("[NGMP] Failed to set search param");
-			}
-			*/
-		}
-
 		// get room internal name
 		// TODO_NGMP: Safer method here, plus handle case where not found
 		NetworkRoom targetNetworkRoom = NGMP_OnlineServicesManager::GetInstance()->GetGroupRooms().at(roomIndex);

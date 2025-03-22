@@ -162,6 +162,7 @@ NGMP_OnlineServices_LobbyInterface::NGMP_OnlineServices_LobbyInterface()
 
 void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback)
 {
+	m_vecLobbies.clear();
 	m_PendingSearchLobbyCompleteCallback = onCompleteCallback;
 
 	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
@@ -235,7 +236,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 					auto searchHandle = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_SearchHandle;
 					uint32_t numSessions = EOS_LobbySearch_GetSearchResultCount(searchHandle, &searchResultOpts);
 
-					std::vector<NGMP_LobbyInfo> vecLobbies = std::vector<NGMP_LobbyInfo>();
+					NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies = std::vector<NGMP_LobbyInfo>();
 
 
 					// TODO_NGMP: None of these EOS handles ever get free'd, anywhere
@@ -266,6 +267,9 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 						{
 							// TODO_NGMP: Filter more here, if its empty or is orphaned, dont bother returning it
 							NGMP_LobbyInfo newEntry = NGMP_LobbyInfo();
+
+							// store lobby id
+							newEntry.m_strLobbyID = SessionInfo->LobbyId;
 
 							// parse owner name
 							char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
@@ -388,7 +392,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 
 
 
-							vecLobbies.push_back(newEntry);
+							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies.push_back(newEntry);
 
 							// Free it up
 							EOS_LobbyDetails_Info_Release(SessionInfo);
@@ -401,7 +405,7 @@ void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> 
 
 					if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingSearchLobbyCompleteCallback != nullptr)
 					{
-						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingSearchLobbyCompleteCallback(vecLobbies);
+						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingSearchLobbyCompleteCallback(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies);
 					}
 				}
 				else
@@ -589,6 +593,136 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 	if (TheNGMPGame != nullptr)
 	{
 		TheNGMPGame->UpdateSlotsFromCurrentLobby();
+	}
+}
+
+void NGMP_OnlineServices_LobbyInterface::JoinLobby(int index)
+{
+	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+
+
+	// We need to browse again for the lobby, EOS_Lobby_CopyLobbyDetailsHandle is only available to people in the lobby, so we need to use EOS_LobbySearch_CopySearchResultByIndex
+	EOS_Lobby_CreateLobbySearchOptions CreateSearchOptions = {};
+	CreateSearchOptions.ApiVersion = EOS_LOBBY_CREATELOBBYSEARCH_API_LATEST;
+	CreateSearchOptions.MaxResults = 1;
+
+
+	EOS_EResult Result = EOS_Lobby_CreateLobbySearch(LobbyHandle, &CreateSearchOptions, &m_SearchHandle);
+
+	if (Result == EOS_EResult::EOS_Success)
+	{
+		EOS_LobbySearch_FindOptions FindOptions = {};
+		FindOptions.ApiVersion = EOS_LOBBYSEARCH_FIND_API_LATEST;
+		FindOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+
+		// TODO_NGMP: Safer method here, plus handle case where not found
+		NGMP_LobbyInfo lobbyInfo = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetLobbyFromIndex(index);
+
+		// must match name
+		EOS_LobbySearch_SetLobbyIdOptions lobbyIdOpts;
+		lobbyIdOpts.ApiVersion = EOS_LOBBYSEARCH_SETLOBBYID_API_LATEST;
+		lobbyIdOpts.LobbyId = lobbyInfo.m_strLobbyID.c_str();
+
+		EOS_EResult res = EOS_LobbySearch_SetLobbyId(m_SearchHandle, &lobbyIdOpts);
+		if (res != EOS_EResult::EOS_Success)
+		{
+			NetworkLog("[NGMP] Failed to set name search param");
+		}
+
+		// TODO_NGMP: Make sure 'finished' callback is called in all error cases
+		EOS_LobbySearch_Find(m_SearchHandle, &FindOptions, (void*)index, [](const EOS_LobbySearch_FindCallbackInfo* Data)
+			{
+				//int lobbyIndex = (int)Data->ClientData;
+
+				if (Data->ResultCode == EOS_EResult::EOS_Success)
+				{
+					EOS_LobbySearch_GetSearchResultCountOptions searchResultOpts;
+					searchResultOpts.ApiVersion = EOS_LOBBYSEARCH_GETSEARCHRESULTCOUNT_API_LATEST;
+
+					auto searchHandle = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_SearchHandle;
+					uint32_t numSessions = EOS_LobbySearch_GetSearchResultCount(searchHandle, &searchResultOpts);
+
+					// cache our details
+					EOS_LobbySearch_CopySearchResultByIndexOptions getOpts;
+					getOpts.ApiVersion = EOS_LOBBYSEARCH_COPYSEARCHRESULTBYINDEX_API_LATEST;
+					getOpts.LobbyIndex = 0;
+
+					EOS_HLobbyDetails detailsHandle = nullptr;
+					EOS_LobbySearch_CopySearchResultByIndex(searchHandle, &getOpts, &detailsHandle);
+
+					if (numSessions == 0)
+					{
+						NetworkLog("[NGMP] Failed to find lobby to join!\n");
+
+						if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby != nullptr)
+						{
+							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby(false);
+						}
+					}
+					else
+					{
+						EOS_Lobby_JoinLobbyOptions joinOpts;
+						joinOpts.ApiVersion = EOS_LOBBY_JOINLOBBY_API_LATEST;
+						joinOpts.LobbyDetailsHandle = detailsHandle;
+						joinOpts.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+						joinOpts.bPresenceEnabled = false;
+						joinOpts.LocalRTCOptions = nullptr;
+						joinOpts.bCrossplayOptOut = false;
+						joinOpts.RTCRoomJoinActionType = EOS_ELobbyRTCRoomJoinActionType::EOS_LRRJAT_ManualJoin;
+
+
+						EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+						EOS_Lobby_JoinLobby(LobbyHandle, &joinOpts, nullptr, [](const EOS_Lobby_JoinLobbyCallbackInfo* Data)
+							{
+								if (Data->ResultCode == EOS_EResult::EOS_Success)
+								{
+									NetworkLog("[NGMP] Joined lobby!");
+
+									NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_strCurrentLobbyID = Data->LobbyId;
+									NetworkLog("[NGMP] Joined lobby!\n");
+
+									// TODO_NGMP: Impl
+									NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->OnJoinedOrCreatedLobby();
+									// Set our properties
+									NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ResetCachedRoomData();
+									NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
+
+
+									if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby != nullptr)
+									{
+										NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby(true);
+									}
+								}
+								else
+								{
+									NetworkLog("[NGMP] Failed to join lobby!");
+									if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby != nullptr)
+									{
+										NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby(false);
+									}
+								}
+							});
+					}
+				}
+				else if (Data->ResultCode == EOS_EResult::EOS_NotFound)
+				{
+					NetworkLog("[NGMP] Failed to find lobby to join!\n");
+
+					if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby != nullptr)
+					{
+						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby(false);
+					}
+				}
+				else
+				{
+					NetworkLog("[NGMP] Failed to search for Lobbies!");
+
+					if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby != nullptr)
+					{
+						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackJoinedLobby(false);
+					}
+				}
+			});
 	}
 }
 

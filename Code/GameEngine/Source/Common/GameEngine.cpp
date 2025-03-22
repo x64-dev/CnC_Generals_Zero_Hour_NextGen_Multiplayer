@@ -606,7 +606,10 @@ void GameEngine::update( void )
 
 		// Compute how many milliseconds have elapsed since last call
 		auto elapsedMsServer = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastTimeServer).count();
+
+#if !defined(NGMP_HACK_USE_COUPLED_FRAME_LOGIC)
 		auto elapsedMsClient = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastTimeClient).count();
+#endif
 		
 
 		{
@@ -616,7 +619,9 @@ void GameEngine::update( void )
 				TheRadar->UPDATE();
 				TheAudio->UPDATE();
 
+#if !defined(NGMP_HACK_USE_COUPLED_FRAME_LOGIC)
 				if (elapsedMsClient >= clientlimit)
+#endif
 				{
 					StartClientCpuFrameTimer();					
 
@@ -673,7 +678,9 @@ void GameEngine::update( void )
 			if ((TheNetwork == NULL && !TheGameLogic->isGamePaused())
 				|| (TheNetwork && TheNetwork->isFrameDataReady()))
 			{
+#if !defined(NGMP_HACK_USE_COUPLED_FRAME_LOGIC)
 				if (elapsedMsServer >= limit)
+#endif
 				{
 					StartServerCpuFrameTimer();
 					TheGameLogic->UPDATE();

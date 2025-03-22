@@ -321,7 +321,7 @@ void PopupHostGameInit( WindowLayout *layout, void *userData )
 	textEntryGameName = TheWindowManager->winGetWindowFromId(parentPopup, textEntryGameNameID);
 	UnicodeString name;
 	//name.translate(TheGameSpyInfo->getLocalName());
-	name.translate("Generals NextGen Multiplayer Lobby");
+	name.translate("Generals NextGen Lobby");
 	GadgetTextEntrySetText(textEntryGameName, name);
 
 	textEntryGameDescriptionID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:TextEntryGameDescription"));

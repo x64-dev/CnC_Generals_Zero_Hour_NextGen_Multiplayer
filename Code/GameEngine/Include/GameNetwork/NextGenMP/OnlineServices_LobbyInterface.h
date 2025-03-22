@@ -14,6 +14,7 @@ struct NGMP_LobbyInfo
 	AsciiString strLobbyName;
 	AsciiString strLobbyOwnerName;
 	AsciiString strLobbyOwnerID;
+	std::string m_strLobbyID;
 	NGMP_ENATType NATType;
 	AsciiString strMapDisplayName;
 	AsciiString strMapPath;
@@ -147,6 +148,11 @@ public:
 		m_OnChatCallback = cb;
 	}
 
+	void RegisterForJoinLobbyCallback(std::function<void(bool)> cb)
+	{
+		m_callbackJoinedLobby = cb;
+	}
+
 	void ResetCachedRoomData()
 	{
 		m_mapMembers.clear();
@@ -171,8 +177,20 @@ public:
 		}
 	}
 
+	void JoinLobby(int index);
+
+	NGMP_LobbyInfo GetLobbyFromIndex(int index)
+	{
+		// TODO_NGMP: safety
+		return m_vecLobbies.at(index);
+	}
+
+	std::vector<NGMP_LobbyInfo> m_vecLobbies;
+
 private:
 	std::vector<std::function<void(bool)>> m_vecCreateLobby_PendingCallbacks = std::vector<std::function<void(bool)>>();
+
+	std::function<void(bool)> m_callbackJoinedLobby = nullptr;
 
 	std::string m_strCurrentLobbyID = "";
 

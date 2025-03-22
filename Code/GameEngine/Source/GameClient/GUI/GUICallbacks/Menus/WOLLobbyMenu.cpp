@@ -666,6 +666,64 @@ void NGMP_WOLLobbyMenu_CreateLobbyCallback(bool bSuccess)
 	//TheGameSpyInfo->setGameOptions();
 }
 
+void NGMP_WOLLobbyMenu_JoinLobbyCallback(bool bSuccess)
+{
+	// TODO_NGMP: Show accurate errors again
+
+	SetLobbyAttemptHostJoin(FALSE);
+	if (bSuccess)
+	{
+		// Woohoo!  On to our next screen!
+		buttonPushed = true;
+		nextScreen = "Menus/GameSpyGameOptionsMenu.wnd";
+		TheShell->pop();
+	}
+	else
+	{
+		GSMessageBoxOk(TheGameText->fetch("GUI:JoinFailedDefault"), UnicodeString(L"TODO_NGMP"));
+		/*
+		UnicodeString s;
+
+		switch (resp.joinStagingRoom.result)
+		{
+		case PEERFullRoom:        // The room is full.
+			s = TheGameText->fetch("GUI:JoinFailedRoomFull");
+			break;
+		case PEERInviteOnlyRoom:  // The room is invite only.
+			s = TheGameText->fetch("GUI:JoinFailedInviteOnly");
+			break;
+		case PEERBannedFromRoom:  // The local user is banned from the room.
+			s = TheGameText->fetch("GUI:JoinFailedBannedFromRoom");
+			break;
+		case PEERBadPassword:     // An incorrect password (or none) was given for a passworded room.
+			s = TheGameText->fetch("GUI:JoinFailedBadPassword");
+			break;
+		case PEERAlreadyInRoom:   // The local user is already in or entering a room of the same type.
+			s = TheGameText->fetch("GUI:JoinFailedAlreadyInRoom");
+			break;
+		case PEERNoConnection:    // Can't join a room if there's no chat connection.
+			s = TheGameText->fetch("GUI:JoinFailedNoConnection");
+			break;
+		default:
+			s = TheGameText->fetch("GUI:JoinFailedDefault");
+			break;
+		}
+		GSMessageBoxOk(TheGameText->fetch("GUI:JoinFailedDefault"), s);
+		if (groupRoomToJoin)
+		{
+			DEBUG_LOG(("WOLLobbyMenuUpdate() - rejoining group room %d\n", groupRoomToJoin));
+			TheGameSpyInfo->joinGroupRoom(groupRoomToJoin);
+			groupRoomToJoin = 0;
+		}
+		else
+		{
+			DEBUG_LOG(("WOLLobbyMenuUpdate() - joining best group room\n"));
+			TheGameSpyInfo->joinBestGroupRoom();
+		}
+		*/
+	}
+}
+
 //-------------------------------------------------------------------------------------------------
 /** Initialize the WOL Lobby Menu */
 //-------------------------------------------------------------------------------------------------
@@ -748,8 +806,11 @@ void WOLLobbyMenuInit( WindowLayout *layout, void *userData )
 	}
 	*/
 
-	// NGMP: Register for login callback
+	// NGMP: Register for create lobby callback
 	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForCreateLobbyCallback(NGMP_WOLLobbyMenu_CreateLobbyCallback);
+
+	// NGMP: Join lobby callback
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForJoinLobbyCallback(NGMP_WOLLobbyMenu_JoinLobbyCallback);
 
 	// NGMP: Request lobbies
 	GadgetListBoxAddEntryText(listboxLobbyChat, UnicodeString(L"Welcome to C&C Generals NextGen Multiplayer!"), GameMakeColor(255, 194, 15, 255), -1, -1);
@@ -1671,6 +1732,21 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 				}
 				else if ( controlID == buttonJoinID )
 				{
+					// TODO_NGMP: Support re-ordering again
+					Int selected;
+					GadgetListBoxGetSelected(GetGameListBox(), &selected);
+					if (selected >= 0)
+					{
+						//Int selectedID = (Int)GadgetListBoxGetItemData(GetGameListBox(), selected);
+						//if (selectedID > 0)
+						{
+							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->JoinLobby(selected);
+
+							SetLobbyAttemptHostJoin(TRUE);
+						}
+					}
+					// TODO_NGMP: Start using StagingRoomInfo again, it'll make this easier and cleaner
+					/*
 					if (s_tryingToHostOrJoin)
 						break;
 
@@ -1750,6 +1826,7 @@ WindowMsgHandledType WOLLobbyMenuSystem( GameWindow *window, UnsignedInt msg,
 					{
 						GSMessageBoxOk(TheGameText->fetch("GUI:Error"), TheGameText->fetch("GUI:NoGameSelected"), NULL);
 					}
+					*/
 				}
 				else if ( controlID == buttonBuddyID )
 				{

@@ -601,7 +601,7 @@ static void checkLogin( void )
 
 void NGMP_WOLLoginMenu_LoginCallback(bool bSuccess)
 {
-	if (TheShell->isAnimFinished() && !buttonPushed)
+	if (!buttonPushed)
 	{
 		// TODO_NGMP: Handle failure properly
 		if (bSuccess)

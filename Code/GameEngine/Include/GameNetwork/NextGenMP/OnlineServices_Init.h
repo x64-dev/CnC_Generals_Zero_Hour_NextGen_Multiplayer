@@ -107,7 +107,11 @@ public:
 		NGMP_ENATType oldNATType = m_NATType;
 		
 		m_NATType = natType;
-		m_cbNATTypeChanged(oldNATType, m_NATType);
+
+		if (m_cbNATTypeChanged != nullptr)
+		{
+			m_cbNATTypeChanged(oldNATType, m_NATType);
+		}
 	}
 	NGMP_ENATType GetNATType() const { return m_NATType; }
 	AsciiString GetNATTypeString() const
