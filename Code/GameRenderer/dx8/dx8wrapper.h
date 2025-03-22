@@ -577,6 +577,7 @@ protected:
 
 	static bool	Create_Device(void);
 	static void Release_Device(void);
+	static void D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* commandList);
 
 	static void Reset_Statistics();
 	static void Enumerate_Devices();
@@ -680,6 +681,15 @@ protected:
 	static IDirect3D8 *					D3DInterface;			//d3d8;
 	static IDirect3DDevice8 *			D3DDevice;				//d3ddevice8;	
 	static tr_renderer					*D3D12Renderer;
+	static tr_cmd_pool*					m_cmd_pool;
+	static tr_cmd**						m_cmds;
+	static ID3D12DescriptorHeap*		m_ImGuiSrvDescHeap;
+	static ID3D12DescriptorHeap*		m_RtvSrvDescHeap;
+	static IDirect3DSwapChain9*			m_swapChain9;
+	static D3DPRESENT_PARAMETERS		m_d3dPresentParams;
+	static IDirect3DSurface9			*m_backBuffers[3];
+	static ID3D12Resource*				m_backBufferResources[3];
+	static D3D12_CPU_DESCRIPTOR_HANDLE	m_backBufferRTV[3];
 
 	static IDirect3DSurface8 *			CurrentRenderTarget;
 	static IDirect3DSurface8 *			DefaultRenderTarget;

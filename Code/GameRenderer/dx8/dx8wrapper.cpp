@@ -71,6 +71,8 @@
 #include "dx8webbrowser.h"
 #include "DxErr.h"
 
+#include <pix3.h>
+#include <d3dx12.h>
 
 #define WW3D_DEVTYPE D3DDEVTYPE_HAL
 
@@ -107,6 +109,8 @@ D3DMATRIX						DX8Wrapper::old_view;
 D3DMATRIX						DX8Wrapper::old_prj;
 
 tr_renderer* DX8Wrapper::D3D12Renderer;
+tr_cmd_pool* DX8Wrapper::m_cmd_pool;
+tr_cmd** DX8Wrapper::m_cmds;
 
 bool								DX8Wrapper::world_identity;
 unsigned							DX8Wrapper::RenderStates[256];
@@ -124,7 +128,14 @@ IDirect3DSurface8 *			DX8Wrapper::CurrentRenderTarget						= NULL;
 IDirect3DSurface8 *			DX8Wrapper::DefaultRenderTarget						= NULL;
 IDirect3DDevice9On12*		DX8Wrapper::device9On12 = NULL;
 
+ID3D12DescriptorHeap*		DX8Wrapper::m_ImGuiSrvDescHeap = NULL;
+ID3D12DescriptorHeap* DX8Wrapper::m_RtvSrvDescHeap = NULL;
 wwRenderTarget*				DX8Wrapper::sceneRenderTarget = NULL;
+IDirect3DSwapChain9*		DX8Wrapper::m_swapChain9 = NULL;
+D3DPRESENT_PARAMETERS		DX8Wrapper::m_d3dPresentParams;
+IDirect3DSurface9			*DX8Wrapper::m_backBuffers[3];
+ID3D12Resource*				DX8Wrapper::m_backBufferResources[3];
+D3D12_CPU_DESCRIPTOR_HANDLE	DX8Wrapper::m_backBufferRTV[3];
 
 int DX8Wrapper::numDeviceVertexShaders = 0;
 DeviceVertexShader DX8Wrapper::deviceVertexShaders[256];
@@ -210,6 +221,53 @@ extern "C" {
 	}
 };
 
+// Simple free list based allocator
+struct WWDescriptorHeapAllocator
+{
+	ID3D12DescriptorHeap* Heap = nullptr;
+	D3D12_DESCRIPTOR_HEAP_TYPE  HeapType = D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES;
+	D3D12_CPU_DESCRIPTOR_HANDLE HeapStartCpu;
+	D3D12_GPU_DESCRIPTOR_HANDLE HeapStartGpu;
+	UINT                        HeapHandleIncrement;
+	ImVector<int>               FreeIndices;
+
+	void Create(ID3D12Device* device, ID3D12DescriptorHeap* heap)
+	{
+		IM_ASSERT(Heap == nullptr && FreeIndices.empty());
+		Heap = heap;
+		D3D12_DESCRIPTOR_HEAP_DESC desc = heap->GetDesc();
+		HeapType = desc.Type;
+		HeapStartCpu = Heap->GetCPUDescriptorHandleForHeapStart();
+		HeapStartGpu = Heap->GetGPUDescriptorHandleForHeapStart();
+		HeapHandleIncrement = device->GetDescriptorHandleIncrementSize(HeapType);
+		FreeIndices.reserve((int)desc.NumDescriptors);
+		for (int n = desc.NumDescriptors; n > 0; n--)
+			FreeIndices.push_back(n - 1);
+	}
+	void Destroy()
+	{
+		Heap = nullptr;
+		FreeIndices.clear();
+	}
+	void Alloc(D3D12_CPU_DESCRIPTOR_HANDLE* out_cpu_desc_handle, D3D12_GPU_DESCRIPTOR_HANDLE* out_gpu_desc_handle)
+	{
+		IM_ASSERT(FreeIndices.Size > 0);
+		int idx = FreeIndices.back();
+		FreeIndices.pop_back();
+		out_cpu_desc_handle->ptr = HeapStartCpu.ptr + (idx * HeapHandleIncrement);
+		out_gpu_desc_handle->ptr = HeapStartGpu.ptr + (idx * HeapHandleIncrement);
+	}
+	void Free(D3D12_CPU_DESCRIPTOR_HANDLE out_cpu_desc_handle, D3D12_GPU_DESCRIPTOR_HANDLE out_gpu_desc_handle)
+	{
+		int cpu_idx = (int)((out_cpu_desc_handle.ptr - HeapStartCpu.ptr) / HeapHandleIncrement);
+		int gpu_idx = (int)((out_gpu_desc_handle.ptr - HeapStartGpu.ptr) / HeapHandleIncrement);
+		IM_ASSERT(cpu_idx == gpu_idx);
+		FreeIndices.push_back(cpu_idx);
+	}
+};
+
+WWDescriptorHeapAllocator g_pd3dSrvDescHeapAlloc;
+
 /***********************************************************************************
 **
 ** DX8Wrapper Implementation
@@ -282,6 +340,9 @@ bool DX8Wrapper::Init(void * hwnd)
 	d3d9On12Args.NumQueues = 1;
 	d3d9On12Args.NodeMask = 0; // Single-GPU scenario
 	//D3DInterface = Direct3DCreate9On12(D3D_SDK_VERSION, &d3d9On12Args, 1);
+
+	tr_create_cmd_pool(D3D12Renderer, D3D12Renderer->graphics_queue, false, &m_cmd_pool);
+	tr_create_cmd_n(m_cmd_pool, false, 3, &m_cmds);
 	
 	Direct3DCreate9On12Ex(D3D_SDK_VERSION, &d3d9On12Args, 1, &D3DInterface);
 // jmarshall end
@@ -446,11 +507,55 @@ void DX8Wrapper::Do_Onetime_Device_Dependent_Shutdowns(void)
 
 }
 
+// Define the function pointer type
+typedef void (*PFN_D3D9ON12_SET_GRAPHICS_RENDER_CALLBACK)(void* callbackFunction);
+
+// Declare the global function pointer
+PFN_D3D9ON12_SET_GRAPHICS_RENDER_CALLBACK D3D9on12SetGraphicsRenderCallback = nullptr;
+
+// Function to load the DLL and resolve the function pointer
+bool LoadD3D9on12AndGetCallback() {
+	HMODULE hD3D9on12 = LoadLibraryW(L"d3d9on12.dll");
+	if (!hD3D9on12) {
+		return false;
+	}
+
+	D3D9on12SetGraphicsRenderCallback =
+		reinterpret_cast<PFN_D3D9ON12_SET_GRAPHICS_RENDER_CALLBACK>(
+			GetProcAddress(hD3D9on12, "D3D9on12SetGraphicsRenderCallback"));
+
+	if (!D3D9on12SetGraphicsRenderCallback) {
+		FreeLibrary(hD3D9on12);
+		return false;
+	}
+
+	return true;
+}
+
+void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* commandList) {	
+	if (!IsWorldBuilder())
+	{
+		ImDrawData* drawData = ImGui::GetDrawData();
+		ImGui::Render();
+		if (drawData)
+		{
+			PIXScopedEvent(commandList, 0ull, L"ImGUI");
+			commandList->SetDescriptorHeaps(1, &m_ImGuiSrvDescHeap);
+			ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList);
+		}	
+	}
+}
 
 bool DX8Wrapper::Create_Device(void)
 {
 	WWASSERT(D3DDevice == NULL);	// for now, once you've created a device, you're stuck with it!
-#
+
+	if (!LoadD3D9on12AndGetCallback()) {
+		return false;
+	}
+
+	D3D9on12SetGraphicsRenderCallback(D3D9on12RenderWithGraphicsList);
+
 	D3DCAPS8 caps;
 	if (FAILED( D3DInterface->GetDeviceCaps(
 		CurRenderDevice,
@@ -512,7 +617,108 @@ bool DX8Wrapper::Create_Device(void)
 
 	// Setup Platform/Renderer backends
 	ImGui_ImplWin32_Init(_Hwnd);
-	ImGui_ImplDX9_Init(D3DDevice);
+	{
+		// Create the SRV heap:
+		{
+			IDirect3DSwapChain9* m_swapChain9 = nullptr;
+			HRESULT hr = D3DDevice->GetSwapChain(0, &m_swapChain9);
+			if (FAILED(hr) || !m_swapChain9)
+			{
+				return false;
+			}
+
+			hr = m_swapChain9->GetPresentParameters(&m_d3dPresentParams);
+			if (FAILED(hr))
+			{
+				return false;
+			}
+
+			for (UINT i = 0; i < m_d3dPresentParams.BackBufferCount; i++)
+			{
+				hr = m_swapChain9->GetBackBuffer(i, D3DBACKBUFFER_TYPE_MONO, &m_backBuffers[i]);
+				if (FAILED(hr) || !m_backBuffers[i])
+				{
+					return false;
+				}
+			}
+
+			{
+				D3D12_DESCRIPTOR_HEAP_DESC desc = {};
+				desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+				desc.NumDescriptors = 64;
+				desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+				desc.NodeMask = 0;
+
+				hr = D3D12Renderer->dx_device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&m_ImGuiSrvDescHeap));
+				if (FAILED(hr))
+				{
+					return false;
+				}
+
+				g_pd3dSrvDescHeapAlloc.Create(D3D12Renderer->dx_device, m_ImGuiSrvDescHeap);
+				// Pass m_ImGuiSrvDescHeap to ImGui_ImplDX12_Init(...),
+				// along with CPU/GPU start handles, etc.
+			}
+
+
+			{
+				D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
+				rtvHeapDesc.NumDescriptors = m_d3dPresentParams.BackBufferCount; // one per back buffer
+				rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+				rtvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE; // not shader visible
+				rtvHeapDesc.NodeMask = 0;
+
+				hr = D3D12Renderer->dx_device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&m_RtvSrvDescHeap));
+				if (FAILED(hr))
+				{
+					return false;
+				}
+
+				// We'll need a pointer to the start of the heap plus the increment size
+				D3D12_CPU_DESCRIPTOR_HANDLE rtvHandleStart = m_RtvSrvDescHeap->GetCPUDescriptorHandleForHeapStart();
+				UINT rtvDescriptorSize =
+					D3D12Renderer->dx_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+
+				for (UINT i = 0; i < m_d3dPresentParams.BackBufferCount; i++)
+				{
+					ID3D12Resource* resource12 = nullptr;
+					hr = device9On12->UnwrapUnderlyingResource(
+						m_backBuffers[i], // The IDirect3DSurface9
+						D3D12Renderer->graphics_queue->dx_queue,              // Must match the queue 9On12 is using
+						__uuidof(ID3D12Resource),
+						reinterpret_cast<void**>(&resource12)
+					);
+					if (FAILED(hr) || !resource12)
+					{
+						return false;
+					}
+
+					m_backBufferResources[i] = resource12; // store for later transitions
+
+					D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHandleStart;
+					rtvHandle.ptr += i * rtvDescriptorSize; // offset for each back buffer
+
+					D3D12Renderer->dx_device->CreateRenderTargetView(resource12, nullptr, rtvHandle);
+					
+					m_backBufferRTV[i] = rtvHandle;
+				}
+			}
+		}
+
+		ImGui_ImplDX12_InitInfo init_info = {};
+		init_info.Device = D3D12Renderer->dx_device;
+		init_info.CommandQueue = D3D12Renderer->graphics_queue->dx_queue;
+		init_info.NumFramesInFlight = m_d3dPresentParams.BackBufferCount;
+		init_info.RTVFormat = DXGI_FORMAT_B8G8R8A8_UNORM;
+		init_info.DSVFormat = DXGI_FORMAT_UNKNOWN;
+		// Allocating SRV descriptors (for textures) is up to the application, so we provide callbacks.
+		// (current version of the backend will only allocate one descriptor, future versions will need to allocate more)
+		init_info.SrvDescriptorHeap = m_ImGuiSrvDescHeap;
+		init_info.SrvDescriptorAllocFn = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE* out_cpu_handle, D3D12_GPU_DESCRIPTOR_HANDLE* out_gpu_handle) { return g_pd3dSrvDescHeapAlloc.Alloc(out_cpu_handle, out_gpu_handle); };
+		init_info.SrvDescriptorFreeFn = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE cpu_handle, D3D12_GPU_DESCRIPTOR_HANDLE gpu_handle) { return g_pd3dSrvDescHeapAlloc.Free(cpu_handle, gpu_handle); };
+
+		ImGui_ImplDX12_Init(&init_info);
+	}
 	io.Fonts->AddFontDefault();	
 	g_BigConsoleFont = io.Fonts->AddFontFromFileTTF(
 		"Fonts\\Arial.ttf",
@@ -1544,12 +1750,6 @@ void DX8Wrapper::Begin_Scene(void)
 		0
 	);
 
-	if (!IsWorldBuilder())
-	{
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-	}
-
 	DX8WebBrowser::Update();
 }
 
@@ -1557,13 +1757,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
 
-	if (!IsWorldBuilder())
-	{
-		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-	}	
-
-	D3DDevice->EndScene();
+	D3DDevice->EndScene();	
 
 	sceneRenderTarget->EndRender();	
 
@@ -1985,6 +2179,7 @@ void DX8Wrapper::Draw_Strip(
 
 void DX8Wrapper::Apply_Render_State_Changes()
 {
+#if 0
 	{
 		// 1. Retrieve the fixed-function pipeline matrices from the device
 		D3DXMATRIX matWorld, matView, matProj;
@@ -2004,7 +2199,7 @@ void DX8Wrapper::Apply_Render_State_Changes()
 
 		DX8Wrapper::SetVertexShaderConstantF(0, (float*)&matWVP_Transposed, 4);
 	}
-
+#endif
 	if (!render_state_changed) return;
 	if (render_state_changed&SHADER_CHANGED) {
 		SNAPSHOT_SAY(("DX8 - apply shader\n"));
