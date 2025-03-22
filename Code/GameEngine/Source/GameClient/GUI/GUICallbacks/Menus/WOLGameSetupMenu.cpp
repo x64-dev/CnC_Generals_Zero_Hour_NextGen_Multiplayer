@@ -630,16 +630,21 @@ static void handlePlayerTemplateSelection(int index)
 		}
 
 
-		if (TheGameSpyInfo->amIHost())
+		if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost())
 		{
 			// send around a new slotlist
 			myGame->resetAccepted();
-			TheGameSpyInfo->setGameOptions();
+
+			// TODO_NGMP
+			//TheGameSpyInfo->setGameOptions();
 			WOLDisplaySlotList();
 		}
 		else
 		{
 			// request the playerTemplate from the host
+
+			// TODO_NGMP:
+			/*
 			AsciiString options;
 			options.format("PlayerTemplate=%d", playerTemplate);
 			AsciiString hostName;
@@ -651,6 +656,7 @@ static void handlePlayerTemplateSelection(int index)
 			req.nick = hostName.str();
 			req.options = options.str();
 			TheGameSpyPeerMessageQueue->addRequest(req);
+			*/
 		}
 	}
 }
@@ -930,10 +936,10 @@ void WOLDisplayGameOptions( void )
 	if (!parentWOLGameSetup)
 		return;
 
-	// TODO_NGMP: Use gameslots again
-	//const GameSlot *localSlot = NULL;
-	//if (theGame->getLocalSlotNum() >= 0)
-	//	localSlot = theGame->getConstSlot(theGame->getLocalSlotNum());
+	NGMPGame* theGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+	const GameSlot *localSlot = NULL;
+	if (theGame->getLocalSlotNum() >= 0)
+		localSlot = theGame->getConstSlot(theGame->getLocalSlotNum());
 
 	// TODO_NGMP: Correct map, not default
 	AsciiString map = getDefaultMap(true);
@@ -959,8 +965,7 @@ void WOLDisplayGameOptions( void )
 	}
 	WOLPositionStartSpots();
 
-	// TODO_NGMP
-	//updateMapStartSpots(TheGameSpyInfo->getCurrentStagingRoom(), buttonMapStartPosition);
+	updateMapStartSpots(theGame, buttonMapStartPosition);
 }
 
 //  -----------------------------------------------------------------------------------------
@@ -969,9 +974,8 @@ void WOLDisplayGameOptions( void )
 void WOLDisplaySlotList( void )
 {
 	// TODO_NGMP
-	/*
-	if (!parentWOLGameSetup || !TheGameSpyInfo->getCurrentStagingRoom())
-		return;
+	//if (!parentWOLGameSetup || !TheGameSpyInfo->getCurrentStagingRoom())
+		//return;
 
 	NGMPGame* game = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	if (!game->isInGame())
@@ -992,13 +996,18 @@ void WOLDisplaySlotList( void )
 			if (i == game->getLocalSlotNum())
 			{
 				// set up my own ping...
-				slot->setPingString(TheGameSpyInfo->getPingString());
+				slot->setPingString("TODO_NGMP");
+				//slot->setPingString(TheGameSpyInfo->getPingString());
 			}
 
 			if (genericPingWindow[i])
 			{
 				genericPingWindow[i]->winHide(FALSE);
-				Int ping = slot->getPingAsInt();
+
+				genericPingWindow[i]->winSetEnabledImage(0, pingImages[0]);
+				// TODO_NGMP
+				//Int ping = slot->getPingAsInt();
+				/*
 				if (ping < TheGameSpyConfig->getPingCutoffGood())
 				{
 					genericPingWindow[i]->winSetEnabledImage(0, pingImages[0]);
@@ -1011,6 +1020,7 @@ void WOLDisplaySlotList( void )
 				{
 					genericPingWindow[i]->winSetEnabledImage(0, pingImages[2]);
 				}
+				*/
 			}
 		}
 		else
@@ -1019,7 +1029,6 @@ void WOLDisplaySlotList( void )
 				genericPingWindow[i]->winHide(TRUE);
 		}
 	}
-	*/
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1029,8 +1038,7 @@ void InitWOLGameGadgets( void )
 {
 	ClearGSMessageBoxes();
 
-	// TODO_NGMP
-	//GameSpyStagingRoom *theGameInfo = TheGameSpyInfo->getCurrentStagingRoom();
+	NGMPGame* theGameInfo = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
 	pingImages[0] = TheMappedImageCollection->findImageByName("Ping03");
 	pingImages[1] = TheMappedImageCollection->findImageByName("Ping02");
 	pingImages[2] = TheMappedImageCollection->findImageByName("Ping01");
@@ -1075,16 +1083,13 @@ void InitWOLGameGadgets( void )
 		GadgetStaticTextSetText(staticTextTitle, NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentLobbyDisplayName());
 	}
 
-	// TODO_NGMP
-	/*
 	if (!theGameInfo)
 	{
 		DEBUG_CRASH(("No staging room!"));
 		return;
 	}
-	*/
 
-	std::map<EOS_ProductUserId, LobbyMember>& lobbyRoster = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+	std::map<EOS_ProductUserId, LobbyMember*>& lobbyRoster = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
 
 	for (Int i = 0; i < MAX_SLOTS; i++)
 	{
@@ -1110,7 +1115,7 @@ void InitWOLGameGadgets( void )
 
 			auto& plrElement = *std::next(lobbyRoster.begin(), i);
 
-			uName.translate(plrElement.second.m_strName);
+			uName.translate(plrElement.second->m_strName);
 			GadgetComboBoxAddEntry(comboBoxPlayer[i],uName,GameSpyColor[GSCOLOR_PLAYER_OWNER]);
 			GadgetComboBoxSetSelectedPos(comboBoxPlayer[0],0);
 		}
@@ -1129,8 +1134,7 @@ void InitWOLGameGadgets( void )
 		comboBoxColor[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxColorID[i] );
 		DEBUG_ASSERTCRASH(comboBoxColor[i], ("Could not find the comboBoxColor[%d]",i ));
 
-		// TODO_NGMP
-		//PopulateColorComboBox(i, comboBoxColor, theGameInfo);
+		PopulateColorComboBox(i, comboBoxColor, theGameInfo);
 		GadgetComboBoxSetSelectedPos(comboBoxColor[i], 0);
 		
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ComboBoxPlayerTemplate%d", i);
@@ -1138,16 +1142,14 @@ void InitWOLGameGadgets( void )
 		comboBoxPlayerTemplate[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxPlayerTemplateID[i] );
 		DEBUG_ASSERTCRASH(comboBoxPlayerTemplate[i], ("Could not find the comboBoxPlayerTemplate[%d]",i ));
 
-		// TODO_NGMP
-		//PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, theGameInfo, theGameInfo->getAllowObservers());
+		PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, theGameInfo, theGameInfo->getAllowObservers());
 
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ComboBoxTeam%d", i);
 		comboBoxTeamID[i] = TheNameKeyGenerator->nameToKey( tmpString );
 		comboBoxTeam[i] = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, comboBoxTeamID[i] );
 		DEBUG_ASSERTCRASH(comboBoxTeam[i], ("Could not find the comboBoxTeam[%d]",i ));
 
-		// TODO_NGMP
-		//PopulateTeamComboBox(i, comboBoxTeam, theGameInfo);
+		PopulateTeamComboBox(i, comboBoxTeam, theGameInfo);
 
 		tmpString.format("GameSpyGameOptionsMenu.wnd:ButtonAccept%d", i); 
 		buttonAcceptID[i] = TheNameKeyGenerator->nameToKey( tmpString );
@@ -2530,7 +2532,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 					{
 						handleTeamSelection(i);
 					}
-					else if( controlID == comboBoxPlayerID[i] && TheGameSpyInfo->amIHost() )
+					else if( controlID == comboBoxPlayerID[i] && NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost())
 					{
 						// We don't have anything that'll happen if we click on ourselves
 						if(i == myGame->getLocalSlotNum())
@@ -2542,6 +2544,8 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 						{
 							if( myGame->getSlot(i)->getState() == SLOT_PLAYER )
 							{
+								// TODO_NGMP: Support kick again
+								/*
 								PeerRequest req;
 								req.peerRequestType = PeerRequest::PEERREQUEST_UTMPLAYER;
 								req.UTM.isStagingRoom = TRUE;
@@ -2551,11 +2555,14 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 								req.id = "KICK/";
 								req.options = "true";
 								TheGameSpyPeerMessageQueue->addRequest(req);
+								*/
 
 								UnicodeString name = myGame->getSlot(i)->getName();
 								myGame->getSlot(i)->setState(SlotState(pos));
 								myGame->resetAccepted();
-								TheGameSpyInfo->setGameOptions();
+
+								// // TODO_NGMP
+								//TheGameSpyInfo->setGameOptions();
 								WOLDisplaySlotList();
 								//TheLAN->OnPlayerLeave(name);
 							}
@@ -2567,7 +2574,9 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 								myGame->resetAccepted();
 								if (wasAI ^ isAI)
 									PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, myGame, wasAI && myGame->getAllowObservers());
-								TheGameSpyInfo->setGameOptions();
+
+								// // TODO_NGMP
+								//TheGameSpyInfo->setGameOptions();
 								WOLDisplaySlotList();
 							}
 						}

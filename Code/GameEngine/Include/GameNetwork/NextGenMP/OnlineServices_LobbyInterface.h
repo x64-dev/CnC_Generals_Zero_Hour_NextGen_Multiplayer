@@ -103,7 +103,7 @@ public:
 			{
 				if (i == index)
 				{
-					return &kvPair.second;
+					return kvPair.second;
 				}
 
 				++i;
@@ -117,13 +117,13 @@ public:
 	{
 		if (m_mapMembers.contains(puid))
 		{
-			return &m_mapMembers[puid];
+			return m_mapMembers[puid];
 		}
 
 		return nullptr;
 	}
 
-	std::map<EOS_ProductUserId, LobbyMember>& GetMembersListForCurrentRoom()
+	std::map<EOS_ProductUserId, LobbyMember*>& GetMembersListForCurrentRoom()
 	{
 		NetworkLog("[NGMP] Refreshing network room roster");
 		return m_mapMembers;
@@ -181,5 +181,6 @@ private:
 
 	NGMPGame* m_pGameInst = nullptr;
 
-	std::map<EOS_ProductUserId, LobbyMember> m_mapMembers = std::map<EOS_ProductUserId, LobbyMember>();
+	// TODO_NGMP: Cleanup
+	std::map<EOS_ProductUserId, LobbyMember*> m_mapMembers = std::map<EOS_ProductUserId, LobbyMember*>();
 };

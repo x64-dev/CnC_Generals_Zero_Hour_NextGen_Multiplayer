@@ -215,12 +215,12 @@ void NetworkMesh::Tick()
 					}
 					else if (m_meshType == ENetworkMeshType::GAME_LOBBY)
 					{
-						std::map<EOS_ProductUserId, LobbyMember>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+						std::map<EOS_ProductUserId, LobbyMember*>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
 
 						if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
 						{
 							UnicodeString str;
-							str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID].m_strName.str(), chatPacket.GetMsg().c_str());
+							str.format(L"%hs: %hs", mapRoomMembers[outRemotePeerID]->m_strName.str(), chatPacket.GetMsg().c_str());
 							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_OnChatCallback(str);
 						}
 						else

@@ -500,6 +500,12 @@ void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetwor
 	{
 		m_RosterNeedsRefreshCallback();
 	}
+
+	// inform game instance too
+	if (TheNGMPGame != nullptr)
+	{
+		TheNGMPGame->UpdateSlotsFromCurrentLobby();
+	}
 }
 
 void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
@@ -546,7 +552,7 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 			// does the user already exist? if not, register the user
 			if (m_mapMembers.find(lobbyMember) == m_mapMembers.end())
 			{
-				m_mapMembers.emplace(lobbyMember, LobbyMember());
+				m_mapMembers.emplace(lobbyMember, new LobbyMember());
 
 				// new member, send them a hello!
 				// TODO_NGMP: More robust impl
@@ -563,12 +569,12 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 			if (rCopyMemberAttr != EOS_EResult::EOS_Success)
 			{
 				// Handle gracefully and fall back to stringified version of user id
-				m_mapMembers[lobbyMember].m_strName = AsciiString(szUserID);
+				m_mapMembers[lobbyMember]->m_strName = AsciiString(szUserID);
 				NetworkLog("[NGMP] Couldn't read display name\n");
 			}
 			else
 			{
-				m_mapMembers[lobbyMember].m_strName = attrDisplayName->Data->Value.AsUtf8;
+				m_mapMembers[lobbyMember]->m_strName = attrDisplayName->Data->Value.AsUtf8;
 			}
 
 		}

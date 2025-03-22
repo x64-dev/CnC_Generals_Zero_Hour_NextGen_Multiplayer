@@ -59,8 +59,11 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 		LobbyMember* pLobbyMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromIndex(i);
 		if (pLobbyMember != nullptr)
 		{
+			UnicodeString str;
+			str.translate(pLobbyMember->m_strName.str());
+
 			GameSlot* slot = getSlot(i);
-			((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, UnicodeString(L"TODO_NGMP"), 0);
+			((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, str, i);
 		}
 
 		// dont need to handle else here, we set it up upon lobby creation
@@ -84,6 +87,8 @@ NGMPGameSlot* NGMPGame::getGameSpySlot(Int index)
 void NGMPGame::init(void)
 {
 	GameInfo::init();
+
+	UpdateSlotsFromCurrentLobby();
 }
 
 void NGMPGame::setPingString(AsciiString pingStr)
@@ -118,7 +123,7 @@ Int NGMPGame::getLocalSlotNum(void) const
 	if (!m_inGame)
 		return -1;
 
-	AsciiString localName = "TODO_NGMP";
+	AsciiString localName = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetDisplayName();
 
 	for (Int i = 0; i < MAX_SLOTS; ++i)
 	{

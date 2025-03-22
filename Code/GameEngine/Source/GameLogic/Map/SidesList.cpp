@@ -88,6 +88,7 @@ void SidesInfo::init(const Dict* d)
 	m_pBuildList->deleteInstance();
 	m_pBuildList = NULL;
 	m_dict.clear();
+
 	if (m_scripts) 
 		m_scripts->deleteInstance();
 	m_scripts = NULL;
