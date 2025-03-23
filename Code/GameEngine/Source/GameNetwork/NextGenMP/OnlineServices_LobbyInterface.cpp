@@ -528,6 +528,11 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 
 	if (getLobbyHandlResult == EOS_EResult::EOS_Success)
 	{
+		// get owner
+		EOS_LobbyDetails_GetLobbyOwnerOptions getLobbyOwnerOpts;
+		getLobbyOwnerOpts.ApiVersion = EOS_LOBBYDETAILS_GETLOBBYOWNER_API_LATEST;
+		EOS_ProductUserId currentLobbyHost = EOS_LobbyDetails_GetLobbyOwner(LobbyInstHandle, &getLobbyOwnerOpts);
+
 		// get each member
 		EOS_LobbyDetails_GetMemberCountOptions optsMemberCount;
 		optsMemberCount.ApiVersion = EOS_LOBBYDETAILS_GETMEMBERCOUNT_API_LATEST;
@@ -581,6 +586,7 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 				m_mapMembers[lobbyMember]->m_strName = attrDisplayName->Data->Value.AsUtf8;
 			}
 
+			m_mapMembers[lobbyMember]->m_bIsHost = currentLobbyHost == lobbyMember;
 		}
 	}
 

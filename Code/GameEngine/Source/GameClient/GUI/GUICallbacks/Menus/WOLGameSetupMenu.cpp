@@ -916,7 +916,7 @@ static void StartPressed(void)
 	}
 	else if (allHaveMap)
 	{
-
+		// TODO_NGMP: today
 		GadgetListBoxAddEntryText(listboxGameSetupChat, TheGameText->fetch("GUI:NotifiedStartIntent"), GameSpyColor[GSCOLOR_DEFAULT], -1, -1);
 		PeerRequest req;
 		req.peerRequestType = PeerRequest::PEERREQUEST_UTMROOM;
@@ -1234,7 +1234,8 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	// register for roster events
 	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForRosterNeedsRefreshCallback([]()
 		{
-			// TODO_NGMP
+			WOLDisplaySlotList();
+			WOLDisplayGameOptions();
 		});
 
 	// TODO_NGMP
@@ -1344,15 +1345,34 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 	}
 	else
 	{
-		// TODO_NGMP
-		/*
 		OptionPreferences natPref;
 		CustomMatchPreferences customPref;
 		AsciiString options;
-		PeerRequest req;
+		//PeerRequest req;
 		UnicodeString uName = hostSlot->getName();
 		AsciiString aName;
 		aName.translate(uName);
+
+		// TODO_NGMP: Do this on join? and map change
+		AsciiString asciiMap = game->getMap();
+		asciiMap.toLower();
+
+		// TODO_NGMP: Sync map availability back to host, he needs it
+		std::map<AsciiString, MapMetaData>::iterator it = TheMapCache->find(asciiMap);
+		if (it != TheMapCache->end())
+		{
+			game->getSlot(game->getLocalSlotNum())->setMapAvailability(true);
+			game->setMapCRC(it->second.m_CRC);
+			game->setMapSize(it->second.m_filesize);
+		}
+		else
+		{
+			game->getSlot(game->getLocalSlotNum())->setMapAvailability(false);
+			game->setMapCRC(0);
+			game->setMapSize(0);
+		}
+
+		/*
 		req.peerRequestType = PeerRequest::PEERREQUEST_UTMPLAYER;
 		req.UTM.isStagingRoom = TRUE;
 		req.id = "REQ/";
@@ -1369,10 +1389,10 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 		options.format("Ping=%s", TheGameSpyInfo->getPingString().str());
 		req.options = options.str();
 		TheGameSpyPeerMessageQueue->addRequest(req);
+		*/
 
 		game->setMapCRC( game->getMapCRC() );		// force a recheck
 		game->setMapSize( game->getMapSize() ); // of if we have the map
-		*/
 
 		for (Int i = 0; i < MAX_SLOTS; ++i)
 		{
@@ -1390,6 +1410,9 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 		buttonStart->winEnable( FALSE );
 		buttonSelectMap->winEnable( FALSE );
 		initialAcceptEnable = FALSE;
+
+		WOLDisplaySlotList();
+		WOLDisplayGameOptions();
 	}
 
 	// Show the Menu
