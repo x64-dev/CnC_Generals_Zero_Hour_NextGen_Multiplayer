@@ -546,8 +546,8 @@ void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* comma
 
 	if (!IsWorldBuilder())
 	{
-		ImDrawData* drawData = ImGui::GetDrawData();
 		ImGui::Render();
+		ImDrawData* drawData = ImGui::GetDrawData();		
 		if (drawData)
 		{
 			PIXScopedEvent(commandList, 0ull, L"ImGUI");
