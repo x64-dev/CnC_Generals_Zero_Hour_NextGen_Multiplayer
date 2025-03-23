@@ -162,7 +162,7 @@ void EndGpuFrameTimer()
 		// Now calculate the GPU time in milliseconds
 		double deltaTicks = static_cast<double>(endTime - startTime);
 		double deltaSeconds = deltaTicks / static_cast<double>(g_GpuFrequency);
-		g_GpuTimeMs = deltaSeconds * 10000.0;
+		g_GpuTimeMs = deltaSeconds * 1000.0;
 	}
 	else
 	{
