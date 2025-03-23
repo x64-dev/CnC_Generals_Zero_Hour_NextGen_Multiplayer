@@ -537,6 +537,11 @@ void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* comma
 	if (IsUploadingTextureData)
 		return;
 
+	sceneRenderTarget->EndRender12(commandList, m_backBufferResources[0]);
+
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = m_backBufferRTV[0];
+	commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+
 	if (!IsWorldBuilder())
 	{
 		ImDrawData* drawData = ImGui::GetDrawData();
@@ -548,6 +553,12 @@ void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* comma
 			ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList);
 		}	
 	}
+
+
+	TransitionResource(commandList,
+		m_backBufferResources[0],
+		D3D12_RESOURCE_STATE_RENDER_TARGET,
+		D3D12_RESOURCE_STATE_PRESENT);
 }
 
 bool DX8Wrapper::Create_Device(void)
