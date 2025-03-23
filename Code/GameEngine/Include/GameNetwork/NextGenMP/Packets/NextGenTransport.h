@@ -4,6 +4,8 @@
 #include "GameNetwork/udp.h"
 #include "GameNetwork/NetworkDefs.h"
 #include "../../Transport.h"
+#include "../NGMP_include.h"
+#include "eos_p2p_types.h"
 
 // it to be a MemoryPoolObject (srj)
 class NextGenTransport : public Transport //: public MemoryPoolObject
@@ -27,6 +29,14 @@ public:
 
 	inline Bool allowBroadcasts(Bool val) override { return false; }
 
+	void SetSocket(EOS_P2P_SocketId sock)
+	{
+		m_bHasSocket = true;
+		m_SockID = sock;
+	}
+
 private:
+	EOS_P2P_SocketId m_SockID;
+	bool m_bHasSocket = false;
 	
 };

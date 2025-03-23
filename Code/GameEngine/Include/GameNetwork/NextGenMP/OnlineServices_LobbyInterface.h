@@ -43,6 +43,9 @@ public:
 		m_transport = new NextGenTransport;
 		m_transport->reset();
 		m_transport->init(0, 0); // we dont care about ip/port anymore
+
+		// reuse our socket from here, it already has all the connections formed, its safer + quicker
+		m_transport->SetSocket(m_pLobbyMesh->GetSocketID());
 	}
 
 	NextGenTransport* GetGameTransport()

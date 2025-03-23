@@ -641,6 +641,9 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 				}
 			}
 
+			// PUID
+			m_mapMembers[lobbyMember]->m_userID = lobbyMember;
+
 			// READY FLAG
 			{
 				EOS_Lobby_Attribute* attrDisplayName = nullptr;

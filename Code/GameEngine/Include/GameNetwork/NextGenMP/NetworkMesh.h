@@ -24,6 +24,8 @@ public:
 
 	ENetworkMeshType GetMeshType() const { return m_meshType; }
 
+	EOS_P2P_SocketId GetSocketID() const { return m_SockID; }
+
 private:
 	EOS_P2P_SocketId m_SockID;
 

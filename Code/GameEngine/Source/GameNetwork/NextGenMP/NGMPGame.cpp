@@ -67,19 +67,19 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			UnicodeString str;
 			str.translate(pLobbyMember->m_strName.str());
 
-			GameSlot* slot = nullptr;
+			NGMPGameSlot* slot = nullptr;
 			if (pLobbyMember->m_bIsHost)
 			{
-				slot = getSlot(0);
+				slot = (NGMPGameSlot*)getSlot(0);
 				// NOTE: Internally generals uses 'local ip' to detect which user is local... we dont have an IP, so just use player index for ip
-				((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, str, 0);
+				slot->setState(SLOT_PLAYER, str, 0);
 			}
 			else
 			{
-				slot = getSlot(realInsertPos);
+				slot = (NGMPGameSlot*)getSlot(realInsertPos);
 
 				// NOTE: Internally generals uses 'local ip' to detect which user is local... we dont have an IP, so just use player index for ip
-				((NGMPGameSlot*)slot)->setState(SLOT_PLAYER, str, realInsertPos);
+				slot->setState(SLOT_PLAYER, str, realInsertPos);
 
 				++realInsertPos;
 				// TODO_NGMP: Check player lists are synced across game with > 2 clients
@@ -94,6 +94,9 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			{
 				slot->unAccept();
 			}
+
+			// store EOS ID
+			slot->m_userID = pLobbyMember->m_userID;
 			
 		}
 

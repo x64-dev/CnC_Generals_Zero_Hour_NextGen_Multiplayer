@@ -1,5 +1,6 @@
 #pragma once
-#pragma once
+
+#include "../../../../Libraries/EpicOnlineServices/Include/eos_common.h"
 
 enum ENetworkConnectionState
 {
@@ -11,7 +12,8 @@ enum ENetworkConnectionState
 enum ENetworkMeshType : uint8_t
 {
 	NETWORK_ROOM = 0,
-	GAME_LOBBY = 1
+	GAME_LOBBY = 1,
+	GAME_TRANSPORT = 2
 };
 
 class NetworkMemberBase
@@ -22,4 +24,5 @@ public:
 	bool m_bIsHost = false;
 
 	bool m_bIsReady = false;
+	EOS_ProductUserId m_userID = nullptr;
 };

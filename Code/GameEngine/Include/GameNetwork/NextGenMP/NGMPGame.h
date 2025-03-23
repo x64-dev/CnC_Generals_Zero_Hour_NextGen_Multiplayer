@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameInfo.h"
+#include "eos_common.h"
 
 class NGMPGameSlot : public GameSlot
 {
@@ -24,6 +25,8 @@ public:
 	void setPingString(AsciiString pingStr) { m_pingStr = pingStr; }
 	inline AsciiString getPingString(void) const { return m_pingStr; }
 	inline Int getPingAsInt(void) const { return m_pingInt; }
+
+	EOS_ProductUserId m_userID = nullptr;
 
 protected:
 	Int m_profileID;
