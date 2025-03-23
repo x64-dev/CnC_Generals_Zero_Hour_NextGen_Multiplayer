@@ -1930,15 +1930,15 @@ void GameLogic::logicMessageDispatcher( GameMessage *msg, void *userData )
 
 				//UnsignedInt oldCRC = m_cachedCRCs[msg->getPlayerIndex()];
 				UnsignedInt newCRC = msg->getArgument(0)->integer;
-				//DEBUG_LOG(("Recieved CRC of %8.8X from %ls on frame %d\n", newCRC,
-					//thisPlayer->getPlayerDisplayName().str(), m_frame));
+				DEBUG_LOG(("Recieved CRC of %8.8X from %ls on frame %d\n", newCRC,
+					thisPlayer->getPlayerDisplayName().str(), m_frame));
 				m_cachedCRCs[msg->getPlayerIndex()] = newCRC; // to mask problem: = (oldCRC < newCRC)?newCRC:oldCRC;
 			}
 			else if (TheRecorder && TheRecorder->getMode() == RECORDERMODETYPE_PLAYBACK)
 			{
 				UnsignedInt newCRC = msg->getArgument(0)->integer;
-				//DEBUG_LOG(("Saw CRC of %X from player %d.  Our CRC is %X.  Arg count is %d\n",
-					//newCRC, thisPlayer->getPlayerIndex(), getCRC(), msg->getArgumentCount()));
+				DEBUG_LOG(("Saw CRC of %X from player %d.  Our CRC is %X.  Arg count is %d\n",
+					newCRC, thisPlayer->getPlayerIndex(), getCRC(), msg->getArgumentCount()));
 
 				TheRecorder->handleCRCMessage(newCRC, thisPlayer->getPlayerIndex(), (msg->getArgument(1)->boolean));
 			}
