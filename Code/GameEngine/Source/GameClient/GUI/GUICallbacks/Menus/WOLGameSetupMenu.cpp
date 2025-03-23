@@ -1238,6 +1238,36 @@ void WOLGameSetupMenuInit( WindowLayout *layout, void *userData )
 			WOLDisplayGameOptions();
 		});
 
+	NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->RegisterForGameStartPacket([]()
+		{
+			NGMPGame* myGame = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame();
+			if (!myGame || !myGame->isInGame())
+				return;
+
+			if (!TheNGMPGame)
+				return;
+
+			// NOTE: Host already did this logic
+			if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->IsHost())
+			{
+				return;
+			}
+
+			// TODO_NGMP
+			//SendStatsToOtherPlayers(TheNGMPGame);
+
+			// we've started, there's no going back
+			// i.e. disable the back button.
+			buttonBack->winEnable(FALSE);
+			GameWindow* buttonBuddy = TheWindowManager->winGetWindowFromId(NULL, NAMEKEY("GameSpyGameOptionsMenu.wnd:ButtonCommunicator"));
+			if (buttonBuddy)
+				buttonBuddy->winEnable(FALSE);
+			GameSpyCloseOverlay(GSOVERLAY_BUDDY);
+
+			*TheNGMPGame = *myGame;
+			TheNGMPGame->startGame(0);
+		});
+
 	// TODO_NGMP
 	/*
 	if (TheNGMPGame && TheNGMPGame->isGameInProgress())
@@ -2680,6 +2710,11 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 						{
 							localSlot->setAccept();
 						}
+
+						// force a refresh of our local lobby properties to sync to remote players
+						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
+
+						/*
 						UnicodeString hostName = game->getSlot(0)->getName();
 						AsciiString asciiName;
 						asciiName.translate(hostName);
@@ -2692,6 +2727,7 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 						TheGameSpyPeerMessageQueue->addRequest(req);
 						//peerSetReady( PEER, PEERTrue );
 						WOLDisplaySlotList();
+						*/
 					}
 				}
 				else

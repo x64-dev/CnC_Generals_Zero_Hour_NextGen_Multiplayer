@@ -3,6 +3,7 @@
 #include "NGMP_include.h"
 #include "OnlineServices_RoomsInterface.h"
 #include "../GameInfo.h"
+#include <chrono>
 
 class LobbyMember : public NetworkMemberBase
 {
@@ -86,11 +87,30 @@ public:
 		m_RosterNeedsRefreshCallback = cb;
 	}
 
+	// TODO_NGMP: Better support for packet callbacks
+	std::function<void()> m_callbackStartGamePacket = nullptr;
+	void RegisterForGameStartPacket(std::function<void()> cb)
+	{
+		m_callbackStartGamePacket = cb;
+	}
+
+	// periodically force refresh the lobby for data accuracy
+	int64_t m_lastForceRefresh = 0;
 	void Tick()
 	{
 		if (m_pLobbyMesh != nullptr)
 		{
 			m_pLobbyMesh->Tick();
+		}
+
+		if (!m_strCurrentLobbyID.empty())
+		{	
+			int64_t currTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+			if ((currTime - m_lastForceRefresh) > 5000)
+			{
+				UpdateRoomDataCache();
+				m_lastForceRefresh = currTime;
+			}
 		}
 	}
 
@@ -136,6 +156,11 @@ public:
 	}
 
 	void ApplyLocalUserPropertiesToCurrentNetworkRoom();
+
+	void SetCurrentLobby_AcceptState(bool bAccepted)
+	{
+
+	}
 
 	bool IsHost();
 	void SetCurrentLobbyID(const char* szLobbyID) { m_strCurrentLobbyID = std::string(szLobbyID); }

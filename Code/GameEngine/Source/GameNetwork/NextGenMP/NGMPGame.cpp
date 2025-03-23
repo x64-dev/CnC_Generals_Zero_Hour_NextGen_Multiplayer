@@ -85,6 +85,15 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 				// TODO_NGMP: Check player lists are synced across game with > 2 clients
 			}
 
+			// ready flag
+			if (pLobbyMember->m_bIsReady)
+			{
+				slot->setAccept();
+			}
+			else
+			{
+				slot->unAccept();
+			}
 			
 		}
 
@@ -222,6 +231,7 @@ void NGMPGame::startGame(Int gameID)
 	else
 		//#endif defined(_DEBUG) || defined(_INTERNAL)
 	{
+		launchGame();
 		// TODO_NGMP: We dont care about this anymore? we're already connected
 		//TheNAT = NEW NAT();
 		//TheNAT->attachSlotList(m_slot, getLocalSlotNum(), m_localIP);

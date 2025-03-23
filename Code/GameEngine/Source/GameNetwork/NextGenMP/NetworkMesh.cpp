@@ -171,6 +171,8 @@ void NetworkMesh::Tick()
 				{
 					// TODO_NGMP: Ignore if not host sending
 					NetworkLog("[NGMP]: Got start game packet from %s", szEOSUserID);
+
+					NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_callbackStartGamePacket();
 				}
 			}
 			else if (m_meshType == ENetworkMeshType::NETWORK_ROOM || m_meshType == ENetworkMeshType::GAME_LOBBY)// NetRoom AND Game Mesh / Lobby packets

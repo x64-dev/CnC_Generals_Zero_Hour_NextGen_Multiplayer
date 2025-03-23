@@ -463,21 +463,57 @@ void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetwor
 		NetworkLog("[NGMP] Failed to EOS_Lobby_UpdateLobbyModification!\n");
 	}
 
-	EOS_Lobby_AttributeData AttributeData;
-	AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
-	AttributeData.Key = "DISPLAY_NAME";
-	AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
-	AttributeData.Value.AsUtf8 = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetDisplayName().str();
-
-	EOS_LobbyModification_AddMemberAttributeOptions addMemberAttrOpts;
-	addMemberAttrOpts.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;
-	addMemberAttrOpts.Attribute = &AttributeData;
-	addMemberAttrOpts.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
-	EOS_EResult r = EOS_LobbyModification_AddMemberAttribute(LobbyModification, &addMemberAttrOpts);
-	if (r != EOS_EResult::EOS_Success)
+	// DISPLAY NAME
 	{
-		// TODO_NGMP: Error
-		NetworkLog("[NGMP] Failed to set our local user properties in net room!\n");
+		EOS_Lobby_AttributeData AttributeData;
+		AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+		AttributeData.Key = "DISPLAY_NAME";
+		AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
+		AttributeData.Value.AsUtf8 = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetDisplayName().str();
+
+		EOS_LobbyModification_AddMemberAttributeOptions addMemberAttrOpts;
+		addMemberAttrOpts.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;
+		addMemberAttrOpts.Attribute = &AttributeData;
+		addMemberAttrOpts.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+		EOS_EResult r = EOS_LobbyModification_AddMemberAttribute(LobbyModification, &addMemberAttrOpts);
+		if (r != EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Error
+			NetworkLog("[NGMP] Failed to set our local user properties in net room!\n");
+		}
+	}
+
+	GameSlot* pLocalSlot = TheNGMPGame->getSlot(TheNGMPGame->getLocalSlotNum());
+	// READY FLAG
+	{
+		EOS_Lobby_AttributeData AttributeData;
+		AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
+		AttributeData.Key = "READY_ACCEPTED";
+		AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_BOOLEAN;
+
+		if (IsHost())
+		{
+			AttributeData.Value.AsBool = true;
+		}
+		else if (pLocalSlot == nullptr)
+		{
+			AttributeData.Value.AsBool = false;
+		}
+		else
+		{
+			pLocalSlot->isAccepted();
+		}
+
+		EOS_LobbyModification_AddMemberAttributeOptions addMemberAttrOpts;
+		addMemberAttrOpts.ApiVersion = EOS_LOBBYMODIFICATION_ADDMEMBERATTRIBUTE_API_LATEST;
+		addMemberAttrOpts.Attribute = &AttributeData;
+		addMemberAttrOpts.Visibility = EOS_ELobbyAttributeVisibility::EOS_LAT_PUBLIC;
+		EOS_EResult r = EOS_LobbyModification_AddMemberAttribute(LobbyModification, &addMemberAttrOpts);
+		if (r != EOS_EResult::EOS_Success)
+		{
+			// TODO_NGMP: Error
+			NetworkLog("[NGMP] Failed to set our local user properties in net room!\n");
+		}
 	}
 
 	// now update lobby
@@ -494,21 +530,36 @@ void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetwor
 			{
 				NetworkLog("[NGMP] Lobby Update failed!\n");
 			}
+
+			// inform game instance too
+			if (TheNGMPGame != nullptr)
+			{
+				TheNGMPGame->UpdateSlotsFromCurrentLobby();
+			}
+
+			if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_RosterNeedsRefreshCallback != nullptr)
+			{
+				NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_RosterNeedsRefreshCallback();
+			}
 		});
 
 	// join the network mesh too
-	m_pLobbyMesh = new NetworkMesh(ENetworkMeshType::GAME_LOBBY);
-	m_pLobbyMesh->ConnectToMesh(m_strCurrentLobbyID.c_str());
+	if (m_pLobbyMesh == nullptr)
+	{
+		m_pLobbyMesh = new NetworkMesh(ENetworkMeshType::GAME_LOBBY);
+		m_pLobbyMesh->ConnectToMesh(m_strCurrentLobbyID.c_str());
+	}
+
+	// inform game instance too
+	// TODO_NGMP: replace all these with UpdateRoomDataCache
+	if (TheNGMPGame != nullptr)
+	{
+		TheNGMPGame->UpdateSlotsFromCurrentLobby();
+	}
 
 	if (m_RosterNeedsRefreshCallback != nullptr)
 	{
 		m_RosterNeedsRefreshCallback();
-	}
-
-	// inform game instance too
-	if (TheNGMPGame != nullptr)
-	{
-		TheNGMPGame->UpdateSlotsFromCurrentLobby();
 	}
 }
 
@@ -569,21 +620,46 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 			}
 
 			// read member data we care about
-			EOS_Lobby_Attribute* attrDisplayName = nullptr;
-			EOS_LobbyDetails_CopyMemberAttributeByKeyOptions copyAttrOpts;
-			copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-			copyAttrOpts.AttrKey = "DISPLAY_NAME";
-			copyAttrOpts.TargetUserId = lobbyMember;
-			EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyMemberAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attrDisplayName);
-			if (rCopyMemberAttr != EOS_EResult::EOS_Success)
+
+			// DISPLAY NAME
 			{
-				// Handle gracefully and fall back to stringified version of user id
-				m_mapMembers[lobbyMember]->m_strName = AsciiString(szUserID);
-				NetworkLog("[NGMP] Couldn't read display name\n");
+				EOS_Lobby_Attribute* attrDisplayName = nullptr;
+				EOS_LobbyDetails_CopyMemberAttributeByKeyOptions copyAttrOpts;
+				copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+				copyAttrOpts.AttrKey = "DISPLAY_NAME";
+				copyAttrOpts.TargetUserId = lobbyMember;
+				EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyMemberAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attrDisplayName);
+				if (rCopyMemberAttr != EOS_EResult::EOS_Success)
+				{
+					// Handle gracefully and fall back to stringified version of user id
+					m_mapMembers[lobbyMember]->m_strName = AsciiString(szUserID);
+					NetworkLog("[NGMP] Couldn't read display name\n");
+				}
+				else
+				{
+					m_mapMembers[lobbyMember]->m_strName = attrDisplayName->Data->Value.AsUtf8;
+				}
 			}
-			else
+
+			// READY FLAG
 			{
-				m_mapMembers[lobbyMember]->m_strName = attrDisplayName->Data->Value.AsUtf8;
+				EOS_Lobby_Attribute* attrDisplayName = nullptr;
+				EOS_LobbyDetails_CopyMemberAttributeByKeyOptions copyAttrOpts;
+				copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
+				copyAttrOpts.AttrKey = "READY_ACCEPTED";
+				copyAttrOpts.TargetUserId = lobbyMember;
+				EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyMemberAttributeByKey(LobbyInstHandle, &copyAttrOpts, &attrDisplayName);
+				if (rCopyMemberAttr != EOS_EResult::EOS_Success)
+				{
+					// Handle gracefully and fall back to stringified version of user id
+					m_mapMembers[lobbyMember]->m_bIsReady = false;
+					NetworkLog("[NGMP] Couldn't read ready flag\n");
+				}
+				else
+				{
+					// host is already ready in generals
+					m_mapMembers[lobbyMember]->m_bIsReady = attrDisplayName->Data->Value.AsBool;
+				}
 			}
 
 			m_mapMembers[lobbyMember]->m_bIsHost = currentLobbyHost == lobbyMember;
