@@ -73,6 +73,12 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 				slot = (NGMPGameSlot*)getSlot(0);
 				// NOTE: Internally generals uses 'local ip' to detect which user is local... we dont have an IP, so just use player index for ip
 				slot->setState(SLOT_PLAYER, str, 0);
+
+				// TODO_NGMP_URGENT: not yet impl, but being out of sync causes mismatch
+				slot->setColor(0);
+				slot->setTeamNumber(0);
+				slot->setStartPos(0);
+				slot->setPlayerTemplate(2);
 			}
 			else
 			{
@@ -81,6 +87,12 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 				// NOTE: Internally generals uses 'local ip' to detect which user is local... we dont have an IP, so just use player index for ip
 				slot->setState(SLOT_PLAYER, str, realInsertPos);
 
+
+				// TODO_NGMP_URGENT: not yet impl, but being out of sync causes mismatch
+				slot->setColor(1);
+				slot->setTeamNumber(1);
+				slot->setStartPos(1);
+				slot->setPlayerTemplate(2);
 				++realInsertPos;
 				// TODO_NGMP: Check player lists are synced across game with > 2 clients
 			}
@@ -98,6 +110,8 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			// store EOS ID
 			slot->m_userID = pLobbyMember->m_userID;
 			
+			
+
 		}
 
 		// dont need to handle else here, we set it up upon lobby creation
@@ -332,8 +346,10 @@ void NGMPGame::launchGame(void)
 
 	// Set the random seed
 	// TODO_NGMP: revisit this
-	InitGameLogicRandom(getSeed());
-	DEBUG_LOG(("InitGameLogicRandom( %d )\n", getSeed()));
+	//InitGameLogicRandom(getSeed());
+	//DEBUG_LOG(("InitGameLogicRandom( %d )\n", getSeed()));
+	InitGameLogicRandom(123);
+	DEBUG_LOG(("InitGameLogicRandom( %d )\n", 123));
 
 	// mark us as "Loading" in the buddy list
 	// TODO_NGMP

@@ -45,9 +45,9 @@ static const Int MaxStrings = 64000;
 static char DebugStrings[MaxStrings][1024];
 static Int nextDebugString = 0;
 static Int numDebugStrings = 0;
-//static char DumpStrings[MaxStrings][1024];
-//static Int nextDumpString = 0;
-//static Int numDumpStrings = 0;
+static char DumpStrings[MaxStrings][1024];
+static Int nextDumpString = 0;
+static Int numDumpStrings = 0;
 
 #define IS_FRAME_OK_TO_LOG TheGameLogic->isInGame() && !TheGameLogic->isInShellGame() && !TheDebugIgnoreSyncErrors && \
 	TheCRCFirstFrameToLog >= 0 && TheCRCFirstFrameToLog <= TheGameLogic->getFrame() \
@@ -202,7 +202,6 @@ void addCRCGenLine(const char *fmt, ...)
 
 void addCRCDumpLine(const char *fmt, ...)
 {
-	/*
 	va_list va;
 	va_start( va, fmt );
 	_vsnprintf(DumpStrings[nextDumpString], 1024, fmt, va );
@@ -213,7 +212,6 @@ void addCRCDumpLine(const char *fmt, ...)
 	++numDumpStrings;
 	if (nextDumpString == MaxStrings)
 		nextDumpString = 0;
-		*/
 }
 
 void dumpVector3(const Vector3 *v, AsciiString name, AsciiString fname, Int line)
