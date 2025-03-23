@@ -764,17 +764,8 @@ bool DX8Wrapper::RecreateGBuffer(void) {
 		sceneRenderTarget = NULL;
 	}
 
-	HRESULT hr = D3DInterface->CheckDeviceMultiSampleType(
-		D3DADAPTER_DEFAULT,
-		D3DDEVTYPE_HAL,
-		D3DFMT_X8R8G8B8,
-		TRUE,                       // TRUE if windowed
-		D3DMULTISAMPLE_4_SAMPLES,
-		&msQuality
-	);
-
 	sceneRenderTarget = new wwRenderTarget();
-	sceneRenderTarget->Initialize(ResolutionWidth, ResolutionHeight, D3DFMT_X8R8G8B8, D3DFMT_D24S8, D3DMULTISAMPLE_4_SAMPLES, 0);
+	sceneRenderTarget->Initialize(ResolutionWidth, ResolutionHeight, D3DFMT_X8R8G8B8, D3DFMT_D24S8, D3DMULTISAMPLE_NONE, 0);
 
 	return true;
 }
@@ -1026,8 +1017,10 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 	Render2DClass::Set_Screen_Resolution( RectClass( 0, 0, ResolutionWidth, ResolutionHeight ) );
 
 	if (bits != -1)		BitDepth = bits;
-	if (windowed != -1)	IsWindowed = (windowed != 0);
-	DX8Wrapper_IsWindowed = IsWindowed;
+// jmarshall - hack for fullscreen flicker, there is some setup here that is legacy that i need to fix. 
+	if (windowed != -1)	IsWindowed = TRUE;
+	DX8Wrapper_IsWindowed = TRUE;
+// jmarshall - hack for fullscreen flicker, there is some setup here that is legacy that i need to fix. 
 
 	WWDEBUG_SAY(("Attempting Set_Render_Device: name: %s (%s:%s), width: %d, height: %d, windowed: %d\n",
 		_RenderDeviceNameTable[CurRenderDevice],_RenderDeviceDescriptionTable[CurRenderDevice].Get_Driver_Name(),

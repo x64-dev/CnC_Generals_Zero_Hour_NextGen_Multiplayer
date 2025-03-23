@@ -184,10 +184,12 @@ bool wwRenderTarget::EndRender()
 
 bool wwRenderTarget::EndRender12(ID3D12GraphicsCommandList* cmdList, ID3D12Resource* pBackBuffer12)
 {
+	m_pDevice = DX8Wrapper::D3DDevice;
+
 	// If we don't have the device or the D3D12 renderer, no work to do
 	if (!m_pDevice || !DX8Wrapper::D3D12Renderer)
 		return false;
-
+#if 0
 	// If not using MSAA, then nothing special needed for color or depth resolves in D3D12.
 	if (!m_bUseMSAA)
 		return true;
@@ -228,7 +230,7 @@ bool wwRenderTarget::EndRender12(ID3D12GraphicsCommandList* cmdList, ID3D12Resou
 			D3D12_RESOURCE_STATE_RESOLVE_DEST,
 			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 	}
-#if 0
+
 	if (m_pDS_MSAA_12 && m_pDS_Resolved_12)
 	{
 		// Same pattern of transitions. Keep in mind some hardware/drivers do not allow direct depth resolves.
