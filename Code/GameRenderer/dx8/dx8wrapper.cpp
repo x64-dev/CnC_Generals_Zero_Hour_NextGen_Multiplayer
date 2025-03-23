@@ -96,6 +96,8 @@ static HWND						_Hwnd															= NULL;
 bool								DX8Wrapper::IsInitted									= false;	
 bool								DX8Wrapper::_EnableTriangleDraw						= true;
 
+int								DX8Wrapper::g_frameDrawCalls = 0;
+int								DX8Wrapper::g_frameNumTexturesCreated = 0;
 int								DX8Wrapper::CurRenderDevice							= -1;
 int								DX8Wrapper::ResolutionWidth							= DEFAULT_RESOLUTION_WIDTH;
 int								DX8Wrapper::ResolutionHeight							= DEFAULT_RESOLUTION_HEIGHT;
@@ -558,7 +560,7 @@ void DX8Wrapper::D3D9on12RenderWithGraphicsList(ID3D12GraphicsCommandList* comma
 	TransitionResource(commandList,
 		m_backBufferResources[0],
 		D3D12_RESOURCE_STATE_RENDER_TARGET,
-		D3D12_RESOURCE_STATE_PRESENT);
+		D3D12_RESOURCE_STATE_PRESENT);	
 }
 
 bool DX8Wrapper::Create_Device(void)
@@ -1758,6 +1760,9 @@ void DX8Wrapper::Begin_Scene(void)
 		0
 	);
 
+	g_frameDrawCalls = 0;
+	g_frameNumTexturesCreated = 0;
+
 	DX8WebBrowser::Update();
 }
 
@@ -1765,7 +1770,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 {
 	DX8_THREAD_ASSERT();
 
-	D3DDevice->EndScene();	
+	D3DDevice->EndScene();		
 
 	sceneRenderTarget->EndRender();	
 
@@ -1773,8 +1778,16 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 
 	if (flip_frames) {
 		DX8_Assert();
+		IsUploadingTextureData = true;
+		StartPresentCpuFrameTimer();
+		IsUploadingTextureData = false;
+
 		HRESULT hr=DX8Wrapper::D3DDevice->Present(NULL, NULL, NULL, NULL);
+
+		IsUploadingTextureData = true;
+		EndPresentCpuFrameTimer();
 		EndGpuFrameTimer();
+		IsUploadingTextureData = false;
 		number_of_DX8_calls++;
 
 		if (SUCCEEDED(hr)) {
@@ -1788,7 +1801,7 @@ void DX8Wrapper::End_Scene(bool flip_frames)
 
 		// If the device was lost we need to check for cooperative level and possibly reset the device
 		DX8_ErrorCode(hr);
-	}
+	}	
 
 	// Each frame, release all of the buffers and textures.
 	Set_Vertex_Buffer(NULL);
@@ -2456,6 +2469,8 @@ HRESULT DX8Wrapper::CreateTextureDDS(
 
 HRESULT DX8Wrapper::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool, wwDeviceTexture** ppTexture, HANDLE* pSharedHandle) {
 	IDirect3DTexture9* textureHandle;
+
+	g_frameNumTexturesCreated++;
 
 	HRESULT hr = D3DDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, &textureHandle, pSharedHandle);
 

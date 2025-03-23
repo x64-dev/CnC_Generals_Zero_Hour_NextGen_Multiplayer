@@ -468,6 +468,7 @@ public:
 	}
 
 	static HRESULT DrawIndexedPrimitive(D3DPRIMITIVETYPE type, INT BaseVertexIndex, UINT MinVertexIndex, UINT NumVertices, UINT startIndex, UINT primCount) {
+		g_frameDrawCalls++;
 		return D3DDevice->DrawIndexedPrimitive(type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
 	}
 
@@ -476,6 +477,7 @@ public:
 	}
 
 	static HRESULT DrawPrimitiveUP(D3DPRIMITIVETYPE PrimitiveType, UINT PrimitiveCount, CONST void* pVertexStreamZeroData, UINT VertexStreamZeroStride) {
+		g_frameDrawCalls++;
 		return D3DDevice->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData, VertexStreamZeroStride);
 	}
 
@@ -580,6 +582,16 @@ public:
 	static HRESULT SetPixelShader(IDirect3DPixelShader9* pShader) {
 		return D3DDevice->SetPixelShader(pShader);
 	}
+
+	static int GetCurrentDrawCallCount()
+	{
+		return g_frameDrawCalls;
+	}
+
+	static int GetNumTexturesCreated()
+	{
+		return g_frameNumTexturesCreated;
+	}
 	
 protected:
 	static int numDeviceVertexShaders;
@@ -594,6 +606,8 @@ protected:
 	static void Reset_Statistics();
 	static void Enumerate_Devices();
 	static void Set_Default_Global_Render_States(void);
+
+	static void CreateFullscreenQuadVB12();
 
 	/*
 	** Device Selection Code.  
@@ -654,6 +668,8 @@ protected:
 
 	static bool								_EnableTriangleDraw;
 
+	static int								g_frameDrawCalls;
+	static int								g_frameNumTexturesCreated;
 	static int								CurRenderDevice;
 	static int								ResolutionWidth;
 	static int								ResolutionHeight;
@@ -1221,5 +1237,7 @@ WWINLINE RenderStateStruct& RenderStateStruct::operator= (const RenderStateStruc
 
 void StartGpuFrameTimer();
 void EndGpuFrameTimer();
+void StartPresentCpuFrameTimer();
+void EndPresentCpuFrameTimer();
 
 #endif
