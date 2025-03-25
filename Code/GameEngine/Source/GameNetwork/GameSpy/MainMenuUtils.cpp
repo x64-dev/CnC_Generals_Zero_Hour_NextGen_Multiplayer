@@ -226,10 +226,6 @@ static void startOnline( void )
 
 	// NGMP
 	bool bQuickLogin = false;
-
-	NGMP_OnlineServicesManager::GetInstance()->Init();
-	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->BeginLogin();
-
 	if (bQuickLogin)
 	{
 		TheShell->push(AsciiString("Menus/GameSpyLoginQuick.wnd"));
@@ -238,6 +234,10 @@ static void startOnline( void )
 	{
 		TheShell->push(AsciiString("Menus/GameSpyLoginProfile.wnd"));
 	}
+
+	NGMP_OnlineServicesManager::GetInstance()->Init();
+
+	
 	
 	/*
 	DEBUG_ASSERTCRASH( !TheGameSpyBuddyMessageQueue, ("TheGameSpyBuddyMessageQueue exists!") );

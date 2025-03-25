@@ -2,6 +2,7 @@
 
 #include "NGMP_include.h"
 
+class HTTPManager;
 
 class NGMP_OnlineServices_AuthInterface;
 class NGMP_OnlineServices_LobbyInterface;
@@ -10,6 +11,7 @@ class NGMP_OnlineServices_RoomsInterface;
 #pragma comment(lib, "EOSSDK-Win64-Shipping.lib")
 #pragma comment(lib, "steam_api64.lib")
 #pragma comment(lib, "sdkencryptedappticket64.lib")
+#pragma comment(lib, "libcurl.lib")
 
 class NetworkRoom
 {
@@ -79,6 +81,8 @@ public:
 			m_pRoomInterface = nullptr;
 		}
 	}
+
+	HTTPManager* GetHTTPManager() const { return m_pHTTPManager; }
 
 	NGMP_OnlineServices_AuthInterface* GetAuthInterface() const { return m_pAuthInterface; }
 	NGMP_OnlineServices_LobbyInterface* GetLobbyInterface() const { return m_pLobbyInterface; }
@@ -151,4 +155,6 @@ private:
 	NGMP_OnlineServices_AuthInterface* m_pAuthInterface = nullptr;
 	NGMP_OnlineServices_LobbyInterface* m_pLobbyInterface = nullptr;
 	NGMP_OnlineServices_RoomsInterface* m_pRoomInterface = nullptr;
+
+	HTTPManager* m_pHTTPManager = nullptr;
 };

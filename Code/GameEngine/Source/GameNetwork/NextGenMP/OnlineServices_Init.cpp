@@ -1,4 +1,5 @@
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include "GameNetwork/NextGenMP/HTTP/HTTPManager.h"
 
 NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager = nullptr;
 
@@ -168,6 +169,14 @@ void NGMP_OnlineServicesManager::Init()
 		m_pAuthInterface = new NGMP_OnlineServices_AuthInterface();
 		m_pLobbyInterface = new NGMP_OnlineServices_LobbyInterface();
 		m_pRoomInterface = new NGMP_OnlineServices_RoomsInterface();
+
+		m_pHTTPManager = new HTTPManager();
+
+		std::map<std::string, std::string> mapHeaders;
+// 		m_pHTTPManager->SendGETRequest("https://www.playgenerals.online/login/check.php?code=abcdd", mapHeaders, [](bool bSuccess, int statusCode, std::string strBody)
+// 			{
+// 				NetworkLog("PageBody: %s", strBody.c_str());
+// 			}, nullptr);
 	}
 }
 
@@ -176,6 +185,16 @@ void NGMP_OnlineServicesManager::Init()
 void NGMP_OnlineServicesManager::Tick()
 {
 	SteamAPI_RunCallbacks();
+
+	if (m_pHTTPManager != nullptr)
+	{
+		m_pHTTPManager->MainThreadTick();
+	}
+
+	if (m_pRoomInterface != nullptr)
+	{
+		m_pAuthInterface->Tick();
+	}
 
 	if (m_EOSPlatformHandle != nullptr)
 	{

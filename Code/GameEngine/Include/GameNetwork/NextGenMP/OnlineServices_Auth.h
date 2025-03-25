@@ -8,13 +8,12 @@ public:
 	{
 		return AsciiString(m_strDisplayName.c_str());
 	}
-	STEAM_CALLBACK(NGMP_OnlineServices_AuthInterface, OnAuthSessionTicketResponse, GetTicketForWebApiResponse_t);
 
-	EOS_ProductUserId GetEOSUser() const { return m_EOSUserID; }
+	EOS_ProductUserId GetEOSUser() const { return nullptr; }
 
 	void BeginLogin();
 
-	void OnEpicLoginComplete(EOS_ProductUserId userID);
+	void Tick();
 
 	void RegisterForLoginCallback(std::function<void(bool)> callback)
 	{
@@ -23,12 +22,16 @@ public:
 
 private:
 	void LoginAsSecondaryDevAccount();
-	void LoginToEpic(bool bUsingDevTool);
+
+	void SaveCredentials(const char* szToken);
+	bool DoCredentialsExist();
+	std::string GetCredentials();
 
 private:
-	EOS_ProductUserId m_EOSUserID = nullptr;
+	bool m_bWaitingLogin = false;
+	std::string m_strCode;
+	std::int64_t m_lastCheckCode = -1;
 
-	std::vector<uint8> m_vecSteamAuthSessionTicket;
 	std::string m_strDisplayName = "NO_USER";
 	std::vector<std::function<void(bool)>> m_vecLogin_PendingCallbacks = std::vector<std::function<void(bool)>>();
 };

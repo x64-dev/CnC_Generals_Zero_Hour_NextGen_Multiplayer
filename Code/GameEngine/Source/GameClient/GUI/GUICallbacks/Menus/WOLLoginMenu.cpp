@@ -435,6 +435,7 @@ void WOLLoginMenuInit( WindowLayout *layout, void *userData )
 
 	// NGMP: Register for login callback
 	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->RegisterForLoginCallback(NGMP_WOLLoginMenu_LoginCallback);
+	NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->BeginLogin();
 
 
 	/*

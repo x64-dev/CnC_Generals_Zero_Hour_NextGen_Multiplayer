@@ -498,6 +498,8 @@ add_library(GameEngine STATIC
     Source/GameLogic/System/RankInfo.cpp
     Source/GameNetwork/NextGenMP/NGMP_Helpers.cpp
     Source/GameNetwork/NextGenMP/NGMPGame.cpp
+    Source/GameNetwork/NextGenMP/HTTP/HTTPManager.cpp
+    Source/GameNetwork/NextGenMP/HTTP/HTTPRequest.cpp
     Source/GameNetwork/NextGenMP/NetworkMesh.cpp
     Source/GameNetwork/NextGenMP/OnlineServices_Init.cpp
     Source/GameNetwork/NextGenMP/OnlineServices_Auth.cpp
@@ -570,6 +572,7 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/Source/WWVegas/WWLib
     ../Libraries/DX90SDK/Include
     ../Libraries/EpicOnlineServices/Include
+    ../Libraries/libcurl/Include
     ../Libraries/Steamworks/Include
     Include
     ../Libraries/EpicOnlineServices/Include
