@@ -22,8 +22,10 @@ struct AuthResponse
 {
 	EAuthResponseResult result;
 	std::string token;
+	int64_t user_id = -1;
+	std::string display_name = "";
 
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(AuthResponse, result, token)
+	NLOHMANN_DEFINE_TYPE_INTRUSIVE(AuthResponse, result, token, user_id, display_name)
 };
 
 std::string generateRandomString() {
@@ -62,6 +64,11 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 				m_bWaitingLogin = false;
 
 				SaveCredentials(authResp.token.c_str());
+
+				// store data locally
+				m_strToken = authResp.token;
+				m_userID = authResp.user_id;
+				m_strDisplayName = authResp.display_name;
 
 				// trigger callback
 				for (auto cb : m_vecLogin_PendingCallbacks)
@@ -146,6 +153,11 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 						m_bWaitingLogin = false;
 
 						SaveCredentials(authResp.token.c_str());
+
+						// store data locally
+						m_strToken = authResp.token;
+						m_userID = authResp.user_id;
+						m_strDisplayName = authResp.display_name;
 
 						// trigger callback
 						for (auto cb : m_vecLogin_PendingCallbacks)

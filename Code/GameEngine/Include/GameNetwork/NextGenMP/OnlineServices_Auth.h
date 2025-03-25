@@ -32,6 +32,9 @@ private:
 	std::string m_strCode;
 	std::int64_t m_lastCheckCode = -1;
 
+	std::string m_strToken = std::string();
+	int64_t m_userID = -1;
 	std::string m_strDisplayName = "NO_USER";
+
 	std::vector<std::function<void(bool)>> m_vecLogin_PendingCallbacks = std::vector<std::function<void(bool)>>();
 };
