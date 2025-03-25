@@ -46,77 +46,118 @@ std::string generateRandomString() {
 
 void NGMP_OnlineServices_AuthInterface::BeginLogin()
 {
-	if (DoCredentialsExist())
-	{
-		std::string strToken = GetCredentials();
-
-		// login
-		std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
-		std::map<std::string, std::string> mapHeaders;
-		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
-		{
-			nlohmann::json jsonObject = nlohmann::json::parse(strBody);
-			AuthResponse authResp = jsonObject.get<AuthResponse>();
-
-			if (authResp.result == EAuthResponseResult::SUCCEEDED)
-			{
-				NetworkLog("LOGIN: Logged in");
-				m_bWaitingLogin = false;
-
-				SaveCredentials(authResp.token.c_str());
-
-				// store data locally
-				m_strToken = authResp.token;
-				m_userID = authResp.user_id;
-				m_strDisplayName = authResp.display_name;
-
-				// trigger callback
-				for (auto cb : m_vecLogin_PendingCallbacks)
-				{
-					// TODO_NGMP: Support failure
-					cb(true);
-				}
-				m_vecLogin_PendingCallbacks.clear();
-			}
-			else if (authResp.result == EAuthResponseResult::FAILED)
-			{
-				NetworkLog("LOGIN: Login failed, trying to re-auth");
-
-				// do normal login flow, token is bad or expired etc
-				m_bWaitingLogin = true;
-				m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
-				m_strCode = generateRandomString();
-
-				std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
-
-				ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
-			}
-
-		}, nullptr);
-	}
-	else
-	{
-		m_bWaitingLogin = true;
-		m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
-		m_strCode = generateRandomString();
-
-		std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
-
-		ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
-	}
-	
-	return;
-
-	// if it's not the first instance of Generals... use the dev account
-	/*
 	static HANDLE MPMutex = NULL;
 	MPMutex = CreateMutex(NULL, FALSE, "685EAFF2-3216-4265-FFFF-251C5F4B82F3");
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
+		// use dev account
 		NetworkLog("[NGMP] Secondary instance detected... using dev account for testing purposes");
-		LoginAsSecondaryDevAccount();
+		// login
+		std::string strToken = "ILOVECODE";
+		std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
+		std::map<std::string, std::string> mapHeaders;
+		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			{
+				nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+				AuthResponse authResp = jsonObject.get<AuthResponse>();
+
+				if (authResp.result == EAuthResponseResult::SUCCEEDED)
+				{
+					NetworkLog("LOGIN: Logged in");
+					m_bWaitingLogin = false;
+
+					SaveCredentials(authResp.token.c_str());
+
+					// store data locally
+					m_strToken = authResp.token;
+					m_userID = authResp.user_id;
+					m_strDisplayName = authResp.display_name;
+
+					// trigger callback
+					for (auto cb : m_vecLogin_PendingCallbacks)
+					{
+						// TODO_NGMP: Support failure
+						cb(true);
+					}
+					m_vecLogin_PendingCallbacks.clear();
+				}
+				else if (authResp.result == EAuthResponseResult::FAILED)
+				{
+					NetworkLog("LOGIN: Login failed, trying to re-auth");
+
+					// do normal login flow, token is bad or expired etc
+					m_bWaitingLogin = true;
+					m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+					m_strCode = generateRandomString();
+
+					std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+
+					ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
+				}
+
+			}, nullptr);
 	}
-	*/
+	else
+	{
+		if (DoCredentialsExist())
+		{
+			std::string strToken = GetCredentials();
+
+			// login
+			std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
+			std::map<std::string, std::string> mapHeaders;
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+				{
+					nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+					AuthResponse authResp = jsonObject.get<AuthResponse>();
+
+					if (authResp.result == EAuthResponseResult::SUCCEEDED)
+					{
+						NetworkLog("LOGIN: Logged in");
+						m_bWaitingLogin = false;
+
+						SaveCredentials(authResp.token.c_str());
+
+						// store data locally
+						m_strToken = authResp.token;
+						m_userID = authResp.user_id;
+						m_strDisplayName = authResp.display_name;
+
+						// trigger callback
+						for (auto cb : m_vecLogin_PendingCallbacks)
+						{
+							// TODO_NGMP: Support failure
+							cb(true);
+						}
+						m_vecLogin_PendingCallbacks.clear();
+					}
+					else if (authResp.result == EAuthResponseResult::FAILED)
+					{
+						NetworkLog("LOGIN: Login failed, trying to re-auth");
+
+						// do normal login flow, token is bad or expired etc
+						m_bWaitingLogin = true;
+						m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+						m_strCode = generateRandomString();
+
+						std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+
+						ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
+					}
+
+				}, nullptr);
+		}
+		else
+		{
+			m_bWaitingLogin = true;
+			m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+			m_strCode = generateRandomString();
+
+			std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+
+			ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
+		}
+	}
 }
 
 void NGMP_OnlineServices_AuthInterface::Tick()
