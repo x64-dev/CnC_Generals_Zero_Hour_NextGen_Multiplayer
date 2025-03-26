@@ -20,3 +20,5 @@
 
 // TODO_NGMP: Investigate further and remove
 #define NGMP_HACK_USE_COUPLED_FRAME_LOGIC 1
+
+#define NATPMP_STATICLIB 1

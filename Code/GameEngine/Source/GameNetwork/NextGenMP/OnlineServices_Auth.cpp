@@ -2,13 +2,14 @@
 
 #include "GameNetwork/NextGenMP/HTTP/HTTPManager.h"
 #include "GameNetwork/NextGenMP/HTTP/HTTPRequest.h"
+#include "GameNetwork/NextGenMP/json.hpp"
 #include <shellapi.h>
 #include <algorithm>
 #include <chrono>
 #include <random>
 #include <windows.h>
 #include <wincred.h>
-#include "GameNetwork/NextGenMP/json.hpp"
+#include "GameNetwork/GameSpyOverlay.h"
 
 enum class EAuthResponseResult : int
 {
@@ -56,7 +57,7 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 		std::string strToken = "ILOVECODE";
 		std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
 		std::map<std::string, std::string> mapHeaders;
-		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 			{
 				nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 				AuthResponse authResp = jsonObject.get<AuthResponse>();
@@ -74,12 +75,7 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 					m_strDisplayName = authResp.display_name;
 
 					// trigger callback
-					for (auto cb : m_vecLogin_PendingCallbacks)
-					{
-						// TODO_NGMP: Support failure
-						cb(true);
-					}
-					m_vecLogin_PendingCallbacks.clear();
+					OnLoginComplete(true);
 				}
 				else if (authResp.result == EAuthResponseResult::FAILED)
 				{
@@ -106,9 +102,9 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 			// login
 			std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 				{
-					nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+					nlohmann::json jsonObject = nlohmann::json::parse(strBody, nullptr, false, true);
 					AuthResponse authResp = jsonObject.get<AuthResponse>();
 
 					if (authResp.result == EAuthResponseResult::SUCCEEDED)
@@ -124,12 +120,7 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 						m_strDisplayName = authResp.display_name;
 
 						// trigger callback
-						for (auto cb : m_vecLogin_PendingCallbacks)
-						{
-							// TODO_NGMP: Support failure
-							cb(true);
-						}
-						m_vecLogin_PendingCallbacks.clear();
+						OnLoginComplete(true);
 					}
 					else if (authResp.result == EAuthResponseResult::FAILED)
 					{
@@ -174,7 +165,7 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 			// check again
 			std::string strURI = std::format("https://www.playgenerals.online/login/check.php?code={}", m_strCode.c_str());
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strURI.c_str(), mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 			{
 					nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 					AuthResponse authResp = jsonObject.get<AuthResponse>();
@@ -201,12 +192,7 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 						m_strDisplayName = authResp.display_name;
 
 						// trigger callback
-						for (auto cb : m_vecLogin_PendingCallbacks)
-						{
-							// TODO_NGMP: Support failure
-							cb(true);
-						}
-						m_vecLogin_PendingCallbacks.clear();
+						OnLoginComplete(true);
 					}
 					else if (authResp.result == EAuthResponseResult::FAILED)
 					{
@@ -214,16 +200,43 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 						m_bWaitingLogin = false;
 
 						// trigger callback
-						for (auto cb : m_vecLogin_PendingCallbacks)
-						{
-							// TODO_NGMP: Support failure
-							cb(false);
-						}
-						m_vecLogin_PendingCallbacks.clear();
+						OnLoginComplete(false);
 					}
 				
 			}, nullptr);
 		}
+	}
+}
+
+void NGMP_OnlineServices_AuthInterface::OnLoginComplete(bool bSuccess)
+{
+	if (bSuccess)
+	{
+		// move on to network capabilities section
+		ClearGSMessageBoxes();
+		GSMessageBoxNoButtons(UnicodeString(L"Network"), UnicodeString(L"Determining local network capabilities..."));
+
+		// NOTE: This is partially blocking and partially async...
+		NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().DetermineLocalNetworkCapabilities([this]()
+			{
+				ClearGSMessageBoxes();
+
+				for (auto cb : m_vecLogin_PendingCallbacks)
+				{
+					// TODO_NGMP: Support failure
+					cb(true);
+				}
+				m_vecLogin_PendingCallbacks.clear();
+			});
+	}
+	else
+	{
+		for (auto cb : m_vecLogin_PendingCallbacks)
+		{
+			// TODO_NGMP: Support failure
+			cb(false);
+		}
+		m_vecLogin_PendingCallbacks.clear();
 	}
 }
 

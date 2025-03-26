@@ -498,6 +498,10 @@ add_library(GameEngine STATIC
     Source/GameLogic/System/RankInfo.cpp
     Source/GameNetwork/NextGenMP/NGMP_Helpers.cpp
     Source/GameNetwork/NextGenMP/NGMPGame.cpp
+    Source/GameNetwork/NextGenMP/PortMapper.cpp
+    Source/GameNetwork/NextGenMP/Vendor/libnatpmp/natpmp.c
+    Source/GameNetwork/NextGenMP/Vendor/libnatpmp/wingettimeofday.c
+    Source/GameNetwork/NextGenMP/Vendor/libnatpmp/getgateway.c
     Source/GameNetwork/NextGenMP/HTTP/HTTPManager.cpp
     Source/GameNetwork/NextGenMP/HTTP/HTTPRequest.cpp
     Source/GameNetwork/NextGenMP/NetworkMesh.cpp
@@ -573,6 +577,8 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/DX90SDK/Include
     ../Libraries/EpicOnlineServices/Include
     ../Libraries/libcurl/Include
+    ../Libraries/miniupnpc/Include
+    ../Libraries/libnatpmp/Include
     ../Libraries/Steamworks/Include
     Include
     ../Libraries/EpicOnlineServices/Include

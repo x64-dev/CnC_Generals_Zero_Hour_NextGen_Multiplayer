@@ -90,6 +90,10 @@ GameWindow *MessageBoxCancel(UnicodeString titleString,UnicodeString bodyString,
 	return TheWindowManager->gogoMessageBox(-1,-1,-1,-1, MSG_BOX_CANCEL, titleString, bodyString, NULL, NULL, NULL, cancelCallback);
 }
 
+GameWindow* MessageBoxNoButtons(UnicodeString titleString, UnicodeString bodyString)///< convenience function for displaying a Message box with Cancel button
+{
+	return TheWindowManager->gogoMessageBox(-1, -1, -1, -1, 0, titleString, bodyString, NULL, NULL, NULL, NULL);
+}
 
 // PRIVATE DATA ///////////////////////////////////////////////////////////////////////////////////
 

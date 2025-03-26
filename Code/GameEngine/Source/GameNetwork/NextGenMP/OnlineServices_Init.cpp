@@ -3,7 +3,6 @@
 
 NGMP_OnlineServicesManager* NGMP_OnlineServicesManager::m_pOnlineServicesManager = nullptr;
 
-
 NGMP_OnlineServicesManager::NGMP_OnlineServicesManager()
 {
 	NetworkLog("[NGMP] Init");
@@ -13,13 +12,6 @@ NGMP_OnlineServicesManager::NGMP_OnlineServicesManager()
 
 void NGMP_OnlineServicesManager::Init()
 {
-	bool bSteamInit = SteamAPI_Init();
-
-	if (!bSteamInit)
-	{
-		DevConsole.AddLog("[NGMP] Steam initialization failed");
-	}
-
 	// Init EOS SDK
 	EOS_InitializeOptions SDKOptions = {};
 	SDKOptions.ApiVersion = EOS_INITIALIZE_API_LATEST;
@@ -184,8 +176,6 @@ void NGMP_OnlineServicesManager::Init()
 
 void NGMP_OnlineServicesManager::Tick()
 {
-	SteamAPI_RunCallbacks();
-
 	if (m_pHTTPManager != nullptr)
 	{
 		m_pHTTPManager->MainThreadTick();

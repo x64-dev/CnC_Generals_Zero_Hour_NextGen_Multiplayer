@@ -19,18 +19,18 @@ HTTPManager::HTTPManager() noexcept
 	}
 }
 
-void HTTPManager::SendGETRequest(const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback)
+void HTTPManager::SendGETRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback)
 {
-	HTTPRequest* pRequest = PlatformCreateRequest(EHTTPVerb::GET, szURI, inHeaders, completionCallback, progressCallback);
+	HTTPRequest* pRequest = PlatformCreateRequest(EHTTPVerb::GET, protover, szURI, inHeaders, completionCallback, progressCallback);
 
 	m_mutex.lock();
 	m_vecRequestsPendingstart.push_back(pRequest);
 	m_mutex.unlock();
 }
 
-void HTTPManager::SendPOSTRequest(const char* szURI, std::map<std::string, std::string>& inHeaders, const char* szPostData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback)
+void HTTPManager::SendPOSTRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, const char* szPostData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback)
 {
-	HTTPRequest* pRequest = PlatformCreateRequest(EHTTPVerb::POST, szURI, inHeaders, completionCallback, progressCallback);
+	HTTPRequest* pRequest = PlatformCreateRequest(EHTTPVerb::POST, protover, szURI, inHeaders, completionCallback, progressCallback);
 	pRequest->SetPostData(szPostData);
 
 	m_mutex.lock();
@@ -112,9 +112,9 @@ char* HTTPManager::PlatformEscapeString(const char* szString, int len)
 	return pEsc;
 }
 
-HTTPRequest* HTTPManager::PlatformCreateRequest(EHTTPVerb httpVerb, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback /*= nullptr*/) noexcept
+HTTPRequest* HTTPManager::PlatformCreateRequest(EHTTPVerb httpVerb, EIPProtocolVersion protover, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback /*= nullptr*/) noexcept
 {
-	HTTPRequest* pNewRequest = new HTTPRequest(httpVerb, szURI, inHeaders, completionCallback, progressCallback);
+	HTTPRequest* pNewRequest = new HTTPRequest(httpVerb, protover, szURI, inHeaders, completionCallback, progressCallback);
 	return pNewRequest;
 }
 

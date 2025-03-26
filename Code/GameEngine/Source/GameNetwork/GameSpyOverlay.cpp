@@ -150,6 +150,12 @@ void GSMessageBoxYesNo(UnicodeString title, UnicodeString message, GameWinMsgBox
 	cancelFunc = newNoFunc;
 }
 
+void GSMessageBoxNoButtons(UnicodeString title, UnicodeString message)
+{
+	ClearGSMessageBoxes();
+	messageBoxWindow = MessageBoxNoButtons(title, message);
+}
+
 /**
 	* If the screen transitions underneath the dialog box, we
 	* need to raise it to keep it visible.

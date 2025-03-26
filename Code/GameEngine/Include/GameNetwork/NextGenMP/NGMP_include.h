@@ -56,8 +56,5 @@ void NetworkLog(const char* fmt, ...);
 #include <Windows/eos_windows.h>
 #include <eos_integratedplatform_types.h>
 
-// Steam
-#include <steam_api.h>
-
 // Devconsole
 #include "../Console/Console.h"

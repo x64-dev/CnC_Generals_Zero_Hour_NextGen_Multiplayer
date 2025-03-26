@@ -12,6 +12,13 @@ enum class EHTTPVerb
 	POST
 };
 
+enum class EIPProtocolVersion
+{
+	DONT_CARE = 0,
+	FORCE_IPV4 = 4,
+	FORCE_IPV6 = 6
+};
+
 class HTTPManager
 {
 public:
@@ -20,8 +27,8 @@ public:
 
 	void MainThreadTick();
 
-	void SendGETRequest(const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
-	void SendPOSTRequest(const char* szURI, std::map<std::string, std::string>& inHeaders, const char* szPostData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
+	void SendGETRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
+	void SendPOSTRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, const char* szPostData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
 
 	void Shutdown();
 
@@ -32,7 +39,7 @@ public:
 
 	CURLM* GetMultiHandle() { return m_pCurl; }
 private:
-	HTTPRequest* PlatformCreateRequest(EHTTPVerb htpVerb, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback,
+	HTTPRequest* PlatformCreateRequest(EHTTPVerb htpVerb, EIPProtocolVersion protover, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback,
 		std::function<void(size_t bytesReceived)> progressCallback = nullptr) noexcept;
 
 	void PlatformThreadedTick_PreLock();

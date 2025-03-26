@@ -11,12 +11,13 @@ size_t WriteMemoryCallback(void* contents, size_t sizePerByte, size_t numBytes, 
 	return trueNumBytes;
 }
 
-HTTPRequest::HTTPRequest(EHTTPVerb httpVerb, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback,
+HTTPRequest::HTTPRequest(EHTTPVerb httpVerb, EIPProtocolVersion protover, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback,
 	std::function<void(size_t bytesReceived)> progressCallback /*= nullptr*/) noexcept
 {
 	m_pCURL = curl_easy_init();
 
 	m_httpVerb = httpVerb;
+	m_protover = protover;
 	m_strURI = szURI;
 	m_completionCallback = completionCallback;
 
@@ -53,7 +54,7 @@ void HTTPRequest::StartRequest()
 	m_bIsComplete = false;
 
 	// 1MB buffer at first, will resize
-	m_pBuffer = (uint8*)malloc(g_initialBufSize);
+	m_pBuffer = (uint8_t*)malloc(g_initialBufSize);
 	memset(m_pBuffer, 0, g_initialBufSize);
 
 	m_currentBufSize = g_initialBufSize;
@@ -75,7 +76,7 @@ void HTTPRequest::OnResponsePartialWrite(std::uint8_t* pBuffer, size_t numBytes)
 		m_currentBufSize = m_currentBufSize + g_initialBufSize;
 
 		// realloc with an additional 1MB
-		m_pBuffer = (uint8*)realloc(m_pBuffer, m_currentBufSize);
+		m_pBuffer = (uint8_t*)realloc(m_pBuffer, m_currentBufSize);
 
 		// memset new 1mb
 		memset(m_pBuffer + m_currentBufSize_Used, 0, m_currentBufSize - m_currentBufSize_Used);
@@ -134,7 +135,20 @@ void HTTPRequest::PlatformStartRequest()
 		curl_easy_setopt(m_pCURL, CURLOPT_WRITEDATA, (void*)this);
 		curl_easy_setopt(m_pCURL, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 		curl_easy_setopt(m_pCURL, CURLOPT_USERAGENT, "GeneralsOnline/1.0");
-		curl_easy_setopt(m_pCURL, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
+		if (m_protover == EIPProtocolVersion::DONT_CARE)
+		{
+			curl_easy_setopt(m_pCURL, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_WHATEVER);
+		}
+		else if (m_protover == EIPProtocolVersion::FORCE_IPV4)
+		{
+			curl_easy_setopt(m_pCURL, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+		}
+		else if (m_protover == EIPProtocolVersion::FORCE_IPV6)
+		{
+			curl_easy_setopt(m_pCURL, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6);
+		}
+		
 
 		struct curl_slist* headers = NULL;
 		for (auto& kvPair : m_mapHeaders)

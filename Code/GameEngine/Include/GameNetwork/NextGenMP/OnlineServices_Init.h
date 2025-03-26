@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NGMP_include.h"
+#include "PortMapper.h"
 
 class HTTPManager;
 
@@ -9,8 +10,6 @@ class NGMP_OnlineServices_LobbyInterface;
 class NGMP_OnlineServices_RoomsInterface;
 
 #pragma comment(lib, "EOSSDK-Win64-Shipping.lib")
-#pragma comment(lib, "steam_api64.lib")
-#pragma comment(lib, "sdkencryptedappticket64.lib")
 #pragma comment(lib, "libcurl.lib")
 
 class NetworkRoom
@@ -96,7 +95,7 @@ public:
 		return m_EOSPlatformHandle;
 	}
 
-	
+	PortMapper& GetPortMapper() { return m_PortMapper; }
 
 	std::vector<NetworkRoom> GetGroupRooms()
 	{
@@ -155,6 +154,7 @@ private:
 	NGMP_OnlineServices_AuthInterface* m_pAuthInterface = nullptr;
 	NGMP_OnlineServices_LobbyInterface* m_pLobbyInterface = nullptr;
 	NGMP_OnlineServices_RoomsInterface* m_pRoomInterface = nullptr;
+	PortMapper m_PortMapper;
 
 	HTTPManager* m_pHTTPManager = nullptr;
 };

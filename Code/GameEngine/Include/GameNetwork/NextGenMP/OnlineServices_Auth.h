@@ -15,6 +15,8 @@ public:
 
 	void Tick();
 
+	void OnLoginComplete(bool bSuccess);
+
 	void RegisterForLoginCallback(std::function<void(bool)> callback)
 	{
 		m_vecLogin_PendingCallbacks.push_back(callback);

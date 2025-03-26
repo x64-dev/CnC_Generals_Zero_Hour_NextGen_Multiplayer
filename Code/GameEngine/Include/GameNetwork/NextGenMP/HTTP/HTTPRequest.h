@@ -6,11 +6,12 @@
 #include <functional>
 
 enum class EHTTPVerb;
+enum class EIPProtocolVersion;
 
 class HTTPRequest
 {
 public:
-	HTTPRequest(EHTTPVerb httpVerb, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)>
+	HTTPRequest(EHTTPVerb httpVerb, EIPProtocolVersion protover, const char* szURI, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)>
 		progressCallback = nullptr) noexcept;
 	~HTTPRequest();
 
@@ -57,6 +58,8 @@ private:
 	std::string m_strResponse;
 
 	EHTTPVerb m_httpVerb;
+
+	EIPProtocolVersion m_protover;
 
 	std::string m_strURI;
 	std::string m_strPostData;
