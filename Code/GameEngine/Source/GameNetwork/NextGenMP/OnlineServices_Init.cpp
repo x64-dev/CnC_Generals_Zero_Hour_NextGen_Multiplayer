@@ -163,12 +163,6 @@ void NGMP_OnlineServicesManager::Init()
 		m_pRoomInterface = new NGMP_OnlineServices_RoomsInterface();
 
 		m_pHTTPManager = new HTTPManager();
-
-		std::map<std::string, std::string> mapHeaders;
-// 		m_pHTTPManager->SendGETRequest("https://www.playgenerals.online/login/check.php?code=abcdd", mapHeaders, [](bool bSuccess, int statusCode, std::string strBody)
-// 			{
-// 				NetworkLog("PageBody: %s", strBody.c_str());
-// 			}, nullptr);
 	}
 }
 

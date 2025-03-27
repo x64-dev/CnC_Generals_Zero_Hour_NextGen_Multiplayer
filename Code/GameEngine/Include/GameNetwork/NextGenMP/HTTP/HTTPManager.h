@@ -5,6 +5,9 @@
 #include <vector>
 #include <mutex>
 #include <thread>
+#include <winhttp.h>
+
+#pragma comment(lib, "winhttp.lib")
 
 enum class EHTTPVerb
 {
@@ -36,6 +39,40 @@ public:
 
 	char* PlatformEscapeString(const char* szString, int len);
 
+	bool IsProxyEnabled() const { return m_bProxyEnabled; }
+
+	bool DeterminePlatformProxySettings()
+	{
+		WINHTTP_CURRENT_USER_IE_PROXY_CONFIG pProxyConfig;
+		WinHttpGetIEProxyConfigForCurrentUser(&pProxyConfig);
+
+		if (pProxyConfig.lpszProxy != nullptr)
+		{
+			LPWSTR ws = pProxyConfig.lpszProxy;
+			std::string strFullProxy;
+			strFullProxy.reserve(wcslen(ws));
+			for (; *ws; ws++)
+				strFullProxy += (char)*ws;
+
+			int ipStart = strFullProxy.find("=") + 1;
+			int ipEnd = strFullProxy.find(":", ipStart);
+
+			m_strProxyAddr = strFullProxy.substr(ipStart, ipEnd - ipStart);
+
+			int portStart = ipEnd + 1;
+			int portEnd = strFullProxy.find(";", portStart);
+			std::string strPort = strFullProxy.substr(portStart, portEnd - portStart);
+
+			m_proxyPort = (uint16_t)atoi(strPort.c_str());
+		}
+
+		m_bProxyEnabled = pProxyConfig.lpszProxy != nullptr;
+		return m_bProxyEnabled;
+	}
+
+	std::string& GetProxyAddress() { return m_strProxyAddr; }
+	uint16_t GetProxyPort() const { return m_proxyPort; }
+
 
 	CURLM* GetMultiHandle() { return m_pCurl; }
 private:
@@ -47,6 +84,10 @@ private:
 
 private:
 	CURLM* m_pCurl = nullptr;
+
+	bool m_bProxyEnabled = false;
+	std::string m_strProxyAddr;
+	uint16_t m_proxyPort;
 
 	std::thread* m_backgroundThread = nullptr;
 

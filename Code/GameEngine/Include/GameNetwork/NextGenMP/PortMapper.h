@@ -44,12 +44,12 @@ public:
 
 	ECapabilityState HasIPv6()
 	{
-		return m_capIPv4;
+		return m_capIPv6;
 	}
 
 	ECapabilityState HasIPv4()
 	{
-		return m_capIPv6;
+		return m_capIPv4;
 	}
 
 	bool HasPortOpen() const { return m_bHasPortOpenedViaUPNP || m_bHasPortOpenedViaNATPMP; }

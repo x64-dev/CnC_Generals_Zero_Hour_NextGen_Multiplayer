@@ -67,34 +67,54 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 
 	// check IPv4
 	std::map<std::string, std::string> mapHeaders;
-	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://www.playgenerals.online/login/ipcap.php", EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://playgenerals.online/cloud/env:dev:DetermineIPCapabilities", EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 		{
-			if (bSuccess)
+			if (bSuccess && statusCode != 0)
 			{
 				nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 				IPCapsResult result = jsonObject.get<IPCapsResult>();
 
+				// NOTE: 6 can still be reported here... if we ONLY have ipV6 and no IPV4... proxies etc can cause / alter behavior.
 				m_capIPv4 = (result.ipversion == 4) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
+
+				if (result.ipversion == 6)
+				{
+					m_capIPv6 = ECapabilityState::SUPPORTED;
+				}
 			}
 			else
 			{
-				m_capIPv4 = ECapabilityState::UNSUPPORTED;
+				// only if it didnt resolve earlier
+				if (m_capIPv4 != ECapabilityState::SUPPORTED)
+				{
+					m_capIPv4 = ECapabilityState::UNSUPPORTED;
+				}
 			}
 
 			// now check IPv6
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://www.playgenerals.online/login/ipcap.php", EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://playgenerals.online/cloud/dev/env:dev:DetermineIPCapabilities", EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 				{
-					if (bSuccess)
+					if (bSuccess && statusCode != 0)
 					{
 						nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 						IPCapsResult result = jsonObject.get<IPCapsResult>();
 
 						m_capIPv6 = (result.ipversion == 6) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
+
+						// NOTE: 4 can still be reported here... if we ONLY have ipV4 and no IPV6... proxies etc can cause / alter behavior.
+						if (result.ipversion == 4)
+						{
+							m_capIPv4 = ECapabilityState::SUPPORTED;
+						}
 					}
 					else
 					{
-						m_capIPv6 = ECapabilityState::UNSUPPORTED;
+						// only if it didnt resolve earlier
+						if (m_capIPv6 != ECapabilityState::SUPPORTED)
+						{
+							m_capIPv6 = ECapabilityState::UNSUPPORTED;
+						}
 					}
 
 					// now call back

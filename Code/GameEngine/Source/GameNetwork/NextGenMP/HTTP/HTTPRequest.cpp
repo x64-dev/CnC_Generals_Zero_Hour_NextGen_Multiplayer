@@ -168,6 +168,12 @@ void HTTPRequest::PlatformStartRequest()
 			}
 		}
 
+		if (pHTTPManager->IsProxyEnabled())
+		{
+			curl_easy_setopt(m_pCURL, CURLOPT_PROXY, pHTTPManager->GetProxyAddress().c_str());
+			curl_easy_setopt(m_pCURL, CURLOPT_PROXYPORT, pHTTPManager->GetProxyPort());
+		}
+
 		curl_easy_setopt(m_pCURL, CURLOPT_VERBOSE, 1);
 		curl_easy_setopt(m_pCURL, CURLOPT_SSL_VERIFYPEER, 0);
 

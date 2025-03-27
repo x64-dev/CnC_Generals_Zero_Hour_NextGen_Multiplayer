@@ -7,6 +7,8 @@ HTTPManager::HTTPManager() noexcept
 	// HTTP background thread
 	m_backgroundThread = new std::thread(&HTTPManager::BackgroundThreadRun, this);
 
+	m_bProxyEnabled = DeterminePlatformProxySettings();
+
 	if (IsDebuggerPresent())
 	{
 // 		DWORD ThreadId = ::GetThreadId(static_cast<HANDLE>(m_backgroundThread->native_handle()));

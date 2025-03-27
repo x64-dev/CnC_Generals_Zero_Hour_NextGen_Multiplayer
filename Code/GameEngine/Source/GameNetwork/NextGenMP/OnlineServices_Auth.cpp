@@ -55,9 +55,14 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 		NetworkLog("[NGMP] Secondary instance detected... using dev account for testing purposes");
 		// login
 		std::string strToken = "ILOVECODE";
-		std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
+		std::string strLoginURI = "https://playgenerals.online/cloud/env:dev:LoginWithToken";
 		std::map<std::string, std::string> mapHeaders;
-		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+
+		nlohmann::json j;
+		j["token"] = strToken.c_str();
+		std::string strPostData = j.dump();
+
+		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPOSTRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, strPostData.c_str(), [=](bool bSuccess, int statusCode, std::string strBody)
 			{
 				nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 				AuthResponse authResp = jsonObject.get<AuthResponse>();
@@ -100,9 +105,14 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 			std::string strToken = GetCredentials();
 
 			// login
-			std::string strLoginURI = std::format("https://www.playgenerals.online/login/do_login.php?token={}", strToken.c_str());
+			std::string strLoginURI = "https://playgenerals.online/cloud/env:dev:LoginWithToken";
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+
+			nlohmann::json j;
+			j["token"] = strToken.c_str();
+			std::string strPostData = j.dump();
+
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPOSTRequest(strLoginURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, strPostData.c_str(), [=](bool bSuccess, int statusCode, std::string strBody)
 				{
 					nlohmann::json jsonObject = nlohmann::json::parse(strBody, nullptr, false, true);
 					AuthResponse authResp = jsonObject.get<AuthResponse>();
