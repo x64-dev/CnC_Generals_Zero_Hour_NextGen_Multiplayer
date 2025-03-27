@@ -43,7 +43,6 @@ if(MSVC)
     set(GNG_COMPILE_OPTIONS
         /nologo # Hide compiler copyright notice
         /W1     # Warnings level 1 (TODO Increase it as we fix such warnnings)
-	/MP	# Multi processor compilation
     )
     set(GNG_LINK_OPTIONS
         /NOLOGO # Hide linker copyright notice
