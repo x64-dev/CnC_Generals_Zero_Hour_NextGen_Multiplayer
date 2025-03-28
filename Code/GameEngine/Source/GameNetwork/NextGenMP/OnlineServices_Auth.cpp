@@ -173,9 +173,14 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 			m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
 
 			// check again
-			std::string strURI = std::format("https://www.playgenerals.online/login/check.php?code={}", m_strCode.c_str());
+			std::string strURI = "https://playgenerals.online/cloud/env:dev:CheckLogin";
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+
+			nlohmann::json j;
+			j["code"] = m_strCode.c_str();
+			std::string strPostData = j.dump();
+
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPOSTRequest(strURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, strPostData.c_str(), [=](bool bSuccess, int statusCode, std::string strBody)
 			{
 					nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 					AuthResponse authResp = jsonObject.get<AuthResponse>();

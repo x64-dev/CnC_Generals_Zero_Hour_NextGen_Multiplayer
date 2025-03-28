@@ -1,6 +1,6 @@
 #include "GameNetwork/NextGenMP/PortMapper.h"
 #include "GameNetwork/NextGenMP/NGMP_include.h"
-#include "GameNetwork/NextGenMP/OnlineServices_Init.h"
+#include "GameNetwork/NextGenMP/NGMP_interfaces.h"
 
 #include "GameNetwork/NextGenMP/HTTP/HTTPManager.h"
 #include "GameNetwork/NextGenMP/HTTP/HTTPRequest.h"
@@ -67,7 +67,7 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 
 	// check IPv4
 	std::map<std::string, std::string> mapHeaders;
-	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://playgenerals.online/cloud/env:dev:DetermineIPCapabilities", EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:DetermineIPCapabilities:{}", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 		{
 			if (bSuccess && statusCode != 0)
 			{
@@ -93,7 +93,8 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 
 			// now check IPv6
 			std::map<std::string, std::string> mapHeaders;
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest("https://playgenerals.online/cloud/dev/env:dev:DetermineIPCapabilities", EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			mapHeaders["AUTH_TOKEN"] = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken();
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:DetermineIPCapabilities:{}", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 				{
 					if (bSuccess && statusCode != 0)
 					{

@@ -22,6 +22,8 @@ public:
 		m_vecLogin_PendingCallbacks.push_back(callback);
 	}
 
+	std::string& GetAuthToken() { return m_strToken; }
+
 private:
 	void LoginAsSecondaryDevAccount();
 
