@@ -10,18 +10,26 @@ class LobbyMember : public NetworkMemberBase
 
 };
 
-struct NGMP_LobbyInfo
+struct LobbyMemberEntry
 {
-	AsciiString strLobbyName;
-	AsciiString strLobbyOwnerName;
-	AsciiString strLobbyOwnerID;
-	std::string m_strLobbyID;
-	NGMP_ENATType NATType;
-	AsciiString strMapDisplayName;
-	AsciiString strMapPath;
-	int numMembers;
-	int maxMembers;
+	int64_t user_id;
+	std::string display_name;
+	bool ready;
 };
+
+struct LobbyEntry
+{
+	int64_t owner;
+	std::string name;
+	std::string map_name;
+	std::string map_path;
+	int current_players;
+	int max_players;
+	std::vector<LobbyMemberEntry> members;
+};
+
+struct LobbyMemberEntry;
+struct LobbyEntry;
 
 class NGMP_OnlineServices_LobbyInterface
 {
@@ -29,8 +37,7 @@ public:
 	NGMP_OnlineServices_LobbyInterface();
 
 	EOS_HLobbySearch m_SearchHandle = nullptr;
-	std::function<void(std::vector<NGMP_LobbyInfo>)> m_PendingSearchLobbyCompleteCallback = nullptr;
-	void SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback);
+	void SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<LobbyEntry>)> onCompleteCallback);
 
 	NextGenTransport* m_transport = nullptr;
 	void InitGameTransport()
@@ -207,13 +214,9 @@ public:
 
 	void JoinLobby(int index);
 
-	NGMP_LobbyInfo GetLobbyFromIndex(int index)
-	{
-		// TODO_NGMP: safety
-		return m_vecLobbies.at(index);
-	}
+	LobbyEntry GetLobbyFromIndex(int index);
 
-	std::vector<NGMP_LobbyInfo> m_vecLobbies;
+	std::vector<LobbyEntry> m_vecLobbies;
 
 private:
 	std::vector<std::function<void(bool)>> m_vecCreateLobby_PendingCallbacks = std::vector<std::function<void(bool)>>();

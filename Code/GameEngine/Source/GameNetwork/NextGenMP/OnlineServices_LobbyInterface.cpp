@@ -2,6 +2,9 @@
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_Hello.h"
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_HelloAck.h"
 #include "GameNetwork/NextGenMP/Packets/NetworkPacket_NetRoom_ChatMessage.h"
+#include "GameNetwork/NextGenMP/json.hpp"
+#include "GameNetwork/NextGenMP/HTTP/HTTPManager.h"
+#include "GameNetwork/NextGenMP/OnlineServices_Init.h"
 
 extern NGMPGame* TheNGMPGame;
 
@@ -160,260 +163,55 @@ NGMP_OnlineServices_LobbyInterface::NGMP_OnlineServices_LobbyInterface()
 	notID2 = notID2;
 }
 
-void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<NGMP_LobbyInfo>)> onCompleteCallback)
+
+
+/*
+struct GetLobbiesResponse
+{
+	std::vector<LobbyEntry> lobbies;
+	
+	
+};
+*/
+
+void NGMP_OnlineServices_LobbyInterface::SearchForLobbies(std::function<void()> onStartCallback, std::function<void(std::vector<LobbyEntry>)> onCompleteCallback)
 {
 	m_vecLobbies.clear();
-	m_PendingSearchLobbyCompleteCallback = onCompleteCallback;
 
-	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+	std::string strURI = std::format("https://playgenerals.online/cloud/env:dev:{}/Lobbies", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken());
+	std::map<std::string, std::string> mapHeaders;
 
-	EOS_Lobby_CreateLobbySearchOptions CreateSearchOptions = {};
-	CreateSearchOptions.ApiVersion = EOS_LOBBY_CREATELOBBYSEARCH_API_LATEST;
-	CreateSearchOptions.MaxResults = 200;
-
-
-	EOS_EResult Result = EOS_Lobby_CreateLobbySearch(LobbyHandle, &CreateSearchOptions, &m_SearchHandle);
-
-	if (Result == EOS_EResult::EOS_Success)
+	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(strURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 	{
-		EOS_LobbySearch_FindOptions FindOptions = {};
-		FindOptions.ApiVersion = EOS_LOBBYSEARCH_FIND_API_LATEST;
-		FindOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
+		// TODO_NGMP: Error handling
+		nlohmann::json jsonObject = nlohmann::json::parse(strBody);
 
-		// bucket id param
+		for (const auto& lobbyEntryIter : jsonObject["lobbies"])
 		{
-			/*
-			EOS_LobbySearch_SetParameterOptions ParamOptions = {};
-			EOS_Lobby_AttributeData AttributeData;
-			AttributeData.Key = "BUCKET";
-			AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
-			AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_STRING;
-			AttributeData.Value.AsUtf8 = "TODO_NGMP"; // TODO_NGMP: Proper value
-			ParamOptions.ApiVersion = EOS_LOBBYSEARCH_SETPARAMETER_API_LATEST;
-			ParamOptions.ComparisonOp = EOS_EComparisonOp::EOS_CO_EQUAL;
-			ParamOptions.Parameter = &AttributeData;
-			EOS_EResult result = EOS_LobbySearch_SetParameter(m_SearchHandle, &ParamOptions);
-			if (result != EOS_EResult::EOS_Success)
+			LobbyEntry lobbyEntry;
+			lobbyEntryIter["owner"].get_to(lobbyEntry.owner);
+			lobbyEntryIter["name"].get_to(lobbyEntry.name);
+			lobbyEntryIter["map_name"].get_to(lobbyEntry.map_name);
+			lobbyEntryIter["map_path"].get_to(lobbyEntry.map_path);
+			lobbyEntryIter["current_players"].get_to(lobbyEntry.current_players);
+			lobbyEntryIter["max_players"].get_to(lobbyEntry.max_players);
+
+			for (const auto& memberEntryIter : lobbyEntryIter["members"])
 			{
-				NetworkLog("[NGMP] Failed to set search param");
+				LobbyMemberEntry memberEntry;
+
+				memberEntryIter["user_id"].get_to(memberEntry.user_id);
+				memberEntryIter["display_name"].get_to(memberEntry.display_name);
+				memberEntryIter["ready"].get_to(memberEntry.ready);
+
+				lobbyEntry.members.push_back(memberEntry);
 			}
-			*/
+
+			m_vecLobbies.push_back(lobbyEntry);
+
+			onCompleteCallback(m_vecLobbies);
 		}
-
-		// version param
-		{
-			EOS_LobbySearch_SetParameterOptions ParamOptions = {};
-			EOS_Lobby_AttributeData AttributeData;
-			AttributeData.Key = "VERSION";
-			AttributeData.ApiVersion = EOS_LOBBY_ATTRIBUTEDATA_API_LATEST;
-			AttributeData.ValueType = EOS_ELobbyAttributeType::EOS_AT_INT64;
-			AttributeData.Value.AsInt64 = 1337; // TODO_NGMP: Proper value
-
-			ParamOptions.ApiVersion = EOS_LOBBYSEARCH_SETPARAMETER_API_LATEST;
-			ParamOptions.ComparisonOp = EOS_EComparisonOp::EOS_CO_EQUAL;
-			ParamOptions.Parameter = &AttributeData;
-
-			EOS_EResult result = EOS_LobbySearch_SetParameter(m_SearchHandle, &ParamOptions);
-			if (result != EOS_EResult::EOS_Success)
-			{
-				OutputDebugString("Failed to set search param");
-			}
-		}
-
-		if (onStartCallback != nullptr)
-		{
-			onStartCallback();
-		}
-
-		// TODO_NGMP: Make sure 'finished' callback is called in all error cases
-		EOS_LobbySearch_Find(m_SearchHandle, &FindOptions, nullptr, [](const EOS_LobbySearch_FindCallbackInfo* Data)
-			{
-				if (Data->ResultCode == EOS_EResult::EOS_Success)
-				{
-					EOS_LobbySearch_GetSearchResultCountOptions searchResultOpts;
-					searchResultOpts.ApiVersion = EOS_LOBBYSEARCH_GETSEARCHRESULTCOUNT_API_LATEST;
-
-					auto searchHandle = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_SearchHandle;
-					uint32_t numSessions = EOS_LobbySearch_GetSearchResultCount(searchHandle, &searchResultOpts);
-
-					NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies = std::vector<NGMP_LobbyInfo>();
-
-
-					// TODO_NGMP: None of these EOS handles ever get free'd, anywhere
-
-					if (numSessions == 0)
-					{
-						// TODO_NGMP: Give more info to play
-					}
-					else
-					{ 
-						// TODO_NGMP: Give more info to play
-					}
-
-					for (uint32_t i = 0; i < numSessions; ++i)
-					{
-						EOS_LobbySearch_CopySearchResultByIndexOptions getOpts;
-						getOpts.ApiVersion = EOS_LOBBYSEARCH_COPYSEARCHRESULTBYINDEX_API_LATEST;
-						getOpts.LobbyIndex = i;
-
-						EOS_HLobbyDetails sessionDetails = nullptr;
-						EOS_LobbySearch_CopySearchResultByIndex(searchHandle, &getOpts, &sessionDetails);
-
-						EOS_LobbyDetails_Info* SessionInfo = NULL;
-						EOS_LobbyDetails_CopyInfoOptions CopyOptions = {};
-						CopyOptions.ApiVersion = EOS_LOBBYDETAILS_COPYINFO_API_LATEST;
-						EOS_EResult CopyResult = EOS_LobbyDetails_CopyInfo(sessionDetails, &CopyOptions, &SessionInfo);
-						if (CopyResult == EOS_EResult::EOS_Success)
-						{
-							// TODO_NGMP: Filter more here, if its empty or is orphaned, dont bother returning it
-							NGMP_LobbyInfo newEntry = NGMP_LobbyInfo();
-
-							// store lobby id
-							newEntry.m_strLobbyID = SessionInfo->LobbyId;
-
-							// parse owner name
-							char szUserID[EOS_PRODUCTUSERID_MAX_LENGTH + 1] = { 0 };
-							int len = EOS_PRODUCTUSERID_MAX_LENGTH + 1;
-							EOS_EResult r = EOS_ProductUserId_ToString(SessionInfo->LobbyOwnerUserId, szUserID, &len);
-							if (r != EOS_EResult::EOS_Success)
-							{
-								// TODO_NGMP: Error
-								NetworkLog("[NGMP] EOS error!\n");
-							}
-							newEntry.strLobbyOwnerID = AsciiString(szUserID);
-
-							// display name
-							{
-								// TODO_NGMP: Handle missing lobby properties
-
-								EOS_Lobby_Attribute* attr = nullptr;
-								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
-								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "NAME";
-								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
-								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
-								{
-									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.strLobbyName = attr->Data->Value.AsUtf8;
-								}
-								else
-								{
-									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.strLobbyName = SessionInfo->LobbyId;
-								}
-							}
-							
-							// owner name
-							{
-								// TODO_NGMP: Handle missing lobby properties
-
-								EOS_Lobby_Attribute* attr = nullptr;
-								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
-								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "OWNER_NAME";
-								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
-								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
-								{
-									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.strLobbyOwnerName = attr->Data->Value.AsUtf8;
-								}
-								else
-								{
-									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.strLobbyOwnerName = newEntry.strLobbyOwnerID;
-								}
-							}
-
-							// map name
-							{
-								// TODO_NGMP: Handle missing lobby properties
-
-								EOS_Lobby_Attribute* attr = nullptr;
-								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
-								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "MAP_NAME";
-								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
-								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
-								{
-									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.strMapDisplayName = attr->Data->Value.AsUtf8;
-								}
-								else
-								{
-									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.strMapDisplayName = SessionInfo->LobbyId;
-								}
-							}
-
-							// map path
-							{
-								// TODO_NGMP: Handle missing lobby properties
-
-								EOS_Lobby_Attribute* attr = nullptr;
-								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
-								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "MAP_PATH";
-								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
-								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
-								{
-									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.strMapPath = attr->Data->Value.AsUtf8;
-								}
-								else
-								{
-									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.strMapPath = SessionInfo->LobbyId;
-								}
-							}
-
-							// NAT
-							{
-								// TODO_NGMP: Handle missing lobby properties
-
-								EOS_Lobby_Attribute* attr = nullptr;
-								EOS_LobbyDetails_CopyAttributeByKeyOptions copyAttrOpts;
-								copyAttrOpts.ApiVersion = EOS_LOBBYDETAILS_COPYMEMBERATTRIBUTEBYKEY_API_LATEST;
-								copyAttrOpts.AttrKey = "NAT";
-								EOS_EResult rCopyMemberAttr = EOS_LobbyDetails_CopyAttributeByKey(sessionDetails, &copyAttrOpts, &attr);
-								if (rCopyMemberAttr == EOS_EResult::EOS_Success)
-								{
-									// TODO_NGMP: Validate type too, could cause a crash
-									newEntry.NATType = (NGMP_ENATType)attr->Data->Value.AsInt64;
-								}
-								else
-								{
-									// TODO_NGMP: Maybe dont return these until it resolves?
-									newEntry.NATType = NGMP_ENATType::NAT_TYPE_UNDETERMINED;
-								}
-							}
-							
-							newEntry.numMembers = SessionInfo->MaxMembers - SessionInfo->AvailableSlots;
-							newEntry.maxMembers = SessionInfo->MaxMembers;
-
-
-
-							NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies.push_back(newEntry);
-
-							// Free it up
-							EOS_LobbyDetails_Info_Release(SessionInfo);
-						}
-
-						//EOS_Sessions_JoinSession
-
-						EOS_LobbyDetails_Release(sessionDetails);
-					}
-
-					if (NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingSearchLobbyCompleteCallback != nullptr)
-					{
-						NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_PendingSearchLobbyCompleteCallback(NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->m_vecLobbies);
-					}
-				}
-				else
-				{
-					NetworkLog("[NGMP] Failed to search for Lobbies!");
-				}
-			});
-	}
+	});
 }
 
 bool NGMP_OnlineServices_LobbyInterface::IsHost()
@@ -449,6 +247,7 @@ bool NGMP_OnlineServices_LobbyInterface::IsHost()
 
 void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetworkRoom()
 {
+	/*
 	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
 
 	EOS_Lobby_UpdateLobbyModificationOptions ModifyOptions = {};
@@ -561,6 +360,7 @@ void NGMP_OnlineServices_LobbyInterface::ApplyLocalUserPropertiesToCurrentNetwor
 	{
 		m_RosterNeedsRefreshCallback();
 	}
+	*/
 }
 
 void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
@@ -683,6 +483,8 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 
 void NGMP_OnlineServices_LobbyInterface::JoinLobby(int index)
 {
+	// TODO_NGMP:
+	/*
 	EOS_HLobby LobbyHandle = EOS_Platform_GetLobbyInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
 
 
@@ -691,7 +493,7 @@ void NGMP_OnlineServices_LobbyInterface::JoinLobby(int index)
 	CreateSearchOptions.ApiVersion = EOS_LOBBY_CREATELOBBYSEARCH_API_LATEST;
 	CreateSearchOptions.MaxResults = 1;
 
-
+	
 	EOS_EResult Result = EOS_Lobby_CreateLobbySearch(LobbyHandle, &CreateSearchOptions, &m_SearchHandle);
 
 	if (Result == EOS_EResult::EOS_Success)
@@ -701,7 +503,7 @@ void NGMP_OnlineServices_LobbyInterface::JoinLobby(int index)
 		FindOptions.LocalUserId = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetEOSUser();
 
 		// TODO_NGMP: Safer method here, plus handle case where not found
-		NGMP_LobbyInfo lobbyInfo = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetLobbyFromIndex(index);
+		LobbyEntry lobbyInfo = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetLobbyFromIndex(index);
 
 		// must match name
 		EOS_LobbySearch_SetLobbyIdOptions lobbyIdOpts;
@@ -809,10 +611,72 @@ void NGMP_OnlineServices_LobbyInterface::JoinLobby(int index)
 				}
 			});
 	}
+	*/
 }
+
+LobbyEntry NGMP_OnlineServices_LobbyInterface::GetLobbyFromIndex(int index)
+{
+	// TODO_NGMP: safety
+	return m_vecLobbies.at(index);
+}
+
+enum class ECreateLobbyResponseResult : int
+{
+	FAILED = 0,
+	SUCCEEDED = 1
+};
+
+struct CreateLobbyResponse
+{
+	ECreateLobbyResponseResult result = ECreateLobbyResponseResult::FAILED;
+	int64_t lobby_id = -1;
+
+	NLOHMANN_DEFINE_TYPE_INTRUSIVE(CreateLobbyResponse, result, lobby_id)
+};
 
 void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName, UnicodeString strInitialMapName, AsciiString strInitialMapPath, int initialMaxSize)
 {
+	std::string strURI = std::format("https://playgenerals.online/cloud/env:dev:{}/Lobbies", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken());
+	std::map<std::string, std::string> mapHeaders;
+
+	// convert
+	AsciiString strName = AsciiString();
+	strName.translate(strLobbyName);
+
+	AsciiString strMapName = AsciiString();
+	strMapName.translate(strInitialMapName);
+
+	nlohmann::json j;
+	j["name"] = strName.str();
+	j["map_name"] = strMapName.str();
+	j["map_path"] = strInitialMapPath.str();
+	j["max_players"] = initialMaxSize;
+	std::string strPostData = j.dump();
+
+	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPUTRequest(strURI.c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, strPostData.c_str(), [=](bool bSuccess, int statusCode, std::string strBody)
+		{
+			nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+			CreateLobbyResponse resp = jsonObject.get<CreateLobbyResponse>();
+
+			if (resp.result == ECreateLobbyResponseResult::SUCCEEDED)
+			{
+				NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->OnJoinedOrCreatedLobby();
+			}
+			else
+			{
+				NetworkLog("[NGMP] Failed to create lobby!\n");
+			}
+
+			// TODO_NGMP: Impl
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->InvokeCreateLobbyCallback(resp.result == ECreateLobbyResponseResult::SUCCEEDED);
+
+			// Set our properties
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ResetCachedRoomData();
+			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
+
+		});
+	return;
+	/*
 	m_PendingCreation_LobbyName = strLobbyName;
 	m_PendingCreation_InitialMapDisplayName = strInitialMapName;
 	m_PendingCreation_InitialMapPath = strInitialMapPath;
@@ -1021,6 +885,7 @@ void NGMP_OnlineServices_LobbyInterface::CreateLobby(UnicodeString strLobbyName,
 			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ResetCachedRoomData();
 			NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->ApplyLocalUserPropertiesToCurrentNetworkRoom();
 		});
+		*/
 }
 
 void NGMP_OnlineServices_LobbyInterface::OnJoinedOrCreatedLobby()

@@ -62,6 +62,7 @@
 
 #include "Common/STLTypedefs.h"
 #include "GameNetwork/NextGenMP/NGMP_interfaces.h"
+#include "GameNetwork/NextGenMP/OnlineServices_LobbyInterface.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -518,7 +519,7 @@ struct GameSortStruct
 	}
 };
 
-static Int insertGame( GameWindow *win, NGMP_LobbyInfo& lobbyInfo, Bool showMap )
+static Int insertGame( GameWindow *win, LobbyEntry& lobbyInfo, Bool showMap )
 {
 	// TODO_NGMP
 	//game->cleanUpSlotPointers();
@@ -535,13 +536,23 @@ static Int insertGame( GameWindow *win, NGMP_LobbyInfo& lobbyInfo, Bool showMap 
 	{
 		//gameColor = GameSpyColor[GSCOLOR_GAME_CRCMISMATCH];
 	}
+	
+	std::string strOwnerName = "";
+	for (LobbyMemberEntry& member : lobbyInfo.members)
+	{
+		if (member.user_id == lobbyInfo.owner)
+		{
+			strOwnerName = member.display_name;
+		}
+	}
+
 	UnicodeString gameName;
-	gameName.format(L"%hs (%hs)", lobbyInfo.strLobbyName.str(), lobbyInfo.strLobbyOwnerName.str());
+	gameName.format(L"%hs (%hs)", lobbyInfo.name.c_str(), strOwnerName.c_str());
 
-	int numPlayers = lobbyInfo.numMembers;
-	int maxPlayers = lobbyInfo.maxMembers;
+	int numPlayers = lobbyInfo.current_players;
+	int maxPlayers = lobbyInfo.max_players;
 
-	AsciiString lobbyMapName = lobbyInfo.strMapDisplayName;
+	AsciiString lobbyMapName = AsciiString(lobbyInfo.map_name.c_str());
 	AsciiString ladder = AsciiString("TODO_NGMP");
 	USHORT ladderPort = 1;
 	int gameID = 0;
@@ -863,7 +874,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 			win->winEnable(false);
 			GadgetListBoxAddEntryText(win, UnicodeString(L"Searching for public lobbies..."), GameMakeColor(255, 194, 15, 255), -1, -1);
 		},
-		[=](std::vector<NGMP_LobbyInfo> vecLobbies)
+		[=](std::vector<LobbyEntry> vecLobbies)
 		{
 			size_t numResults = vecLobbies.size();
 
@@ -880,7 +891,7 @@ void RefreshGameListBox( GameWindow *win, Bool showMap )
 				Int indexToSelect = -1;
 
 				int i = 0;
-				for (NGMP_LobbyInfo lobby : vecLobbies)
+				for (LobbyEntry lobby : vecLobbies)
 				{
 					Int index = insertGame(win, lobby, showMap);
 					if (i == selectedID)

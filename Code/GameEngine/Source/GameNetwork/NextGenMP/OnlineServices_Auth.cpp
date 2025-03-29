@@ -55,7 +55,7 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 		NetworkLog("[NGMP] Secondary instance detected... using dev account for testing purposes");
 		// login
 		std::string strToken = "ILOVECODE";
-		std::string strLoginURI = "https://playgenerals.online/cloud/env:dev:LoginWithToken";
+		std::string strLoginURI = "https://playgenerals.online/cloud/env:dev/LoginWithToken";
 		std::map<std::string, std::string> mapHeaders;
 
 		nlohmann::json j;
@@ -105,7 +105,7 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 			std::string strToken = GetCredentials();
 
 			// login
-			std::string strLoginURI = "https://playgenerals.online/cloud/env:dev:LoginWithToken";
+			std::string strLoginURI = "https://playgenerals.online/cloud/env:dev/LoginWithToken";
 			std::map<std::string, std::string> mapHeaders;
 
 			nlohmann::json j;
@@ -173,7 +173,7 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 			m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
 
 			// check again
-			std::string strURI = "https://playgenerals.online/cloud/env:dev:CheckLogin";
+			std::string strURI = "https://playgenerals.online/cloud/env:dev/CheckLogin";
 			std::map<std::string, std::string> mapHeaders;
 
 			nlohmann::json j;

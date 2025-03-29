@@ -12,7 +12,8 @@
 enum class EHTTPVerb
 {
 	GET,
-	POST
+	POST,
+	PUT
 };
 
 enum class EIPProtocolVersion
@@ -32,6 +33,7 @@ public:
 
 	void SendGETRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
 	void SendPOSTRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, const char* szPostData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
+	void SendPUTRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, const char* szData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback = nullptr);
 
 	void Shutdown();
 

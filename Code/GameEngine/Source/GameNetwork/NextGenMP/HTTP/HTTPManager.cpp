@@ -40,6 +40,16 @@ void HTTPManager::SendPOSTRequest(const char* szURI, EIPProtocolVersion protover
 	m_mutex.unlock();
 }
 
+void HTTPManager::SendPUTRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, const char* szData, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback /*= nullptr*/)
+{
+	HTTPRequest* pRequest = PlatformCreateRequest(EHTTPVerb::PUT, protover, szURI, inHeaders, completionCallback, progressCallback);
+	pRequest->SetPostData(szData);
+
+	m_mutex.lock();
+	m_vecRequestsPendingstart.push_back(pRequest);
+	m_mutex.unlock();
+}
+
 void HTTPManager::PlatformThreadedTick_PreLock()
 {
 	// We do this pre-lock becaues because it doesn't access anything shared (m_vecRequestsInFlight etc), but it does block/consume time, so locking means the game thread wont run logic for a while, dropping fps

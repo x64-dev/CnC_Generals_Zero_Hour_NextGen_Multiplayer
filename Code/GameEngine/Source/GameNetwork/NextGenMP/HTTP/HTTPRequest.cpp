@@ -159,13 +159,19 @@ void HTTPRequest::PlatformStartRequest()
 		}
 		curl_easy_setopt(m_pCURL, CURLOPT_HTTPHEADER, headers);
 
-		if (m_httpVerb == EHTTPVerb::POST)
+		if (m_httpVerb == EHTTPVerb::POST || m_httpVerb == EHTTPVerb::PUT)
 		{
 			//if (m_strPostData.length() > 0)
 			{
 				//char* pEscaped = curl_easy_escape(m_pCURL, m_strPostData.c_str(), m_strPostData.length());
 				curl_easy_setopt(m_pCURL, CURLOPT_POSTFIELDS, m_strPostData.c_str());
 			}
+		}
+
+		// needed for PUT etc
+		if (m_httpVerb == EHTTPVerb::PUT)
+		{
+			curl_easy_setopt(m_pCURL, CURLOPT_CUSTOMREQUEST, "PUT");
 		}
 
 		if (pHTTPManager->IsProxyEnabled())
