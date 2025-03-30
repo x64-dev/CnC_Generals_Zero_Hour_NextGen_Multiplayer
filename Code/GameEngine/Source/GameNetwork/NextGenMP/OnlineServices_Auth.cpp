@@ -29,7 +29,8 @@ struct AuthResponse
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(AuthResponse, result, token, user_id, display_name)
 };
 
-std::string generateRandomString() {
+std::string GenerateGamecode()
+{
 	std::string result;
 	const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const size_t max_index = sizeof(charset) - 1;
@@ -38,7 +39,7 @@ std::string generateRandomString() {
 	std::mt19937 generator(seed);
 	std::uniform_int_distribution<> distribution(0, max_index - 1);
 
-	for (int i = 0; i < 5; ++i) {
+	for (int i = 0; i < 32; ++i) {
 		result += charset[distribution(generator)];
 	}
 
@@ -89,9 +90,9 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 					// do normal login flow, token is bad or expired etc
 					m_bWaitingLogin = true;
 					m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
-					m_strCode = generateRandomString();
+					m_strCode = GenerateGamecode();
 
-					std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+					std::string strURI = std::format("https://www.playgenerals.online/login/?gamecode={}", m_strCode.c_str());
 
 					ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
 				}
@@ -139,9 +140,9 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 						// do normal login flow, token is bad or expired etc
 						m_bWaitingLogin = true;
 						m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
-						m_strCode = generateRandomString();
+						m_strCode = GenerateGamecode();
 
-						std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+						std::string strURI = std::format("https://www.playgenerals.online/login/?gamecode={}", m_strCode.c_str());
 
 						ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
 					}
@@ -152,9 +153,9 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 		{
 			m_bWaitingLogin = true;
 			m_lastCheckCode = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
-			m_strCode = generateRandomString();
+			m_strCode = GenerateGamecode();
 
-			std::string strURI = std::format("https://www.playgenerals.online/login/?code={}", m_strCode.c_str());
+			std::string strURI = std::format("https://www.playgenerals.online/login/?gamecode={}", m_strCode.c_str());
 
 			ShellExecuteA(NULL, "open", strURI.c_str(), NULL, NULL, SW_SHOWNORMAL);
 		}
