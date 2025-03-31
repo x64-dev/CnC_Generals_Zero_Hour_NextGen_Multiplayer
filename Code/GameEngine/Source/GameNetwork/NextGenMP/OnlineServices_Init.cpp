@@ -180,6 +180,8 @@ void NGMP_OnlineServicesManager::Tick()
 		m_pAuthInterface->Tick();
 	}
 
+	m_PortMapper.Tick();
+
 	if (m_EOSPlatformHandle != nullptr)
 	{
 		EOS_Platform_Tick(m_EOSPlatformHandle);

@@ -297,6 +297,7 @@ static void updateNumPlayersOnline(void)
 
 
 		//<hexcol>%hs for colors
+		ECapabilityState NATDirectConnect = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().HasDirectConnect();
 		ECapabilityState capUPnP = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().HasUPnP();
 		ECapabilityState capNATPMP = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().HasNATPMP();
 		ECapabilityState capipv4 = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().HasIPv4();
@@ -305,14 +306,15 @@ static void updateNumPlayersOnline(void)
 		bool bHasPortMappedUPnP = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().HasPortOpenUPnP();
 		int internalPort = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().GetOpenPort_Internal();
 		int externalPort = NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().GetOpenPort_External();
-		headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n \nNetwork Capabilities:\n\tUPnP: %hs\n\tNAT-PMP: %hs\n\tIPv4: %hs\n\tIPv6: %hs\n\tPort Mapped: %hs\n\tInternal Port: %d\n\tExternal Port: %d",
+		headingStr.format(L"Welcome to Generals NextGen Multiplayer.\n \nNetwork Capabilities:\n\tUPnP: %hs\n\tNAT-PMP: %hs\n\tIPv4: %hs\n\tIPv6: %hs\n\tPort Mapped: %hs\n\tInternal Port: %d\n\tExternal Port: %d\n\tDirect Connect: %hs",
 			capUPnP == ECapabilityState::UNDETERMINED ? "Still Determining..." : capUPnP == ECapabilityState::SUPPORTED ? "Supported" : "Unsupported",
 			capNATPMP == ECapabilityState::UNDETERMINED ? "Still Determining..." : capNATPMP == ECapabilityState::SUPPORTED ? "Supported" : "Unsupported",
 			capipv4 == ECapabilityState::UNDETERMINED ? "Still Determining..." : capipv4 == ECapabilityState::SUPPORTED ? "Supported" : "Unsupported",
 			capipv6 == ECapabilityState::UNDETERMINED ? "Still Determining..." : capipv6 == ECapabilityState::SUPPORTED ? "Supported" : "Unsupported",
 			bHasPortMapped ? (bHasPortMappedUPnP ? "Yes (UPnP)" : "Yes (NAT-PMP)") : "No",
 			internalPort,
-			externalPort
+			externalPort,
+			NATDirectConnect == ECapabilityState::UNDETERMINED ? "Still Determining..." : NATDirectConnect == ECapabilityState::SUPPORTED ? "Supported" : "Unsupported"
 		);
 
 		while (headingStr.nextToken(&line, UnicodeString(L"\n")))

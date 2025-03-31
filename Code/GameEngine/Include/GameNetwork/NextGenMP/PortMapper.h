@@ -27,10 +27,20 @@ public:
 		CleanupPorts();
 	}
 
+	void Tick();
+	void StartNATCheck();
+
+	std::function<void(void)> m_pendingCallbackNetworkCaps = nullptr;
+
 	void DetermineLocalNetworkCapabilities(std::function<void(void)> callbackDeterminedCaps);
 
 	void TryForwardPreferredPorts();
 	void CleanupPorts();
+
+	ECapabilityState HasDirectConnect()
+	{
+		return m_directConnect;
+	}
 
 	ECapabilityState HasUPnP()
 	{
@@ -58,16 +68,18 @@ public:
 	int GetOpenPort_External() const { return m_PreferredPortExternal; }
 	int GetOpenPort_Internal() const { return m_PreferredPortInternal; }
 
+	void UPnP_RemoveAllMappingsToThisMachine();
+
 private:
 	bool ForwardPreferredPort_UPnP();
 	bool ForwardPreferredPort_NATPMP();
 
-	void UPnP_RemoveAllMappingsToThisMachine();
 	void RemovePortMapping_UPnP();
 	void RemovePortMapping_NATPMP();
 
 private:
 	std::function<void(void)> m_callbackDeterminedCaps = nullptr;
+	ECapabilityState m_directConnect = ECapabilityState::UNDETERMINED;
 	ECapabilityState m_capUPnP = ECapabilityState::UNDETERMINED;
 	ECapabilityState m_capNATPMP = ECapabilityState::UNDETERMINED;
 	ECapabilityState m_capIPv4 = ECapabilityState::UNDETERMINED;
@@ -78,4 +90,12 @@ private:
 
 	uint16_t m_PreferredPortInternal = 0;
 	uint16_t m_PreferredPortExternal = 0;
+
+	SOCKET m_NATSocket;
+	bool m_bNATCheckInProgress = false;
+
+	const int m_probeTimeout = 3000;
+	int64_t m_probeStartTime = -1;
+	static const int m_probesExpected = 5;
+	bool m_probesReceived[m_probesExpected];
 };

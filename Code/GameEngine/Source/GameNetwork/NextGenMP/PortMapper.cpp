@@ -8,6 +8,8 @@
 
 #include <random>
 #include <chrono>
+#include <winsock.h>
+#include "GameNetwork/GameSpyOverlay.h"
 
 struct IPCapsResult
 {
@@ -16,9 +18,173 @@ struct IPCapsResult
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(IPCapsResult, ipversion)
 };
 
+void PortMapper::Tick()
+{
+	if (m_bNATCheckInProgress)
+	{
+		// check here first, in case we early out
+		bool bAllProbesReceived = true;
+		for (int i = 0; i < m_probesExpected; ++i)
+		{
+			bAllProbesReceived &= m_probesReceived[i];
+		}
+
+		if (bAllProbesReceived)
+		{
+			m_bNATCheckInProgress = false;
+			m_directConnect = ECapabilityState::SUPPORTED;
+
+			// callback
+			m_pendingCallbackNetworkCaps();
+
+			closesocket(m_NATSocket);
+			WSACleanup();
+		}
+
+		// timed out?
+		int64_t currTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+		if (currTime - m_probeStartTime >= m_probeTimeout)
+		{
+			m_bNATCheckInProgress = false;
+			m_directConnect = ECapabilityState::UNSUPPORTED;
+
+			// callback
+			m_pendingCallbackNetworkCaps();
+
+			closesocket(m_NATSocket);
+			WSACleanup();
+		}
+
+		// now recv again
+		char buffer[1024];
+		sockaddr_in clientAddr;
+		int clientAddrLen = sizeof(clientAddr);
+
+		int bytesReceived = recvfrom(m_NATSocket, buffer, sizeof(buffer), 0, (sockaddr*)&clientAddr, &clientAddrLen);
+		if (bytesReceived == SOCKET_ERROR)
+		{
+			if (WSAGetLastError() == WSAEWOULDBLOCK)
+			{
+				return;
+			}
+			else {
+				NetworkLog("[NAT Check]: recvfrom failed");
+				return;
+			}
+		}
+
+		buffer[bytesReceived] = '\0';
+		//NetworkLog("[NAT Check]: Received from server: %s", buffer);
+
+		for (int i = 0; i < m_probesExpected; ++i)
+		{
+			char szBuffer[32] = { 0 };
+			sprintf_s(szBuffer, "NATCHECK%d", i);
+
+			if (strcmp(buffer, szBuffer) == 0)
+			{
+				m_probesReceived[i] = true;
+			}
+		}
+	}
+}
+
+void PortMapper::StartNATCheck()
+{
+	for (int i = 0; i < m_probesExpected; ++i)
+	{
+		m_probesReceived[i] = false;
+	}
+	m_directConnect = ECapabilityState::UNDETERMINED;
+
+	// init recv socket 
+	WSADATA wsaData;
+	
+	sockaddr_in serverAddr;
+	const int PORT = m_PreferredPortInternal;
+
+	// Initialize Winsock
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+	{
+		NetworkLog("[NAT Check]: Failed to initialize Winsock. Error: %d", WSAGetLastError());
+		m_directConnect = ECapabilityState::UNSUPPORTED;
+		m_pendingCallbackNetworkCaps();
+		return;
+	}
+
+	// Create UDP server socket
+	m_NATSocket = socket(AF_INET, SOCK_DGRAM, 0);
+	if (m_NATSocket == INVALID_SOCKET)
+	{
+		NetworkLog("[NAT Check]: Socket creation failed. Error: %d", WSAGetLastError());
+		WSACleanup();
+		m_directConnect = ECapabilityState::UNSUPPORTED;
+		m_pendingCallbackNetworkCaps();
+		return;
+	}
+
+	// Set the socket to non-blocking mode
+	u_long mode = 1;
+	if (ioctlsocket(m_NATSocket, FIONBIO, &mode) != NO_ERROR)
+	{
+		NetworkLog("[NAT Check]: Failed to set non-blocking mode.");
+		closesocket(m_NATSocket);
+		WSACleanup();
+		m_directConnect = ECapabilityState::UNSUPPORTED;
+		m_pendingCallbackNetworkCaps();
+		return;
+	}
+
+	// Bind the socket to an address and port
+	serverAddr.sin_family = AF_INET;
+	serverAddr.sin_port = htons(PORT);
+	serverAddr.sin_addr.s_addr = INADDR_ANY;
+
+	if (bind(m_NATSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR)
+	{
+		NetworkLog("[NAT Check]: Binding failed. Error: %d", WSAGetLastError());
+		closesocket(m_NATSocket);
+		WSACleanup();
+		m_directConnect = ECapabilityState::UNSUPPORTED;
+		m_pendingCallbackNetworkCaps();
+		return;
+	}
+
+
+	// do NAT check
+	m_bNATCheckInProgress = true;
+	m_probeStartTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+	std::string strToken = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken();
+	std::string strURI = std::format("https://playgenerals.online/cloud/env:dev:{}/NATCheck", strToken.c_str());
+	std::map<std::string, std::string> mapHeaders;
+
+	nlohmann::json j;
+	j["preferred_port"] = m_PreferredPortExternal;
+	std::string strPostData = j.dump();
+
+	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPOSTRequest(strURI.c_str(), EIPProtocolVersion::FORCE_IPV4, mapHeaders, strPostData.c_str(), [=](bool bSuccess, int statusCode, std::string strBody)
+		{
+			if (statusCode == 200)
+			{
+
+			}
+			else
+			{
+				// return immediately, wont work
+				m_directConnect = ECapabilityState::UNSUPPORTED;
+				m_pendingCallbackNetworkCaps();
+
+				NetworkLog("[NAT Checker]: Error code %d", statusCode);
+			}
+		});
+}
+
 void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> callbackDeterminedCaps)
 {
+	m_pendingCallbackNetworkCaps = callbackDeterminedCaps;
+
 	// reset state
+	m_directConnect = ECapabilityState::UNDETERMINED;
 	m_capUPnP = ECapabilityState::UNDETERMINED;
 	m_capNATPMP = ECapabilityState::UNDETERMINED;
 	m_capIPv4 = ECapabilityState::UNDETERMINED;
@@ -27,7 +193,7 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 	// store callback
 	m_callbackDeterminedCaps = callbackDeterminedCaps;
 	// TODO_NGMP: Do this on a background thread?
-	
+
 	// UPnP
 	int errorCode = 0;
 	struct UPNPDev* upnp_dev = upnpDiscover(2000, nullptr, nullptr, 0, 0, 2, &errorCode);
@@ -118,8 +284,9 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 						}
 					}
 
-					// now call back
-					callbackDeterminedCaps();
+					// start nat checker
+					StartNATCheck();
+
 				});
 		});
 
@@ -135,8 +302,9 @@ void PortMapper::TryForwardPreferredPorts()
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::mt19937 gen(seed);
 	std::uniform_int_distribution<> dis(35000, 45000);
+	std::uniform_int_distribution<> disInternal(5000, 15000);
 
-	m_PreferredPortInternal = 5000; // fixed, we'll randomize the ext port instead
+	m_PreferredPortInternal = disInternal(gen);
 	m_PreferredPortExternal = dis(gen);
 
 	NetworkLog("PortMapper: Attempting to open ext port %d and forward to local port %d", m_PreferredPortExternal, m_PreferredPortInternal);

@@ -119,6 +119,8 @@
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
 #endif
 
+static NGMP_OnlineServicesManager* g_pOnlineServicesMgr = nullptr;
+
 wwCVar com_clientMaxMs("com_clientMaxMs", "16", "Max default client FPS", CVAR_INT);
 
 //-------------------------------------------------------------------------------------------------
@@ -235,6 +237,12 @@ GameEngine::~GameEngine()
 
 	delete TheFileSystem;
 	TheFileSystem = NULL;
+
+	if (g_pOnlineServicesMgr != nullptr)
+	{
+		delete g_pOnlineServicesMgr;
+		g_pOnlineServicesMgr = nullptr;
+	}
 
 	Drawable::killStaticImages();
 
@@ -578,7 +586,6 @@ DECLARE_PERF_TIMER(GameEngine_update)
  * of TheNetwork and TheGameLogic to a fixed framerate.
  */
 
-static NGMP_OnlineServicesManager* g_pOnlineServicesMgr = nullptr;
 void GameEngine::update( void )
 { 
 	static int m_serverFrame = 0;
