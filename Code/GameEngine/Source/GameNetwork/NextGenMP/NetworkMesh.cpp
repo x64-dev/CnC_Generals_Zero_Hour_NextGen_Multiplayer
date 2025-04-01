@@ -84,7 +84,8 @@ void NetworkMesh::ConnectToMesh(const char* szRoomID)
 			}
 			else if (pMesh->GetMeshType() == ENetworkMeshType::GAME_LOBBY)
 			{
-				pMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromID(Data->RemoteUserId);
+				// TODO_NGMP: Custom
+				//pMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromID(Data->RemoteUserId);
 			}
 
 			if (pMember != nullptr)
@@ -217,6 +218,8 @@ void NetworkMesh::Tick()
 					}
 					else if (m_meshType == ENetworkMeshType::GAME_LOBBY)
 					{
+						// TODO_NGMP: Custom
+						/*
 						std::map<EOS_ProductUserId, LobbyMember*>& mapRoomMembers = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
 
 						if (mapRoomMembers.find(outRemotePeerID) != mapRoomMembers.end())
@@ -229,6 +232,7 @@ void NetworkMesh::Tick()
 						{
 							// TODO_NGMP: Error, user sending us messages isnt in the room
 						}
+						*/
 					}
 				}
 			}

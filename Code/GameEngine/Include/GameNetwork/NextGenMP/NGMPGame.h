@@ -26,7 +26,7 @@ public:
 	inline AsciiString getPingString(void) const { return m_pingStr; }
 	inline Int getPingAsInt(void) const { return m_pingInt; }
 
-	EOS_ProductUserId m_userID = nullptr;
+	int64_t m_userID = -1;
 
 protected:
 	Int m_profileID;

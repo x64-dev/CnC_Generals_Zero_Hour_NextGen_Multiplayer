@@ -61,14 +61,16 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 
 	for (Int i = 0; i < MAX_SLOTS; ++i)
 	{
-		LobbyMember* pLobbyMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromIndex(i);
-		if (pLobbyMember != nullptr)
+		LobbyMemberEntry pLobbyMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromIndex(i);
+		if (pLobbyMember.IsValid())
 		{
 			UnicodeString str;
-			str.translate(pLobbyMember->m_strName.str());
+			str.translate(pLobbyMember.display_name.c_str());
+
+			bool bIsHost = pLobbyMember.user_id == NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentLobbyOwnerID();
 
 			NGMPGameSlot* slot = nullptr;
-			if (pLobbyMember->m_bIsHost)
+			if (bIsHost)
 			{
 				slot = (NGMPGameSlot*)getSlot(0);
 				// NOTE: Internally generals uses 'local ip' to detect which user is local... we dont have an IP, so just use player index for ip
@@ -98,7 +100,7 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			}
 
 			// ready flag
-			if (pLobbyMember->m_bIsReady)
+			if (pLobbyMember.m_bIsReady)
 			{
 				slot->setAccept();
 			}
@@ -108,7 +110,7 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			}
 
 			// store EOS ID
-			slot->m_userID = pLobbyMember->m_userID;
+			slot->m_userID = pLobbyMember.user_id;
 			
 			
 

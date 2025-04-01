@@ -5,20 +5,21 @@
 #include "../GameInfo.h"
 #include <chrono>
 
-class LobbyMember : public NetworkMemberBase
+struct LobbyMemberEntry : public NetworkMemberBase
 {
-
-};
-
-struct LobbyMemberEntry
-{
-	int64_t user_id;
+	int64_t user_id = -1;
 	std::string display_name;
 	bool ready;
+
+	// NOTE: NetworkMemberBase is not deserialized
+
+	bool IsValid() const { return user_id != -1; }
 };
 
 struct LobbyEntry
 {
+	int64_t lobbyID = -1;
+
 	int64_t owner;
 	std::string name;
 	std::string map_name;
@@ -113,7 +114,8 @@ public:
 			m_pLobbyMesh->Tick();
 		}
 
-		if (!m_strCurrentLobbyID.empty())
+		// TODO_NGMP: Do we still need this safety measure?
+		if (IsInLobby())
 		{	
 			int64_t currTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
 			if ((currTime - m_lastForceRefresh) > 5000)
@@ -124,40 +126,39 @@ public:
 		}
 	}
 
-	LobbyMember* GetRoomMemberFromIndex(int index)
+	int64_t GetCurrentLobbyOwnerID()
+	{
+		return m_CurrentLobby.owner;
+	}
+
+	LobbyMemberEntry GetRoomMemberFromIndex(int index)
 	{
 		// TODO_NGMP: Optimize data structure
-		if (index < m_mapMembers.size())
+		if (index < m_CurrentLobby.members.size())
 		{
-			int i = 0;
-			for (auto kvPair : m_mapMembers)
-			{
-				if (i == index)
-				{
-					return kvPair.second;
-				}
+			return m_CurrentLobby.members.at(index);
+		}
 
-				++i;
+		return LobbyMemberEntry();
+	}
+
+	LobbyMemberEntry GetRoomMemberFromID(int64_t userid)
+	{
+		for (const LobbyMemberEntry& lobbyMember : m_CurrentLobby.members)
+		{
+			if (lobbyMember.user_id == userid)
+			{
+				return lobbyMember;
 			}
 		}
 
-		return nullptr;
+		return LobbyMemberEntry();
 	}
 
-	LobbyMember* GetRoomMemberFromID(EOS_ProductUserId puid)
-	{
-		if (m_mapMembers.contains(puid))
-		{
-			return m_mapMembers[puid];
-		}
-
-		return nullptr;
-	}
-
-	std::map<EOS_ProductUserId, LobbyMember*>& GetMembersListForCurrentRoom()
+	std::vector<LobbyMemberEntry>& GetMembersListForCurrentRoom()
 	{
 		NetworkLog("[NGMP] Refreshing network room roster");
-		return m_mapMembers;
+		return m_CurrentLobby.members;
 	}
 
 	void RegisterForCreateLobbyCallback(std::function<void(bool)> callback)
@@ -173,7 +174,6 @@ public:
 	}
 
 	bool IsHost();
-	void SetCurrentLobbyID(const char* szLobbyID) { m_strCurrentLobbyID = std::string(szLobbyID); }
 
 	void UpdateRoomDataCache();
 
@@ -190,7 +190,7 @@ public:
 
 	void ResetCachedRoomData()
 	{
-		m_mapMembers.clear();
+		m_CurrentLobby = LobbyEntry();
 
 		if (m_RosterNeedsRefreshCallback != nullptr)
 		{
@@ -198,8 +198,12 @@ public:
 		}
 	}
 
+	bool IsInLobby() const { return m_CurrentLobby.lobbyID != -1; }
+
 	void SendToMesh(NetworkPacket& packet)
 	{
+		// TODO_NGMP: Custom
+		/*
 		std::vector<EOS_ProductUserId> vecUsers;
 		for (auto kvPair : m_mapMembers)
 		{
@@ -210,6 +214,7 @@ public:
 		{
 			m_pLobbyMesh->SendToMesh(packet, vecUsers);
 		}
+		*/
 	}
 
 	void JoinLobby(int index);
@@ -223,13 +228,10 @@ private:
 
 	std::function<void(bool)> m_callbackJoinedLobby = nullptr;
 
-	std::string m_strCurrentLobbyID = "";
+	LobbyEntry m_CurrentLobby;
 
 	// TODO_NGMP: cleanup
 	NetworkMesh* m_pLobbyMesh = nullptr;
 
 	NGMPGame* m_pGameInst = nullptr;
-
-	// TODO_NGMP: Cleanup
-	std::map<EOS_ProductUserId, LobbyMember*> m_mapMembers = std::map<EOS_ProductUserId, LobbyMember*>();
 };

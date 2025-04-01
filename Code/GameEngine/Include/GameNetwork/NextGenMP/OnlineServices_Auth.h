@@ -9,6 +9,7 @@ public:
 		return AsciiString(m_strDisplayName.c_str());
 	}
 
+	int64_t GetUserID() const { return m_userID; }
 	EOS_ProductUserId GetEOSUser() const { return nullptr; }
 
 	void BeginLogin();

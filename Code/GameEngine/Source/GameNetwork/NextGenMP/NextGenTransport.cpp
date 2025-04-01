@@ -207,7 +207,7 @@ Bool NextGenTransport::doRecv(void)
 
 Bool NextGenTransport::doSend(void)
 {
-	auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
+	//auto P2PHandle = EOS_Platform_GetP2PInterface(NGMP_OnlineServicesManager::GetInstance()->GetEOSPlatformHandle());
 	
 	bool retval = true;
 
@@ -220,7 +220,9 @@ Bool NextGenTransport::doSend(void)
 			// addr is actually player index...
 			//LobbyMember* pMember = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetRoomMemberFromIndex(m_outBuffer[i].addr);
 
+			// TODO_NGMP: Custom
 
+			/*
 			NGMPGameSlot* pSlot = (NGMPGameSlot*)NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetCurrentGame()->getSlot(m_outBuffer[i].addr);
 			EOS_ProductUserId eosUser = pSlot->m_userID;
 
@@ -263,6 +265,7 @@ Bool NextGenTransport::doSend(void)
 			{
 				retval = FALSE;
 			}
+			*/
 		}
 	}
 

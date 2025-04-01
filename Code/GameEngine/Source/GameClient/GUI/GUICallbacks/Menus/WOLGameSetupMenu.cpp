@@ -1089,7 +1089,7 @@ void InitWOLGameGadgets( void )
 		return;
 	}
 
-	std::map<EOS_ProductUserId, LobbyMember*>& lobbyRoster = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
+	std::vector<LobbyMemberEntry>& lobbyRoster = NGMP_OnlineServicesManager::GetInstance()->GetLobbyInterface()->GetMembersListForCurrentRoom();
 
 	for (Int i = 0; i < MAX_SLOTS; i++)
 	{
@@ -1113,9 +1113,12 @@ void InitWOLGameGadgets( void )
 		{
 			UnicodeString uName;
 
-			auto& plrElement = *std::next(lobbyRoster.begin(), i);
+			//auto& plrElement = *std::next(lobbyRoster.begin(), i);
 
-			uName.translate(plrElement.second->m_strName);
+			// TODO_NGMP: What if we don't find a user we expect to find?
+			LobbyMemberEntry plrElement = lobbyRoster.at(i);
+
+			uName.translate(plrElement.display_name.c_str());
 			GadgetComboBoxAddEntry(comboBoxPlayer[i],uName,GameSpyColor[GSCOLOR_PLAYER_OWNER]);
 			GadgetComboBoxSetSelectedPos(comboBoxPlayer[0],0);
 		}
