@@ -11,6 +11,7 @@
 #include "../miniupnpc/include/upnpcommands.h"
 #pragma comment(lib, "miniupnpc.lib")
 #include <functional>
+#include <thread>
 
 enum ECapabilityState : uint8_t
 {
@@ -30,7 +31,8 @@ public:
 	void Tick();
 	void StartNATCheck();
 
-	std::function<void(void)> m_pendingCallbackNetworkCaps = nullptr;
+	void BackgroundThreadRun();
+	std::thread* m_backgroundThread = nullptr;
 
 	void DetermineLocalNetworkCapabilities(std::function<void(void)> callbackDeterminedCaps);
 
@@ -93,6 +95,8 @@ private:
 
 	SOCKET m_NATSocket;
 	bool m_bNATCheckInProgress = false;
+
+	std::atomic<bool> m_bPortMapperWorkComplete = false;
 
 	const int m_probeTimeout = 3000;
 	int64_t m_probeStartTime = -1;

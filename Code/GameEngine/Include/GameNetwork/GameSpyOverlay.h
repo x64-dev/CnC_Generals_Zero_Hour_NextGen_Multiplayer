@@ -43,7 +43,7 @@ void GSMessageBoxOk(UnicodeString titleString,UnicodeString bodyString, GameWinM
 void GSMessageBoxOkCancel(UnicodeString title, UnicodeString message, GameWinMsgBoxFunc okFunc, GameWinMsgBoxFunc cancelFunc);	///< Display a Message box with Ok/Cancel buttons and track it
 void GSMessageBoxCancel(UnicodeString title, UnicodeString message, GameWinMsgBoxFunc cancelFunc);	///< Display a Message box with Cancel button and track it
 void GSMessageBoxYesNo(UnicodeString title, UnicodeString message, GameWinMsgBoxFunc yesFunc, GameWinMsgBoxFunc noFunc);	///< Display a Message box with Yes/No buttons and track it
-void GSMessageBoxNoButtons(UnicodeString titleString, UnicodeString bodyString);	///< Display a Message box with Ok button and track it
+void GSMessageBoxNoButtons(UnicodeString titleString, UnicodeString bodyString, bool bShowGameLogo = false);	///< Display a Message box with Ok button and track it
 void RaiseGSMessageBox( void );		///< Bring GS message box to the foreground (if we transition screens while a message box is up)
 
 enum GSOverlayType

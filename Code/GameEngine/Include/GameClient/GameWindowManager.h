@@ -139,7 +139,7 @@ public:
                         GameWinMsgBoxFunc yesCallback,
                         GameWinMsgBoxFunc noCallback,
                         GameWinMsgBoxFunc okCallback,
-                        GameWinMsgBoxFunc cancelCallback, Bool useLogo );
+                        GameWinMsgBoxFunc cancelCallback, Bool useLogo, Bool allowNoButtons = false );
 
 
 	//---------------------------------------------------------------------------

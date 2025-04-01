@@ -1672,11 +1672,11 @@ GameWindow *GameWindowManager::gogoMessageBox(Int x, Int y, Int width, Int heigh
                         GameWinMsgBoxFunc yesCallback,
                         GameWinMsgBoxFunc noCallback,
                         GameWinMsgBoxFunc okCallback,
-                        GameWinMsgBoxFunc cancelCallback, Bool useLogo )
+                        GameWinMsgBoxFunc cancelCallback, Bool useLogo, Bool allowNoButtons)
 
 {
 	// first check to make sure we have some buttons to display
-	if(buttonFlags == 0 )
+	if(buttonFlags == 0 && !allowNoButtons)
 	{
 		return NULL;
 	}

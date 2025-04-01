@@ -150,10 +150,10 @@ void GSMessageBoxYesNo(UnicodeString title, UnicodeString message, GameWinMsgBox
 	cancelFunc = newNoFunc;
 }
 
-void GSMessageBoxNoButtons(UnicodeString title, UnicodeString message)
+void GSMessageBoxNoButtons(UnicodeString title, UnicodeString message, bool bShowGameLogo)
 {
 	ClearGSMessageBoxes();
-	messageBoxWindow = MessageBoxNoButtons(title, message);
+	messageBoxWindow = MessageBoxNoButtons(title, message, bShowGameLogo);
 }
 
 /**

@@ -48,6 +48,6 @@ GameWindow *MessageBoxOk(UnicodeString titleString,UnicodeString bodyString,Game
 
 GameWindow *MessageBoxCancel(UnicodeString titleString,UnicodeString bodyString,GameWinMsgBoxFunc cancelCallback);///< convenience function for displaying a Message box with Cancel button
 
-GameWindow* MessageBoxNoButtons(UnicodeString titleString, UnicodeString bodyString);
+GameWindow* MessageBoxNoButtons(UnicodeString titleString, UnicodeString bodyString, bool bShowGameLogo = false);
 
 #endif //__MESSAGEBOX_H_

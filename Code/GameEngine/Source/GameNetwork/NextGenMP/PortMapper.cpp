@@ -20,6 +20,70 @@ struct IPCapsResult
 
 void PortMapper::Tick()
 {
+	// do we have work to do on main thread?
+	if (m_bPortMapperWorkComplete.load())
+	{
+		m_bPortMapperWorkComplete.store(false);
+
+		// check IPv4
+		std::map<std::string, std::string> mapHeaders;
+		NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/DetermineIPCapabilities", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+			{
+				if (bSuccess && statusCode != 0)
+				{
+					nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+					IPCapsResult result = jsonObject.get<IPCapsResult>();
+
+					// NOTE: 6 can still be reported here... if we ONLY have ipV6 and no IPV4... proxies etc can cause / alter behavior.
+					m_capIPv4 = (result.ipversion == 4) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
+
+					if (result.ipversion == 6)
+					{
+						m_capIPv6 = ECapabilityState::SUPPORTED;
+					}
+				}
+				else
+				{
+					// only if it didnt resolve earlier
+					if (m_capIPv4 != ECapabilityState::SUPPORTED)
+					{
+						m_capIPv4 = ECapabilityState::UNSUPPORTED;
+					}
+				}
+
+				// now check IPv6
+				std::map<std::string, std::string> mapHeaders;
+				mapHeaders["AUTH_TOKEN"] = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken();
+				NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/DetermineIPCapabilities", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
+					{
+						if (bSuccess && statusCode != 0)
+						{
+							nlohmann::json jsonObject = nlohmann::json::parse(strBody);
+							IPCapsResult result = jsonObject.get<IPCapsResult>();
+
+							m_capIPv6 = (result.ipversion == 6) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
+
+							// NOTE: 4 can still be reported here... if we ONLY have ipV4 and no IPV6... proxies etc can cause / alter behavior.
+							if (result.ipversion == 4)
+							{
+								m_capIPv4 = ECapabilityState::SUPPORTED;
+							}
+						}
+						else
+						{
+							// only if it didnt resolve earlier
+							if (m_capIPv6 != ECapabilityState::SUPPORTED)
+							{
+								m_capIPv6 = ECapabilityState::UNSUPPORTED;
+							}
+						}
+
+						// start nat checker
+						StartNATCheck();
+					});
+			});
+	}
+
 	if (m_bNATCheckInProgress)
 	{
 		// check here first, in case we early out
@@ -35,7 +99,7 @@ void PortMapper::Tick()
 			m_directConnect = ECapabilityState::SUPPORTED;
 
 			// callback
-			m_pendingCallbackNetworkCaps();
+			m_callbackDeterminedCaps();
 
 			closesocket(m_NATSocket);
 			WSACleanup();
@@ -49,7 +113,7 @@ void PortMapper::Tick()
 			m_directConnect = ECapabilityState::UNSUPPORTED;
 
 			// callback
-			m_pendingCallbackNetworkCaps();
+			m_callbackDeterminedCaps();
 
 			closesocket(m_NATSocket);
 			WSACleanup();
@@ -108,7 +172,7 @@ void PortMapper::StartNATCheck()
 	{
 		NetworkLog("[NAT Check]: Failed to initialize Winsock. Error: %d", WSAGetLastError());
 		m_directConnect = ECapabilityState::UNSUPPORTED;
-		m_pendingCallbackNetworkCaps();
+		m_callbackDeterminedCaps();
 		return;
 	}
 
@@ -119,7 +183,7 @@ void PortMapper::StartNATCheck()
 		NetworkLog("[NAT Check]: Socket creation failed. Error: %d", WSAGetLastError());
 		WSACleanup();
 		m_directConnect = ECapabilityState::UNSUPPORTED;
-		m_pendingCallbackNetworkCaps();
+		m_callbackDeterminedCaps();
 		return;
 	}
 
@@ -131,7 +195,7 @@ void PortMapper::StartNATCheck()
 		closesocket(m_NATSocket);
 		WSACleanup();
 		m_directConnect = ECapabilityState::UNSUPPORTED;
-		m_pendingCallbackNetworkCaps();
+		m_callbackDeterminedCaps();
 		return;
 	}
 
@@ -146,7 +210,7 @@ void PortMapper::StartNATCheck()
 		closesocket(m_NATSocket);
 		WSACleanup();
 		m_directConnect = ECapabilityState::UNSUPPORTED;
-		m_pendingCallbackNetworkCaps();
+		m_callbackDeterminedCaps();
 		return;
 	}
 
@@ -172,17 +236,15 @@ void PortMapper::StartNATCheck()
 			{
 				// return immediately, wont work
 				m_directConnect = ECapabilityState::UNSUPPORTED;
-				m_pendingCallbackNetworkCaps();
+				m_callbackDeterminedCaps();
 
 				NetworkLog("[NAT Checker]: Error code %d", statusCode);
 			}
 		});
 }
 
-void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> callbackDeterminedCaps)
+void PortMapper::BackgroundThreadRun()
 {
-	m_pendingCallbackNetworkCaps = callbackDeterminedCaps;
-
 	// reset state
 	m_directConnect = ECapabilityState::UNDETERMINED;
 	m_capUPnP = ECapabilityState::UNDETERMINED;
@@ -190,8 +252,7 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 	m_capIPv4 = ECapabilityState::UNDETERMINED;
 	m_capIPv6 = ECapabilityState::UNDETERMINED;
 
-	// store callback
-	m_callbackDeterminedCaps = callbackDeterminedCaps;
+	
 	// TODO_NGMP: Do this on a background thread?
 
 	// UPnP
@@ -231,66 +292,20 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 	// open ports
 	TryForwardPreferredPorts();
 
-	// check IPv4
-	std::map<std::string, std::string> mapHeaders;
-	NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/DetermineIPCapabilities", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV4, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
-		{
-			if (bSuccess && statusCode != 0)
-			{
-				nlohmann::json jsonObject = nlohmann::json::parse(strBody);
-				IPCapsResult result = jsonObject.get<IPCapsResult>();
+	m_bPortMapperWorkComplete.store(true);
+	NetworkLog("[PortMapper] Background thread work is done");
+}
 
-				// NOTE: 6 can still be reported here... if we ONLY have ipV6 and no IPV4... proxies etc can cause / alter behavior.
-				m_capIPv4 = (result.ipversion == 4) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
+void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> callbackDeterminedCaps)
+{
+	// store callback
+	m_callbackDeterminedCaps = callbackDeterminedCaps;
 
-				if (result.ipversion == 6)
-				{
-					m_capIPv6 = ECapabilityState::SUPPORTED;
-				}
-			}
-			else
-			{
-				// only if it didnt resolve earlier
-				if (m_capIPv4 != ECapabilityState::SUPPORTED)
-				{
-					m_capIPv4 = ECapabilityState::UNSUPPORTED;
-				}
-			}
+	// reset status
+	m_bPortMapperWorkComplete.store(false);
 
-			// now check IPv6
-			std::map<std::string, std::string> mapHeaders;
-			mapHeaders["AUTH_TOKEN"] = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken();
-			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/DetermineIPCapabilities", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
-				{
-					if (bSuccess && statusCode != 0)
-					{
-						nlohmann::json jsonObject = nlohmann::json::parse(strBody);
-						IPCapsResult result = jsonObject.get<IPCapsResult>();
-
-						m_capIPv6 = (result.ipversion == 6) ? ECapabilityState::SUPPORTED : ECapabilityState::UNSUPPORTED;
-
-						// NOTE: 4 can still be reported here... if we ONLY have ipV4 and no IPV6... proxies etc can cause / alter behavior.
-						if (result.ipversion == 4)
-						{
-							m_capIPv4 = ECapabilityState::SUPPORTED;
-						}
-					}
-					else
-					{
-						// only if it didnt resolve earlier
-						if (m_capIPv6 != ECapabilityState::SUPPORTED)
-						{
-							m_capIPv6 = ECapabilityState::UNSUPPORTED;
-						}
-					}
-
-					// start nat checker
-					StartNATCheck();
-
-				});
-		});
-
-	
+	// background thread, network ops are blocking
+	m_backgroundThread = new std::thread(&PortMapper::BackgroundThreadRun, this);
 }
 
 void PortMapper::TryForwardPreferredPorts()

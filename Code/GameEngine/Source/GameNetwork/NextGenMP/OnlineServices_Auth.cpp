@@ -230,7 +230,7 @@ void NGMP_OnlineServices_AuthInterface::OnLoginComplete(bool bSuccess)
 	{
 		// move on to network capabilities section
 		ClearGSMessageBoxes();
-		GSMessageBoxNoButtons(UnicodeString(L"Network"), UnicodeString(L"Determining local network capabilities..."));
+		GSMessageBoxNoButtons(UnicodeString(L"Network"), UnicodeString(L"Determining local network capabilities... this may take a few seconds"), true);
 
 		// NOTE: This is partially blocking and partially async...
 		NGMP_OnlineServicesManager::GetInstance()->GetPortMapper().DetermineLocalNetworkCapabilities([this]()
