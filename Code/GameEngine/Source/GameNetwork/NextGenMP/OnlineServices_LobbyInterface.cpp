@@ -321,6 +321,11 @@ void NGMP_OnlineServices_LobbyInterface::UpdateRoomDataCache()
 			if (TheNGMPGame != nullptr)
 			{
 				TheNGMPGame->UpdateSlotsFromCurrentLobby();
+
+				if (m_RosterNeedsRefreshCallback != nullptr)
+				{
+					m_RosterNeedsRefreshCallback();
+				}
 			}
 		});
 	}
