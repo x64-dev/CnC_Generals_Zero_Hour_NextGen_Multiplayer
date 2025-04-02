@@ -115,6 +115,18 @@ void NGMPGame::UpdateSlotsFromCurrentLobby()
 			
 
 		}
+		else
+		{
+			// TODO_NGMP: Support AI slots
+			
+			// set empty
+			NGMPGameSlot* slot = (NGMPGameSlot*)getSlot(i);
+
+			if (slot != nullptr)
+			{
+				slot->setState(SLOT_OPEN);
+			}
+		}
 
 		// dont need to handle else here, we set it up upon lobby creation
 	}
