@@ -22,11 +22,12 @@ enum class EAuthResponseResult : int
 struct AuthResponse
 {
 	EAuthResponseResult result;
-	std::string token;
+	std::string ss_token;
+	std::string al_token;
 	int64_t user_id = -1;
 	std::string display_name = "";
 
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(AuthResponse, result, token, user_id, display_name)
+	NLOHMANN_DEFINE_TYPE_INTRUSIVE(AuthResponse, result, ss_token, al_token, user_id, display_name)
 };
 
 std::string GenerateGamecode()
@@ -73,10 +74,10 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 					NetworkLog("LOGIN: Logged in");
 					m_bWaitingLogin = false;
 
-					SaveCredentials(authResp.token.c_str());
+					SaveCredentials(authResp.al_token.c_str());
 
 					// store data locally
-					m_strToken = authResp.token;
+					m_strToken = authResp.ss_token;
 					m_userID = authResp.user_id;
 					m_strDisplayName = authResp.display_name;
 
@@ -123,10 +124,10 @@ void NGMP_OnlineServices_AuthInterface::BeginLogin()
 						NetworkLog("LOGIN: Logged in");
 						m_bWaitingLogin = false;
 
-						SaveCredentials(authResp.token.c_str());
+						SaveCredentials(authResp.al_token.c_str());
 
 						// store data locally
-						m_strToken = authResp.token;
+						m_strToken = authResp.ss_token;
 						m_userID = authResp.user_id;
 						m_strDisplayName = authResp.display_name;
 
@@ -200,10 +201,10 @@ void NGMP_OnlineServices_AuthInterface::Tick()
 						NetworkLog("LOGIN: Logged in");
 						m_bWaitingLogin = false;
 
-						SaveCredentials(authResp.token.c_str());
+						SaveCredentials(authResp.al_token.c_str());
 
 						// store data locally
-						m_strToken = authResp.token;
+						m_strToken = authResp.ss_token;
 						m_userID = authResp.user_id;
 						m_strDisplayName = authResp.display_name;
 
