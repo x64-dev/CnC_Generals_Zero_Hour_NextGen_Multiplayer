@@ -53,7 +53,6 @@ void PortMapper::Tick()
 
 				// now check IPv6
 				std::map<std::string, std::string> mapHeaders;
-				mapHeaders["AUTH_TOKEN"] = NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken();
 				NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendGETRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/DetermineIPCapabilities", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::FORCE_IPV6, mapHeaders, [=](bool bSuccess, int statusCode, std::string strBody)
 					{
 						if (bSuccess && statusCode != 0)

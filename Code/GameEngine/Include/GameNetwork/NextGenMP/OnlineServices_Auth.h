@@ -25,6 +25,11 @@ public:
 
 	std::string& GetAuthToken() { return m_strToken; }
 
+	bool IsLoggedIn() const
+	{
+		return m_userID != -1 && !m_strToken.empty();
+	}
+
 private:
 	void LoginAsSecondaryDevAccount();
 

@@ -196,4 +196,19 @@ void NGMP_OnlineServicesManager::Tick()
 	{
 		m_pLobbyInterface->Tick();
 	}
+
+	int64_t currTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::utc_clock::now().time_since_epoch()).count();
+	if ((currTime - m_lastUserPut) > m_timeBetweenUserPuts)
+	{
+		m_lastUserPut = currTime;
+
+		if (m_pAuthInterface != nullptr && m_pAuthInterface->IsLoggedIn())
+		{
+			std::map<std::string, std::string> mapHeaders;
+			NGMP_OnlineServicesManager::GetInstance()->GetHTTPManager()->SendPUTRequest(std::format("https://playgenerals.online/cloud/env:dev:{}/User", NGMP_OnlineServicesManager::GetInstance()->GetAuthInterface()->GetAuthToken()).c_str(), EIPProtocolVersion::DONT_CARE, mapHeaders, "", [=](bool bSuccess, int statusCode, std::string strBody)
+				{
+					// TODO_NGMP: Handle 404 (session terminated)
+				});
+		}
+	};
 }

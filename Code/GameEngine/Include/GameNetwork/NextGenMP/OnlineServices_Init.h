@@ -157,4 +157,7 @@ private:
 	PortMapper m_PortMapper;
 
 	HTTPManager* m_pHTTPManager = nullptr;
+
+	int64_t m_lastUserPut = -1;
+	int64_t m_timeBetweenUserPuts = 60000;
 };
