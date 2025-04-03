@@ -8,7 +8,7 @@
 #include "eos_p2p_types.h"
 
 
-#include "GameNetwork/NextGenMP/Vendor/enet/enet.h"
+//#include "GameNetwork/NextGenMP/Vendor/enet/enet.h"
 
 #pragma comment(lib, "enet/enet64.lib")
 

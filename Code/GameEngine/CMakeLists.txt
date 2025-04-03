@@ -576,8 +576,9 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/Source/WWVegas/WWLib
     ../Libraries/DX90SDK/Include
     ../Libraries/EpicOnlineServices/Include
-
-    "Include/GameNetwork/NextGenMP/Vendor"
+    
+    Include/GameNetwork/NextGenMP/Vendor
+    Include/GameNetwork/NextGenMP/Vendor/libnatpmp
 
     Include
     ../Libraries/EpicOnlineServices/Include

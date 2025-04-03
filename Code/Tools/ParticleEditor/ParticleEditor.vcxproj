@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D3DED860-C4ED-31EA-B418-B03FD57DBE3A}</ProjectGuid>
+    <ProjectGuid>{643020CE-2B24-3B01-BE91-B764ECF1EBFD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -50,19 +50,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\gen_custom\run\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\run\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ParticleEditor.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ParticleEditor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\gen_custom\run\Internal\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\run\Internal\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">ParticleEditor.dir\Internal\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">ParticleEditor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\gen_custom\run\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\run\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ParticleEditor.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ParticleEditor</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
@@ -72,7 +72,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -91,10 +91,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_MBCS;_USRDLL;_AFXDLL;CMAKE_INTDIR=\"Debug\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -108,9 +108,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>F:/gen_custom/Code/Tools/ParticleEditor/Debug/ParticleEditor.lib</ImportLibrary>
-      <ModuleDefinitionFile>F:/gen_custom/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>F:/gen_custom/run/Debug/ParticleEditor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>E:/GenCustom/code/Tools/ParticleEditor/Debug/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>E:/GenCustom/code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>E:/GenCustom/run/Debug/ParticleEditor.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -120,7 +120,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -139,10 +139,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_MBCS;_USRDLL;_AFXDLL;CMAKE_INTDIR=\"Internal\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -156,9 +156,9 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>F:/gen_custom/Code/Tools/ParticleEditor/Internal/ParticleEditor.lib</ImportLibrary>
-      <ModuleDefinitionFile>F:/gen_custom/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>F:/gen_custom/run/Internal/ParticleEditor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>E:/GenCustom/code/Tools/ParticleEditor/Internal/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>E:/GenCustom/code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>E:/GenCustom/run/Internal/ParticleEditor.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -188,10 +188,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_MBCS;_USRDLL;_AFXDLL;CMAKE_INTDIR=\"Release\";ParticleEditor_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\gen_custom\Code\Tools\ParticleEditor\.\include;F:\gen_custom\Code\Tools\ParticleEditor\.\res;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameengine\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\gameenginedevice\include;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;F:\gen_custom\Code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\Tools\ParticleEditor\.\include;E:\GenCustom\code\Tools\ParticleEditor\.\res;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameengine\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\gameenginedevice\include;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\ww3d2;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwdebug;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwlib;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwmath;E:\GenCustom\code\Tools\ParticleEditor\..\..\libraries\source\wwvegas\wwsaveload;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -205,9 +205,9 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>F:/gen_custom/Code/Tools/ParticleEditor/Release/ParticleEditor.lib</ImportLibrary>
-      <ModuleDefinitionFile>F:/gen_custom/Code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>F:/gen_custom/run/Release/ParticleEditor.pdb</ProgramDataBaseFile>
+      <ImportLibrary>E:/GenCustom/code/Tools/ParticleEditor/Release/ParticleEditor.lib</ImportLibrary>
+      <ModuleDefinitionFile>E:/GenCustom/code/Tools/ParticleEditor/ParticleEditor.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>E:/GenCustom/run/Release/ParticleEditor.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -216,11 +216,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\gen_custom\Code\Tools\ParticleEditor\CMakeLists.txt">
+    <CustomBuild Include="E:\GenCustom\code\Tools\ParticleEditor\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/gen_custom/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/GenCustom/code/Tools/ParticleEditor/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/gen_custom/Code -BF:/gen_custom/Code --check-stamp-file F:/gen_custom/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/Tools/ParticleEditor/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -229,11 +229,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\gen_custom\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule F:/gen_custom/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule E:/GenCustom/code/Tools/ParticleEditor/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/gen_custom/Code -BF:/gen_custom/Code --check-stamp-file F:/gen_custom/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/Tools/ParticleEditor/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -242,11 +242,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">F:\gen_custom\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/gen_custom/Code/Tools/ParticleEditor/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/GenCustom/code/Tools/ParticleEditor/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SF:/gen_custom/Code -BF:/gen_custom/Code --check-stamp-file F:/gen_custom/Code/Tools/ParticleEditor/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/Tools/ParticleEditor/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -255,29 +255,29 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\gen_custom\Code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\code\Tools\ParticleEditor\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\ParticleEditor.rc" />
-    <None Include="F:\gen_custom\Code\Tools\ParticleEditor\ParticleEditor.def" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\CButtonShowColor.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\CColorAlphaDialog.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\CSwitchesDialog.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\EmissionTypePanels.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\MoreParmsDialog.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\ParticleEditor.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\ParticleEditorDialog.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\ParticleTypePanels.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\ShaderTypePanels.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\StdAfx.cpp" />
-    <ClCompile Include="F:\gen_custom\Code\Tools\ParticleEditor\VelocityTypePanels.cpp" />
+    <ResourceCompile Include="E:\GenCustom\code\Tools\ParticleEditor\ParticleEditor.rc" />
+    <None Include="E:\GenCustom\code\Tools\ParticleEditor\ParticleEditor.def" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\CButtonShowColor.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\CColorAlphaDialog.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\CSwitchesDialog.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\EmissionTypePanels.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\MoreParmsDialog.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\ParticleEditor.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\ParticleEditorDialog.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\ParticleTypePanels.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\ShaderTypePanels.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\StdAfx.cpp" />
+    <ClCompile Include="E:\GenCustom\code\Tools\ParticleEditor\VelocityTypePanels.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="F:\gen_custom\Code\ZERO_CHECK.vcxproj">
-      <Project>{9C9B0804-6CA0-348B-B7A6-A8225F272FF3}</Project>
+    <ProjectReference Include="E:\GenCustom\code\ZERO_CHECK.vcxproj">
+      <Project>{450D4A2A-8E19-35AA-A93D-2402E759EA08}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
