@@ -1,7 +1,7 @@
 #pragma once
 
 #include "HTTPRequest.h"
-#include "../../../../../Libraries/libcurl/include/curl/multi.h"
+#include "GameNetwork/NextGenMP/Vendor/libcurl/multi.h"
 #include <vector>
 #include <mutex>
 #include <thread>

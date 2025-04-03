@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../libcurl/include/curl/curl.h"
+#include "GameNetwork/NextGenMP/Vendor/libcurl/curl.h"
 #include <map>
 #include <string>
 #include <functional>

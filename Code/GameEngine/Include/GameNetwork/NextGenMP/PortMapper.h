@@ -5,11 +5,11 @@
 
 #include "common/gsPlatformSocket.h"
 #include "GameNetwork/NextGenMP/Vendor/libnatpmp/natpmp.h"
-#include "../miniupnpc/include/miniupnpc.h"
-#include "../miniupnpc/include/miniupnpctypes.h"
-#include "../miniupnpc/include/upnperrors.h"
-#include "../miniupnpc/include/upnpcommands.h"
-#pragma comment(lib, "miniupnpc.lib")
+#include "GameNetwork/NextGenMP/Vendor/miniupnpc/miniupnpc.h"
+#include "GameNetwork/NextGenMP/Vendor/miniupnpc/miniupnpctypes.h"
+#include "GameNetwork/NextGenMP/Vendor/miniupnpc/upnperrors.h"
+#include "GameNetwork/NextGenMP/Vendor/miniupnpc/upnpcommands.h"
+#pragma comment(lib, "miniupnpc/miniupnpc.lib")
 #include <functional>
 #include <thread>
 

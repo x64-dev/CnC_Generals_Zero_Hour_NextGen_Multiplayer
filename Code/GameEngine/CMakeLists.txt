@@ -576,17 +576,14 @@ target_include_directories(GameEngine PRIVATE
     ../Libraries/Source/WWVegas/WWLib
     ../Libraries/DX90SDK/Include
     ../Libraries/EpicOnlineServices/Include
-    ../Libraries/libcurl/Include
-    ../Libraries/miniupnpc/Include
-    ../Libraries/libnatpmp/Include
-    ../Libraries/Steamworks/Include
+
+    "Include/GameNetwork/NextGenMP/Vendor"
+
     Include
     ../Libraries/EpicOnlineServices/Include
-    ../Libraries/Steamworks/Include
     Include/Precompiled
     Source/Precompiled
     ../Libraries/EpicOnlineServices/Include
-    ../Libraries/Steamworks/Include
 )
 
 target_link_libraries(GameEngine PRIVATE

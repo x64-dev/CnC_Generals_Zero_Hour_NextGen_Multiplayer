@@ -10,7 +10,7 @@ class NGMP_OnlineServices_LobbyInterface;
 class NGMP_OnlineServices_RoomsInterface;
 
 #pragma comment(lib, "EOSSDK-Win64-Shipping.lib")
-#pragma comment(lib, "libcurl.lib")
+#pragma comment(lib, "libcurl/libcurl.lib")
 
 class NetworkRoom
 {
