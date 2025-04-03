@@ -9,7 +9,7 @@
 #include "GameNetwork/NextGenMP/Vendor/miniupnpc/miniupnpctypes.h"
 #include "GameNetwork/NextGenMP/Vendor/miniupnpc/upnperrors.h"
 #include "GameNetwork/NextGenMP/Vendor/miniupnpc/upnpcommands.h"
-#pragma comment(lib, "miniupnpc/miniupnpc.lib")
+//#pragma comment(lib, "miniupnpc/miniupnpc.lib")
 #include <functional>
 #include <thread>
 

@@ -10,7 +10,7 @@
 
 //#include "GameNetwork/NextGenMP/Vendor/enet/enet.h"
 
-#pragma comment(lib, "enet/enet64.lib")
+//#pragma comment(lib, "enet/enet64.lib")
 
 // it to be a MemoryPoolObject (srj)
 class NextGenTransport : public Transport //: public MemoryPoolObject

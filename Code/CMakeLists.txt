@@ -259,6 +259,6 @@ target_link_directories(RTS PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/d3d9on12/bin/src/Release
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/DX90SDK/Lib/x64
 	${CMAKE_CURRENT_SOURCE_DIR}/Libraries/EpicOnlineServices/Lib/
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/NextGenMP/Vendor/
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameEngine/Source/GameNetwork/NextGenMP/Vendor/
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Pix/x64
 )
