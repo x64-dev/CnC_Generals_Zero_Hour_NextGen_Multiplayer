@@ -619,6 +619,7 @@ target_link_libraries(GameEngine PRIVATE
 target_compile_definitions(GameEngine PRIVATE
     ${GNG_COMPILE_DEFINITIONS}
 	/MP	# Multi processor compilation
+    /Zf # Faster pdb generation + avoid conflicts
 )
 
 target_compile_options(GameEngine PRIVATE
