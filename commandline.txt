@@ -1,1 +1,1 @@
--win -fps -nofade -nocinematic -packetloss -latavg -latamp -latperiod -latnoise -nologo -quickstart
+-win -fps -nofade -nocinematic -packetloss -latavg -latamp -latperiod -latnoise -nologo -quickstart -xres 1920 -yres 1080

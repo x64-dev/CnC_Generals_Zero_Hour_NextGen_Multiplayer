@@ -502,6 +502,23 @@ add_library(GameEngine STATIC
     Source/GameNetwork/NextGenMP/Vendor/libnatpmp/natpmp.c
     Source/GameNetwork/NextGenMP/Vendor/libnatpmp/wingettimeofday.c
     Source/GameNetwork/NextGenMP/Vendor/libnatpmp/getgateway.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/addr_is_reserved.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/connecthostport.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/igd_desc_parse.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/listdevices.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/minisoap.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/minissdpc.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/miniupnpc.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/miniwget.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/minixml.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/minixmlvalid.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/portlistingparse.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/receivedata.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/upnpc.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/upnpcommands.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/upnpdev.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/upnperrors.c
+    Source/GameNetwork/NextGenMP/Vendor/miniupnpc/upnpreplyparse.c
     Source/GameNetwork/NextGenMP/HTTP/HTTPManager.cpp
     Source/GameNetwork/NextGenMP/HTTP/HTTPRequest.cpp
     Source/GameNetwork/NextGenMP/NetworkMesh.cpp
@@ -579,6 +596,7 @@ target_include_directories(GameEngine PRIVATE
     
     Include/GameNetwork/NextGenMP/Vendor
     Include/GameNetwork/NextGenMP/Vendor/libnatpmp
+    Include/GameNetwork/NextGenMP/Vendor/miniupnpc
 
     Include
     ../Libraries/EpicOnlineServices/Include
