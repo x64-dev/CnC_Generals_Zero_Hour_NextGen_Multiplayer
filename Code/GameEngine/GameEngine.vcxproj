@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4790D0E2-97FB-3C65-B685-88D13D98FA13}</ProjectGuid>
+    <ProjectGuid>{8BF65DB1-EA54-3A0C-A4D4-CCD31FD23C3D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -50,22 +50,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\Code\GameEngine\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\code\GameEngine\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">GameEngine.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">GameEngineDebug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\Code\GameEngine\Internal\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\code\GameEngine\Internal\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">GameEngine.dir\Internal\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">GameEngineInternal</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\Code\GameEngine\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\code\GameEngine\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GameEngine.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GameEngine</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -73,7 +73,6 @@
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MinimalRebuild></MinimalRebuild>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -82,16 +81,16 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level1</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -104,13 +103,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MinimalRebuild></MinimalRebuild>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization></Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -119,18 +117,18 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level1</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Internal"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Internal"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Internal\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Internal\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -143,14 +141,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MinimalRebuild></MinimalRebuild>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -159,18 +156,18 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level1</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WINVER=0x0A00;_WIN32_WINNT=0x0A00;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;/MP;GHTTP_EXTENDEDERROR=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\GenCustom\Code\GameEngine\..\Libraries\Include;E:\GenCustom\Code\GameEngine\..\Libraries\Source;E:\GenCustom\Code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\Code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\Code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\Code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\Code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\Code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\Code\GameEngine\Include;E:\GenCustom\Code\GameEngine\Include\Precompiled;E:\GenCustom\Code\GameEngine\Source\Precompiled;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\GenCustom\code\GameEngine\..\Libraries\Include;E:\GenCustom\code\GameEngine\..\Libraries\Source;E:\GenCustom\code\GameEngine\..\Libraries\Source\Compression;E:\GenCustom\code\GameEngine\..\Libraries\Source\GameSpy;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas;E:\GenCustom\code\GameEngine\..\Libraries\Source\WWVegas\WWLib;E:\GenCustom\code\GameEngine\..\Libraries\DX90SDK\Include;E:\GenCustom\code\GameEngine\..\Libraries\EpicOnlineServices\Include;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\libnatpmp;E:\GenCustom\code\GameEngine\Include\GameNetwork\NextGenMP\Vendor\miniupnpc;E:\GenCustom\code\GameEngine\Include;E:\GenCustom\code\GameEngine\Include\Precompiled;E:\GenCustom\code\GameEngine\Source\Precompiled;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include\speex;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\include;E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -182,11 +179,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\GenCustom\Code\GameEngine\CMakeLists.txt">
+    <CustomBuild Include="E:\GenCustom\code\GameEngine\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/GenCustom/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/GenCustom/code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/Code -BE:/GenCustom/Code --check-stamp-file E:/GenCustom/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -195,11 +192,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\GenCustom\code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule E:/GenCustom/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">Building Custom Rule E:/GenCustom/code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/Code -BE:/GenCustom/Code --check-stamp-file E:/GenCustom/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -208,11 +205,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">E:\GenCustom\code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Internal|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/GenCustom/Code/GameEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/GenCustom/code/GameEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/Code -BE:/GenCustom/Code --check-stamp-file E:/GenCustom/Code/GameEngine/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/GenCustom/code -BE:/GenCustom/code --check-stamp-file E:/GenCustom/code/GameEngine/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -221,722 +218,722 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\Code\GameEngine\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\GenCustom\code\GameEngine\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\source\Console\Console.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\source\Console\Cvar.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\source\Console\CvarManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\source\Console\ConsoleCommandManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Audio\AudioEventRTS.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Audio\AudioRequest.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Audio\GameAudio.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Audio\GameMusic.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Audio\GameSounds.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Bezier\BezFwdIterator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Bezier\BezierSegment.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\BitFlags.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\CommandLine.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\crc.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\CRCDebug.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\DamageFX.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Dict.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\DiscreteCircle.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\GameEngine.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\GameLOD.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\GameMain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\GlobalData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INI.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIAiData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIAnimation.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIAudioEventInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INICommandButton.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INICommandSet.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIControlBarScheme.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INICrate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIDamageFX.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIDrawGroupInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIGameData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIMapCache.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIMapData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIMappedImage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIMiscAudio.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIModel.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIMultiplayer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIObject.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIParticleSys.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INISpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INITerrain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INITerrainBridge.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INITerrainRoad.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIVideo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIWater.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIWeapon.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\INI\INIWebpageURL.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Language.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\MessageStream.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\MiniLog.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\MultiplayerSettings.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\NameKeyGenerator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\PartitionSolver.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\PerfTimer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RandomValue.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Recorder.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\ActionManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Energy.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Handicap.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\MissionStats.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Money.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Player.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\PlayerList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\PlayerTemplate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\ProductionPrerequisite.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\ResourceGatheringManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Science.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\ScoreKeeper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\SpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\Team.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\RTS\TunnelTracker.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\SkirmishBattleHonors.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\StateMachine.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\StatsCollector.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\ArchiveFile.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\ArchiveFileSystem.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\AsciiString.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\BuildAssistant.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\CDManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Compression.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\CopyProtection.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\CriticalSection.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\DataChunk.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Debug.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Directory.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\DisabledTypes.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\encrypt.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\File.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\FileSystem.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\FunctionLexicon.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\GameCommon.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\GameMemory.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\GameType.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Geometry.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\KindOf.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\List.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\LocalFile.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\LocalFileSystem.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\MemoryInit.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\QuickTrig.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\QuotedPrintable.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Radar.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\RAMFile.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\registry.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\SaveGame\GameState.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\SaveGame\GameStateMap.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Snapshot.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\StackDump.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\StreamingArchiveFile.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\String.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\SubsystemInterface.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Trig.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\UnicodeString.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Upgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\Xfer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\XferCRC.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\XferLoad.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\System\XferSave.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\TerrainTypes.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\DrawModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\Module.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\ModuleFactory.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\Thing.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\ThingFactory.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\Thing\ThingTemplate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\UserPreferences.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Common\version.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Color.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Credits.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Display.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\DisplayString.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\DisplayStringManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Drawable.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Drawable\DrawableManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Drawable\Update\AnimatedParticleSysBoneClientUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Drawable\Update\BeaconClientUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Drawable\Update\SwayClientUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\DrawGroupInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Eva.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\FXList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GameClient.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GameClientDispatch.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GameText.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GlobalLanguage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GraphDraw.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\AnimateWindowManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBar.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarBeacon.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommand.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommandProcessing.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarMultiSelect.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarObserver.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarOCLTimer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarPrintPositions.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarResizer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarScheme.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarStructureInventory.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarUnderConstruction.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\DisconnectMenu\DisconnectMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\EstablishConnectionsMenu\EstablishConnectionsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetCheckBox.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetComboBox.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetHorizontalSlider.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetListBox.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetProgressBar.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetPushButton.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetRadioButton.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetStaticText.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTabControl.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTextEntry.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Gadget\GadgetVerticalSlider.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameFont.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindowGlobal.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindowManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindowManagerScript.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitions.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GameWindowTransitionsStyles.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarCallback.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarPopupDescription.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Diplomacy.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ExtendedMessageBox.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\GeneralsExpPoints.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\IMECandidate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGameChat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGamePopupMessage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\CreditsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DifficultySelect.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DisconnectWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DownloadMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\EstablishConnectionsWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\GameInfoWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\KeyboardOptionsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanGameOptionsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanLobbyMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanMapSelectMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MainMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MapSelectMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\NetworkDirectConnect.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\OptionsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupCommunicator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupHostGame.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupJoinGame.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupLadderSelect.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupPlayerInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupReplay.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupSaveLoad.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\QuitMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ReplayMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ScoreScreen.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SinglePlayerMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishGameOptionsMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishMapSelectMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLBuddyOverlay.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLCustomScoreScreen.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLGameSetupMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLadderScreen.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLobbyMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLocaleSelectPopup.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLoginMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMapSelectMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMessageWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQMScoreScreen.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQuickMatchMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLStatusMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLWelcomeMenu.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\MessageBox.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\GUICallbacks\ReplayControls.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\HeaderTemplate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\IMEManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\LoadScreen.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\ProcessAnimateWindow.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Shell\Shell.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\Shell\ShellMenuScheme.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\WindowLayout.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\WindowVideoManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\GUI\WinInstanceData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\InGameUI.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Input\Keyboard.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Input\Mouse.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\LanguageFilter.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Line2D.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MapUtil.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\CommandXlat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\GUICommandTranslator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\HintSpy.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\HotKey.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\LookAtXlat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\MetaEvent.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\PlaceEventTranslator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\SelectionXlat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\MessageStream\WindowXlat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\RadiusDecal.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\SelectionInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Statistics.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\Anim2D.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\CampaignManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\Debug Displayers\AudioDebugDisplay.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\DebugDisplay.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\Image.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\ParticleSys.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\System\RayEffect.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Terrain\TerrainRoads.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Terrain\TerrainVisual.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\VideoPlayer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\View.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameClient\Water.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AI.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIDock.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIGroup.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIGuard.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIPathfind.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIPlayer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AISkirmishPlayer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AIStates.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\AITNGuard.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\Squad.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\AI\TurretAI.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Map\PolygonTrigger.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Map\SidesList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Map\TerrainLogic.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Armor.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\AutoHealBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\BehaviorModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeScaffoldBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\BridgeTowerBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\DumbProjectileBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDamagedBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDeadBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\GenerateMinefieldBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\InstantDeathBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\JetSlowDeathBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\MinefieldBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\OverchargeBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\ParkingPlaceBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\PoisonedBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\POWTruckBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\PrisonBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaCenterBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaTowerBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\RebuildHoleBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\SlowDeathBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\SpawnBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\SupplyWarehouseCripplingBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Behavior\TechBuildingBehavior.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\ActiveBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\BodyModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\HighlanderBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\HiveStructureBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\ImmortalBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\InactiveBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Body\StructureBody.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CollideModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToCarBombCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToHijackedVehicleCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\CrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\HealCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\MoneyCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\SalvageCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ShroudCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\UnitCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\VeterancyCrateCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\FireWeaponCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Collide\SquishCollide.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\CaveContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\GarrisonContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\HealContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\MobNexusContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\OpenContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\OverlordContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\ParachuteContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\RailedTransportContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\TransportContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Contain\TunnelContain.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\CreateModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\GrantUpgradeCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\PreorderCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\SpecialPowerCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\SupplyCenterCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\SupplyWarehouseCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Create\VeterancyGainCreate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Damage\BoneFXDamage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Damage\DamageModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Damage\TransitionDamageFX.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Destroy\DestroyModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\CreateCrateDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\CreateObjectDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\CrushDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\DamDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\DestroyDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\DieModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\EjectPilotDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\FXListDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\KeepObjectDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\RebuildHoleExposeDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\SpecialPowerCompletionDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Die\UpgradeDie.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\ExperienceTracker.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\FiringTracker.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\GhostObject.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectDefectionHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectRepulsorHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectSMCHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Helper\ObjectWeaponStatusHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Locomotor.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Object.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\ObjectCreationList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\ObjectTypes.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\PartitionManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SimpleObjectIterator.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\BaikonurLaunchPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashBountyPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CashHackSpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\CleanupAreaPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DefectorSpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\DemoralizeSpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\OCLSpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialAbility.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialPowerModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\SpecialPower\SpyVisionSpecialPower.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\AssaultTransportAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\ChinookAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeliverPayloadAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeployStyleAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DozerAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\HackInternetAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\JetAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\MissileAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\POWTruckAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailedTransportAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailroadGuideAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\SupplyTruckAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\TransportAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WanderAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WorkerAIUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AssistedTargetingUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AutoDepositUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\AutoFindHealingUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\BaseRenerateUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\BattlePlanUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\BoneFXUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\CheckpointUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\CleanupHazardUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\CommandButtonHuntUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DelayedWeaponSetUpgradeUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DeletionUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DemoTrapUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\DockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\PrisonDockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RailedTransportDockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RepairDockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyCenterDockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyWarehouseDockUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DynamicGeometryInfoUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\DynamicShroudClearingRangeUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\EMPUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\EnemyNearUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FireOCLAfterWeaponCooldownUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FireSpreadUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FirestormDynamicGeometryInfoUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FireWeaponUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FlammableUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\FloatUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\HeightDieUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\HelicopterSlowDeathUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\HijackerUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\HordeUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\LaserUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\LifetimeUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\MissileLauncherBuildingUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\MobMemberSlavedUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileSlowDeathUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\OCLUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ParticleUplinkCannonUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\PhysicsUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\PilotFindVehicleUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\PointDefenseLaserUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\PowerPlantUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\DefaultProductionExitUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\QueueProductionExitUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SpawnPointProductionExitUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SupplyCenterProductionExitUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProductionUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProjectileStreamUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ProneUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\RadarUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\RadiusDecalUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\SlavedUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\SpecialAbilityUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\SpyVisionUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\StealthDetectorUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\StealthUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\StickyBombUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\StructureCollapseUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\StructureToppleUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\TensileFormationUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\ToppleUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\UpdateModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Update\WaveGuideUpdate.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\ActiveShroudUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\ArmorUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\CommandSetUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\CostModifierUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\DelayedUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\ExperienceScalarUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\LocomotorSetUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\MaxHealthUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\ObjectCreationUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\PowerPlantUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\RadarUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\StatusBitsUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\StealthUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\SubObjectsUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\UnpauseSpecialPowerUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\UpgradeModule.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponBonusUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponSetUpgrade.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\Weapon.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\Object\WeaponSet.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptActions.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptConditions.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\ScriptEngine\ScriptEngine.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\ScriptEngine\Scripts.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\ScriptEngine\VictoryConditions.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\CaveSystem.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\CrateSystem.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\Damage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\GameLogic.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\GameLogicDispatch.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameLogic\System\RankInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_Helpers.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\NGMPGame.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\PortMapper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\natpmp.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\wingettimeofday.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\getgateway.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\addr_is_reserved.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\connecthostport.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\igd_desc_parse.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\listdevices.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minisoap.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minissdpc.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\miniupnpc.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\miniwget.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minixml.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minixmlvalid.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\portlistingparse.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\receivedata.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpc.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpcommands.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpdev.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnperrors.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpreplyparse.c" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\HTTP\HTTPManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\HTTP\HTTPRequest.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\NetworkMesh.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_Init.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_Auth.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_LobbyInterface.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_RoomsInterface.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\NextGenTransport.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\NetworkBitstream.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_Lobby_StartGamePacket.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\Connection.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\DownloadManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\FileTransfer.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\FirewallHelper.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\FrameData.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\FrameDataManager.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\FrameMetrics.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameMessageParser.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpyOverlay.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Chat.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\GSConfig.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\LadderDefs.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\LobbyUtils.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\MainMenuUtils.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\PeerDefs.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\StagingRoomGameInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\BuddyThread.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\GameResultsThread.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PeerThread.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PersistentStorageThread.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\PingThread.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GameSpy\Thread\ThreadUtils.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\GUIUtil.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\IPEnumeration.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\LANAPI.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\LANAPICallbacks.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\LANAPIhandlers.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\LANGameInfo.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NAT.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetCommandList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetCommandMsg.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetCommandRef.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetCommandWrapperList.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetMessageStream.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetPacket.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\Network.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\NetworkUtil.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\Transport.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\UDPTransport.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\udp.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\User.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
-    <ClCompile Include="E:\GenCustom\Code\GameEngine\Source\Precompiled\PreRTS.cpp" />
-    <ClInclude Include="E:\GenCustom\Code\GameEngine\Source\Console\CvarManager.h" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\source\Console\Console.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\source\Console\Cvar.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\source\Console\CvarManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\source\Console\ConsoleCommandManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Audio\AudioEventRTS.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Audio\AudioRequest.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Audio\GameAudio.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Audio\GameMusic.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Audio\GameSounds.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Bezier\BezFwdIterator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Bezier\BezierSegment.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\BitFlags.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\CommandLine.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\crc.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\CRCDebug.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\DamageFX.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Dict.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\DiscreteCircle.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\GameEngine.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\GameLOD.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\GameMain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\GlobalData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INI.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIAiData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIAnimation.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIAudioEventInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INICommandButton.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INICommandSet.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIControlBarScheme.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INICrate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIDamageFX.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIDrawGroupInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIGameData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIMapCache.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIMapData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIMappedImage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIMiscAudio.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIModel.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIMultiplayer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIObject.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIParticleSys.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INISpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INITerrain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INITerrainBridge.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INITerrainRoad.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIVideo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIWater.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIWeapon.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\INI\INIWebpageURL.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Language.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\MessageStream.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\MiniLog.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\MultiplayerSettings.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\NameKeyGenerator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\PartitionSolver.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\PerfTimer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RandomValue.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Recorder.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\ActionManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Energy.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Handicap.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\MissionStats.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Money.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Player.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\PlayerList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\PlayerTemplate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\ProductionPrerequisite.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\ResourceGatheringManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Science.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\ScoreKeeper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\SpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\Team.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\RTS\TunnelTracker.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\SkirmishBattleHonors.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\StateMachine.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\StatsCollector.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\ArchiveFile.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\ArchiveFileSystem.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\AsciiString.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\BuildAssistant.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\CDManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Compression.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\CopyProtection.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\CriticalSection.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\DataChunk.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Debug.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Directory.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\DisabledTypes.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\encrypt.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\File.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\FileSystem.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\FunctionLexicon.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\GameCommon.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\GameMemory.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\GameType.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Geometry.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\KindOf.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\List.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\LocalFile.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\LocalFileSystem.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\MemoryInit.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\QuickTrig.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\QuotedPrintable.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Radar.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\RAMFile.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\registry.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\SaveGame\GameState.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\SaveGame\GameStateMap.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Snapshot.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\StackDump.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\StreamingArchiveFile.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\String.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\SubsystemInterface.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Trig.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\UnicodeString.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Upgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\Xfer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\XferCRC.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\XferLoad.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\System\XferSave.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\TerrainTypes.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\DrawModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\Module.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\ModuleFactory.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\Thing.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\ThingFactory.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\Thing\ThingTemplate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\UserPreferences.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Common\version.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Color.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Credits.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Display.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\DisplayString.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\DisplayStringManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Drawable.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Drawable\DrawableManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Drawable\Update\AnimatedParticleSysBoneClientUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Drawable\Update\BeaconClientUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Drawable\Update\SwayClientUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\DrawGroupInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Eva.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\FXList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GameClient.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GameClientDispatch.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GameText.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GlobalLanguage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GraphDraw.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\AnimateWindowManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBar.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarBeacon.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommand.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarCommandProcessing.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarMultiSelect.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarObserver.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarOCLTimer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarPrintPositions.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarResizer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarScheme.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarStructureInventory.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ControlBar\ControlBarUnderConstruction.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\DisconnectMenu\DisconnectMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\EstablishConnectionsMenu\EstablishConnectionsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetCheckBox.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetComboBox.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetHorizontalSlider.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetListBox.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetProgressBar.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetPushButton.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetRadioButton.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetStaticText.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTabControl.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetTextEntry.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Gadget\GadgetVerticalSlider.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameFont.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindowGlobal.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindowManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindowManagerScript.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindowTransitions.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GameWindowTransitionsStyles.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarCallback.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\ControlBarPopupDescription.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Diplomacy.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\ExtendedMessageBox.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\GeneralsExpPoints.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\IMECandidate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGameChat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\InGamePopupMessage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\CreditsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DifficultySelect.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DisconnectWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\DownloadMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\EstablishConnectionsWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\GameInfoWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\KeyboardOptionsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanGameOptionsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanLobbyMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\LanMapSelectMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MainMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\MapSelectMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\NetworkDirectConnect.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\OptionsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupCommunicator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupHostGame.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupJoinGame.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupLadderSelect.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupPlayerInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupReplay.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\PopupSaveLoad.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\QuitMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ReplayMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\ScoreScreen.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SinglePlayerMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishGameOptionsMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\SkirmishMapSelectMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLBuddyOverlay.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLCustomScoreScreen.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLGameSetupMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLadderScreen.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLobbyMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLocaleSelectPopup.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLLoginMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMapSelectMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLMessageWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQMScoreScreen.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLQuickMatchMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLStatusMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\Menus\WOLWelcomeMenu.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\MessageBox.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\GUICallbacks\ReplayControls.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\HeaderTemplate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\IMEManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\LoadScreen.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\ProcessAnimateWindow.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Shell\Shell.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\Shell\ShellMenuScheme.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\WindowLayout.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\WindowVideoManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\GUI\WinInstanceData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\InGameUI.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Input\Keyboard.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Input\Mouse.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\LanguageFilter.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Line2D.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MapUtil.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\CommandXlat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\GUICommandTranslator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\HintSpy.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\HotKey.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\LookAtXlat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\MetaEvent.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\PlaceEventTranslator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\SelectionXlat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\MessageStream\WindowXlat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\RadiusDecal.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\SelectionInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Statistics.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\Anim2D.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\CampaignManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\Debug Displayers\AudioDebugDisplay.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\DebugDisplay.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\Image.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\ParticleSys.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\System\RayEffect.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Terrain\TerrainRoads.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Terrain\TerrainVisual.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\VideoPlayer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\View.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameClient\Water.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AI.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIDock.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIGroup.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIGuard.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIPathfind.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIPlayer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AISkirmishPlayer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AIStates.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\AITNGuard.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\Squad.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\AI\TurretAI.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Map\PolygonTrigger.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Map\SidesList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Map\TerrainLogic.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Armor.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\AutoHealBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\BehaviorModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\BridgeBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\BridgeScaffoldBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\BridgeTowerBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\DumbProjectileBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDamagedBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\FireWeaponWhenDeadBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\GenerateMinefieldBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\InstantDeathBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\JetSlowDeathBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\MinefieldBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\OverchargeBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\ParkingPlaceBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\PoisonedBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\POWTruckBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\PrisonBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaCenterBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\PropagandaTowerBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\RebuildHoleBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\SlowDeathBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\SpawnBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\SupplyWarehouseCripplingBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Behavior\TechBuildingBehavior.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\ActiveBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\BodyModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\HighlanderBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\HiveStructureBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\ImmortalBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\InactiveBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Body\StructureBody.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CollideModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToCarBombCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ConvertToHijackedVehicleCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\CrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\HealCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\MoneyCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\SalvageCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\ShroudCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\UnitCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\CrateCollide\VeterancyCrateCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\FireWeaponCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Collide\SquishCollide.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\CaveContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\GarrisonContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\HealContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\MobNexusContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\OpenContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\OverlordContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\ParachuteContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\RailedTransportContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\TransportContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Contain\TunnelContain.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\CreateModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\GrantUpgradeCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\PreorderCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\SpecialPowerCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\SupplyCenterCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\SupplyWarehouseCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Create\VeterancyGainCreate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Damage\BoneFXDamage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Damage\DamageModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Damage\TransitionDamageFX.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Destroy\DestroyModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\CreateCrateDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\CreateObjectDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\CrushDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\DamDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\DestroyDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\DieModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\EjectPilotDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\FXListDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\KeepObjectDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\RebuildHoleExposeDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\SpecialPowerCompletionDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Die\UpgradeDie.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\ExperienceTracker.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\FiringTracker.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\GhostObject.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Helper\ObjectDefectionHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Helper\ObjectHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Helper\ObjectRepulsorHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Helper\ObjectSMCHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Helper\ObjectWeaponStatusHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Locomotor.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Object.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\ObjectCreationList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\ObjectTypes.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\PartitionManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SimpleObjectIterator.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\BaikonurLaunchPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\CashBountyPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\CashHackSpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\CleanupAreaPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\DefectorSpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\DemoralizeSpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\OCLSpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialAbility.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\SpecialPowerModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\SpecialPower\SpyVisionSpecialPower.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\AssaultTransportAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\ChinookAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeliverPayloadAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DeployStyleAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\DozerAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\HackInternetAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\JetAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\MissileAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\POWTruckAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailedTransportAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\RailroadGuideAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\SupplyTruckAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\TransportAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WanderAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AIUpdate\WorkerAIUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AssistedTargetingUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AutoDepositUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\AutoFindHealingUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\BaseRenerateUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\BattlePlanUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\BoneFXUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\CheckpointUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\CleanupHazardUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\CommandButtonHuntUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DelayedWeaponSetUpgradeUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DeletionUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DemoTrapUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\DockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\PrisonDockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RailedTransportDockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\RepairDockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyCenterDockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DockUpdate\SupplyWarehouseDockUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DynamicGeometryInfoUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\DynamicShroudClearingRangeUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\EMPUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\EnemyNearUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FireOCLAfterWeaponCooldownUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FireSpreadUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FirestormDynamicGeometryInfoUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FireWeaponUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FlammableUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\FloatUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\HeightDieUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\HelicopterSlowDeathUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\HijackerUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\HordeUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\LaserUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\LifetimeUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\MissileLauncherBuildingUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\MobMemberSlavedUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileSlowDeathUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\NeutronMissileUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\OCLUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ParticleUplinkCannonUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\PhysicsUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\PilotFindVehicleUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\PointDefenseLaserUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\PowerPlantUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\DefaultProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\QueueProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SpawnPointProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProductionExitUpdate\SupplyCenterProductionExitUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProductionUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProjectileStreamUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ProneUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\RadarUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\RadiusDecalUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\SlavedUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\SpecialAbilityUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\SpyVisionUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\StealthDetectorUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\StealthUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\StickyBombUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\StructureCollapseUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\StructureToppleUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\TensileFormationUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\ToppleUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\UpdateModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Update\WaveGuideUpdate.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\ActiveShroudUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\ArmorUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\CommandSetUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\CostModifierUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\DelayedUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\ExperienceScalarUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\LocomotorSetUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\MaxHealthUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\ObjectCreationUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\PowerPlantUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\RadarUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\StatusBitsUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\StealthUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\SubObjectsUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\UnpauseSpecialPowerUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\UpgradeModule.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponBonusUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Upgrade\WeaponSetUpgrade.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\Weapon.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\Object\WeaponSet.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\ScriptEngine\ScriptActions.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\ScriptEngine\ScriptConditions.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\ScriptEngine\ScriptEngine.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\ScriptEngine\Scripts.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\ScriptEngine\VictoryConditions.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\CaveSystem.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\CrateSystem.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\Damage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\GameLogic.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\GameLogicDispatch.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameLogic\System\RankInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\NGMP_Helpers.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\NGMPGame.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\PortMapper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\natpmp.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\wingettimeofday.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\libnatpmp\getgateway.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\addr_is_reserved.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\connecthostport.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\igd_desc_parse.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\listdevices.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minisoap.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minissdpc.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\miniupnpc.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\miniwget.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minixml.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\minixmlvalid.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\portlistingparse.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\receivedata.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpc.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpcommands.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpdev.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnperrors.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Vendor\miniupnpc\upnpreplyparse.c" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\HTTP\HTTPManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\HTTP\HTTPRequest.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\NetworkMesh.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_Init.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_Auth.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_LobbyInterface.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\OnlineServices_RoomsInterface.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\NextGenTransport.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\NetworkBitstream.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_Hello.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_HelloAck.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_NetRoom_ChatMessage.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NextGenMP\Packets\NetworkPacket_Lobby_StartGamePacket.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\Connection.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\ConnectionManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\DisconnectManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\DownloadManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\FileTransfer.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\FirewallHelper.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\FrameData.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\FrameDataManager.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\FrameMetrics.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameMessageParser.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpyOverlay.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Chat.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\GSConfig.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\LadderDefs.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\LobbyUtils.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\MainMenuUtils.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\PeerDefs.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\StagingRoomGameInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\BuddyThread.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\GameResultsThread.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\PeerThread.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\PersistentStorageThread.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\PingThread.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GameSpy\Thread\ThreadUtils.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\GUIUtil.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\IPEnumeration.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\LANAPI.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\LANAPICallbacks.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\LANAPIhandlers.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\LANGameInfo.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NAT.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetCommandList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetCommandMsg.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetCommandRef.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetCommandWrapperList.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetMessageStream.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetPacket.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\Network.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\NetworkUtil.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\Transport.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\UDPTransport.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\udp.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\User.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\GameNetwork\WOLBrowser\WebBrowser.cpp" />
+    <ClCompile Include="E:\GenCustom\code\GameEngine\Source\Precompiled\PreRTS.cpp" />
+    <ClInclude Include="E:\GenCustom\code\GameEngine\Source\Console\CvarManager.h" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="E:\GenCustom\Code\ZERO_CHECK.vcxproj">
-      <Project>{E155F834-2AF8-3F28-A4D0-6531ACBE2C7D}</Project>
+    <ProjectReference Include="E:\GenCustom\code\ZERO_CHECK.vcxproj">
+      <Project>{450D4A2A-8E19-35AA-A93D-2402E759EA08}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\Compression\Compression.vcxproj">
-      <Project>{9E178F51-8492-3501-9788-5FB0C1F0265C}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\Compression\Compression.vcxproj">
+      <Project>{BC661146-461E-3056-84C4-DE879927B75A}</Project>
       <Name>Compression</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\GameEngineDevice\GameEngineDevice.vcxproj">
-      <Project>{1184421F-A266-380E-94A4-8CF564C9E4A1}</Project>
+    <ProjectReference Include="E:\GenCustom\code\GameEngineDevice\GameEngineDevice.vcxproj">
+      <Project>{2E36EC68-B7FF-3155-95DC-A2D415E1AA01}</Project>
       <Name>GameEngineDevice</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\GameRenderer\GameRenderer.vcxproj">
-      <Project>{D9739406-837B-3A07-BD14-813700F2567A}</Project>
+    <ProjectReference Include="E:\GenCustom\code\GameRenderer\GameRenderer.vcxproj">
+      <Project>{78073E36-49DC-3DB3-84F5-FAB95CFB6687}</Project>
       <Name>GameRenderer</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\OpenAL\OpenAL.vcxproj">
-      <Project>{AB3358D1-5DC4-32E2-A929-363D2300F006}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\OpenAL\OpenAL.vcxproj">
+      <Project>{4E8AFD8D-DBD6-3432-B8B8-0EE8140AF73F}</Project>
       <Name>OpenAL</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\sharedDll\UniSpySDK.vcxproj">
-      <Project>{FE3ECB99-716B-384C-870F-6C0B18517C2E}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\sharedDll\UniSpySDK.vcxproj">
+      <Project>{34164791-6E26-39FC-B8F0-9A2B76836845}</Project>
       <Name>UniSpySDK</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\WWDebug\WWDebug.vcxproj">
-      <Project>{FB83ADE2-B820-39B5-9FB7-602EF303119A}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\WWDebug\WWDebug.vcxproj">
+      <Project>{1FFC8FB0-549D-3365-AA3A-5BEC4A68AD97}</Project>
       <Name>WWDebug</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
-      <Project>{F3C41705-FCE2-3977-A18D-83CC1A2C857F}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\WWDownload\WWDownload.vcxproj">
+      <Project>{A75670DB-83CE-3C9A-AA4F-1FEB7C12EF27}</Project>
       <Name>WWDownload</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libgsm\gsm.vcxproj">
-      <Project>{AC77161E-5EB5-343F-A327-98839BF32F35}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libgsm\gsm.vcxproj">
+      <Project>{2C1D4832-55E3-31FF-A903-A3F89FF8F2DC}</Project>
       <Name>gsm</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\libspeex\speex.vcxproj">
-      <Project>{3DABC0A7-567C-39DB-ADC1-F098DF07CD88}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\libspeex\speex.vcxproj">
+      <Project>{AB64EFDD-78C2-3DD8-95E1-C47400F877A7}</Project>
       <Name>speex</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\brigades\usbrigades.vcxproj">
-      <Project>{C8950AB5-EDAE-388D-AEC8-5D5774239BD3}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\brigades\usbrigades.vcxproj">
+      <Project>{4483CD17-F84D-3019-9C30-03B46012BE10}</Project>
       <Name>usbrigades</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\gcdkey\uscdkey.vcxproj">
-      <Project>{86247FB6-DFAF-3594-A195-1DD50CA7B0F6}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\gcdkey\uscdkey.vcxproj">
+      <Project>{93BB8411-7658-3F2C-A972-3EE7FFD5413A}</Project>
       <Name>uscdkey</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Chat\uschat.vcxproj">
-      <Project>{081A6A7C-3CA0-3B8D-8A48-A690E9C61377}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Chat\uschat.vcxproj">
+      <Project>{C461C6F0-CDFD-3DD6-B15B-F830C13DC48D}</Project>
       <Name>uschat</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\common\uscommon.vcxproj">
-      <Project>{6BEAA9EB-3F48-31C1-A25E-242E025EEBAA}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\common\uscommon.vcxproj">
+      <Project>{C3DD5AA0-7498-34DF-89BA-5AABF6098244}</Project>
       <Name>uscommon</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Direct2Game\usd2g.vcxproj">
-      <Project>{FECDE611-37F2-3157-894E-B94FDF48F9E4}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Direct2Game\usd2g.vcxproj">
+      <Project>{F05B2098-BF09-3DF3-8372-9A356F238491}</Project>
       <Name>usd2g</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\GP\usgp.vcxproj">
-      <Project>{5AC62033-1EF4-363B-BE4D-E51866706CBE}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\GP\usgp.vcxproj">
+      <Project>{44AA5CA4-88BA-3210-BF88-D6FA762CDF66}</Project>
       <Name>usgp</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\ghttp\ushttp.vcxproj">
-      <Project>{4E764668-9415-3DD9-BACE-F896E787D383}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\ghttp\ushttp.vcxproj">
+      <Project>{FBE2504F-D559-32ED-B60E-610389A2327D}</Project>
       <Name>ushttp</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\natneg\usnatneg.vcxproj">
-      <Project>{E5AB2A94-A426-3B5E-9A9A-E172283A70E4}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\natneg\usnatneg.vcxproj">
+      <Project>{B916F2EA-226E-3A91-8D03-AB00C5A61DFB}</Project>
       <Name>usnatneg</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Peer\uspeer.vcxproj">
-      <Project>{1D5C0548-2AF8-33DB-BE83-07640B6146F9}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Peer\uspeer.vcxproj">
+      <Project>{6B3612AB-3E96-3C6E-9BCC-BBC312364D72}</Project>
       <Name>uspeer</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\pinger\uspinger.vcxproj">
-      <Project>{F550D6E0-E606-39B4-8C5A-BDFF45A5B5E9}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\pinger\uspinger.vcxproj">
+      <Project>{67C888D1-F41C-30CB-841C-F4DF42EC8879}</Project>
       <Name>uspinger</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\pt\uspt.vcxproj">
-      <Project>{E65AE574-0CBF-3178-86C8-9E407BC68223}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\pt\uspt.vcxproj">
+      <Project>{B31C9438-9811-320D-9CE2-54C1A9B1F093}</Project>
       <Name>uspt</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\qr2\usqr2.vcxproj">
-      <Project>{14D86051-47E7-3A94-91D4-61C34AD8B763}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\qr2\usqr2.vcxproj">
+      <Project>{5C1DF762-B457-3139-BBC6-2EBAF1F9D378}</Project>
       <Name>usqr2</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\sake\ussake.vcxproj">
-      <Project>{A47DF793-2578-3049-96E8-80958449E104}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\sake\ussake.vcxproj">
+      <Project>{658E840C-FE33-3808-AA10-1C304D354CEE}</Project>
       <Name>ussake</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\sc\ussc.vcxproj">
-      <Project>{26341015-732D-3DBF-8725-EEAD2D1AE47C}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\sc\ussc.vcxproj">
+      <Project>{0D40A4C0-942C-38E9-9CC6-96FFF4E4768D}</Project>
       <Name>ussc</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\serverbrowsing\usserverbrowsing.vcxproj">
-      <Project>{5E4508BD-FAA6-391F-A2AC-02C1E6919647}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\serverbrowsing\usserverbrowsing.vcxproj">
+      <Project>{CCDE6EE9-5CA7-30DA-B9A4-F28FF2913FBC}</Project>
       <Name>usserverbrowsing</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\gstats\usstats.vcxproj">
-      <Project>{8DD190AC-FB81-3570-811A-0F066839DB34}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\gstats\usstats.vcxproj">
+      <Project>{1B8748E6-F7D4-3B3C-B1E9-71CF0F063F7B}</Project>
       <Name>usstats</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\Voice2\usvoice2.vcxproj">
-      <Project>{AD58A389-D13C-37AC-8FFE-75AE97A06722}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\Voice2\usvoice2.vcxproj">
+      <Project>{F6465A24-8211-3BB2-BB3C-747C5C16E4A5}</Project>
       <Name>usvoice2</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\GameSpy\webservices\uswebservices.vcxproj">
-      <Project>{6BA68CB2-72F3-3ACE-B4BC-1066B4C0040D}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\GameSpy\webservices\uswebservices.vcxproj">
+      <Project>{9824446D-F98D-3297-822F-ED3A6961C7A0}</Project>
       <Name>uswebservices</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\ww3d2\ww3d2.vcxproj">
-      <Project>{AE97EEAC-0575-358F-B371-E23B918F727C}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\ww3d2\ww3d2.vcxproj">
+      <Project>{B867F42E-5D48-335E-8904-777D7A0E29D6}</Project>
       <Name>ww3d2</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\WWLib\wwlib.vcxproj">
-      <Project>{6266FB78-51BF-3B70-A5FA-582F7498C78E}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\WWLib\wwlib.vcxproj">
+      <Project>{462CD42F-EFC2-319C-BF7B-5FE3DD5EAA27}</Project>
       <Name>wwlib</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
-      <Project>{9EF16A72-A388-3F08-A34A-F621C2A354EF}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\WWMath\wwmath.vcxproj">
+      <Project>{02F258EC-049E-3803-90D0-6E6CC8E67FB6}</Project>
       <Name>wwmath</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\GenCustom\Code\Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
-      <Project>{A920247F-F9EB-3DC0-B24A-99CEC48B01B9}</Project>
+    <ProjectReference Include="E:\GenCustom\code\Libraries\Source\WWVegas\WWSaveLoad\wwsaveload.vcxproj">
+      <Project>{C54E6775-EF56-3556-863A-2CB43CBE2A4F}</Project>
       <Name>wwsaveload</Name>
     </ProjectReference>
   </ItemGroup>
