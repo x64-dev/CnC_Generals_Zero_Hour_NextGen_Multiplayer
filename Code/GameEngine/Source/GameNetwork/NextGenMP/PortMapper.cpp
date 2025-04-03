@@ -305,6 +305,7 @@ void PortMapper::DetermineLocalNetworkCapabilities(std::function<void(void)> cal
 
 	// background thread, network ops are blocking
 	m_backgroundThread = new std::thread(&PortMapper::BackgroundThreadRun, this);
+	SetThreadDescription(static_cast<HANDLE>(m_backgroundThread->native_handle()), L"PortMapper Background Thread");
 }
 
 void PortMapper::TryForwardPreferredPorts()

@@ -9,16 +9,7 @@ HTTPManager::HTTPManager() noexcept
 
 	m_bProxyEnabled = DeterminePlatformProxySettings();
 
-	if (IsDebuggerPresent())
-	{
-// 		DWORD ThreadId = ::GetThreadId(static_cast<HANDLE>(m_backgroundThread->native_handle()));
-// 		THREADNAME_INFO info;
-// 		info.dwType = 0x1000;
-// 		info.szName = "HTTP Background Thread";
-// 		info.dwThreadID = ThreadId;
-// 		info.dwFlags = 0;
-// 		RaiseException(0x406D1388, 0, sizeof(info) / sizeof(ULONG_PTR), (ULONG_PTR*)&info);
-	}
+	SetThreadDescription(static_cast<HANDLE>(m_backgroundThread->native_handle()), L"HTTP Background Thread");
 }
 
 void HTTPManager::SendGETRequest(const char* szURI, EIPProtocolVersion protover, std::map<std::string, std::string>& inHeaders, std::function<void(bool bSuccess, int statusCode, std::string strBody)> completionCallback, std::function<void(size_t bytesReceived)> progressCallback)
